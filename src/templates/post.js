@@ -5,8 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-import { faCalendar, faTags, faEdit } from "@fortawesome/free-solid-svg-icons"
-import { faCreativeCommons, faGithub } from "@fortawesome/free-brands-svg-icons"
+import { faCalendar, faTags } from "@fortawesome/free-solid-svg-icons"
+import { faCreativeCommons } from "@fortawesome/free-brands-svg-icons"
 
 export default function Post({ data, pageContext }) {
   const post = data.markdownRemark
