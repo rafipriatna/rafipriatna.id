@@ -62,6 +62,7 @@ module.exports = {
               quality: 100,
             },
           },
+          'gatsby-remark-static-images',
         ],
       },
     },
