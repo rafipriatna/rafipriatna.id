@@ -5,7 +5,7 @@ export default function Header() {
   const [isMobile, setMobile] = useState(false)
 
   return (
-    <div className="bg-gray-900">
+    <div className="bg-gray-900 sticky top-0 z-10">
       <div className="container mx-auto px-0 lg:px-20 flex flex-col lg:flex-row">
         <div className="flex items-center justify-between px-4 lg:px-2 py-4 lg:py-0">
           <Link to="/" className="uppercase font-semibold text-white">

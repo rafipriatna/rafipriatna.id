@@ -10,7 +10,7 @@ config.autoAddCss = false
 export default function Sidebar() {
   return (
     <div>
-      <div className="sticky top-4">
+      <div className="sticky top-20">
         <div className="bg-gray-900 text-white lg:rounded overflow-hidden shadow-md">
           <div className="m-4">
             <div className="w-32 h-32 relative mb-4 mx-auto">
