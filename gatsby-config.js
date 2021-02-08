@@ -17,6 +17,9 @@ module.exports = {
     },
   },
   plugins: [
+    `gatsby-plugin-sharp`,
+    `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-fontawesome-css`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -28,7 +31,7 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `content`,
-        path: `${__dirname}/src/content`,
+        path: `${__dirname}/content`,
       },
     },
     {
@@ -45,8 +48,22 @@ module.exports = {
         postCssPlugins: [require("tailwindcss")("./tailwind.config.js")],
       },
     },
-    `gatsby-transformer-remark`,
-    `gatsby-plugin-react-helmet`,
-    `gatsby-plugin-fontawesome-css`,
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+          `gatsby-remark-autolink-headers`,
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 1500,
+              withWebp: true,
+              showCaptions: true,
+              quality: 100,
+            },
+          },
+        ],
+      },
+    },
   ],
 }

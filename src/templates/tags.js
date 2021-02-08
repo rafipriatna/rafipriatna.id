@@ -2,32 +2,46 @@ import React from "react"
 import PropTypes from "prop-types"
 import { Link, graphql } from "gatsby"
 
+import Layout from "../components/layout"
+import SEO from "../components/seo"
+
+import Config from "../utils/config"
+
+const dataPost = {
+  title: "Tags" + Config.title,
+  description: Config.description,
+}
+
 const Tags = ({ pageContext, data }) => {
   const { tag } = pageContext
   const { edges, totalCount } = data.allMarkdownRemark
-  const tagHeader = `${totalCount} post${
-    totalCount === 1 ? "" : "s"
-  } tagged with "${tag}"`
+  const tagHeader = `${totalCount} post${totalCount === 1 ? "" : "s"
+    } tagged with "${tag}"`
   return (
-    <div>
-      <h1>{tagHeader}</h1>
-      <ul>
-        {edges.map(({ node }) => {
-          const { slug } = node.fields
-          const { title } = node.frontmatter
-          return (
-            <li key={slug}>
-              <Link to={slug}>{title}</Link>
-            </li>
-          )
-        })}
-      </ul>
-      {/*
-              This links to a page that does not yet exist.
-              You'll come back to it!
-            */}
-      <Link to="/tags">All tags</Link>
-    </div>
+    <Layout>
+      <SEO post={dataPost} />
+      <div className="flex flex-col justify-start">
+        <h1 className="text-4xl mb-4 text-center">{tagHeader}</h1>
+      </div>
+      {edges.map(({ node }) => {
+        const { slug } = node.fields
+        const { title, date } = node.frontmatter
+        return (
+          <Link to={slug} key={node.id}>
+            <div className="transition duration-200 ease-in-out hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 lg:mt-4 mt-2">
+              <div className="lg:flex flex-col lg:flex-row justify-between w-full lg:py-0">
+                <div className="text-lg flex flex-col lg:flex-row">
+                  {title}
+                </div>
+                <div className="text-md flex flex-col lg:flex-row lg:block hidden">
+                  <span>{date}</span>
+                </div>
+              </div>
+            </div>
+          </Link>
+        )
+      })}
+    </Layout>
   )
 }
 Tags.propTypes = {
@@ -68,7 +82,12 @@ export const pageQuery = graphql`
           }
           frontmatter {
             title
+            date(
+              fromNow: true
+              locale: "id-ID"
+            )
           }
+          id
         }
       }
     }
