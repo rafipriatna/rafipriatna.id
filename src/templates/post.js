@@ -35,21 +35,6 @@ export default function Post({ data, pageContext }) {
           <footer className="border-t border-b">
             <div className="text-sm mt-4">
               <p>
-                <span className="mr-2">
-                  <FontAwesomeIcon icon={faEdit} size="1x" />
-                </span>
-                          Sunting artikel ini di{" "}
-                <Link to="/">
-                  <FontAwesomeIcon
-                    icon={faGithub}
-                    size="1x"
-                    target="_blank"
-                  />{" "}
-                            Github
-                          </Link>
-              </p>
-
-              <p>
                 <span className="mr-2.5">
                   <FontAwesomeIcon icon={faCalendar} size="1x" />
                 </span>
