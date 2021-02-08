@@ -31,10 +31,10 @@ export default function tentang({ pageContext }) {
 
             <h2 className="text-2xl mb-4 font-weight-700">Saya Menggunakan</h2>
             <ul className="ml-10">
-                <li>💻 Laptop: Acer Swift 3 SF314-54G</li>
-                <li>🌐 Domain: <a href="https://www.domainesia.com/?aff=6794" target="_blank" rel="noreferrer" >Domainesia</a></li>
-                <li>✏ Blog: Gatsby.js + Tailwind CSS</li>
-                <li>📝 Editor: Visual Studio Code</li>
+                <li><span role="img" aria-label="laptop_icon">💻</span> Laptop: Acer Swift 3 SF314-54G</li>
+                <li><span role="img" aria-label="globe_icon">🌐</span> Domain: <a href="https://www.domainesia.com/?aff=6794" target="_blank" rel="noreferrer" >Domainesia</a></li>
+                <li><span role="img" aria-label="pencil_icon">✏</span> Blog: Gatsby.js + Tailwind CSS</li>
+                <li><span role="img" aria-label="editor_icon">📝</span> Editor: Visual Studio Code</li>
             </ul>
 
             <h2 className="text-2xl mb-4 font-weight-700 mt-4">Hubungi Saya</h2>
