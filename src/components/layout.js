@@ -1,8 +1,9 @@
 import React from 'react'
+import HyvorTalk from 'hyvor-talk-react'
 import Header from "./header"
 import Sidebar from "./sidebar"
 
-export default function layout({ children }) {
+export default function layout({ children, type = "page" }) {
 
     return (
         <div>
@@ -16,6 +17,7 @@ export default function layout({ children }) {
                                 {children}
                             </div>
                         </div>
+                        {type === "post" && < HyvorTalk.Embed websiteId={1292} />}
                     </div>
                 </div>
             </div>

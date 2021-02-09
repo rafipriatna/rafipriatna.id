@@ -21,7 +21,7 @@ export default function Post({ data, pageContext }) {
   }
 
   return (
-    <Layout>
+    <Layout type="post">
       <SEO post={dataPost} />
       <article itemScope itemType="http://schema.org/Article">
         <header className="flex flex-col justify-start">
