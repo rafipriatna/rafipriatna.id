@@ -69,6 +69,11 @@ module.exports = {
                             classPrefix: 'language-',
                             inlineCodeMarker: '>',
                             noInlineHighlight: false,
+                            prompt: {
+                                user: "me",
+                                host: "rafipriatna",
+                                global: true,
+                            },
                         },
                     },
                 ],
