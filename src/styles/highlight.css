@@ -24,6 +24,7 @@
 }
 
 .command-line-prompt {
+    margin-right: -5px;
     border: 0;
 }
 
@@ -33,9 +34,14 @@
     display: block;
 }
 
-.command-line-prompt>span[data-user]:before {
+/* Prompt for all users */
+.command-line-prompt > span[data-user]:before {
     content: "[" attr(data-user) "@" attr(data-host) "] $";
-    margin-right: -20px;
+}
+
+/* Prompt for root */
+.command-line-prompt > span[data-user="root"]:before {
+    content: "[" attr(data-user) "@" attr(data-host) "] #";
 }
 
 .command-line-prompt>span[data-prompt]:before {
