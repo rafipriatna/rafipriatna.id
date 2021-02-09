@@ -8,7 +8,7 @@ module.exports = {
     /* Your site config here */
     siteMetadata: {
         siteTitle: "RAFIPRIATNA.ID",
-        siteDescription: "My Personal Blog.",
+        siteDescription: "Kebun digital Rafi.",
         siteUrl: "https://rafipriatna.id/",
         keywords: "Rafi Priatna K, Blog, Indonesia, GNU",
         author: {
@@ -17,9 +17,30 @@ module.exports = {
         },
     },
     plugins: [
-        `gatsby-plugin-sharp`,
+        // ===================================================================================
+        // Meta
+        // ===================================================================================
         `gatsby-plugin-react-helmet`,
-        `gatsby-plugin-fontawesome-css`,
+        'gatsby-plugin-netlify',
+        {
+            resolve: 'gatsby-plugin-manifest',
+            options: {
+                name: 'Rafi Priatna K',
+                short_name: 'Rafi Priatna K',
+                description:
+                    'Kebun digital Rafi.',
+                start_url: '/',
+                background_color: 'dark',
+                theme_color: '#161e2e',
+                display: 'minimal-ui',
+                icon: `static/me.jpg`,
+            },
+        },
+
+        // ===================================================================================
+        // Static
+        // ===================================================================================
+        `gatsby-plugin-sharp`,
         {
             resolve: `gatsby-source-filesystem`,
             options: {
@@ -34,6 +55,11 @@ module.exports = {
                 path: `${__dirname}/content`,
             },
         },
+
+        // ===================================================================================
+        // CSS
+        // ===================================================================================
+        `gatsby-plugin-fontawesome-css`,
         {
             resolve: `gatsby-plugin-purgecss`,
             options: {
@@ -48,6 +74,10 @@ module.exports = {
                 postCssPlugins: [require("tailwindcss")("./tailwind.config.js")],
             },
         },
+
+        // ===================================================================================
+        // Markdown
+        // ===================================================================================
         {
             resolve: `gatsby-transformer-remark`,
             options: {
