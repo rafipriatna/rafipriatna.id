@@ -35,7 +35,9 @@ Setelah itu simpan dengan menekan `ctrl + x`.
 
 Lalu, masih di direktori `/etc/dnscrypt-proxy`, kita bisa install dnscrypt dengan konfigurasi yang baru kita edit.
 ```bash
-$ sudo dnscrypt-proxy -service install
+sudo dnscrypt-proxy -service install
+```
+```
 [2020-08-19 09:34:30] [WARNING] /var/cache/dnscrypt-proxy/public-resolvers.md: open /var/cache/dnscrypt-proxy/sf-2qmn7ru25se2qp4e.tmp: no such file or directory
 [2020-08-19 09:34:30] [WARNING] /var/cache/dnscrypt-proxy/public-resolvers.md.minisig: open /var/cache/dnscrypt-proxy/sf-oj7ygp4kwnm7oyqu.tmp: no such file or directory
 [2020-08-19 09:34:30] [NOTICE] Source [/var/cache/dnscrypt-proxy/public-resolvers.md] loaded
@@ -70,7 +72,7 @@ sudo service network-manager restart
 ## Buat autostart
 Karena ini bukan `systemctl`, maka kita harus mengaktifkannya secara manual untuk menjalankan DNSCrypt.
 Tapi kita bisa mengakali hal ini dengan menambahkan script ke `/etc/rc.local`.
-```bash
+```
 # DNSCrypt
 cd /etc/dnscrypt-proxy && dnscrypt-proxy -service start
 ```

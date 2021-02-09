@@ -79,7 +79,9 @@ Kita akan membuat database di MySQL dengan nama "node_arduino", tetapi teman-tem
 Silakan buat database baru dengan MySQL Client favorit, misalnya PhpMyAdmin, Adminer, atau MySQL CLI. Saya pakai MySQL CLI. Perintah di terminalnya seperti ini:
 
 ```bash
-$ mysql -u root -p
+mysql -u root -p
+```
+```
 mysql > create database node_arduino;
 mysql > exit;
 ```
