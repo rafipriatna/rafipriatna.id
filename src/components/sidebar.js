@@ -27,23 +27,18 @@ export default function Sidebar() {
 
             <p className="text-sm text-center font-light">
               Selamat datang di Kebun digital saya.
-          </p>
+            </p>
 
             <div className="text-center text-sm mt-2 text-gray-600">
               <FontAwesomeIcon icon={faMapMarkerAlt} size="1x" className="animate-pulse" />
               <p className="ml-2 inline-block">Tangerang Selatan, Indonesia</p>
             </div>
-
-            {/* <div className="mt-4 text-center">
-            <button className="bg-gray-500 transition duration-400 ease-in-out hover:bg-gray-700 px-2 py-2 rounded w-full">
-              Selengkapnya
-            </button>
-          </div> */}
+            
           </div>
         </div>
 
         <div className="text-center text-gray-400 mt-4 text-sm">
-          Dibuat dengan <FontAwesomeIcon icon={faHeart} size="1x" className="animate-bounce text-red-800" /> bersama MidnigtRumble.
+          Dibuat dengan <FontAwesomeIcon icon={faHeart} size="1x" className="animate-bounce text-red-800" /> saat #DiRumahAja.
         </div>
       </div>
     </div>
