@@ -20,34 +20,36 @@ Semua perangkat lunak tersebut gratis dan sudah tersedia di distribusi linux Cen
 ## Update
 Seperti biasa, sebelum memasang paket, kita harus update dulu reponya. Di CentOS 8 kita menggunakan paket manager yang bernama `dnf`.
 
-```bash
+```bash{promptUser: root}{promptHost: server}
 dnf update
 ```
 
 ## Install NGINX
 Setelah update repo, kita bisa memasang `nginx` dengan perintah sederhana ini:
 
-```bash
+```bash{promptUser: root}{promptHost: server}
 dnf install nginx
 ```
 
 Kita juga bisa membuat NGINX berjalan secara otomatis saat boot atau saat komputer server dijalankan. Caranya adalah dengan mengaktifkannya melalui systemctl.
 
-```bash
+```bash{promptUser: root}{promptHost: server}
 systemctl enable nginx
 systemctl start nginx
 ```
 
 Untuk mengecek server NGINX yang digunakan, bisa dengan perintah:
 
-```bash
+```bash{promptUser: root}{promptHost: server}
 nginx -v
 ```
 
 Outputnya akan mirip seperti ini:
 
-```bash
-[root@server ~]# nginx -v
+```bash{promptUser: root}{promptHost: server}
+nginx -v
+```
+```
 nginx version: nginx/1.14.1
 ```
 
@@ -64,13 +66,13 @@ MariaDB adalah sebuah perangkat lunak gratis dan open source yang berguna untuk 
 
 Ada dua perangkat lunak yang harus dipasang, yaitu `mariadb` dan `mariadb-server`.
 
-```bash
+```bash{promptUser: root}{promptHost: server}
 dnf install mariadb mariadb-server
 ```
 
 Secara bawaan, semua orang bisa masuk ke MariaDB tanpa kredensial. Untuk membuat MariaDB aman, kita bisa menjalankan perintah ini:
 
-```bash
+```bash{promptUser: root}{promptHost: server}
 mysql_secure_installation
 ```
 
@@ -78,7 +80,7 @@ Maka MariaDB akan mengarahkan hal-hal apa yang harus dilakukan, seperti menggant
 
 Untuk masuk ke MariaDB, cukup jalankan perintah ini:
 
-```bash
+```bash{promptUser: root}{promptHost: server}
 mysql -u root -p
 ```
 
@@ -86,7 +88,7 @@ Setelah itu masukkan password yang sudah dibuat saat `secure installation`.
 
 Untuk membuat MariaDB berjalan secara otomatis saat boot, maka kita juga harus mengaktifnya melalui systemctl.
 
-```bash
+```bash{promptUser: root}{promptHost: server}
 systemctl enable mariadb
 systemctl start mariadb
 ```
@@ -96,19 +98,19 @@ Versi paling baru dari PHP saat ini adalah PHP 7.4. Namun di repository CentOS 8
 
 Pertama-tama, kita harus menambahkan repository **EPEL** terlebih dahulu.
 
-```bash
+```bash{promptUser: root}{promptHost: server}
 dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 ```
 
 Kemudian, kita bisa menambahkan repo **Remi**.
 
-```bash
+```bash{promptUser: root}{promptHost: server}
 dnf install dnf-utils http://rpms.remirepo.net/enterprise/remi-release-8.rpm
 ```
 
 Untuk melihat module PHP apa saja yang tersedia, gunakan perintah ini:
 
-```bash
+```bash{promptUser: root}{promptHost: server}
 dnf module list php
 ```
 
@@ -117,32 +119,34 @@ dnf module list php
 ### Install PHP 7.4
 Karena versi defaultnya bukan PHP 7.4, maka kita harus reset dulu modulenya.
 
-```bash
+```bash{promptUser: root}{promptHost: server}
 dnf module reset php
 ```
 
 Kemudian, kita bisa aktifkan module PHP 7.4 dari repo Remi.
 
-```bash
+```bash{promptUser: root}{promptHost: server}
 dnf module enable php:remi-7.4
 ```
 
 Kemudian, kita bisa memasanga PHP, PHP-FPM, dan module lainnya yang dibutuhkan.
 
-```bash
+```bash{promptUser: root}{promptHost: server}
 dnf install php php-opcache php-gd php-curl php-mysqlnd
 ```
 
 Kemudian kita bisa mengecek versi PHP yang sudah terpasang.
 
-```bash
+```bash{promptUser: root}{promptHost: server}
 php -v
 ```
 
 Outputnya akan mirip seperti ini:
 
-```bash
-[root@server ~]# php -v
+```bash{promptUser: root}{promptHost: server}
+php -v
+```
+```
 PHP 7.4.8 (cli) (built: Jul  9 2020 08:57:23) ( NTS )
 Copyright (c) The PHP Group
 Zend Engine v3.4.0, Copyright (c) Zend Technologies
@@ -151,7 +155,7 @@ Zend Engine v3.4.0, Copyright (c) Zend Technologies
 
 Supaya PHP dapat berjalan saat komputer boot, kita harus mengaktifkan `PHP-FPM` melalui systemctl.
 
-```bash
+```bash{promptUser: root}{promptHost: server}
 systemctl enable php-fpm
 systemctl start php-fpm
 ```
@@ -160,20 +164,20 @@ Secara bawaan, `PHP-FPM` dikonfigurasikan untuk web server **Apache**, karena ki
 
 Silakan edit `www.conf`.
 
-```bash
+```bash{promptUser: root}{promptHost: server}
 nano /etc/php-fpm.d/www.conf
 ```
 
 Lalu cari kedua baris ini:
 
-```bash
+```bash{promptUser: root}{promptHost: server}
 user = apache
 group = apache
 ```
 
 Ganti menjadi:
 
-```bash
+```bash{promptUser: root}{promptHost: server}
 user = nginx
 group = nginx
 ```
@@ -182,7 +186,7 @@ Lalu tekan `ctrl + x` untuk menyimpan.
 
 Setelah disimpan, kita harus restart `NGINX` dan `PHP-FPM`.
 
-```bash
+```bash{promptUser: root}{promptHost: server}
 service nginx restart
 service php-fpm restart
 ```
