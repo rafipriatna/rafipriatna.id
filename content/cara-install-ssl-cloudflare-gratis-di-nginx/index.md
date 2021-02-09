@@ -44,7 +44,7 @@ Cara pasang SSL Cloudflare cukup mudah.
 9. Kasus kali ini, file konfigurasi situs saya ada di `/etc/nginx/sites-available/domain.com`, maka saya mengedit file tersebut. Perlu diperhatikan, file konfigurasi saya dengan kamu mungkin berbeda, jadi saya akan memperlihatkan file konfigurasi NGINX saya sebelum dan sesudah diedit.
 
 Sebelum diedit :
-```bash
+```
 server {
     listen 80;
 
@@ -69,7 +69,7 @@ server {
 }
 ```
 Sesudah diedit :
-```bash
+```
 server {
     listen 80;
     listen 443 ssl;

@@ -25,23 +25,27 @@ Jika sudah sama versinya, sekarang saatnya melakukan restorasi. Pada artikel kal
 
 Pertama-tama, silakan `matikan service mysql` terlebih dahulu, lalu copy **hanya** direktori database (yang ingin direstorasi) yang ada di direktori backup `/var/lib/mysql` ke direktori `/var/lib/mysql` yang ada di lokal. Setelah itu, copy file ib (ibdata1, ib_logfile0, ib_logfile1) yang ada di drektori backup ke direktori mysql lokal, sama seperti meng-copy direktori database. Terakhir adalah ganti chown file-file yang sudah dicopy. Bentuk commandnya seperti berikut dari awal hingga akhir :
 
+Misalkan /home/rafi/backup adalah direktori backup saya.
+
+Copy file database dari backup ke lokal
+
 ```bash
-# Misalkan /home/rafi/backup adalah direktori backup saya
-
-## Copy file database dari backup ke lokal
 sudo cp -rf /home/rafi/backup/var/lib/mysql/database_saya /var/lib/mysql/
+```
 
-## Copy file ib dari backup ke lokal
+Copy file ib dari backup ke lokal
+```bash
 sudo cp /home/rafi/backup/var/lib/mysql/ibdata1 /var/lib/mysql
 sudo cp /home/rafi/backup/var/lib/mysql/ib_logfile0 /var/lib/mysql
 sudo cp /home/rafi/backup/var/lib/mysql/ib_logfile1 /var/lib/mysql
+```
 
-## Ganti chown direktori dan file yang sudah dicopy
+Ganti chown direktori dan file yang sudah dicopy
+```bash
 sudo chown -R mysql:mysql /var/lib/mysql/database_saya
 sudo chmod -R 660 /var/lib/mysql/database_saya
 sudo chown  mysql:mysql /var/lib/mysql/database_saya 
 sudo chmod 700 /var/lib/mysql/database_saya
-
 sudo chown mysql:mysql /var/lib/mysql/ibdata1
 sudo chown -R mysql:mysql /var/lib/mysql/ib_logfile0
 sudo chown -R mysql:mysql /var/lib/mysql/ib_logfile1

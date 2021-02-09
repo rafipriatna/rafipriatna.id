@@ -1075,7 +1075,7 @@ void loop() {
 
 Selanjutnya, kita harus definisikan PIN yang digunakan. Untuk yang pakai WeMos, ini agak aneh. Karena di PIN WeMos itu antara D0 - D8, sedangkan kita harus mendefinisikannya dalam bentuk integer. Untuk itu, berikut adalah terjemahan PIN dari WeMos :
 
-```bash
+```
 D0   = 16;
 D1   = 5;
 D2   = 4;

@@ -170,14 +170,14 @@ nano /etc/php-fpm.d/www.conf
 
 Lalu cari kedua baris ini:
 
-```bash{promptUser: root}{promptHost: server}
+```
 user = apache
 group = apache
 ```
 
 Ganti menjadi:
 
-```bash{promptUser: root}{promptHost: server}
+```
 user = nginx
 group = nginx
 ```

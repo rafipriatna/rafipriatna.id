@@ -19,7 +19,7 @@ Karena saya terbiasa menggunakan terminal di distribusi linux, maka saya memasan
 
 Pertama-tama aktifkan dulu WSL di windows, caranya buka Powershell sebagai Administrator. Lalu jalankan perintah berikut 
 
-``` bash
+``` 
 Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
 ```
 Setelah itu, ketik 'Y' maka komputernya akan restart otomatis dan siap dipasang distribusi linux.
@@ -53,7 +53,7 @@ Saya tidak suka dengan tampilan Command Prompt, Powershell, maupun aplikasi Ubun
 Untuk mengubah shell default menjadi Ubuntu, silakan klik 3 bar di pojok kiri atas > Edit > Preferences...
 Lalu ubah `shell` dan `shellArgs` menjadi seperti ini :
 
-``` bash
+```
 shell: 'C:\\Windows\\System32\\wsl.exe',
 shellArgs: [],
 ```
@@ -64,11 +64,11 @@ Text editor favorit saya adalah Microsoft Visual Studio Code, karena simpel dan 
 Jika VSCode tidak mendeteksi WSL, kita juga bisa memasang plugin `Remote-WSL` secara manual.
 
 Ganti juga terminal di Visual Studio Code ke WSL. Caranya buka `settings.json` di VSCode lalu tambahkan ini :
-``` bash
+```
 "terminal.integrated.shell.windows": "C:\\Windows\\System32\\wsl.exe"
 ```
 Jika kalian menggunakan zsh seperti saya, tambahkan ini :
-``` bash
+```
  "terminal.integrated.shell.windows": "C:\\Windows\\System32\\wsl.exe",
     "terminal.integrated.shellArgs.windows": [
         "-c",
