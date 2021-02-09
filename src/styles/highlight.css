@@ -1,0 +1,41 @@
+.gatsby-highlight {
+    background-color: #303952;
+    margin: 0.5em -20px;
+    padding: 1em;
+    overflow: auto;
+}
+
+.gatsby-highlight pre[class*="language-"] {
+    background-color: transparent;
+    margin: 0;
+    padding: 0;
+    overflow: initial;
+    float: left;
+    min-width: 100%;
+}
+
+.prose code::before {
+    content: "";
+}
+
+.prose code::after {
+    content: "";
+}
+
+.command-line-prompt {
+    border: 0;
+}
+
+.command-line-prompt>span:before {
+    color: #999;
+    content: " ";
+    display: block;
+}
+
+.command-line-prompt>span[data-user]:before {
+    content: "[" attr(data-user) "@" attr(data-host) "] $";
+}
+
+.command-line-prompt>span[data-prompt]:before {
+    content: attr(data-prompt);
+}

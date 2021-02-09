@@ -1,4 +1,5 @@
 import './src/styles/global.css';
-require("prismjs/themes/prism-tomorrow.css")
-require("prismjs/plugins/line-numbers/prism-line-numbers.css")
-require("prismjs/plugins/command-line/prism-command-line.css")
+import "prismjs/themes/prism-tomorrow.css";
+import "prismjs/plugins/line-numbers/prism-line-numbers.css";
+import "prismjs/plugins/command-line/prism-command-line.css";
+import "./src/styles/highlight.css";
