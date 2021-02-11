@@ -2,7 +2,7 @@ import React from "react"
 import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 
-import config from "../utils/config"
+import config from "../utils/Config"
 
 const SEO = ({ post }) => {
   const data = useStaticQuery(graphql`

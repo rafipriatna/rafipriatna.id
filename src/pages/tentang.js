@@ -4,8 +4,8 @@ import { config } from "@fortawesome/fontawesome-svg-core"
 import { faTwitter, faInstagram, faTelegram } from "@fortawesome/free-brands-svg-icons"
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons"
 
-import SEO from "../components/seo"
-import Layout from "../components/layout"
+import Layout from "../components/Layout"
+import SEO from "../components/Seo"
 
 config.autoAddCss = false
 

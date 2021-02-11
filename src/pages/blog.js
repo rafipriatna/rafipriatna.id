@@ -1,12 +1,12 @@
 import React, { useMemo } from "react"
 import { graphql } from "gatsby"
 
-import Layout from "../components/layout"
-import SEO from "../components/seo"
-import Search from "../components/search"
+import Layout from "../components/Layout"
+import SEO from "../components/Seo"
+import Search from "../components/Search"
 
-import Config from "../utils/config"
-import { getSimplifiedPosts } from '../utils/helpers'
+import Config from "../utils/Config"
+import { getSimplifiedPosts } from '../utils/Helpers'
 
 export default function Blog({ data, ...props }) {
 

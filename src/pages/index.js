@@ -2,12 +2,12 @@ import React from "react"
 import Typed from "react-typed"
 import { graphql, Link } from "gatsby"
 
-import Layout from "../components/layout"
-import SEO from "../components/seo"
+import Layout from "../components/Layout"
+import SEO from "../components/Seo"
 
 import FotoProfil from "../images/me.jpg"
 
-import Config from "../utils/config"
+import Config from "../utils/Config"
 
 export default function Home({ data, pageContext }) {
     const { posts } = data.content

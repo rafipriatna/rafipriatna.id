@@ -2,10 +2,10 @@ import React from "react"
 import PropTypes from "prop-types"
 import { Link, graphql } from "gatsby"
 
-import Layout from "../components/layout"
-import SEO from "../components/seo"
+import Layout from "../components/Layout"
+import SEO from "../components/Seo"
 
-import Config from "../utils/config"
+import Config from "../utils/Config"
 
 const dataPost = {
   title: "Tags" + Config.title,

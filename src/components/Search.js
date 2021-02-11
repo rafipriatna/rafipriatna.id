@@ -3,7 +3,7 @@ import { useStaticQuery, graphql } from 'gatsby'
 import { useFlexSearch } from 'react-use-flexsearch'
 import * as queryString from 'query-string'
 
-import Posts from './posts'
+import Posts from './Posts'
 
 export default function Search({ posts, location, navigate }) {
     const { search } = queryString.parse(location.search)
