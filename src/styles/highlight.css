@@ -47,3 +47,9 @@
 .command-line-prompt>span[data-prompt]:before {
     content: attr(data-prompt);
 }
+
+/* Post */
+.anchor.before {
+    top: 10px;
+    stroke: #fff;
+}
