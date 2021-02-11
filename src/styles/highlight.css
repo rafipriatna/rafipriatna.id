@@ -1,6 +1,6 @@
 .gatsby-highlight {
     background-color: #303952;
-    margin: 0 -20px;
+    margin: 0 -25px;
     padding: 1em;
     overflow: auto;
 }
@@ -9,7 +9,7 @@
     background-color: transparent;
     margin: 0;
     padding: 0;
-    padding-left: 5px;
+    padding-left: 10px;
     overflow: initial;
     float: left;
     min-width: 100%;

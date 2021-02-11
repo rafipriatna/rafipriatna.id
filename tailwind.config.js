@@ -63,6 +63,9 @@ module.exports = {
           },
         },
       }),
+      container: {
+        padding: '0 2rem',
+      },
     },
   },
   variants: {

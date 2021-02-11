@@ -1,18 +1,13 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-
-import { faCalendar, faTags } from "@fortawesome/free-solid-svg-icons"
-import { faCreativeCommons } from "@fortawesome/free-brands-svg-icons"
 
 export default function Post({ data, pageContext }) {
   const post = data.markdownRemark
   const { frontmatter } = post
   const { title, description, tags, date } = frontmatter
-  const lastModified = post.parent.modifiedTime
 
   const dataPost = {
     path: pageContext.postPath,
@@ -23,56 +18,28 @@ export default function Post({ data, pageContext }) {
   return (
     <Layout>
       <SEO post={dataPost} />
-      <article itemScope itemType="http://schema.org/Article">
-        <header className="flex flex-col justify-start">
-          <h1 className="text-4xl mb-4 text-center">{title}</h1>
+      <article itemScope itemType="http://schema.org/Article" className="px-2">
+        <header className="text-gray-300 mb-10 break-words">
+          <h1 className="text-4xl mb-6">{title}</h1>
+          <p className="my-2">
+            Terbit pada tanggal {date}{" "}
+          </p>
+
+          <p>
+            {tags.map(tag => {
+              return (
+                <Link to={"/tags/" + tag} className="font-bold pb-4 mr-2" key={tag}>
+                  #{tag}
+                </Link>
+              )
+            })}
+          </p>
         </header>
-        <div className="prose prose-dark max-w-full">
+        <div className="prose prose-dark max-w-full break-words">
           <section
             dangerouslySetInnerHTML={{ __html: post.html }}
             itemProp="articleBody"
           />
-          <footer className="border-t border-b">
-            <div className="text-sm mt-4">
-              <p>
-                <span className="mr-2.5">
-                  <FontAwesomeIcon icon={faCalendar} size="1x" />
-                </span>
-                {date}{" "}
-                {date < lastModified
-                  ? "(Diperbarui: " + lastModified + ")"
-                  : ""}
-              </p>
-
-              <span className="mr-1.5">
-                <FontAwesomeIcon icon={faTags} size="1x" />
-              </span>
-              {tags.map(tag => {
-                return (
-                  <Link to={"/tags/" + tag} className="font-bold pb-4 mr-2" key={tag}>
-                    #{tag}
-                  </Link>
-                )
-              })}
-
-              <p>
-                <span className="mr-2">
-                  <FontAwesomeIcon
-                    icon={faCreativeCommons}
-                    size="1x"
-                  />
-                </span>
-                <a
-                  href="https://creativecommons.org/licenses/by-nc/4.0/deed.id"
-                  rel="license noreferrer"
-                  target="_blank"
-                >
-                  Atribusi-NonKomersial 4.0 Internasional (CC BY-NC
-                  4.0)
-                          </a>
-              </p>
-            </div>
-          </footer>
         </div>
       </article>
     </Layout>
@@ -88,11 +55,6 @@ export const pageQuery = graphql`
         date(formatString: "DD MMMM YYYY", locale: "id-ID")
         description
         tags
-      }
-      parent {
-        ... on File {
-          modifiedTime(formatString: "DD MMMM YYYY", locale: "id-ID")
-        }
       }
     }
   }

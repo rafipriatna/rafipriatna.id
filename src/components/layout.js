@@ -1,23 +1,15 @@
 import React from 'react'
 import Header from "./header"
-import Sidebar from "./sidebar"
+import Footer from "./footer"
 
 export default function layout({ children }) {
 
     return (
         <div>
             <Header />
-            <div className="container mt-8 mx-auto mb-8 px-0 lg:px-20">
-                <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-                    <Sidebar />
-                    <div className="col-span-1 order-first lg:order-none lg:col-span-3">
-                        <div className="bg-gray-900 text-white lg:rounded overflow-hidden shadow-md">
-                            <div className="m-4">
-                                {children}
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div className="container mt-8 mx-auto mb-8 px-4 lg:px-0 lg:max-w-4xl text-white">
+                {children}
+                <Footer />
             </div>
         </div>
     )
