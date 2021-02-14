@@ -84,7 +84,7 @@ export default function Home({ data, pageContext }) {
 
             <div className="text-right">
                 <Link to="/blog">
-                    <span className="bg-gray-700 text-white rounded-md px-1 py-1">
+                    <span className="bg-gray-700 text-white rounded-md px-2 py-2 hover:bg-gray-800">
                         Lihat artikel lainnya
                 </span>
                 </Link>
