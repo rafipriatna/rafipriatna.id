@@ -35,7 +35,7 @@ export default function Post({ data, pageContext }) {
             })}
           </p>
         </header>
-        <div className="prose prose-dark max-w-full break-words">
+        <div className="prose prose-dark max-w-full break-words text-lg">
           <section
             dangerouslySetInnerHTML={{ __html: post.html }}
             itemProp="articleBody"
