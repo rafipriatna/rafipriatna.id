@@ -51,7 +51,7 @@ export default function Home({ data, pageContext }) {
                     <img
                         src={FotoProfil}
                         alt="8bit me wkwkw"
-                        className="object-cover object-center visible group-hover:hidden w-full h-full rounded-lg"
+                        className="object-cover object-center visible group-hover:hidden w-lg h-lg rounded-full"
                     />
                 </div>
             </div>
