@@ -12,7 +12,7 @@ export default function tentang({ pageContext }) {
     return (
         <Layout>
             <SEO post={dataPost} />
-            <div className="px-2 text-xl">
+            <div className="px-2 text-lg">
                 <h1 className="text-4xl mb-10">Tentang</h1>
                 <p>
                     Saya Rafi, seorang mahasiswa jurusan Sistem Informasi. Saya biasanya membuat projek open-source yang saya simpan di <a href="https://github.com/rafipriatna" target="_blank" rel="noreferrer" >Github</a> saya.
