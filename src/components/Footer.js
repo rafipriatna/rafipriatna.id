@@ -1,6 +1,4 @@
 import React from "react"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faHeart } from "@fortawesome/free-solid-svg-icons"
 
 export default function Footer() {
   return (
@@ -12,7 +10,7 @@ export default function Footer() {
               © 2021 Rafi Priatna K.
             </div>
             <div className="text-md flex flex-col lg:flex-row lg:block hidden">
-              Dibuat dengan <FontAwesomeIcon icon={faHeart} size="1x" className="animate-bounce text-red-800" /> di Tangerang Selatan.
+              Dibuat dengan ♥ di Tangerang Selatan.
 
             </div>
           </div>
