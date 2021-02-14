@@ -69,22 +69,22 @@ export default function Header() {
         <div className="flex flex-col lg:flex-row">
           <Link
             to="/"
-            className="transition duration-200 ease-in-out px-4 py-2 lg:py-4 text-gray-300 hover:text-white block text-base font-medium"
-            activeClassName="text-white underline"
+            className="transition duration-200 ease-in-out hover:bg-gray-700 hover:text-white rounded-md px-4 py-2 lg:py-4 text-gray-300 hover:text-white block text-base font-medium m-1"
+            activeClassName="text-white bg-gray-700 rounded-md"
           >
             Beranda
             </Link>
           <Link
             to="/blog"
-            className="transition duration-200 ease-in-out px-4 py-2 lg:py-4 text-gray-300 hover:text-white block text-base font-medium"
-            activeClassName="text-white underline"
+            className="transition duration-200 ease-in-out hover:bg-gray-700 hover:text-white rounded-md px-4 py-2 lg:py-4 text-gray-300 hover:text-white block text-base font-medium m-1"
+            activeClassName="text-white bg-gray-700 rounded-md"
           >
             Blog
             </Link>
           <Link
             to="/tentang"
-            className="transition duration-200 ease-in-out px-4 py-2 lg:py-4 text-gray-300 hover:text-white block text-base font-medium"
-            activeClassName="text-white underline"
+            className="transition duration-200 ease-in-out hover:bg-gray-700 hover:text-white rounded-md px-4 py-2 lg:py-4 text-gray-300 hover:text-white block text-base font-medium m-1"
+            activeClassName="text-white bg-gray-700 rounded-md"
           >
             $whoami
             </Link>
