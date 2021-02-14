@@ -1,13 +1,7 @@
 import React from 'react'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { config } from "@fortawesome/fontawesome-svg-core"
-import { faTwitter, faInstagram, faTelegram } from "@fortawesome/free-brands-svg-icons"
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons"
 
 import Layout from "../components/Layout"
 import SEO from "../components/Seo"
-
-config.autoAddCss = false
 
 export default function tentang({ pageContext }) {
     const dataPost = {
@@ -18,7 +12,7 @@ export default function tentang({ pageContext }) {
     return (
         <Layout>
             <SEO post={dataPost} />
-            <div className="px-2">
+            <div className="px-2 text-xl">
                 <h1 className="text-4xl mb-10">Tentang</h1>
                 <p>
                     Saya Rafi, seorang mahasiswa jurusan Sistem Informasi. Saya biasanya membuat projek open-source yang saya simpan di <a href="https://github.com/rafipriatna" target="_blank" rel="noreferrer" >Github</a> saya.
@@ -38,10 +32,10 @@ export default function tentang({ pageContext }) {
 
                 <h2 className="text-2xl mb-4 font-weight-700 mt-4">Hubungi Saya</h2>
                 <ul className="ml-10">
-                    <li><FontAwesomeIcon icon={faEnvelope} size="1x" /> Email: me@rafipriatna.id</li>
-                    <li><FontAwesomeIcon icon={faTelegram} size="1x" /> Telegram: @rafipriatna</li>
-                    <li><FontAwesomeIcon icon={faInstagram} size="1x" /> Instagram: @rafipriatna</li>
-                    <li><FontAwesomeIcon icon={faTwitter} size="1x" /> Twitter: @rafipriatna</li>
+                    <li>Email: me@rafipriatna.id</li>
+                    <li>Telegram: @rafipriatna</li>
+                    <li>Instagram: @rafipriatna</li>
+                    <li>Twitter: @rafipriatna</li>
                 </ul>
             </div>
         </Layout>

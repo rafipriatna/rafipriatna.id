@@ -59,15 +59,6 @@ module.exports = {
         // ===================================================================================
         // CSS
         // ===================================================================================
-        `gatsby-plugin-fontawesome-css`,
-        {
-            resolve: `gatsby-plugin-purgecss`,
-            options: {
-                tailwind: true,
-                printRejected: false,
-                develop: false,
-            },
-        },
         {
             resolve: "gatsby-plugin-postcss",
             options: {
