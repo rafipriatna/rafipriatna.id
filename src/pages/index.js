@@ -19,7 +19,7 @@ export default function Home({ data, pageContext }) {
     }
 
     const teks = [
-        'Halo Dunia! <span role="img" aria-label="laptop_icon">👋</span>',
+        'Hello World! <span role="img" aria-label="laptop_icon">👋</span>',
         'You found me.',
         'I\'\m so glad.',
         'Rafi Priatna Blog'
