@@ -19,10 +19,10 @@ export default function Home({ data, pageContext }) {
     }
 
     const teks = [
-        'Hello World! <span role="img" aria-label="laptop_icon">👋</span>',
-        'You found me.',
-        'I\'\m so glad.',
-        'Rafi Priatna Blog'
+        `Hello World! <span role="img" aria-label="laptop_icon">👋</span>`,
+        `You found me.`,
+        `I'm so glad.`,
+        `Rafi Priatna Blog`
     ]
 
     return (
@@ -105,7 +105,7 @@ export const indexQuery = graphql`
         frontmatter {
           title
           date(
-            fromNow: true
+            formatString: "DD MMMM YYYY"
             locale: "id-ID"
           )
         }
