@@ -55,6 +55,7 @@ module.exports = {
 
             figcaption: {
               color: theme("colors.gray.500"),
+              textAlign: ['center']
             },
 
             blockquote: {
