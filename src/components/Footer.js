@@ -61,8 +61,8 @@ export default class Footer extends React.Component {
         </footer>
 
         {/* Back to top */}
-        <div className={`${this.state.scrolling ? "block" : "hidden"} fixed z-30 bottom-0 right-0 mr-6 mb-8`}>
-          <button onClick={backToTop} className="text-white block bg-gray-800 bg-opacity-50 rounded-md" id="backToTop">
+        <div className={`${this.state.scrolling ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"} fixed z-30 bottom-0 right-0 mr-6 mb-8 bg-gray-800 transition duration-500 ease-in-out hover:bg-gray-600 transform hover:-translate-y-1 hover:scale-110 rounded-md bg-opacity-50`}>
+          <button onClick={backToTop} className="focus:outline-none">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="h-10 w-10">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
             </svg>
