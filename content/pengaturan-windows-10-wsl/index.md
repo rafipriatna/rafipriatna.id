@@ -4,7 +4,7 @@ date: 2019-10-10T22:13:18+07:00
 title: "Pengaturan Windows 10 untuk pengembangan web"
 slug: "pengaturan-windows-10-untuk-pengembangan-web"
 tags: [
-    "Windows 10",
+    "windows-10",
     "web",
     "development",
     "wsl"

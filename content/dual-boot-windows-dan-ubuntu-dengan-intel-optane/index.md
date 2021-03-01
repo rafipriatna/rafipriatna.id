@@ -5,7 +5,7 @@ title: "Dual boot Windows 10 dan Ubuntu dengan Intel Optane"
 slug: "dual-boot-windows-dan-ubuntu-dengan-intel-optane"
 tags: [
     "linux",
-    "windows 10",
+    "windows-10",
     "dual boot"
 ]
 description: "Cara dual boot windows 10 dan ubuntu dengan Intel Optane"

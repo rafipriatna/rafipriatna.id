@@ -6,7 +6,7 @@ slug: "cara-install-dnscrypt-proxy-di-mx-linux"
 tags: [
     "dnscrypt-proxy",
     "debian",
-    "mx-linux"
+    "mxlinux"
 ]
 description: "Cara install DNSCrypt proxy di MX Linux."
 ---
