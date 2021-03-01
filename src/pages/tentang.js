@@ -14,13 +14,9 @@ export default function tentang({ pageContext }) {
             <SEO post={dataPost} />
             <div className="px-2 text-lg">
                 <h1 className="text-4xl mb-10">Tentang</h1>
-                <p>
-                    Saya Rafi, seorang mahasiswa jurusan Sistem Informasi. Saya biasanya membuat projek open-source yang saya simpan di <a href="https://github.com/rafipriatna" target="_blank" rel="noreferrer" >Github</a> saya.
-            </p>
-
                 <p className="mb-4">
-                    Saya membuat blog ini dengan tujuan untuk mendokumentasikan hasil pembelajaran saya. Semoga isi blog ini berguna untuk para pembaca sekalian. :D
-            </p>
+                    Halo semua, nama saya Rafi Priatna K, biasa dipanggil Rafi. Saya membuat blog ini untuk mendokumentasikan hasil pembelajaran saya dan juga sebagai media untuk mencurahkan hal-hal random saya. Selamat menikmati konten yang saya sajikan :)
+                </p>
 
                 <h2 className="text-2xl mb-4 font-weight-700">Saya Menggunakan</h2>
                 <ul className="ml-10">
@@ -30,7 +26,7 @@ export default function tentang({ pageContext }) {
                     <li><span role="img" aria-label="editor_icon">📝</span> Editor: Visual Studio Code</li>
                 </ul>
 
-                <h2 className="text-2xl mb-4 font-weight-700 mt-4">Hubungi Saya</h2>
+                <h2 className="text-2xl mb-4 font-weight-700 mt-4">Mungkin kamu butuh ini:</h2>
                 <ul className="ml-10">
                     <li>Email: me@rafipriatna.id</li>
                     <li>Telegram: @rafipriatna</li>
