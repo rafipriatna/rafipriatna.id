@@ -82,10 +82,7 @@ export const pageQuery = graphql`
           }
           frontmatter {
             title
-            date(
-              fromNow: true
-              locale: "id-ID"
-            )
+            date(formatString: "DD MMMM YYYY", locale: "id-ID")
           }
           id
         }
