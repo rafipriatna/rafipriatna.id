@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import { Link } from 'gatsby'
 
 const PostCell = ({ node }) => {
@@ -20,15 +20,17 @@ const PostCell = ({ node }) => {
 }
 
 export default function Posts({ data, showYears }) {
+
     const postsByYear = {}
-    
+
     data.forEach((post) => {
+        console.log(postsByYear)
         const year = post.date.split(' ').pop()
 
         postsByYear[year] = [...(postsByYear[year] || []), post]
     })
 
-    const years = useMemo(() => Object.keys(postsByYear).reverse(), [postsByYear])
+    const years = Object.keys(postsByYear).reverse()
 
     if (showYears) {
         return years.map((year) => (

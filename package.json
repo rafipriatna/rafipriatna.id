@@ -15,28 +15,28 @@
   },
   "dependencies": {
     "@tailwindcss/ui": "^0.7.2",
-    "gatsby": "^2.32.8",
+    "gatsby": "^3.0.1",
     "gatsby-plugin-local-search": "^2.0.0",
-    "gatsby-plugin-manifest": "^2.12.0",
-    "gatsby-plugin-netlify": "^2.11.0",
-    "gatsby-plugin-postcss": "^3.6.0",
-    "gatsby-plugin-react-helmet": "^3.9.0",
-    "gatsby-plugin-sharp": "^2.14.1",
-    "gatsby-remark-autolink-headers": "^2.11.0",
-    "gatsby-remark-images": "^3.11.0",
-    "gatsby-remark-prismjs": "^3.13.0",
+    "gatsby-plugin-manifest": "^3.0.0",
+    "gatsby-plugin-netlify": "^3.0.0",
+    "gatsby-plugin-postcss": "^4.0.0",
+    "gatsby-plugin-react-helmet": "^4.0.0",
+    "gatsby-plugin-sharp": "^3.0.0",
+    "gatsby-remark-autolink-headers": "^3.0.0",
+    "gatsby-remark-images": "^4.0.0",
+    "gatsby-remark-prismjs": "^4.0.0",
     "gatsby-remark-static-images": "^1.2.1",
-    "gatsby-source-filesystem": "^2.10.0",
-    "gatsby-transformer-remark": "^2.15.0",
-    "postcss": "^8.2.4",
+    "gatsby-source-filesystem": "^3.0.0",
+    "gatsby-transformer-remark": "^3.0.0",
+    "postcss": "^8.2.7",
     "prismjs": "^1.23.0",
-    "query-string": "^6.14.0",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
+    "query-string": "^6.14.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
     "react-helmet": "^6.1.0",
     "react-typed": "^1.2.0",
     "react-use-flexsearch": "^0.1.1",
-    "tailwindcss": "^2.0.2",
+    "tailwindcss": "^2.0.3",
     "typed.js": "^2.0.11"
   },
   "devDependencies": {
@@ -44,9 +44,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-hello-world"
+    "url": "https://github.com/rafipriatna/rafipriatna.id"
   },
-  "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
+  "resolutions": {
+    "graphql": "^15.4.0",
+    "graphql-compose": "^7.25.0",
+    "webpack": "^5.24.2"
   }
 }
