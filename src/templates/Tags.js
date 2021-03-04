@@ -15,13 +15,12 @@ const dataPost = {
 const Tags = ({ pageContext, data }) => {
   const { tag } = pageContext
   const { edges, totalCount } = data.allMarkdownRemark
-  const tagHeader = `${totalCount} post${totalCount === 1 ? "" : "s"
-    } tagged with "${tag}"`
+  const tagHeader = `Terdapat ${totalCount} artikel dengan tag "${tag}"`
   return (
     <Layout>
       <SEO post={dataPost} />
-      <div className="flex flex-col justify-start">
-        <h1 className="text-4xl mb-4 text-center">{tagHeader}</h1>
+      <div className="flex flex-col justify-start px-2">
+        <h1 className="text-4xl mb-10">{tagHeader}</h1>
       </div>
       {edges.map(({ node }) => {
         const { slug } = node.fields
