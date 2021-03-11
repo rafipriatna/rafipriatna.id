@@ -24,7 +24,6 @@ export default function Posts({ data, showYears }) {
     const postsByYear = {}
 
     data.forEach((post) => {
-        console.log(postsByYear)
         const year = post.date.split(' ').pop()
 
         postsByYear[year] = [...(postsByYear[year] || []), post]
