@@ -65,6 +65,12 @@ module.exports = {
                 postCssPlugins: [require("tailwindcss")("./tailwind.config.js")],
             },
         },
+        {
+            resolve: `gatsby-plugin-nprogress`,
+            options: {
+              showSpinner: false,
+            },
+          },
 
         // ===================================================================================
         // Markdown
