@@ -29,21 +29,19 @@ export default function Home({ data, pageContext }) {
                         </p>
                     <p className="mt-4">
                         Menonton banyak vidio tutorial di Youtube, menumpuk banyak tab Chrome, membuka editor VSCode sampai saya dapat menganggap diri saya layak untuk ini, mungkin saya akan sesekali membuat Tweet tentang ini atau membuat Instagram story.
-
                         </p>
                     <p className="mt-4">
                         Saya hanyalah manusia generasi Z yang penasaran yang dengan senang hati mengingat hal lama dan dengan kejam merindukan hal baru.
                         </p>
                     <p className="mt-4">
                         So... Let's build it.
-                        </p>
-
+                    </p>
                 </div>
                 <div className="hidden lg:block">
                     <img
                         src={FotoProfil}
                         alt="8bit me wkwkw"
-                        className="object-cover object-center visible group-hover:hidden w-lg h-lg rounded-full"
+                        className="object-cover object-center visible group-hover:hidden w-lg h-lg rounded-lg"
                     />
                 </div>
             </div>
