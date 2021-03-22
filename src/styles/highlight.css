@@ -56,6 +56,6 @@
 
 /* Post */
 .anchor.before {
-    top: 10px;
+    top: 10px !important;
     stroke: #fff;
 }
