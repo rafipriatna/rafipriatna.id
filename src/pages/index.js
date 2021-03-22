@@ -1,5 +1,4 @@
 import React from "react"
-import Typed from "react-typed"
 import { graphql, Link } from "gatsby"
 
 import Layout from "../components/Layout"
@@ -18,17 +17,10 @@ export default function Home({ data, pageContext }) {
         description: Config.description,
     }
 
-    const teks = [
-        `Hello World! <span role="img" aria-label="laptop_icon">👋</span>`,
-        `You found me.`,
-        `I'm so glad.`,
-        `Rafi Priatna Blog`
-    ]
-
     return (
         <Layout>
             <SEO post={dataPost} />
-            <h1 className="text-4xl mb-10 px-2">{"/>"} {<Typed strings={teks} typeSpeed={60} />}</h1>
+            <h1 className="text-4xl mb-10 px-2">{"/>"} Hello World! <span role="img" aria-label="laptop_icon">👋</span></h1>
 
             <div className="lg:flex flex-col lg:flex-row justify-between w-full lg:py-0 mb-10 lg:mb-20 px-2">
                 <div className="text-xl max-w-lg text-justify lg:mr-8">
