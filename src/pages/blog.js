@@ -13,13 +13,14 @@ export default function Blog({ data, ...props }) {
   const posts = data.content.posts
   const simplifiedPosts = useMemo(() => getSimplifiedPosts(posts), [posts])
 
-  const dataPost = {
+  const dataSeo = {
     title: "Blog",
     description: Config.description,
   }
+
   return (
     <Layout>
-      <SEO post={dataPost} />
+      <SEO data={dataSeo} />
       <div className="px-2">
         <h1 className="text-4xl mb-10">Blog</h1>
         <p className="text-2xl my-4">

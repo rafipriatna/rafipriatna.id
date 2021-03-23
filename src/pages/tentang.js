@@ -4,14 +4,14 @@ import Layout from "../components/Layout"
 import SEO from "../components/Seo"
 
 export default function tentang({ pageContext }) {
-    const dataPost = {
+    const dataSeo = {
         path: pageContext.postPath,
         title: "Tentang",
         description: "Tentang Rafi Priatna K Blog",
     }
     return (
         <Layout>
-            <SEO post={dataPost} />
+            <SEO data={dataSeo} />
             <div className="px-2 text-lg">
                 <h1 className="text-4xl mb-10">Tentang</h1>
                 <p className="mb-4">

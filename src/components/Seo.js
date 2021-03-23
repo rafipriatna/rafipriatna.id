@@ -4,8 +4,8 @@ import { useStaticQuery, graphql } from "gatsby"
 
 import config from "../utils/Config"
 
-const SEO = ({ post }) => {
-  const data = useStaticQuery(graphql`
+const SEO = ({ data }) => {
+  const query = useStaticQuery(graphql`
     {
       site {
         siteMetadata {
@@ -21,7 +21,7 @@ const SEO = ({ post }) => {
     }
   `)
 
-  const defaults = data.site.siteMetadata
+  const defaults = query.site.siteMetadata
 
   if (defaults.siteUrl === "" && typeof window !== "undefined") {
     defaults.siteUrl = window.location.origin
@@ -32,10 +32,10 @@ const SEO = ({ post }) => {
     return null
   }
 
-  const title = post.title + config.title || defaults.siteTitle
-  const description = post.description || defaults.siteDescription
-  const url = new URL(post.path || "", defaults.siteUrl)
-  const image = post.image ? new URL(post.image, defaults.siteUrl) : false
+  const title = data.title + config.title || defaults.siteTitle
+  const description = data.description || defaults.siteDescription
+  const url = new URL(data.path || "", defaults.siteUrl)
+  const image = data.image ? new URL(data.image, defaults.siteUrl) : false
 
   return (
     <Helmet>

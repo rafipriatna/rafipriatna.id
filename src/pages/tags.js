@@ -8,7 +8,7 @@ import SEO from "../components/Seo"
 
 import Config from "../utils/Config"
 
-const dataPost = {
+const dataSeo = {
   title: "Tags" + Config.title,
   description: Config.description,
 }
@@ -22,7 +22,7 @@ const TagsPage = ({
   },
 }) => (
   <Layout>
-    <SEO post={dataPost} />
+    <SEO data={dataSeo} />
     <div className="flex flex-col justify-start">
       <h1 className="text-4xl mb-4 text-center">Tags</h1>
     </div>

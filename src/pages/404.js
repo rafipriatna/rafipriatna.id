@@ -5,14 +5,14 @@ import SEO from "../components/Seo"
 
 export default function NotFound() {
 
-    const data = {
+    const dataSeo = {
         title: "Not Found :(",
         description: "404 Not Found.",
     }
 
     return (
         <Layout>
-            <SEO post={data} />
+            <SEO data={dataSeo} />
             <div className="px-2 text-lg">
                 <h1 className="text-4xl mb-10">404 :(</h1>
                 <p>Halaman yang kamu cari nggak ketemu nih...</p>

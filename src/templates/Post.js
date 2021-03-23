@@ -9,7 +9,7 @@ export default function Post({ data, pageContext }) {
   const { frontmatter } = post
   const { title, description, tags, date } = frontmatter
 
-  const dataPost = {
+  const dataSeo = {
     path: pageContext.postPath,
     title: title,
     description: description,
@@ -17,7 +17,7 @@ export default function Post({ data, pageContext }) {
 
   return (
     <Layout>
-      <SEO post={dataPost} />
+      <SEO data={dataSeo} />
       <article itemScope itemType="http://schema.org/Article" className="px-2">
         <header className="mb-10 break-words">
           <h1 className="text-4xl mb-6">{title}</h1>

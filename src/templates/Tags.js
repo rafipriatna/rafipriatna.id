@@ -7,7 +7,7 @@ import SEO from "../components/Seo"
 
 import Config from "../utils/Config"
 
-const dataPost = {
+const dataSeo = {
   title: "Tags" + Config.title,
   description: Config.description,
 }
@@ -18,7 +18,7 @@ const Tags = ({ pageContext, data }) => {
   const tagHeader = `Terdapat ${totalCount} artikel dengan tag "${tag}"`
   return (
     <Layout>
-      <SEO post={dataPost} />
+      <SEO data={dataSeo} />
       <div className="flex flex-col justify-start px-2">
         <h1 className="text-4xl mb-10">{tagHeader}</h1>
       </div>

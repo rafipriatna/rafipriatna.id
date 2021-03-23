@@ -11,7 +11,7 @@ import Config from "../utils/Config"
 export default function Home({ data, pageContext }) {
     const { posts } = data.content
 
-    const dataPost = {
+    const dataSeo = {
         path: pageContext.postPath,
         title: "Beranda",
         description: Config.description,
@@ -19,7 +19,7 @@ export default function Home({ data, pageContext }) {
 
     return (
         <Layout>
-            <SEO post={dataPost} />
+            <SEO data={dataSeo} />
             <h1 className="text-4xl mb-10 px-2">{"/>"} Hello World! <span role="img" aria-label="laptop_icon">👋</span></h1>
 
             <div className="lg:flex flex-col lg:flex-row justify-between w-full lg:py-0 mb-10 lg:mb-20 px-2">
