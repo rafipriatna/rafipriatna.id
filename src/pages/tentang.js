@@ -1,7 +1,9 @@
 import React from 'react'
 
-import Layout from "../components/Layout"
-import SEO from "../components/Seo"
+import Layout from '../components/Layout'
+import SEO from '../components/Seo'
+
+import archievements from '../data/achievements'
 
 export default function tentang({ pageContext }) {
     const dataSeo = {
@@ -18,7 +20,7 @@ export default function tentang({ pageContext }) {
                     Halo semua, nama saya Rafi Priatna K, biasa dipanggil Rafi. Saya membuat blog ini untuk mendokumentasikan hasil pembelajaran saya dan juga sebagai media untuk mencurahkan hal-hal random saya. Selamat menikmati konten yang saya sajikan :)
                 </p>
 
-                <h2 className="text-2xl mb-4 font-weight-700">Saya Menggunakan</h2>
+                <h2 className="text-2xl mb-4 font-weight-700">Saya Menggunakan:</h2>
                 <ul className="ml-10">
                     <li><span role="img" aria-label="laptop_icon">💻</span> Laptop: Acer Swift 3 SF314-54G</li>
                     <li><span role="img" aria-label="globe_icon">🌐</span> Domain: <a href="https://www.domainesia.com/?aff=6794" target="_blank" rel="noreferrer" >Domainesia</a></li>
@@ -32,6 +34,15 @@ export default function tentang({ pageContext }) {
                     <li>Telegram: @rafipriatna</li>
                     <li>Instagram: @rafipriatna</li>
                     <li>Twitter: @rafipriatna</li>
+                </ul>
+
+                <h2 className="text-2xl mb-4 font-weight-700 mt-4">Achievement:</h2>
+                <ul className="ml-10 list-disc">
+                    {archievements.map(node => {
+                        return (
+                            <li>{node.tahun}. {node.judul}. ({node.tim})</li>
+                        )
+                    })}
                 </ul>
             </div>
         </Layout>
