@@ -195,7 +195,7 @@ CLG5pPkCggEAflfmKUDTC4kfkXwoXzHxHkgialFPbszvzOmyB39q3E2pU5pFTChv
 ```
 
 Mencari-cari di internet cara solvenya, saya menemukan artikel ini https://blog.cryptohack.org/twitter-secrets.
-Jadi saya coba praktikkan, membuat solver sendiri menggunakan Python:
+Jadi saya coba praktikkan untuk membuat solvernya:
 
 ```python
 import base64
