@@ -74,7 +74,7 @@ export default function Home({ data, pageContext }) {
             </div>
 
             <div className="text-right">
-                <Link to="/blog?search=writeup">
+                <Link to="/tags/writeup">
                     <span className="bg-gray-700 text-white rounded-md px-2 py-2 hover:bg-gray-800">
                         Lihat writeup lainnya
                 </span>
