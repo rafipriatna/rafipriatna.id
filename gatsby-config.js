@@ -55,6 +55,13 @@ module.exports = {
                 path: `${__dirname}/content`,
             },
         },
+        {
+            resolve: `gatsby-source-filesystem`,
+            options: {
+                name: `writeup`,
+                path: `${__dirname}/writeup`,
+            },
+        },
 
         // ===================================================================================
         // CSS
