@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Layout from '../components/Layout'
-import SEO from '../components/Seo'
+import Seo from '../components/Seo'
 
 import archievements from '../data/achievements'
 
@@ -13,7 +13,7 @@ export default function tentang({ pageContext }) {
     }
     return (
         <Layout>
-            <SEO data={dataSeo} />
+            <Seo data={dataSeo} />
             <div className="px-2 text-lg">
                 <h1 className="text-4xl mb-10">Tentang</h1>
                 <p className="mb-4">

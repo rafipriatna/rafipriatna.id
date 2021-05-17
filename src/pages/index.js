@@ -2,7 +2,7 @@ import React from "react"
 import { graphql, Link } from "gatsby"
 
 import Layout from "../components/Layout"
-import SEO from "../components/Seo"
+import Seo from "../components/Seo"
 
 import FotoProfil from "../images/me.jpg"
 
@@ -19,7 +19,7 @@ export default function Home({ data, pageContext }) {
 
     return (
         <Layout>
-            <SEO data={dataSeo} />
+            <Seo data={dataSeo} />
             <h1 className="text-4xl mb-10 px-2">{"/>"} Hello World! <span role="img" aria-label="laptop_icon">👋</span></h1>
 
             <div className="lg:flex flex-col lg:flex-row justify-between w-full lg:py-0 mb-10 lg:mb-20 px-2">

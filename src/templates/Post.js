@@ -2,7 +2,7 @@ import React from "react"
 import { graphql, Link } from "gatsby"
 
 import Layout from "../components/Layout"
-import SEO from "../components/Seo"
+import Seo from "../components/Seo"
 
 export default function Post({ data, pageContext }) {
   const post = data.markdownRemark
@@ -17,7 +17,7 @@ export default function Post({ data, pageContext }) {
 
   return (
     <Layout>
-      <SEO data={dataSeo} />
+      <Seo data={dataSeo} />
       <article itemScope itemType="http://schema.org/Article" className="px-2">
         <header className="mb-10 break-words">
           <h1 className="text-4xl mb-6">{title}</h1>

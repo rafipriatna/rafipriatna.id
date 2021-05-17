@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import { Link, graphql } from "gatsby"
 
 import Layout from "../components/Layout"
-import SEO from "../components/Seo"
+import Seo from "../components/Seo"
 
 import Config from "../utils/Config"
 
@@ -18,7 +18,7 @@ const Tags = ({ pageContext, data }) => {
   const tagHeader = `Terdapat ${totalCount} artikel dengan tag "${tag}"`
   return (
     <Layout>
-      <SEO data={dataSeo} />
+      <Seo data={dataSeo} />
       <div className="flex flex-col justify-start px-2">
         <h1 className="text-4xl mb-10">{tagHeader}</h1>
       </div>

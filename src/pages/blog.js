@@ -2,7 +2,7 @@ import React, { useMemo } from "react"
 import { graphql } from "gatsby"
 
 import Layout from "../components/Layout"
-import SEO from "../components/Seo"
+import Seo from "../components/Seo"
 import Search from "../components/Search"
 
 import Config from "../utils/Config"
@@ -20,7 +20,7 @@ export default function Blog({ data, ...props }) {
 
   return (
     <Layout>
-      <SEO data={dataSeo} />
+      <Seo data={dataSeo} />
       <div className="px-2">
         <h1 className="text-4xl mb-10">Blog</h1>
         <p className="text-2xl my-4">

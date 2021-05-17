@@ -4,7 +4,7 @@ import kebabCase from "lodash/kebabCase"
 import { Link, graphql } from "gatsby"
 
 import Layout from "../components/Layout"
-import SEO from "../components/Seo"
+import Seo from "../components/Seo"
 
 import Config from "../utils/Config"
 
@@ -22,7 +22,7 @@ const TagsPage = ({
   },
 }) => (
   <Layout>
-    <SEO data={dataSeo} />
+    <Seo data={dataSeo} />
     <div className="flex flex-col justify-start">
       <h1 className="text-4xl mb-4 text-center">Tags</h1>
     </div>
