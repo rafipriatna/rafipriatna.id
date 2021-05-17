@@ -25,7 +25,7 @@ dCTF 2021 diselenggarakan oleh DragonSec SI dimulai dari hari Jum'at jam 15:00 U
 - Crypto
     - [Julius' ancient script](#julius-ancient-script)
     - [This one is really basic](#this-one-is-really-basic)
-    - [Private Encryption Mistake](#this-one-is-really-basic)
+    - [Private Encryption Mistake](#private-encryption-mistake)
 - Web
     - [Simple Web](#simple-web)
     - [DevOps vs SecOps](#devops-vs-secops)
