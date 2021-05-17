@@ -10,6 +10,7 @@ import Config from "../utils/Config"
 
 export default function Home({ data, pageContext }) {
     const { posts } = data.content
+    const { writeups } = data.writeup
 
     const dataSeo = {
         path: pageContext.postPath,
@@ -46,7 +47,41 @@ export default function Home({ data, pageContext }) {
                 </div>
             </div>
 
-            <h1 className="text-4xl px-2 mb-10">
+            <h1 className="text-4xl px-2 my-10">
+                CTF Writeups
+            </h1>
+
+            <div className="mb-6">
+                {writeups.map(post => {
+                    const { frontmatter, fields, id } = post
+                    const { title, date } = frontmatter
+
+                    return (
+                        <Link to={fields.slug} key={id}>
+                            <div className="transition duration-200 ease-in-out hover:bg-gray-700 hover:text-white rounded-md px-2 py-2 lg:mt-4 mt-2">
+                                <div className="lg:flex flex-col lg:flex-row justify-between w-full lg:py-0">
+                                    <div className="text-lg flex flex-col lg:flex-row">
+                                        {title}
+                                    </div>
+                                    <div className="text-md flex flex-col lg:flex-row lg:block hidden">
+                                        <span>{date}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </Link>
+                    )
+                })}
+            </div>
+
+            <div className="text-right">
+                <Link to="/blog?search=writeup">
+                    <span className="bg-gray-700 text-white rounded-md px-2 py-2 hover:bg-gray-800">
+                        Lihat writeup lainnya
+                </span>
+                </Link>
+            </div>
+
+            <h1 className="text-4xl px-2 my-10">
                 Artikel terbaru
             </h1>
 
@@ -86,6 +121,7 @@ export default function Home({ data, pageContext }) {
 
 export const indexQuery = graphql`
   query LatestPostQuery {
+
     content: allMarkdownRemark(
         limit: 5
         sort: { fields: [frontmatter___date], order: DESC }
@@ -104,5 +140,26 @@ export const indexQuery = graphql`
         }
       }
     }
+
+    writeup: allMarkdownRemark(
+        limit: 5
+        sort: { fields: [frontmatter___date], order: DESC }
+        filter: {fileAbsolutePath: {regex: "/writeup/"}}
+    ) {
+      writeups: nodes {
+        id
+        frontmatter {
+          title
+          date(
+            formatString: "DD MMMM YYYY"
+            locale: "id-ID"
+          )
+        }
+        fields {
+          slug
+        }
+      }
+    }
+
   }
 `
