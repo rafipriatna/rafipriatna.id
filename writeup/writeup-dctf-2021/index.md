@@ -15,6 +15,7 @@ description: "Writeup soal yang saya selesaikan pada dCTF 2021."
 <p align="center">
   <img src="dragonsec_logo_flag.gif" alt="DragonSec Logo" />
 </p>
+
 dCTF 2021 diselenggarakan oleh DragonSec SI dimulai dari hari Jum'at jam 15:00 UTC (22:00 WIB) hingga Minggu jam 21:59 UTC (04:49 WIB). Tim saya (Alakadarnya) berhasil menempati posisi ke-41. Berikut ini adalah beberapa _challenge_ yang berhasil saya selesaikan.
 
 ----
