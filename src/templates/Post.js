@@ -32,7 +32,7 @@ export default function Post({ data, pageContext }) {
     } else {
       console.log(`Error adding utterances comments on: ${commentBox}`)
     }
-  }, [])
+  }, [commentBox])
 
   return (
     <Layout>
