@@ -1,8 +1,9 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { graphql, Link } from "gatsby"
 
 import Layout from "../components/Layout"
 import Seo from "../components/Seo"
+import Comment from "../components/Comment"
 
 export default function Post({ data, pageContext }) {
   const post = data.markdownRemark
@@ -15,6 +16,24 @@ export default function Post({ data, pageContext }) {
     description: description,
   }
 
+  const commentBox = React.createRef()
+
+  useEffect(() => {
+    const commentScript = document.createElement("script")
+    commentScript.async = true
+    commentScript.src = "https://utteranc.es/client.js"
+    commentScript.setAttribute("repo", "rafipriatna/rafipriatna.id")
+    commentScript.setAttribute("issue-term", "pathname")
+    commentScript.setAttribute("id", "utterances")
+    commentScript.setAttribute("theme", "dark-blue")
+    commentScript.setAttribute("crossorigin", "anonymous")
+    if (commentBox && commentBox.current) {
+      commentBox.current.appendChild(commentScript)
+    } else {
+      console.log(`Error adding utterances comments on: ${commentBox}`)
+    }
+  }, [])
+
   return (
     <Layout>
       <Seo data={dataSeo} />
@@ -22,14 +41,16 @@ export default function Post({ data, pageContext }) {
         <header className="mb-10 break-words">
           <h1 className="text-4xl mb-6">{title}</h1>
           <div className="text-gray-400">
-            <p className="my-2">
-              Terbit pada tanggal {date}{" "}
-            </p>
+            <p className="my-2">Terbit pada tanggal {date} </p>
 
             <p>
               {tags.map(tag => {
                 return (
-                  <Link to={"/tags/" + tag} className="font-bold pb-4 mr-2 hover:text-white" key={tag}>
+                  <Link
+                    to={"/tags/" + tag}
+                    className="font-bold pb-4 mr-2 hover:text-white"
+                    key={tag}
+                  >
                     #{tag}
                   </Link>
                 )
@@ -42,6 +63,12 @@ export default function Post({ data, pageContext }) {
             dangerouslySetInnerHTML={{ __html: post.html }}
             itemProp="articleBody"
           />
+        </div>
+        <div className="text-center">
+          <div id="comments">
+            <h2 className="text-2xl mb-6">Komentar</h2>
+            <Comment commentBox={commentBox} />
+          </div>
         </div>
       </article>
     </Layout>
