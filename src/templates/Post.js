@@ -25,7 +25,7 @@ export default function Post({ data, pageContext }) {
     commentScript.setAttribute("repo", "rafipriatna/rafipriatna.id")
     commentScript.setAttribute("issue-term", "pathname")
     commentScript.setAttribute("id", "utterances")
-    commentScript.setAttribute("theme", "dark-blue")
+    commentScript.setAttribute("theme", "github-dark")
     commentScript.setAttribute("crossorigin", "anonymous")
     if (commentBox && commentBox.current) {
       commentBox.current.appendChild(commentScript)
@@ -48,7 +48,7 @@ export default function Post({ data, pageContext }) {
                 return (
                   <Link
                     to={"/tags/" + tag}
-                    className="font-bold pb-4 mr-2 hover:text-white"
+                    className="font-bold pb-4 mr-2 hover:text-gray-100"
                     key={tag}
                   >
                     #{tag}
@@ -58,7 +58,7 @@ export default function Post({ data, pageContext }) {
             </p>
           </div>
         </header>
-        <div className="prose prose-dark max-w-full break-words text-lg">
+        <div className="prose prose-dark max-w-full break-words text-lg text-justify">
           <section
             dangerouslySetInnerHTML={{ __html: post.html }}
             itemProp="articleBody"

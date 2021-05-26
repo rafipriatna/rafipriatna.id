@@ -6,10 +6,9 @@ import Seo from "../components/Seo"
 import Search from "../components/Search"
 
 import Config from "../utils/Config"
-import { getSimplifiedPosts } from '../utils/Helpers'
+import { getSimplifiedPosts } from "../utils/Helpers"
 
 export default function Blog({ data, ...props }) {
-
   const posts = data.content.posts
   const simplifiedPosts = useMemo(() => getSimplifiedPosts(posts), [posts])
 
@@ -34,15 +33,14 @@ export default function Blog({ data, ...props }) {
 
 export const pageQuery = graphql`
   query MyQuery {
-    content: allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+    content: allMarkdownRemark(
+      sort: { fields: [frontmatter___date], order: DESC }
+    ) {
       posts: nodes {
         id
         frontmatter {
           title
-          date(
-            formatString: "DD MMMM YYYY"
-            locale: "id-ID"
-          )
+          date(formatString: "DD MMMM YYYY", locale: "id-ID")
         }
         fields {
           slug

@@ -9,7 +9,7 @@ export default function Header() {
   return (
     <div className="container mx-auto lg:max-w-4xl flex flex-col lg:flex-row lg:mb-16 lg:mt-8">
       <div className="flex items-center justify-between px-6 lg:px-2 py-4 lg:py-0">
-        <Link to="/" className="uppercase font-semibold text-white">
+        <Link to="/" className="uppercase font-semibold text-gray-100">
           <div className="flex justify-between space-x-2 items-center">
             <div>
               <div className="group w-8 h-8 rounded-full overflow-hidden">
@@ -28,7 +28,7 @@ export default function Header() {
         <div>
           <button
             onClick={() => setMobile(!isMobile)}
-            className="focus:outline-none block lg:hidden text-white"
+            className="focus:outline-none block lg:hidden text-gray-100"
           >
             <svg
               className="w-5 h-5"
@@ -58,7 +58,7 @@ export default function Header() {
 
       <div
         className={`${isMobile ? "block px-2" : "hidden"
-          } lg:flex flex-col lg:flex-row justify-between w-full py-4 lg:py-0 text-white`}
+          } lg:flex flex-col lg:flex-row justify-between w-full py-4 lg:py-0 text-gray-100`}
       >
         {/* <div className="flex flex-col lg:flex-row">
             <a href="#" className="block px-4 py-2 lg:py-4 hover:text-gray-900">
@@ -69,22 +69,22 @@ export default function Header() {
         <div className="flex flex-col lg:flex-row">
           <Link
             to="/"
-            className="transition duration-200 ease-in-out hover:bg-gray-700 hover:text-white rounded-md px-4 py-2 lg:py-4 text-gray-300 hover:text-white block text-base font-medium m-1"
-            activeClassName="text-white bg-gray-700 rounded-md"
+            className="transition duration-200 ease-in-out hover:bg-gray-800 hover:text-gray-100 rounded-md px-4 py-2 lg:py-4 text-gray-300 hover:text-gray-100 block text-base font-medium m-1"
+            activeClassName="text-gray-100 bg-gray-800 rounded-md"
           >
             Beranda
             </Link>
           <Link
             to="/blog"
-            className="transition duration-200 ease-in-out hover:bg-gray-700 hover:text-white rounded-md px-4 py-2 lg:py-4 text-gray-300 hover:text-white block text-base font-medium m-1"
-            activeClassName="text-white bg-gray-700 rounded-md"
+            className="transition duration-200 ease-in-out hover:bg-gray-800 hover:text-gray-100 rounded-md px-4 py-2 lg:py-4 text-gray-300 hover:text-gray-100 block text-base font-medium m-1"
+            activeClassName="text-gray-100 bg-gray-800 rounded-md"
           >
             Blog
             </Link>
           <Link
             to="/tentang"
-            className="transition duration-200 ease-in-out hover:bg-gray-700 hover:text-white rounded-md px-4 py-2 lg:py-4 text-gray-300 hover:text-white block text-base font-medium m-1"
-            activeClassName="text-white bg-gray-700 rounded-md"
+            className="transition duration-200 ease-in-out hover:bg-gray-800 hover:text-gray-100 rounded-md px-4 py-2 lg:py-4 text-gray-300 hover:text-gray-100 block text-base font-medium m-1"
+            activeClassName="text-gray-100 bg-gray-800 rounded-md"
           >
             $whoami
             </Link>
