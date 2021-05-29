@@ -40,7 +40,6 @@ const SEO = ({ data }) => {
   return (
     <Helmet>
       <title>{title}</title>
-      <link rel="canonical" href={url} />
       <meta name="description" content={description} />
 
       <meta property="og:url" content={url} />
