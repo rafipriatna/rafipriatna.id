@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React from "react"
 import { graphql, Link } from "gatsby"
 
 import Layout from "../components/Layout"
@@ -15,24 +15,6 @@ export default function Post({ data, pageContext }) {
     title: title,
     description: description,
   }
-
-  const commentBox = React.createRef()
-
-  useEffect(() => {
-    const commentScript = document.createElement("script")
-    commentScript.async = true
-    commentScript.src = "https://utteranc.es/client.js"
-    commentScript.setAttribute("repo", "rafipriatna/rafipriatna.id")
-    commentScript.setAttribute("issue-term", "pathname")
-    commentScript.setAttribute("id", "utterances")
-    commentScript.setAttribute("theme", "github-dark")
-    commentScript.setAttribute("crossorigin", "anonymous")
-    if (commentBox && commentBox.current) {
-      commentBox.current.appendChild(commentScript)
-    } else {
-      console.log(`Error adding utterances comments on: ${commentBox}`)
-    }
-  }, [commentBox])
 
   return (
     <Layout>
@@ -64,13 +46,8 @@ export default function Post({ data, pageContext }) {
             itemProp="articleBody"
           />
         </div>
-        <div className="text-center">
-          <div id="comments">
-            <h2 className="text-2xl mb-6">Komentar</h2>
-            <Comment commentBox={commentBox} />
-          </div>
-        </div>
       </article>
+      <Comment />
     </Layout>
   )
 }
