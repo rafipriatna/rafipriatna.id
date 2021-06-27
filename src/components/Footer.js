@@ -174,8 +174,7 @@ export default class Footer extends React.Component {
                 </svg>
                 <span className="tab block text-xs">Tentang</span>
               </Link>
-              <a
-                href="#"
+              <button
                 onClick={backToTop}
                 className="w-full focus:text-teal-500 hover:text-teal-500 justify-center inline-block text-center pt-2 pb-1 text-gray-200"
               >
@@ -194,7 +193,7 @@ export default class Footer extends React.Component {
                   />
                 </svg>
                 <span className="tab block text-xs">Ke atas</span>
-              </a>
+              </button>
             </div>
           </section>
         </div>
