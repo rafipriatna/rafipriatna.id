@@ -25,9 +25,9 @@ export default function Search({ posts, location, navigate }) {
 
   return (
     <>
-      <div class="flex items-center mt-2 mb-6 ml-4 w-full">
+      <div className="flex items-center mt-2 mb-6 ml-4 w-full">
         <svg
-          class="w-4 h-4 fill-current z-10"
+          className="w-4 h-4 fill-current z-10"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           fill="black"
@@ -38,7 +38,7 @@ export default function Search({ posts, location, navigate }) {
         <input
           type="text"
           placeholder="Cari artikel di sini..."
-          class="w-full -ml-8 pl-10 px-4 py-2 rounded-lg ring-2 ring-gray-800 focus:outline-none focus:ring-gray-700 bg-gray-800"
+          className="w-full -ml-8 pl-10 px-4 py-2 rounded-lg ring-2 ring-gray-800 focus:outline-none focus:ring-gray-700 bg-gray-800"
           value={query}
           onChange={e => {
             navigate(e.target.value ? `/blog/?search=${e.target.value}` : "")
