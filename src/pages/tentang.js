@@ -38,9 +38,9 @@ export default function tentang({ pageContext }) {
 
                 <h2 className="text-2xl mb-4 font-weight-700 mt-4">Achievement:</h2>
                 <ul className="ml-10 list-disc">
-                    {archievements.map(node => {
+                    {archievements.map((node, index) => {
                         return (
-                            <li>{node.tahun}. {node.judul}. ({node.tim})</li>
+                            <li key={index}>{node.tahun}. {node.judul}. ({node.tim})</li>
                         )
                     })}
                 </ul>
