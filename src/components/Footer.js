@@ -109,11 +109,12 @@ export default class Footer extends React.Component {
 
         {/* New mobile menu */}
         <div>
-          <section className="block lg:hidden fixed inset-x-0 bottom-0 z-10 bg-gray-800 text-gray-100 shadow-2xl">
+          <section className="block lg:hidden fixed inset-x-0 bottom-0 z-10 bg-gray-800 text-gray-400 shadow-2xl">
             <div id="tabs" className="flex justify-between">
               <Link
                 to="/"
                 className="w-full focus:text-teal-500 hover:text-teal-500 justify-center inline-block text-center pt-2 pb-1"
+                activeClassName="text-gray-100"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -134,6 +135,7 @@ export default class Footer extends React.Component {
               <Link
                 to="/blog"
                 className="w-full focus:text-teal-500 hover:text-teal-500 justify-center inline-block text-center pt-2 pb-1"
+                activeClassName="text-gray-100"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -154,6 +156,7 @@ export default class Footer extends React.Component {
               <Link
                 to="/tentang"
                 className="w-full focus:text-teal-500 hover:text-teal-500 justify-center inline-block text-center pt-2 pb-1"
+                activeClassName="text-gray-100"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -174,7 +177,7 @@ export default class Footer extends React.Component {
               <a
                 href="#"
                 onClick={backToTop}
-                className="w-full focus:text-teal-500 hover:text-teal-500 justify-center inline-block text-center pt-2 pb-1"
+                className="w-full focus:text-teal-500 hover:text-teal-500 justify-center inline-block text-center pt-2 pb-1 text-gray-200"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
