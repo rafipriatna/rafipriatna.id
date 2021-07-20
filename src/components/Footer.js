@@ -87,7 +87,7 @@ export default class Footer extends React.Component {
             this.state.scrolling
               ? "translate-y-0 opacity-100"
               : "translate-y-12 opacity-0"
-          } fixed z-30 bottom-0 right-0 mr-6 mb-8 bg-gray-900 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 rounded-md bg-opacity-50 lg:visible invisible`}
+          } fixed z-30 bottom-0 right-0 lg:mr-6 lg:mb-14 mr-4 mb-20 bg-gray-900 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 rounded-md bg-opacity-50`}
         >
           <button onClick={backToTop} className="focus:outline-none">
             <svg
@@ -174,9 +174,10 @@ export default class Footer extends React.Component {
                 </svg>
                 <span className="tab block text-xs">Tentang</span>
               </Link>
-              <button
-                onClick={backToTop}
-                className="w-full focus:text-teal-500 hover:text-teal-500 justify-center inline-block text-center pt-2 pb-1 text-gray-200"
+              <Link
+                to="/portofolio"
+                className="w-full focus:text-teal-500 hover:text-teal-500 justify-center inline-block text-center pt-2 pb-1"
+                activeClassName="text-gray-100"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -186,14 +187,14 @@ export default class Footer extends React.Component {
                   stroke="currentColor"
                 >
                   <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M5 15l7-7 7 7"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
                   />
                 </svg>
-                <span className="tab block text-xs">Ke atas</span>
-              </button>
+                <span className="tab block text-xs">Portofolio</span>
+              </Link>
             </div>
           </section>
         </div>
