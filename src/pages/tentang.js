@@ -21,7 +21,7 @@ export default function Tentang({ pageContext }) {
             saya mulai memahami semuanya.
           </p>
           <p className="mt-4">
-            Saya banyak menonton banyak vidio tutorial di Youtube, menumpuk
+            Saya menonton banyak vidio tutorial di Youtube, menumpuk
             banyak tab browser, membuka editor VSCode sampai saya dapat
             menganggap diri saya layak untuk ini, mungkin saya akan sesekali
             membuat Tweet tentang ini atau membuat Instagram story.
