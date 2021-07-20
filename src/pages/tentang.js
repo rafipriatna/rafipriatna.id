@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from "gatsby"
 
 import Layout from "../components/Layout"
 import Seo from "../components/Seo"
@@ -39,11 +40,8 @@ export default function Tentang({ pageContext }) {
             Alasan saya memulai pemrograman adalah karena saya ingin membuat
             sesuatu yang ingin saya buat. Biasanya sesuatu yang saya buat itu
             saya buka kodenya (open source) yang saya simpan di Github saya.
-            Silakan kunjungi{" "}
-            <a className="text-blue-500" href="/portofolio">
-              portofolio
-            </a>{" "}
-            saya untuk melihat projek-projek apa saja yang sudah saya buat.
+            Silakan kunjungi <Link to="/portofolio">portofolio</Link> saya untuk
+            melihat projek-projek apa saja yang sudah saya buat.
           </p>
           <h2 className="text-2xl my-4 font-weight-700">Saya Menggunakan:</h2>
           <ul>
@@ -80,15 +78,13 @@ export default function Tentang({ pageContext }) {
             </li>
           </ul>
 
-          <h2 className="text-2xl my-4 font-weight-700 mt-4">
-            Kontak:
-          </h2>
-            <ul>
-              <li>Email: me@rafipriatna.id</li>
-              <li>Telegram: @rafipriatna</li>
-              <li>Instagram: @rafipriatna</li>
-              <li>Twitter: @rafipriatna</li>
-            </ul>
+          <h2 className="text-2xl my-4 font-weight-700 mt-4">Kontak:</h2>
+          <ul>
+            <li>Email: me@rafipriatna.id</li>
+            <li>Telegram: @rafipriatna</li>
+            <li>Instagram: @rafipriatna</li>
+            <li>Twitter: @rafipriatna</li>
+          </ul>
         </div>
       </div>
     </Layout>
