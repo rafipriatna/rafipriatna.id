@@ -29,62 +29,23 @@ export default function Home({ data, pageContext }) {
       </h1>
 
       <div className="lg:flex flex-col lg:flex-row justify-between w-full lg:py-0 mb-10 lg:mb-20 px-2">
-        <div className="text-xl max-w-lg text-justify lg:mr-8">
-          <p>
-            Terima kasih sudah mengunjungi portofolio web dev saya — Saya pikir
-            saya mulai memahami semuanya.
-          </p>
-          <p className="mt-4">
-            Menonton banyak vidio tutorial di Youtube, menumpuk banyak tab
-            Chrome, membuka editor VSCode sampai saya dapat menganggap diri saya
-            layak untuk ini, mungkin saya akan sesekali membuat Tweet tentang
-            ini atau membuat Instagram story.
-          </p>
-          <p className="mt-4">
-            Saya hanyalah manusia generasi Z yang penasaran yang dengan senang
-            hati mengingat hal lama dan dengan kejam merindukan hal baru.
-          </p>
-          <p className="mt-4">So... Let's build it.</p>
-        </div>
-        <div className="hidden lg:block">
+        <div className="w-1/6 hidden lg:block">
           <img
             src={FotoProfil}
             alt="8bit me wkwkw"
-            className="object-cover object-center visible group-hover:hidden w-lg h-lg rounded-lg"
+            className="object-cover object-center w-24 h-24 rounded-full"
           />
         </div>
-      </div>
-
-      <h1 className="text-4xl px-2 my-10">CTF Writeups</h1>
-
-      <div className="mb-6">
-        {writeups.nodes.map(writeup => {
-          const { frontmatter, fields, id } = writeup
-          const { title, date } = frontmatter
-
-          return (
-            <Link to={fields.slug} key={id}>
-              <div className="transition duration-200 ease-in-out hover:bg-gray-800 hover:text-gray-100 rounded-md px-2 py-2 lg:mt-4 mt-2">
-                <div className="lg:flex flex-col lg:flex-row justify-between w-full lg:py-0">
-                  <div className="text-lg flex flex-col lg:flex-row">
-                    {title}
-                  </div>
-                  <div className="text-md flex flex-col lg:flex-row lg:block hidden">
-                    <span>{date}</span>
-                  </div>
-                </div>
-              </div>
-            </Link>
-          )
-        })}
-      </div>
-
-      <div className="text-right">
-        <Link to="/tags/writeup">
-          <span className="text-gray-100 rounded-md px-2 py-2 hover:bg-gray-800">
-            Lihat writeup lainnya
-          </span>
-        </Link>
+        <div className="text-xl w-5/6 text-justify mr-8">
+          <p>
+            Hai, saya Rafi. Saya membuat blog ini untuk mendokumentasikan hasil
+            pembelajaran saya dan juga sebagai media untuk mencurahkan hal-hal
+            random saya. Selamat menikmati konten yang saya sajikan{" "}
+            <span role="img" aria-label="globe_icon">
+              😁
+            </span>
+          </p>
+        </div>
       </div>
 
       <h1 className="text-4xl px-2 my-10">Artikel terbaru</h1>
@@ -119,6 +80,38 @@ export default function Home({ data, pageContext }) {
         </Link>
       </div>
 
+      <h1 className="text-4xl px-2 my-10">CTF Writeups</h1>
+
+      <div className="mb-6">
+        {writeups.nodes.map(writeup => {
+          const { frontmatter, fields, id } = writeup
+          const { title, date } = frontmatter
+
+          return (
+            <Link to={fields.slug} key={id}>
+              <div className="transition duration-200 ease-in-out hover:bg-gray-800 hover:text-gray-100 rounded-md px-2 py-2 lg:mt-4 mt-2">
+                <div className="lg:flex flex-col lg:flex-row justify-between w-full lg:py-0">
+                  <div className="text-lg flex flex-col lg:flex-row">
+                    {title}
+                  </div>
+                  <div className="text-md flex flex-col lg:flex-row lg:block hidden">
+                    <span>{date}</span>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          )
+        })}
+      </div>
+
+      <div className="text-right">
+        <Link to="/tags/writeup">
+          <span className="text-gray-100 rounded-md px-2 py-2 hover:bg-gray-800">
+            Lihat writeup lainnya
+          </span>
+        </Link>
+      </div>
+
       <h1 className="text-4xl px-2 my-10">Projects</h1>
       <Project projects={projects.nodes} />
     </Layout>
@@ -130,7 +123,7 @@ export const indexQuery = graphql`
     posts: allMarkdownRemark(
       limit: 5
       sort: { fields: [frontmatter___date], order: DESC }
-      filter: { fileAbsolutePath: { regex: "/content/" } }
+      filter: { fileAbsolutePath: { regex: "/content/posts/" } }
     ) {
       nodes {
         id
@@ -147,7 +140,7 @@ export const indexQuery = graphql`
     writeups: allMarkdownRemark(
       limit: 5
       sort: { fields: [frontmatter___date], order: DESC }
-      filter: { fileAbsolutePath: { regex: "/writeup/" } }
+      filter: { fileAbsolutePath: { regex: "/content/writeups/" } }
     ) {
       nodes {
         id
@@ -164,7 +157,7 @@ export const indexQuery = graphql`
     projects: allMarkdownRemark(
       limit: 5
       sort: { fields: [frontmatter___date], order: ASC }
-      filter: { fileAbsolutePath: { regex: "/portofolio/" } }
+      filter: { fileAbsolutePath: { regex: "/content/portofolio/" } }
     ) {
       nodes {
         id
