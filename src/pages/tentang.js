@@ -21,10 +21,10 @@ export default function Tentang({ pageContext }) {
             saya mulai memahami semuanya.
           </p>
           <p className="mt-4">
-            Saya menonton banyak vidio tutorial di Youtube, menumpuk
-            banyak tab browser, membuka editor VSCode sampai saya dapat
-            menganggap diri saya layak untuk ini, mungkin saya akan sesekali
-            membuat Tweet tentang ini atau membuat Instagram story.
+            Saya menonton banyak vidio tutorial di Youtube, menumpuk banyak tab
+            browser, membuka editor VSCode sampai saya dapat menganggap diri
+            saya layak untuk ini, mungkin saya akan sesekali membuat Tweet
+            tentang ini atau membuat Instagram story.
           </p>
           <p className="mt-4">
             Saya hanyalah manusia generasi Z yang penasaran yang dengan senang
@@ -44,47 +44,51 @@ export default function Tentang({ pageContext }) {
             melihat projek-projek apa saja yang sudah saya buat.
           </p>
           <h2 className="text-2xl my-4 font-weight-700">Saya Menggunakan:</h2>
-          <ul>
-            <li>
-              <span role="img" aria-label="laptop_icon">
-                💻
-              </span>{" "}
-              Laptop: Acer Swift 3 SF314-54G
-            </li>
-            <li>
-              <span role="img" aria-label="globe_icon">
-                🌐
-              </span>{" "}
-              Domain:{" "}
-              <a
-                href="https://www.domainesia.com/?aff=6794"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Domainesia
-              </a>
-            </li>
-            <li>
-              <span role="img" aria-label="pencil_icon">
-                ✏
-              </span>{" "}
-              Blog: Gatsby.js + Tailwind CSS
-            </li>
-            <li>
-              <span role="img" aria-label="editor_icon">
-                📝
-              </span>{" "}
-              Editor: Visual Studio Code
-            </li>
-          </ul>
+          <blockquote>
+            <ul>
+              <li>
+                <span role="img" aria-label="laptop_icon">
+                  💻
+                </span>{" "}
+                Laptop: Acer Swift 3 SF314-54G
+              </li>
+              <li>
+                <span role="img" aria-label="globe_icon">
+                  🌐
+                </span>{" "}
+                Domain:{" "}
+                <a
+                  href="https://www.domainesia.com/?aff=6794"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Domainesia
+                </a>
+              </li>
+              <li>
+                <span role="img" aria-label="pencil_icon">
+                  ✏
+                </span>{" "}
+                Blog: Gatsby.js + Tailwind CSS
+              </li>
+              <li>
+                <span role="img" aria-label="editor_icon">
+                  📝
+                </span>{" "}
+                Editor: Visual Studio Code
+              </li>
+            </ul>
+          </blockquote>
 
           <h2 className="text-2xl my-4 font-weight-700 mt-4">Kontak:</h2>
-          <ul>
-            <li>Email: me@rafipriatna.id</li>
-            <li>Telegram: @rafipriatna</li>
-            <li>Instagram: @rafipriatna</li>
-            <li>Twitter: @rafipriatna</li>
-          </ul>
+          <blockquote>
+            <ul>
+              <li>Email: me@rafipriatna.id</li>
+              <li>Telegram: @rafipriatna</li>
+              <li>Instagram: @rafipriatna</li>
+              <li>Twitter: @rafipriatna</li>
+            </ul>
+          </blockquote>
         </div>
       </div>
     </Layout>

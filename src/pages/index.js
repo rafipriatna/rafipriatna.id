@@ -36,7 +36,7 @@ export default function Home({ data, pageContext }) {
             className="object-cover object-center w-24 h-24 rounded-full"
           />
         </div>
-        <div className="text-xl w-5/6 text-justify lg:mr-8">
+        <div className="text-xl lg:w-5/6 text-justify">
           <p>
             Hai, saya Rafi. Saya membuat blog ini untuk mendokumentasikan hasil
             pembelajaran saya dan juga sebagai media untuk mencurahkan hal-hal
