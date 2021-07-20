@@ -16,6 +16,7 @@
   "dependencies": {
     "@tailwindcss/ui": "^0.7.2",
     "gatsby": "^3.6.1",
+    "gatsby-plugin-image": "^1.9.0",
     "gatsby-plugin-local-search": "^2.0.1",
     "gatsby-plugin-manifest": "^3.6.0",
     "gatsby-plugin-netlify": "^3.6.1",
@@ -29,6 +30,7 @@
     "gatsby-remark-static-images": "^1.2.1",
     "gatsby-source-filesystem": "^3.6.0",
     "gatsby-transformer-remark": "^4.3.0",
+    "gatsby-transformer-sharp": "^3.9.0",
     "postcss": "^8.3.0",
     "prismjs": "^1.23.0",
     "query-string": "^7.0.0",

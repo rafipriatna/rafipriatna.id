@@ -7,6 +7,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   // Define a template for blog post
   const blogPost = path.resolve(`./src/templates/Post.js`)
   const tagTemplate = path.resolve(`./src/templates/Tags.js`)
+  const projectTemplate = path.resolve(`./src/templates/Project.js`)
 
   // Get all markdown blog posts sorted by date
   const result = await graphql(
@@ -14,6 +15,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       {
         allMarkdownRemark(
           sort: { fields: [frontmatter___date], order: ASC }
+          filter: { fileAbsolutePath: { regex: "/content/|/writeup/" } }
           limit: 1000
         ) {
           nodes {
@@ -26,6 +28,18 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         tagsGroup: allMarkdownRemark(limit: 2000) {
           group(field: frontmatter___tags) {
             fieldValue
+          }
+        }
+        projects: allMarkdownRemark(
+          sort: { fields: [frontmatter___date], order: ASC }
+          filter: { fileAbsolutePath: { regex: "/portofolio/" } }
+          limit: 1000
+        ) {
+          nodes {
+            id
+            fields {
+              slug
+            }
           }
         }
       }
@@ -71,6 +85,20 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       })
     })
   }
+
+  const projects = result.data.projects.nodes
+
+  if (projects.length > 0) {
+    projects.forEach(project => {
+      createPage({
+        path: `/portofolio/${project.fields.slug}`,
+        component: projectTemplate,
+        context: {
+          id: project.id,
+        },
+      })
+    })
+  }
 }
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
@@ -79,15 +107,15 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
   if (node.internal.type === `MarkdownRemark`) {
     if (typeof node.frontmatter.slug !== "undefined") {
       createNodeField({
-        node,
         name: "slug",
+        node,
         value: node.frontmatter.slug,
       })
     } else {
       const value = createFilePath({ node, getNode })
 
       createNodeField({
-        name: `slug`,
+        name: "slug",
         node,
         value,
       })

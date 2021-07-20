@@ -53,6 +53,13 @@ export default function Header() {
           >
             Tentang
           </Link>
+          <Link
+            to="/portofolio"
+            className="transition duration-200 ease-in-out hover:bg-gray-800 hover:text-gray-100 rounded-md px-4 py-2 lg:py-4 text-gray-300 hover:text-gray-100 block text-base font-medium m-1"
+            activeClassName="text-gray-100 bg-gray-800 rounded-md"
+          >
+            Portofolio
+          </Link>
         </div>
       </div>
     </div>

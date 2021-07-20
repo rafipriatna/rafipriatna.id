@@ -39,7 +39,9 @@ module.exports = {
     // ===================================================================================
     // Static
     // ===================================================================================
+    `gatsby-plugin-image`,
     `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -59,6 +61,13 @@ module.exports = {
       options: {
         name: `writeup`,
         path: `${__dirname}/writeup`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `portofolio`,
+        path: `${__dirname}/portofolio`,
       },
     },
 
