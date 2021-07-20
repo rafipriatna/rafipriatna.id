@@ -56,20 +56,6 @@ module.exports = {
         path: `${__dirname}/content`,
       },
     },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `writeup`,
-        path: `${__dirname}/writeup`,
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `portofolio`,
-        path: `${__dirname}/portofolio`,
-      },
-    },
 
     // ===================================================================================
     // CSS

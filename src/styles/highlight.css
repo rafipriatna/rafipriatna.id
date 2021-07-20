@@ -60,3 +60,8 @@
     top: 10px !important;
     stroke: #fff;
 }
+
+/* Other */
+.prose li::before {
+    display: none;
+}

@@ -35,7 +35,7 @@ export const pageQuery = graphql`
   query MyQuery {
     content: allMarkdownRemark(
       sort: { fields: [frontmatter___date], order: DESC }
-      filter: { fileAbsolutePath: { regex: "/content/|/writeup/" } }
+      filter: { fileAbsolutePath: { regex: "/content/posts/|/content/writeups/" } }
     ) {
       posts: nodes {
         id

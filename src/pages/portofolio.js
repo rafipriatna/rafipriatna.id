@@ -31,7 +31,7 @@ export const pageQuery = graphql`
     content: allMarkdownRemark(
       limit: 5
       sort: { fields: [frontmatter___date], order: ASC }
-      filter: { fileAbsolutePath: { regex: "/portofolio/" } }
+      filter: { fileAbsolutePath: { regex: "/content/portofolio/" } }
     ) {
       projects: nodes {
         id

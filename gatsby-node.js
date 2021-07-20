@@ -15,7 +15,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       {
         allMarkdownRemark(
           sort: { fields: [frontmatter___date], order: ASC }
-          filter: { fileAbsolutePath: { regex: "/content/|/writeup/" } }
+          filter: { fileAbsolutePath: { regex: "/content/posts/|/content/writeups/" } }
           limit: 1000
         ) {
           nodes {
@@ -32,7 +32,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         }
         projects: allMarkdownRemark(
           sort: { fields: [frontmatter___date], order: ASC }
-          filter: { fileAbsolutePath: { regex: "/portofolio/" } }
+          filter: { fileAbsolutePath: { regex: "/content/portofolio/" } }
           limit: 1000
         ) {
           nodes {
