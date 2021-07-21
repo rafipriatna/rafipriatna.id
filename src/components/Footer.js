@@ -35,8 +35,8 @@ export default class Footer extends React.Component {
 
     return (
       <>
-        <footer className="footer relative lg:my-10 my-20 mt-0 px-2">
-          <div className="mt-8 flex justify-center lg:justify-start">
+        <footer className="footer relative lg:my-10 my-20 mt-0 px-2 text-center">
+          <div className="flex justify-center mb-5">
             <a
               href="https://www.instagram.com/rafipriatna"
               target="_blank"
@@ -79,6 +79,7 @@ export default class Footer extends React.Component {
               </svg>
             </a>
           </div>
+          <b>me</b> at <b>rafipriatna</b> dot <b>id</b>
         </footer>
 
         {/* Back to top */}
