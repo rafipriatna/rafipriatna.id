@@ -21,22 +21,22 @@ export default function Home({ data, pageContext }) {
   return (
     <Layout>
       <Seo data={dataSeo} />
-      <h1 className="text-4xl mb-10 px-2">
-        {"/>"} Hello World!{" "}
-        <span role="img" aria-label="laptop_icon">
-          👋
-        </span>
-      </h1>
 
       <div className="lg:flex flex-col lg:flex-row justify-between w-full lg:py-0 mb-10 lg:mb-20 px-2">
-        <div className="w-1/6 hidden lg:block">
+        <div className="w-1/6 hidden lg:block lg:mr-10">
           <img
             src={FotoProfil}
             alt="8bit me wkwkw"
-            className="object-cover object-center w-24 h-24 rounded-full"
+            className="object-cover object-center w-full h-40 rounded-lg"
           />
         </div>
         <div className="text-xl lg:w-5/6 text-justify">
+          <h1 className="text-4xl mb-8">
+            {"/>"} Hello World!{" "}
+            <span role="img" aria-label="laptop_icon">
+              👋
+            </span>
+          </h1>
           <p>
             Hai, saya Rafi. Saya membuat blog ini untuk mendokumentasikan hasil
             pembelajaran saya dan juga sebagai media untuk mencurahkan hal-hal
