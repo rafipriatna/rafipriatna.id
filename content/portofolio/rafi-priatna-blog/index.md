@@ -8,5 +8,4 @@ type: "Website"
 description: "Website pribadi dibuat dengan JAMStack."
 ---
 
-### Keterangan
 Website pribadi yang dibuat menggunakan JavaScript, APIs, dan markup HTML (JAMStack) dari [GatsbyJS](https://www.gatsbyjs.com/) dan dideploy menggunakan layanan dari [Netlify](https://www.netlify.com/).
