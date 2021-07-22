@@ -84,7 +84,7 @@ export default function Header() {
             className="pl-4 py-4 focus:outline-none"
             onClick={changeTheme}
           >
-            {localStorage.getItem("theme") === "psikopat" ? moonIcon : sunIcon}
+            { typeof window !== 'undefined' && localStorage.getItem("theme") === "psikopat" ? moonIcon : sunIcon}
           </button>
         </div>
       </div>
