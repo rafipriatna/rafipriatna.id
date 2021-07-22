@@ -8,15 +8,15 @@ export default function Header() {
   const moonIcon = "🌙"
 
   function changeTheme(event) {
-    const theme = localStorage.getItem("theme")
+    const theme = typeof window !== "undefined" && localStorage.getItem("theme")
 
     if (theme === "psikopat") {
-      localStorage.removeItem("theme")
+      typeof window !== "undefined" && localStorage.removeItem("theme")
       event.target.textContent = sunIcon
       document.documentElement.classList.add("dark")
     } else {
       event.target.textContent = moonIcon
-      localStorage.setItem("theme", "psikopat")
+      typeof window !== "undefined" && localStorage.setItem("theme", "psikopat")
       document.documentElement.classList.remove("dark")
     }
   }

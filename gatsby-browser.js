@@ -5,7 +5,7 @@ import "prismjs/plugins/command-line/prism-command-line.css"
 import "./src/styles/highlight.css"
 
 const onInitialClientRender = () => {
-  const theme = localStorage.getItem("theme")
+  const theme = typeof window !== 'undefined' && localStorage.getItem("theme")
 
   if (theme === "psikopat") {
     document.documentElement.classList.remove("dark")
