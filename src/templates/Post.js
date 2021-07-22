@@ -3,7 +3,6 @@ import { graphql, Link } from "gatsby"
 
 import Layout from "../components/Layout"
 import Seo from "../components/Seo"
-import Comment from "../components/Comment"
 
 export default function Post({ data, pageContext }) {
   const post = data.markdownRemark
@@ -47,7 +46,6 @@ export default function Post({ data, pageContext }) {
           />
         </div>
       </article>
-      <Comment />
     </Layout>
   )
 }
