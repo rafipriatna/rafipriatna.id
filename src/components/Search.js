@@ -38,7 +38,7 @@ export default function Search({ posts, location, navigate }) {
         <input
           type="text"
           placeholder="Cari artikel di sini..."
-          className="w-full -ml-8 pl-10 px-4 py-2 rounded-lg ring-2 ring-gray-800 focus:outline-none focus:ring-gray-700 bg-gray-800"
+          className="w-full -ml-8 pl-10 px-4 py-2 rounded-lg ring-2 focus:outline-none focus:ring-gray-300 ring-gray-300 focus:bg-gray-300 dark:bg-gray-800 dark:ring-gray-800"
           value={query}
           onChange={e => {
             navigate(e.target.value ? `/blog/?search=${e.target.value}` : "")

@@ -1,9 +1,11 @@
-import React from "react"
+import React, { useMemo } from "react"
 import { graphql, Link } from "gatsby"
 
 import Layout from "../components/Layout"
 import Seo from "../components/Seo"
 import Project from "../components/Project"
+import Posts from "../components/Posts"
+import { getSimplifiedPosts } from "../utils/Helpers"
 
 import FotoProfil from "../images/me.jpg"
 
@@ -17,6 +19,15 @@ export default function Home({ data, pageContext }) {
     title: "Beranda",
     description: Config.description,
   }
+
+  const simplifiedPosts = useMemo(
+    () => getSimplifiedPosts(posts.nodes),
+    [posts.nodes]
+  )
+  const simplifiedWriteups = useMemo(
+    () => getSimplifiedPosts(writeups.nodes),
+    [writeups.nodes]
+  )
 
   return (
     <Layout>
@@ -51,30 +62,12 @@ export default function Home({ data, pageContext }) {
       <h1 className="text-4xl px-2 my-10">Artikel terbaru</h1>
 
       <div className="mb-6">
-        {posts.nodes.map(post => {
-          const { frontmatter, fields, id } = post
-          const { title, date } = frontmatter
-
-          return (
-            <Link to={fields.slug} key={id}>
-              <div className="transition duration-200 ease-in-out hover:bg-gray-800 hover:text-gray-100 rounded-md px-2 py-2 lg:mt-4 mt-2">
-                <div className="lg:flex flex-col lg:flex-row justify-between w-full lg:py-0">
-                  <div className="text-lg flex flex-col lg:flex-row">
-                    {title}
-                  </div>
-                  <div className="text-md flex flex-col lg:flex-row lg:block hidden">
-                    <span>{date}</span>
-                  </div>
-                </div>
-              </div>
-            </Link>
-          )
-        })}
+        <Posts data={simplifiedPosts} />
       </div>
 
       <div className="text-right">
         <Link to="/blog">
-          <span className="text-gray-100 rounded-md px-2 py-2 hover:bg-gray-800">
+          <span className="transition rounded-md px-2 py-2 hover:bg-gray-300 dark:text-gray-100 dark:hover:bg-gray-800">
             Lihat artikel lainnya
           </span>
         </Link>
@@ -83,30 +76,12 @@ export default function Home({ data, pageContext }) {
       <h1 className="text-4xl px-2 my-10">CTF Writeups</h1>
 
       <div className="mb-6">
-        {writeups.nodes.map(writeup => {
-          const { frontmatter, fields, id } = writeup
-          const { title, date } = frontmatter
-
-          return (
-            <Link to={fields.slug} key={id}>
-              <div className="transition duration-200 ease-in-out hover:bg-gray-800 hover:text-gray-100 rounded-md px-2 py-2 lg:mt-4 mt-2">
-                <div className="lg:flex flex-col lg:flex-row justify-between w-full lg:py-0">
-                  <div className="text-lg flex flex-col lg:flex-row">
-                    {title}
-                  </div>
-                  <div className="text-md flex flex-col lg:flex-row lg:block hidden">
-                    <span>{date}</span>
-                  </div>
-                </div>
-              </div>
-            </Link>
-          )
-        })}
+        <Posts data={simplifiedWriteups} />
       </div>
 
       <div className="text-right">
         <Link to="/tags/writeup">
-          <span className="text-gray-100 rounded-md px-2 py-2 hover:bg-gray-800">
+          <span className="transition rounded-md px-2 py-2 hover:bg-gray-300 dark:text-gray-100 dark:hover:bg-gray-800">
             Lihat writeup lainnya
           </span>
         </Link>

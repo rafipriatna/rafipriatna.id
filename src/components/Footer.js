@@ -41,7 +41,7 @@ export default class Footer extends React.Component {
               href="https://www.instagram.com/rafipriatna"
               target="_blank"
               rel="noreferrer"
-              className="text-gray-400 hover:text-gray-100"
+              className="text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-100"
             >
               <span className="sr-only">Instagram</span>
               <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
@@ -56,7 +56,7 @@ export default class Footer extends React.Component {
               href="https://twitter.com/rafipriatna"
               target="_blank"
               rel="noreferrer"
-              className="ml-6 text-gray-400 hover:text-gray-100"
+              className="ml-6 text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-100"
             >
               <span className="sr-only">Twitter</span>
               <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
@@ -67,7 +67,7 @@ export default class Footer extends React.Component {
               href="https://github.com/rafipriatna"
               target="_blank"
               rel="noreferrer"
-              className="ml-6 text-gray-400 hover:text-gray-100"
+              className="ml-6 text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-100"
             >
               <span className="sr-only">GitHub</span>
               <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
@@ -88,7 +88,7 @@ export default class Footer extends React.Component {
             this.state.scrolling
               ? "translate-y-0 opacity-100"
               : "translate-y-12 opacity-0"
-          } fixed z-30 bottom-0 right-0 lg:mr-6 lg:mb-14 mr-4 mb-20 bg-gray-900 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 rounded-md bg-opacity-50`}
+          } fixed z-30 bottom-0 right-0 lg:mr-6 lg:mb-14 mr-4 mb-20 bg-gray-300 dark:bg-gray-800 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 rounded-md bg-opacity-50 dark:bg-opacity-50`}
         >
           <button onClick={backToTop} className="focus:outline-none">
             <svg
@@ -110,12 +110,12 @@ export default class Footer extends React.Component {
 
         {/* New mobile menu */}
         <div>
-          <section className="block lg:hidden fixed inset-x-0 bottom-0 z-10 bg-gray-800 text-gray-400 shadow-2xl">
+          <section className="block lg:hidden fixed inset-x-0 bottom-0 z-10 shadow-2xl text-gray-500 bg-gray-300 dark:bg-gray-800 dark:text-gray-400">
             <div id="tabs" className="flex justify-between">
               <Link
                 to="/"
                 className="w-full focus:text-teal-500 hover:text-teal-500 justify-center inline-block text-center pt-2 pb-1"
-                activeClassName="text-gray-100"
+                activeClassName="dark:text-gray-100 text-gray-800"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -136,7 +136,7 @@ export default class Footer extends React.Component {
               <Link
                 to="/blog"
                 className="w-full focus:text-teal-500 hover:text-teal-500 justify-center inline-block text-center pt-2 pb-1"
-                activeClassName="text-gray-100"
+                activeClassName="dark:text-gray-100 text-gray-800"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -157,7 +157,7 @@ export default class Footer extends React.Component {
               <Link
                 to="/tentang"
                 className="w-full focus:text-teal-500 hover:text-teal-500 justify-center inline-block text-center pt-2 pb-1"
-                activeClassName="text-gray-100"
+                activeClassName="dark:text-gray-100 text-gray-800"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -178,7 +178,7 @@ export default class Footer extends React.Component {
               <Link
                 to="/portofolio"
                 className="w-full focus:text-teal-500 hover:text-teal-500 justify-center inline-block text-center pt-2 pb-1"
-                activeClassName="text-gray-100"
+                activeClassName="dark:text-gray-100 text-gray-800"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

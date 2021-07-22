@@ -14,8 +14,8 @@ export default function Tentang({ pageContext }) {
     <Layout>
       <Seo data={dataSeo} />
       <div className="px-2 text-lg">
-        <h1 className="text-4xl mb-10">Hai, saya Rafi.</h1>
-        <div className="mb-4 text-justify prose prose-dark max-w-full text-lg">
+        <div className="mb-4 text-justify prose dark:prose-dark max-w-full text-lg">
+          <h3 className="mb-10">Hai, saya Rafi.</h3>
           <p>
             Terima kasih sudah mengunjungi portofolio web dev saya — Saya pikir
             saya mulai memahami semuanya.
@@ -35,7 +35,7 @@ export default function Tentang({ pageContext }) {
             hal-hal baru.
           </p>
 
-          <h2 className="text-2xl my-4 font-weight-700">Personal Project:</h2>
+          <h4 className="my-4 font-weight-700">Personal Project:</h4>
           <p>
             Alasan saya memulai pemrograman adalah karena saya ingin membuat
             sesuatu yang ingin saya buat. Biasanya sesuatu yang saya buat itu
@@ -43,7 +43,7 @@ export default function Tentang({ pageContext }) {
             Silakan kunjungi <Link to="/portofolio">portofolio</Link> saya untuk
             melihat projek-projek apa saja yang sudah saya buat.
           </p>
-          <h2 className="text-2xl my-4 font-weight-700">Saya Menggunakan:</h2>
+          <h4 className="my-4 font-weight-700">Saya Menggunakan:</h4>
           <ul>
             <li>
               <span role="img" aria-label="laptop_icon">
@@ -78,7 +78,7 @@ export default function Tentang({ pageContext }) {
             </li>
           </ul>
 
-          <h2 className="text-2xl my-4 font-weight-700 mt-4">Kontak:</h2>
+          <h4 className="my-4 font-weight-700 mt-4">Kontak:</h4>
           <ul>
             <li>Email: me@rafipriatna.id</li>
             <li>Telegram: @rafipriatna</li>

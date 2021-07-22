@@ -24,10 +24,10 @@ export default function Project({ projects }) {
         return (
           <div className="md:w-1/2 lg:w-1/3 py-2 px-2">
             <Link to={"/portofolio/" + fields.slug} key={id}>
-              <div className="bg-gray-900 relative p-2 rounded-lg text-gray-100 transition duration-500 ease-in-out transform hover:bg-gray-800">
+              <div className="relative p-2 rounded-lg transition duration-500 ease-in-out transform hover:bg-gray-300 dark:text-gray-100 dark:hover:bg-gray-800">
                 <div
                   className={
-                    "right-0 mt-4 rounded-l-full absolute text-center font-bold text-xs text-white px-2 py-1 " +
+                    "right-0 mt-4 rounded-l-full absolute text-center font-bold text-xs text-gray-100 px-2 py-1 " +
                     bgColor
                   }
                 >

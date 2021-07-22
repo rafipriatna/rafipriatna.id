@@ -1,8 +1,8 @@
-const colors = require('tailwindcss/colors')
+const colors = require("tailwindcss/colors")
 
 module.exports = {
   purge: ["./src/**/*.{js,jsx,ts,tsx}"],
-  darkMode: false, // or 'media' or 'class'
+  darkMode: "class", // or 'media' or 'class'
   theme: {
     colors: {
       transparent: "transparent",
@@ -23,17 +23,28 @@ module.exports = {
                 color: theme("colors.blue.700"),
               },
             },
+            hr: {
+              borderColor: theme("colors.gray.800"),
+            },
           },
         },
 
         dark: {
           css: {
-            color: theme("colors.gray.300"),
+            color: theme("colors.gray.100"),
             a: {
-              color: theme("colors.green.500"),
+              color: theme("colors.blue.700"),
               "&:hover": {
-                color: theme("colors.green.500"),
+                color: theme("colors.blue.700"),
               },
+            },
+
+            p: {
+              color: theme("colors.gray.300"),
+            },
+
+            hr: {
+              borderColor: theme("colors.gray.300"),
             },
 
             h1: {
@@ -56,7 +67,7 @@ module.exports = {
             },
 
             strong: {
-              color: theme("colors.gray.300"),
+              color: theme("colors.gray.100"),
             },
 
             code: {
@@ -64,7 +75,7 @@ module.exports = {
             },
 
             figcaption: {
-              color: theme("colors.gray.500"),
+              color: theme("colors.gray.300"),
               textAlign: ["center"],
             },
 
@@ -80,7 +91,7 @@ module.exports = {
     },
   },
   variants: {
-    extend: {},
+    extend: { typography: ["dark"] },
   },
   plugins: [require(`@tailwindcss/ui`)],
 }

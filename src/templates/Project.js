@@ -34,7 +34,7 @@ export default function Project({ data, pageContext }) {
 
             <div class="w-5/6 overflow-hidden">
               <h1 className="text-4xl mb-2">{title}</h1>
-              <div className="text-gray-400">{date}</div>
+              <div className="dark:text-gray-400">{date}</div>
             </div>
           </div>
         </header>
@@ -44,7 +44,7 @@ export default function Project({ data, pageContext }) {
           alt="Cover"
         />
 
-        <div className="prose prose-dark max-w-full break-words text-lg text-justify">
+        <div className="prose dark:prose-dark max-w-full break-words text-lg text-justify">
           <section
             dangerouslySetInnerHTML={{ __html: projek.html }}
             itemProp="articleBody"

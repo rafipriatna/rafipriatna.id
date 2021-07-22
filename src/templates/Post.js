@@ -22,7 +22,7 @@ export default function Post({ data, pageContext }) {
       <article itemScope itemType="http://schema.org/Article" className="px-2">
         <header className="mb-10 break-words">
           <h1 className="text-4xl mb-6">{title}</h1>
-          <div className="text-gray-400">
+          <div className="dark:text-gray-400">
             <p className="my-2">Terbit pada tanggal {date} </p>
 
             <p>
@@ -30,7 +30,7 @@ export default function Post({ data, pageContext }) {
                 return (
                   <Link
                     to={"/tags/" + tag}
-                    className="font-bold pb-4 mr-2 hover:text-gray-100"
+                    className="font-bold pb-4 mr-2 dark:hover:text-gray-100"
                     key={tag}
                   >
                     #{tag}
@@ -40,7 +40,7 @@ export default function Post({ data, pageContext }) {
             </p>
           </div>
         </header>
-        <div className="prose prose-dark max-w-full break-words text-lg text-justify">
+        <div className="prose dark:prose-dark max-w-full break-words text-lg text-justify">
           <section
             dangerouslySetInnerHTML={{ __html: post.html }}
             itemProp="articleBody"
