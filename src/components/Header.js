@@ -44,7 +44,7 @@ export default function Header() {
             className="focus:outline-none"
             onClick={changeTheme}
           >
-            {localStorage.getItem("theme") === "psikopat" ? moonIcon : sunIcon}
+            {typeof window !== 'undefined' && localStorage.getItem("theme") === "psikopat" ? moonIcon : sunIcon}
           </button>
         </div>
       </div>
