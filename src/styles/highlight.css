@@ -1,67 +1,69 @@
 .gatsby-highlight {
-    background-color: #262626;
-    margin: 0;
-    border-left: 2px solid #0369a1;
-    padding: 1em;
-    overflow: auto;
-    max-height: 400px;
+  background-color: #262626;
+  margin: 0;
+  border-left: 4px solid #0369a1;
+  padding: 1em;
+  overflow: auto;
+  max-height: 400px;
 }
 
 .gatsby-highlight pre[class*="language-"] {
-    background-color: transparent;
-    margin: 0;
-    padding: 0;
-    overflow: initial;
-    float: left;
-    min-width: 100%;
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
+  overflow: initial;
+  float: left;
+  min-width: 100%;
 }
 
-:not(pre) > code[class*="language-"], pre[class*="language-"] {
-    background-color: #0369a1;
-    padding: 0 6px;
-    overflow-wrap: break-word;
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+  background-color: #0369a1;
+  padding: 0 6px;
+  overflow-wrap: break-word;
+  color: #fff;
 }
 
 .prose code::before {
-    content: "";
+  content: "";
 }
 
 .prose code::after {
-    content: "";
+  content: "";
 }
 
 .command-line-prompt {
-    margin-right: -5px;
-    border: 0;
+  margin-right: -5px;
+  border: 0;
 }
 
-.command-line-prompt>span:before {
-    color: #999;
-    content: " ";
-    display: block;
+.command-line-prompt > span:before {
+  color: #999;
+  content: " ";
+  display: block;
 }
 
 /* Prompt for all users */
 .command-line-prompt > span[data-user]:before {
-    content: "[" attr(data-user) "@" attr(data-host) "] $";
+  content: "[" attr(data-user) "@" attr(data-host) "] $";
 }
 
 /* Prompt for root */
 .command-line-prompt > span[data-user="root"]:before {
-    content: "[" attr(data-user) "@" attr(data-host) "] #";
+  content: "[" attr(data-user) "@" attr(data-host) "] #";
 }
 
-.command-line-prompt>span[data-prompt]:before {
-    content: attr(data-prompt);
+.command-line-prompt > span[data-prompt]:before {
+  content: attr(data-prompt);
 }
 
 /* Post */
 .anchor.before {
-    top: 10px !important;
-    stroke: #fff;
+  top: 10px !important;
+  stroke: #3498db;
 }
 
 /* Other */
 .prose li::before {
-    display: none;
+  display: none;
 }
