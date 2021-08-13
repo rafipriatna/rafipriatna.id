@@ -93,16 +93,6 @@ module.exports = {
           "gatsby-remark-static-images",
           {
             resolve: `gatsby-remark-prismjs`,
-            options: {
-              classPrefix: "language-",
-              inlineCodeMarker: ">",
-              noInlineHighlight: false,
-              prompt: {
-                user: "me",
-                host: "rafipriatna",
-                global: true,
-              },
-            },
           },
         ],
       },
