@@ -37,24 +37,9 @@ pre[class*="language-"] {
   border: 0;
 }
 
-.command-line-prompt > span:before {
+.prose code.language-bash::before {
+  content: 'me@rafipriatna:~$ ';
   color: #999;
-  content: " ";
-  display: block;
-}
-
-/* Prompt for all users */
-.command-line-prompt > span[data-user]:before {
-  content: "[" attr(data-user) "@" attr(data-host) "] $";
-}
-
-/* Prompt for root */
-.command-line-prompt > span[data-user="root"]:before {
-  content: "[" attr(data-user) "@" attr(data-host) "] #";
-}
-
-.command-line-prompt > span[data-prompt]:before {
-  content: attr(data-prompt);
 }
 
 /* Post */
