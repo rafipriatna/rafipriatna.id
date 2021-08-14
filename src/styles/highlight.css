@@ -38,7 +38,7 @@ pre[class*="language-"] {
 }
 
 .prose code.language-bash::before {
-  content: 'me@rafipriatna:~$ ';
+  content: '$ ';
   color: #999;
 }
 
