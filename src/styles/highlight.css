@@ -37,7 +37,17 @@ pre[class*="language-"] {
   border: 0;
 }
 
-.prose code.language-bash::before {
+/* Prompt for all users */
+.command-line-prompt > span[data-user]:before {
+  content: "$ ";
+}
+
+/* Prompt for root */
+.command-line-prompt > span[data-user="root"]:before {
+  content: "# ";
+}
+
+.prose code.language-shell::before {
   content: '$ ';
   color: #999;
 }
