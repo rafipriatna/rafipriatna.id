@@ -47,9 +47,14 @@ pre[class*="language-"] {
   content: "# ";
 }
 
-.prose code.language-shell::before {
+.prose code.language-shell:before {
   content: '$ ';
   color: #999;
+}
+
+/* Hide for prismjs */
+.prose code.language-shell span.command-line-prompt {
+  display: none;
 }
 
 /* Post */
