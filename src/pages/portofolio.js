@@ -18,8 +18,21 @@ export default function Portofolio({ data, ...props }) {
   return (
     <Layout>
       <Seo data={dataSeo} />
-      <div className="px-2">
-        <h1 className="text-4xl mb-10">Portofolio</h1>
+      <div className="px-2 mb-10">
+        <h1 className="text-4xl mb-2">Portofolio</h1>
+        <h2 className="text-2xl dark:text-gray-400">
+          Projek-projek yang pernah saya kerjakan baik projek pribadi ataupun
+          tim. Projek sumber terbuka saya lainnya dapat dilihat di{" "}
+          <a
+            href="https://github.com/rafipriatna"
+            className="text-blue-600"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Github
+          </a>
+          .
+        </h2>
       </div>
       <Project projects={projects} />
     </Layout>
