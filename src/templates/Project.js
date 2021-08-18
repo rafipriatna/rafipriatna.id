@@ -27,7 +27,7 @@ export default function Project({ data, pageContext }) {
             <div class="w-24 overflow-hidden lg:block hidden">
               <img
                 src={iconImage}
-                className="rounded-full h-20 w-20"
+                className="h-20 w-20"
                 alt="Icon"
               />
             </div>

@@ -41,7 +41,7 @@ export default function Project({ projects }) {
                 <div className="flex justify-center">
                   <img
                     src={iconImage}
-                    className="rounded-full -mt-6 border-4 object-center object-cover border-white mr-2 h-16 w-16"
+                    className="rounded-full -mt-6 border-4 object-center object-cover border-white mr-2 h-16 w-16 bg-gray-800"
                     alt="icon"
                   />
                 </div>
