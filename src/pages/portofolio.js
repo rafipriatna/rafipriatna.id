@@ -43,7 +43,7 @@ export const pageQuery = graphql`
   query ProjectsQuery {
     content: allMarkdownRemark(
       limit: 5
-      sort: { fields: [frontmatter___date], order: ASC }
+      sort: { fields: [frontmatter___date], order: DESC }
       filter: { fileAbsolutePath: { regex: "/content/portofolio/" } }
     ) {
       projects: nodes {
