@@ -143,13 +143,13 @@ Tampilan dari Fritzing seperti ini:
 Bisa dilihat di sana ada Breadboard, lalu ada berbagai macam _parts_ elektronik yang siap digunakan. Intinya seperti merangkai sungguhan, karena ada penjelasan juga tiap pinnya, maka proses merangkainya jadi tidak terlalu membingungkan.
 
 ## Pemrograman Dasar Arduino
-Bahasa pemrograman yang digunakan oleh Arduino adalah bahasa pemrograman C++ dengan beberapa tambahan fungsi khusus, yang akan dibahas nanti. Di Arduino, _sketch_ (sebutan untuk file kode Arduino) akan dikompilasi ke bahasa mesin, sehingga perangkat keras Arduino dapat bekerja sesuai dengan kode yang ditulis.
+Bahasa pemrograman yang digunakan oleh Arduino adalah bahasa pemrograman cpp dengan beberapa tambahan fungsi khusus, yang akan dibahas nanti. Di Arduino, _sketch_ (sebutan untuk file kode Arduino) akan dikompilasi ke bahasa mesin, sehingga perangkat keras Arduino dapat bekerja sesuai dengan kode yang ditulis.
 
 Perlu diingat, bahwa pemrograman Arduino ini **_case sensitive_** yang artinya huruf besar dan huruf kecil bisa dibaca berbeda. Misal kamu ngetik `pinmode` pasti akan salah, karena yang benar `pinMode`.
 
 Secara bawaan, pemrograman Arduino mempunyai dua _function_ atau fungsi, yaitu `setup()`, dan `loop()`. Kedua fungsi ini harus ada, supaya Arduinonya dapat digunakan tentunya.
 
-```c++
+```cpp
 setup() {
     
 }
@@ -184,7 +184,7 @@ Unduh library saja belum cukup, teman-teman juga harus meng-import librarynya. L
 
 Contoh kode saat import seperti ini:
 
-```c++
+```cpp
 #include <Library.h>
 #include <Library_lain.h>
 
@@ -202,7 +202,7 @@ Dalam pemrograman kita bisa memberikan komentar pada kode kita, komentar ini tid
 
 Contoh:
 
-```c++
+```cpp
 #include <Library.h>
 #include <Library_lain.h>
 
@@ -242,7 +242,7 @@ Jadi, di Arduino IDE itu ada fitur yang namanya Serial Monitor, nah di sana akan
 
 Contoh penggunaannya:
 
-```c++
+```cpp
 setup () {
     // Kita harus begin dulu
     Serial.begin();
@@ -257,7 +257,7 @@ loop () {
 #### `pinMode()`
 Sebelum kita bisa menggunakan pin pada Arduino, kita harus memberi tahu Arduino dulu, bahwa pin ini akan menjadi Input atau Output. Caranya adalah dengan menggunakan pinMode(). Misalnya, saya ingin pin nomor 3 sebagai output dan pin 4 sebagai input, maka saya menulisnya seperti ini:
 
-```c++
+```cpp
 setup() {
     pinMode(3, OUTPUT);
     pinMode(4, INPUT);
@@ -271,7 +271,7 @@ loop() {
 #### `digitalRead()`
 Untuk membaca pin digital yang spesifik. Fungsi ini digunakan untuk mengetahui apakah modul pada pin ini statusnya `HIGH` atau `LOW`. Oleh sebab itu, kembalian atau _return_ nya bisa antara HIGH atau LOW. Sebelumnya, kita sudah mengetahui pin-pin di Arduino, kan? Pin digital yang ada 14 itu, bisa kita gunakan di sini. Contohnya saya mau membaca pin nomor 4, maka saya bisa menulisnya begini:
 
-```c++
+```cpp
 setup() {
     pinMode(3, OUTPUT);
     pinMode(4, INPUT);
@@ -285,7 +285,7 @@ loop() {
 #### `digitalWrite()`
 Kebalikannya dari digitalRead ini, fungsi digitalWrite() digunakan untuk membuat modul pada pin menyala atau tidak. Cara penulisannya `digitalWrite(pin, isi)`. Contohya saya mau menyalakan pin nomor 3, maka:
 
-```c++
+```cpp
 setup() {
     pinMode(3, OUTPUT);
     pinMode(4, INPUT);
@@ -300,14 +300,14 @@ loop() {
 #### `delay()`
 Seperti namanya, fungsi ini digunakan untuk membuat jeda waktu untuk melanjutkan ke kode di bawahnya. Format waktu yang digunakan adalah _millisecond_. Contoh penggunaannya:
 
-```c++
+```cpp
 delay(1000); // Delay 1 detik.
 ```
 
 #### `millis()`
 Digunakan untuk mengambil waktu saat ini, format waktunya masih sama yaitu _millisecond_. Contoh penggunannya:
 
-```c++
+```cpp
 Serial.print(millis()); // Akan membuat output waktu saat ini di Serial.
 ```
 
@@ -318,7 +318,7 @@ Arduino sudah merangkum semuanya di sana.
 ### Program Pertama
 Untuk program pertama ini, kita akan coba menyalakan `LED_BUILTIN` atau LED yang sudah tertanam di Arduino.
 
-```c++
+```cpp
 setup() {
     // Deklarasi dulu bahwa LED_BUILTIN mau dipakai sebagai output.
     pinMode(LED_BUILTIN, OUTPUT);
@@ -333,7 +333,7 @@ loop() {
 Klik tombol `verify` pada Arduino IDE untuk memastikan kodenya benar, jika benar tidak ada error lalu klik tombol `Upload`. Dan lihat hasilnya.
 
 ### Blink LED BUILTIN
-```c++
+```cpp
 setup() {
     // Deklarasi dulu bahwa LED_BUILTIN mau dipakai sebagai output.
     pinMode(LED_BUILTIN, OUTPUT);
@@ -384,7 +384,7 @@ Rangkaian versi fisiknya seperti ini:
 
 Jika sudah dirangkai, selanjutnya adalah memprogramnya. Sama aja sih seperti memprogram LED_BUILTIN sebelumnya.
 
-```c++
+```cpp
 void setup() {
     // Deklarasi LEDnya di pin 2 mau dipakai output
     pinMode(2, OUTPUT);

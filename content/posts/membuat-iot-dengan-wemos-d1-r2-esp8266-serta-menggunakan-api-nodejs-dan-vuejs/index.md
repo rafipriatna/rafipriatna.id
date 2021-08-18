@@ -1053,7 +1053,7 @@ Sekarang adalah saatnya memprogram Mikrokontrolernya.
 
 Pertama-tama, kita harus import semua library yang dibutuhkan sertama membuat variabel konstanta yang berisi SSID (Nama WiFi), password WiFi, dan juga alamat servernya:
 
-```c++
+```cpp
 #include <ESP8266WiFi.h> // Untuk menghubungkan dengan WiFi.
 #include <ESP8266HTTPClient.h> // Untuk melakukan HTTP Client (POST, GET, PATCH, dsb).
 #include <WiFiClient.h>  // Supaya bisa terkoneksi ke alamat IP yang spesifik.
@@ -1091,7 +1091,7 @@ TX   = 1;
 
 Karena saya pakai PIN D2 - D4, maka saya akan menggunakan 4, 0, dan 2 dalam `pinMode()`:
 
-```c++
+```cpp
 setup() {
     pinMode(4, OUTPUT);
     pinMode(0, OUTPUT);
@@ -1101,7 +1101,7 @@ setup() {
 
 Lalu koneksikan Arduino dengan WiFi:
 
-```c++
+```cpp
 setup() {
     pinMode(4, OUTPUT);
     pinMode(0, OUTPUT);
@@ -1125,7 +1125,7 @@ setup() {
 
 Pada fungsi `loop()`, kita akan melakukan pengulangan pengambilan data (method GET) ke API kita. Saya juga membuat fungsi baru bernama `httpGetButtonRequest()` untuk melakukan GET Request, karena kodenya panjang jadi saya buat fungsi sendiri.
 
-```c++
+```cpp
 void loop() {
   if (WiFi.status() == WL_CONNECTED) {
     httpGetButtonRequest();
@@ -1136,7 +1136,7 @@ void loop() {
 
 Sekarang saatnya memprogram fungsi `httpGetRequest`-nya, pertama-tama kita panggil dulu library yang kita butuhkan:
 
-```c+++
+```cpp
 String httpGetRequest(){
     WiFiClient client;
     HTTPClient http;
@@ -1145,7 +1145,7 @@ String httpGetRequest(){
 
 Selanjutnya adalah membuat looping, kita akan looping sebanyak pin yang digunakan (3). Kita looping di sini maksudnya untuk mengambil data berdasarkan ID. Karena ID yang ada di database itu udah pasti 1 - 3, maka kita hanya looping dari 1 - 3.
 
-```c++
+```cpp
 for (int i = 1; i <= 3; i++) {
     // Kode
 }
@@ -1153,7 +1153,7 @@ for (int i = 1; i <= 3; i++) {
 
 Sekarang manipulasi URL APInya, yaitu dengan menambahkan angka di belakang URL:
 
-```c++
+```cpp
     String serverNameSum = serverName;
     // serverNameSum = http://192.168.0.74:8080/api/buttons/
 
@@ -1172,7 +1172,7 @@ Sekarang manipulasi URL APInya, yaitu dengan menambahkan angka di belakang URL:
 
 Setelah itu buat kondisi, jika kita berhasil mendapatkan data, maka terjemahkan JSON-nya dan eksekusi ke PIN-nya:
 
-```c++
+```cpp
 if (http.GET() > 0) {
     // Terjemahkan JSON ke dalam variabel doc.
     // Variabel doc memiliki kapasitas 2048 bytes.
@@ -1223,7 +1223,7 @@ if (http.GET() > 0) {
 
 Sehingga, secara keseluruhan, kode Arduinonya seperti ini:
 
-```c++
+```cpp
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
 #include <WiFiClient.h>
