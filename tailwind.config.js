@@ -11,6 +11,7 @@ module.exports = {
       red: colors.red,
       blue: colors.lightBlue,
       yellow: colors.amber,
+      white: "#fff",
     },
     extend: {
       typography: theme => ({
