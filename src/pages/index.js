@@ -89,7 +89,7 @@ export default function Home({ data, pageContext }) {
 
       <h1 className="text-4xl px-2 my-10">Portofolio</h1>
       <Project projects={projects.nodes} />
-      <div className="text-right mt-6">
+      <div className="text-right my-6">
         <Link to="/portofolio">
           <span className="transition rounded-md px-2 py-2 hover:bg-gray-300 dark:text-gray-100 dark:hover:bg-gray-800">
             Lihat portofolio lainnya
