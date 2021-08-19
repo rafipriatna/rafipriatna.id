@@ -22,8 +22,8 @@ export default function Header() {
   }
 
   return (
-    <div className="transition sticky top-0 z-50 bg-white dark:bg-gray-900">
-      <div className="mx-auto lg:max-w-4xl flex flex-col lg:flex-row lg:pt-4 lg:pb-4">
+    <div className="transition sticky top-0 z-50 lg:text-xl bg-gray-200 dark:bg-gray-800 border-solid border-b-2 dark:border-gray-500 border-gray-300">
+      <div className="mx-auto lg:max-w-4xl flex flex-col lg:flex-row lg:pt-1 lg:pb-1">
         <div className="flex items-center justify-between px-6 lg:px-2 py-4 lg:py-0 uppercase font-semibold dark:text-gray-100">
           <Link to="/">
             <div className="flex justify-between space-x-2 items-center">
@@ -57,29 +57,29 @@ export default function Header() {
           <div className="flex flex-col lg:flex-row">
             <Link
               to="/"
-              className="transition duration-200 ease-in-out hover:bg-gray-300 dark:hover:bg-gray-800 rounded-md px-4 lg:py-4 block text-base font-medium m-1"
-              activeClassName="bg-gray-300 dark:bg-gray-800 rounded-md"
+              className="transition duration-200 ease-in-out hover:bg-gray-300 dark:hover:bg-gray-700 rounded-md px-4 lg:py-4 block font-medium m-1"
+              activeClassName="bg-gray-300 dark:bg-gray-700 rounded-md"
             >
               Beranda
             </Link>
             <Link
               to="/blog"
-              className="transition duration-200 ease-in-out hover:bg-gray-300 dark:hover:bg-gray-800 rounded-md px-4 lg:py-4 block text-base font-medium m-1"
-              activeClassName="bg-gray-300 dark:bg-gray-800 rounded-md"
+              className="transition duration-200 ease-in-out hover:bg-gray-300 dark:hover:bg-gray-700 rounded-md px-4 lg:py-4 block font-medium m-1"
+              activeClassName="bg-gray-300 dark:bg-gray-700 rounded-md"
             >
               Blog
             </Link>
             <Link
               to="/tentang"
-              className="transition duration-200 ease-in-out hover:bg-gray-300 dark:hover:bg-gray-800 rounded-md px-4 lg:py-4 block text-base font-medium m-1"
-              activeClassName="bg-gray-300 dark:bg-gray-800 rounded-md"
+              className="transition duration-200 ease-in-out hover:bg-gray-300 dark:hover:bg-gray-700 rounded-md px-4 lg:py-4 block font-medium m-1"
+              activeClassName="bg-gray-300 dark:bg-gray-700 rounded-md"
             >
               Tentang
             </Link>
             <Link
               to="/portofolio"
-              className="transition duration-200 ease-in-out hover:bg-gray-300 dark:hover:bg-gray-800 rounded-md px-4 lg:py-4 block text-base font-medium m-1"
-              activeClassName="bg-gray-300 dark:bg-gray-800 rounded-md"
+              className="transition duration-200 ease-in-out hover:bg-gray-300 dark:hover:bg-gray-700 rounded-md px-4 lg:py-4 block font-medium m-1"
+              activeClassName="bg-gray-300 dark:bg-gray-700 rounded-md"
             >
               Portofolio
             </Link>
