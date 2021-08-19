@@ -93,8 +93,3 @@ pre[class*="language-"] {
   top: 10px !important;
   stroke: #3498db;
 }
-
-/* Other */
-.prose li::before {
-  display: none;
-}
