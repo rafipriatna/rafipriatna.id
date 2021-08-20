@@ -4,8 +4,9 @@ pre.language-shell {
   color: #595c62;
   padding-top: 2.5rem !important;
   margin: 2rem 0;
-  border-radius: .35rem;
-  box-shadow: 0 0.5rem 1rem rgb(51 51 51 / 20%), 0 0.5rem 2rem rgb(51 51 51 / 20%);
+  border-radius: 0.35rem;
+  box-shadow: 0 0.5rem 1rem rgb(51 51 51 / 20%),
+    0 0.5rem 2rem rgb(51 51 51 / 20%);
 }
 
 pre.language-shell::before {
@@ -92,4 +93,21 @@ pre[class*="language-"] {
 .anchor.before {
   top: 10px !important;
   stroke: #3498db;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-margin-top: 100px;
+}
+
+h1:not(:first-child),
+h2:not(:first-child),
+h3:not(:first-child),
+h4:not(:first-child) {
+  margin-top: 3rem;
 }
