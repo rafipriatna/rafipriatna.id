@@ -1,5 +1,4 @@
 --- 
-draft: false
 date: 2019-07-28T21:00:00+07:00
 title: "Halo Dunia"
 slug: "halo-dunia"

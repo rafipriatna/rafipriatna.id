@@ -1,5 +1,4 @@
 ---
-draft: false
 date: 2020-09-17T19:50:48+07:00
 title: "Membuat IoT Dengan WeMos D1 R2 Menggunakan RESTful API Node.js Dan Vue.js"
 slug: "membuat-iot-dengan-wemos-d1-r2-esp8266-serta-menggunakan-api-nodejs-dan-vuejs"

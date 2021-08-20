@@ -1,5 +1,4 @@
---- 
-draft: false
+---
 date: 2020-01-19T16:13:46+07:00
 title: "Migrasi blog ke Hugo"
 slug: "migrasi-blog-ke-hugo"

@@ -1,5 +1,4 @@
 ---
-draft: false
 date: 2020-12-20T16:18:51+07:00
 title: "Hobi baru saya: main Capture The Flag"
 slug: "ctf"

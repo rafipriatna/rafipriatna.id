@@ -1,5 +1,4 @@
 ---
-draft: false
 date: 2020-08-20T12:30:12+07:00
 title: "Cara Install SSL Cloudflare Gratis Di NGINX"
 slug: "cara-install-ssl-cloudflare-gratis-di-nginx"

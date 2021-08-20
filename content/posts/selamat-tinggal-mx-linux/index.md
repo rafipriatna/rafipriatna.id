@@ -1,5 +1,4 @@
 ---
-draft: false
 date: 2020-09-11T14:03:10+07:00
 title: "Selamat tinggal MX Linux"
 slug: "selamat-tinggal-mx-linux"

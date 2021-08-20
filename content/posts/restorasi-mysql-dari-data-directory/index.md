@@ -1,5 +1,4 @@
 ---
-draft: false
 date: 2020-08-20T16:22:29+07:00
 title: "Restorasi MySQL Dari Data Directory"
 slug: "restorasi-mysql-dari-data-directory"

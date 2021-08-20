@@ -1,5 +1,4 @@
 ---
-draft: false
 date: 2020-08-19T10:07:58+07:00
 title: "Cara Install DNSCrypt Proxy Di MX Linux"
 slug: "cara-install-dnscrypt-proxy-di-mx-linux"

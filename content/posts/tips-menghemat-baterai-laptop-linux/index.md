@@ -1,5 +1,4 @@
 ---
-draft: false
 date: 2020-07-24T17:38:42+07:00
 title: "Tips Menghemat Baterai Laptop Linux Ubuntu / Debian"
 slug: "tips-menghemat-baterai-laptop-linux"

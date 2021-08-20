@@ -1,5 +1,4 @@
 ---
-draft: false
 date: 2020-07-23T16:20:40+07:00
 title: "Migrasi Ke MX Linux 19.2"
 slug: "migrasi-ke-mx-linux"

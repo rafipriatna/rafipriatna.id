@@ -1,5 +1,4 @@
 ---
-draft: false
 date: 2020-09-13T10:42:17+07:00
 title: "Berkenalan Dengan Arduino"
 slug: "berkenalan-dengan-arduino"

@@ -1,5 +1,4 @@
 ---
-draft: false
 date: 2020-07-29T09:05:00+07:00
 title: "Cara Install NGINX, MariaDB, PHP (LEMP Stack) CentOS 8"
 slug: "cara-install-lemp-stack-centos-8"

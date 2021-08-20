@@ -1,5 +1,4 @@
 --- 
-draft: false
 date: 2020-01-26T11:27:14+07:00
 title: "Dual boot Windows 10 dan Ubuntu dengan Intel Optane"
 slug: "dual-boot-windows-dan-ubuntu-dengan-intel-optane"
