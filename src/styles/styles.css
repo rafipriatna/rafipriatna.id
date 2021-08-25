@@ -56,6 +56,15 @@ pre[class*="language-"] {
   color: #fff;
 }
 
+code[class*="language-"],
+pre[class*="language-"] {
+  overflow-wrap: break-word;
+}
+
+.prose code {
+  white-space: pre-wrap;
+}
+
 .prose code::before {
   content: "";
 }
