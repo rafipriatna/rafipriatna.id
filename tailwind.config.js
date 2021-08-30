@@ -9,7 +9,7 @@ module.exports = {
       current: "currentColor",
       gray: colors.trueGray,
       red: colors.red,
-      blue: colors.lightBlue,
+      blue: colors.sky,
       yellow: colors.amber,
       white: "#fff",
     },
@@ -94,5 +94,5 @@ module.exports = {
   variants: {
     extend: { typography: ["dark"] },
   },
-  plugins: [require(`@tailwindcss/ui`)],
+  plugins: [require('@tailwindcss/typography'),],
 }
