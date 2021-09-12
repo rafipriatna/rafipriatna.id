@@ -38,7 +38,7 @@ export default function Home({ data, pageContext }) {
           <img
             src={FotoProfil}
             alt="8bit me wkwkw"
-            className="object-cover object-center w-full h-40 rounded-lg"
+            className="object-cover object-center w-full h-40"
           />
         </div>
         <div className="text-xl lg:w-5/6 text-justify">
@@ -67,7 +67,7 @@ export default function Home({ data, pageContext }) {
 
       <div className="text-right">
         <Link to="/blog">
-          <span className="transition rounded-md px-2 py-2 hover:bg-gray-300 dark:text-gray-100 dark:hover:bg-gray-800">
+          <span className="transition px-2 py-2 hover:bg-gray-300 dark:text-gray-100 dark:hover:bg-gray-800">
             Lihat artikel lainnya
           </span>
         </Link>
@@ -81,7 +81,7 @@ export default function Home({ data, pageContext }) {
 
       <div className="text-right">
         <Link to="/tags/writeup">
-          <span className="transition rounded-md px-2 py-2 hover:bg-gray-300 dark:text-gray-100 dark:hover:bg-gray-800">
+          <span className="transition px-2 py-2 hover:bg-gray-300 dark:text-gray-100 dark:hover:bg-gray-800">
             Lihat writeup lainnya
           </span>
         </Link>
@@ -91,7 +91,7 @@ export default function Home({ data, pageContext }) {
       <Project projects={projects.nodes} />
       <div className="text-right my-6">
         <Link to="/portofolio">
-          <span className="transition rounded-md px-2 py-2 hover:bg-gray-300 dark:text-gray-100 dark:hover:bg-gray-800">
+          <span className="transition px-2 py-2 hover:bg-gray-300 dark:text-gray-100 dark:hover:bg-gray-800">
             Lihat portofolio lainnya
           </span>
         </Link>

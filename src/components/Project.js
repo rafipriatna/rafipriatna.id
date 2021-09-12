@@ -24,7 +24,7 @@ export default function Project({ projects }) {
         return (
           <div className="md:w-1/2 lg:w-1/3 py-2 px-2">
             <Link to={"/portofolio/" + fields.slug} key={id}>
-              <div className="relative p-2 rounded-lg transition duration-500 ease-in-out transform hover:bg-gray-300 dark:text-gray-100 dark:hover:bg-gray-800">
+              <div className="relative transition duration-500 ease-in-out transform hover:bg-gray-300 dark:text-gray-100 dark:hover:bg-gray-800">
                 <div
                   className={
                     "right-0 mt-4 rounded-l-full absolute text-center font-bold text-xs text-gray-100 px-2 py-1 " +
@@ -35,7 +35,7 @@ export default function Project({ projects }) {
                 </div>
                 <img
                   src={coverImage}
-                  className="h-32 rounded-lg w-full object-cover"
+                  className="h-32 w-full object-cover"
                   alt="Cover"
                 />
                 <div className="flex justify-center">
