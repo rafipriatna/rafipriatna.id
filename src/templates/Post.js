@@ -22,17 +22,19 @@ export default function Post({ data, pageContext }) {
         <header className="mb-10 break-words">
           <h1 className="text-4xl mb-6">{title}</h1>
           <div className="dark:text-gray-400">
-            <p className="my-2">Terbit pada tanggal {date} </p>
+            <p className="my-2 pb-4">Terbit pada tanggal {date} </p>
 
             <p>
               {tags.map(tag => {
                 return (
                   <Link
                     to={"/tags/" + tag}
-                    className="font-bold pb-4 mr-2 dark:hover:text-gray-100"
+                    className="mr-2 px-2 py-1 border-2
+                    border-gray-400 bg-gray-200 hover:border-blue-600 hover:text-blue-600 hover:bg-blue-100
+                    dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:hover:border-blue-600 darK:hover:text-blue-600 dark:hover:bg-blue-800"
                     key={tag}
                   >
-                    #{tag}
+                    {tag}
                   </Link>
                 )
               })}
