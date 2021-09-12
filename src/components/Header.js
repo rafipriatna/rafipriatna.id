@@ -64,6 +64,7 @@ export default function Header() {
             </Link>
             <Link
               to="/blog"
+              partiallyActive={true}
               className="transition duration-200 ease-in-out hover:bg-gray-300 dark:hover:bg-gray-700 rounded-md px-4 lg:py-4 block font-medium m-1"
               activeClassName="bg-gray-300 dark:bg-gray-700 rounded-md"
             >
