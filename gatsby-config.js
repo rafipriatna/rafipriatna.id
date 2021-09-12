@@ -116,10 +116,16 @@ module.exports = {
       options: {
         name: "pages",
         engine: "flexsearch",
-        engineOptions: "speed",
+        engineOptions: {
+          encode: 'icase',
+          tokenize: 'forward',
+          async: false,
+        },
         query: `
                 {
-                  allMarkdownRemark {
+                  allMarkdownRemark(
+                    filter: { fileAbsolutePath: { regex: "/content/posts/|/content/writeups/" } }
+                  ) {
                     nodes {
                       id
                       frontmatter {

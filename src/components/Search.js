@@ -37,7 +37,7 @@ export default function Search({ posts, location, navigate }) {
         </svg>
         <input
           type="text"
-          placeholder="Cari artikel di sini..."
+          placeholder="Ketik di sini untuk mulai mencari."
           className="w-full -ml-8 pl-10 px-4 py-2 rounded-lg ring-2 focus:outline-none focus:ring-gray-300 ring-gray-300 focus:bg-gray-300 dark:bg-gray-800 dark:ring-gray-800"
           value={query}
           onChange={e => {
@@ -48,7 +48,13 @@ export default function Search({ posts, location, navigate }) {
       </div>
       <section>
         {query ? (
-          results.length > 0 && <Posts data={results} />
+          results.length > 0 ? (
+            <Posts data={results} showYears query={query} />
+          ) : (<p className="text-center text-2xl py-5">Kamu nyari apa? Ndak nemu nih
+              <span role="img" aria-label="sad_icon">
+              😥
+              </span>
+            </p>)
         ) : (
           <Posts data={posts} showYears />
         )}
