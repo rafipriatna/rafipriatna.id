@@ -24,12 +24,12 @@ export default function Post({ data, pageContext }) {
           <div className="dark:text-gray-400">
             <p className="my-2 pb-4">Terbit pada tanggal {date} </p>
 
-            <p>
+            <div className="flex flex-row lg:flex-wrap overflow-y-auto ">
               {tags.map(tag => {
                 return (
                   <Link
                     to={"/tags/" + tag}
-                    className="mr-2 px-2 py-1 border-2
+                    className="mr-2 px-2 py-1 border-2 my-2
                     border-gray-400 bg-gray-200 hover:border-blue-600 hover:text-blue-600 hover:bg-blue-100
                     dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:hover:border-blue-600 dark:hover:text-blue-600"
                     key={tag}
@@ -38,7 +38,7 @@ export default function Post({ data, pageContext }) {
                   </Link>
                 )
               })}
-            </p>
+            </div>
           </div>
         </header>
         <div className="prose dark:prose-dark max-w-full break-words text-lg text-justify">
