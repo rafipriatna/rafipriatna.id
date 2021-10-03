@@ -22,7 +22,7 @@ export default function Header() {
   }
 
   return (
-    <div className="transition sticky top-0 z-50 lg:text-xl bg-gray-100 dark:bg-gray-800 shadow-xl">
+    <div className="transition sticky top-0 z-50 lg:text-xl bg-white dark:bg-gray-800 shadow-sm">
       <div className="mx-auto lg:max-w-4xl flex flex-col lg:flex-row">
         <div className="flex items-center justify-between px-6 lg:px-2 py-4 lg:py-0 uppercase font-semibold dark:text-gray-100">
           <Link to="/">
