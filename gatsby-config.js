@@ -88,6 +88,7 @@ module.exports = {
               withWebp: true,
               showCaptions: true,
               quality: 100,
+              backgroundColor: `transparent`,
             },
           },
           "gatsby-remark-static-images",
