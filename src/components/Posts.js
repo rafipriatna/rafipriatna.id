@@ -28,8 +28,8 @@ const PostCell = ({ node, query }) => {
 
     return (
         <Link to={node.slug} key={node.id}>
-            <div className="transition border border-2 border-transparent px-2 py-2 lg:mt-4 mt-2 transition px-2 py-2 hover:bg-gray-300 dark:text-gray-100 dark:hover:bg-gray-800
-            hover:border-gray-400 hover:bg-gray-100
+            <div className="transition border border-2 border-transparent px-2 py-2 lg:mt-4 mt-2 transition
+            hover:bg-gray-200 hover:border-gray-400
             dark:text-white dark:hover:border-gray-600 dark:hover:bg-gray-800">
                 <div className="lg:flex flex-col lg:flex-row justify-between w-full lg:py-0">
                     <div className="text-lg flex flex-col lg:flex-row">

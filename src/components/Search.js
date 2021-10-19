@@ -25,7 +25,7 @@ export default function Search({ posts, location, navigate }) {
 
   return (
     <>
-      <div className="flex items-center mt-2 mb-6 ml-4 w-full">
+      <div className="flex items-center mt-2 mb-6 ml-4 px-2 w-full">
         <svg
           className="w-4 h-4 fill-current z-10"
           xmlns="http://www.w3.org/2000/svg"
@@ -38,7 +38,7 @@ export default function Search({ posts, location, navigate }) {
         <input
           type="text"
           placeholder="Ketik di sini untuk mulai mencari."
-          className="w-full -ml-8 pl-10 px-4 py-2 rounded-none ring-1 focus:outline-none focus:ring-blue-600 ring-gray-300 dark:ring-gray-600 dark:focus:ring-blue-600 dark:bg-gray-800"
+          className="w-full -ml-8 pl-10 py-2 rounded-none ring-1 bg-gray-200 focus:outline-none focus:ring-blue-600 ring-gray-400 dark:ring-gray-600 dark:focus:ring-blue-600 dark:bg-gray-800"
           value={query}
           onChange={e => {
             navigate(e.target.value ? `/blog/?search=${e.target.value}` : "")
