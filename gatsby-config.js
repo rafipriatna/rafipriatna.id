@@ -21,7 +21,6 @@ module.exports = {
     // Meta
     // ===================================================================================
     `gatsby-plugin-react-helmet`,
-    "gatsby-plugin-netlify",
     {
       resolve: "gatsby-plugin-manifest",
       options: {
@@ -91,7 +90,6 @@ module.exports = {
               backgroundColor: `transparent`,
             },
           },
-          "gatsby-remark-static-images",
           {
             resolve: `gatsby-remark-prismjs`,
             options: {
