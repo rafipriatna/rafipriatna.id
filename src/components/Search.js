@@ -55,7 +55,7 @@ export default function Search({ posts, location }) {
         {query ? (
           results.length > 0 ? (
             <Posts data={results} showYears query={query} />
-          ) : (<p className="text-center text-2xl py-5">Kamu nyari apa? Ndak nemu nih
+          ) : (<p className="text-center text-2xl my-20">Kamu nyari apa? Ndak nemu nih
             <span role="img" aria-label="sad_icon">
               😥
             </span>
