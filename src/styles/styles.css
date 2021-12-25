@@ -35,24 +35,23 @@ pre.language-shell::after {
 }
 
 .gatsby-highlight pre[class*="language-"] {
-  background-color: #262626;
   margin: 20px 0;
   padding: 1em;
   overflow: auto;
   max-height: 400px;
-  border-radius: 0;
   box-shadow: 0 0 1px rgb(0 0 0 / 10%), 0 0 1px rgb(0 0 0 / 6%),
     0 2px 2px rgb(0 0 0 / 6%), 0 4px 4px rgb(0 0 0 / 6%),
     0 8px 8px rgb(0 0 0 / 6%), 0 16px 16px rgb(0 0 0 / 6%);
+  @apply rounded bg-slate-50 dark:bg-slate-800
 }
 
 :not(pre) > code[class*="language-"],
 pre[class*="language-"] {
-  background-color: #0369a1;
   padding: 0 6px;
   overflow-wrap: break-word;
   color: #fff !important;
   border-radius: 0;
+  @apply bg-royal rounded
 }
 
 code[class*="language-"],
@@ -100,7 +99,6 @@ code.language-shell {
 
 /* Post */
 .anchor.before {
-  top: 10px !important;
   stroke: #3498db;
 }
 
@@ -111,7 +109,6 @@ h4,
 h5 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  scroll-margin-top: 100px;
 }
 
 h1:not(:first-child),

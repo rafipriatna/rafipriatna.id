@@ -20,7 +20,7 @@ export default function layout({ children, circle }) {
             </div>
           </div>
         )}
-        <div className="z-10 container mt-8 mx-auto mb-8 dark:text-gray-100">
+        <div className="z-10 container mt-8 mb-8 dark:text-gray-100">
           {children}
           <Footer />
         </div>

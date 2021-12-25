@@ -27,8 +27,8 @@ const PostCell = ({ node, query }) => {
     }
 
     return (
-        <Link to={node.slug} key={node.id} className='text-xl hover:text-royal'>
-            <div className="space-y-2 xl:grid xl:grid-cols-4 xl:space-y-0 xl:items-baseline my-5 transform hover:-translate-y-2 duration-500">
+        <Link to={node.slug} key={node.id} className='text-xl transition duration-200 ease-in-out hover:text-royal'>
+            <div className="space-y-2 xl:grid xl:grid-cols-4 xl:space-y-0 xl:items-baseline my-5">
                 <dl>
                     <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
                         {node.date}
