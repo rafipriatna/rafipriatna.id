@@ -12,13 +12,13 @@ const PostCell = ({ node, query }) => {
                 const highlightEnd = highlightStart + query.length
 
                 return (
-                    <h3>
+                    <h2>
                         {title.slice(0, highlightStart)}
-                        <strong className="bg-blue-600 text-white">
+                        <strong className="text-royal">
                             {title.slice(highlightStart, highlightEnd)}
                         </strong>
                         {title.slice(highlightEnd)}
-                    </h3>
+                    </h2>
                 )
             }
             return <h3>{title}</h3>
@@ -27,16 +27,21 @@ const PostCell = ({ node, query }) => {
     }
 
     return (
-        <Link to={node.slug} key={node.id}>
-            <div className="transition border border-2 border-transparent px-2 py-2 lg:mt-4 mt-2 transition
-            hover:bg-gray-200 hover:border-gray-400
-            dark:text-white dark:hover:border-gray-600 dark:hover:bg-gray-800">
-                <div className="lg:flex flex-col lg:flex-row justify-between w-full lg:py-0">
-                    <div className="text-lg flex flex-col lg:flex-row">
-                        {getTitle(node.title, query)}
-                    </div>
-                    <div className="text-md flex flex-col lg:flex-row lg:block hidden">
-                        <span>{node.date}</span>
+        <Link to={node.slug} key={node.id} className='text-xl hover:text-royal'>
+            <div className="space-y-2 xl:grid xl:grid-cols-4 xl:space-y-0 xl:items-baseline my-5 transform hover:-translate-y-2 duration-500">
+                <dl>
+                    <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
+                        {node.date}
+                    </dd>
+                </dl>
+                <div className="space-y-5 xl:col-span-3">
+                    <div className="space-y-6">
+                        <div>
+                            {getTitle(node.title, query)}
+                            <div className="flex flex-wrap prose text-gray-500 max-w-none dark:text-gray-400 my-2">
+                                {/* {node.description} */}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -45,8 +50,6 @@ const PostCell = ({ node, query }) => {
 }
 
 export default function Posts({ data = [], showYears, query }) {
-
-
     if (showYears) {
         const postsByYear = {}
 
@@ -59,7 +62,7 @@ export default function Posts({ data = [], showYears, query }) {
         const years = Object.keys(postsByYear).reverse()
         return years.map((year) => (
             <section key={year}>
-                <h2 className="text-3xl mb-6 mt-10 px-2">{year}</h2>
+                <h2 className="text-3xl mb-6 mt-10">{year}</h2>
                 {postsByYear[year].map((node) => (
                     <PostCell key={node.id} node={node} query={query} />
                 ))}

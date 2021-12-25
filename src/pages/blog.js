@@ -20,12 +20,7 @@ export default function Blog({ data, ...props }) {
   return (
     <Layout>
       <Seo data={dataSeo} />
-      <div className="px-2">
-        <h1 className="text-4xl mb-10">Blog</h1>
-        <p className="text-2xl my-4">
-          Artikel, tutorial, apapun itu ada di sini.
-        </p>
-      </div>
+      <h1 className="text-4xl mb-10">Blog</h1>
       <Search posts={simplifiedPosts} {...props} />
     </Layout>
   )
@@ -42,6 +37,7 @@ export const pageQuery = graphql`
         frontmatter {
           title
           date(formatString: "DD MMMM YYYY", locale: "id-ID")
+          description
         }
         fields {
           slug

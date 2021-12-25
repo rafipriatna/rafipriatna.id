@@ -53,7 +53,7 @@ const SEO = ({ data }) => {
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       {image && <meta name="twitter:image" content={image} />}
-      <body className="transition bg-white dark:bg-gray-900" />
+      <body className="transition bg-white dark:bg-gray-800 min-h-screen" />
     </Helmet>
   )
 }

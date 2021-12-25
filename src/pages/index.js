@@ -30,36 +30,29 @@ export default function Home({ data, pageContext }) {
   )
 
   return (
-    <Layout>
+    <Layout circle>
       <Seo data={dataSeo} />
 
-      <div className="lg:flex flex-col lg:flex-row justify-between w-full lg:py-0 mb-10 lg:mb-20 px-2">
-        <div className="w-1/6 hidden lg:block lg:mr-10">
+      <div className="grid items-center grid-cols-1 text-center place-items-center md:text-left md:grid-cols-6 my-10">
+        <h1 className="order-2 col-span-5 text-4xl leading-tight md:leading-normal md:order-1 sm:text-5xl">
+          Saya{' '}
+          <span className="animate-pulse text-royal">Rafi</span>.
+          Seorang mahasiswa S1 Sistem Informasi yang biasa saja.
+        </h1>
+        <div className="order-1 md:order-2">
           <img
             src={FotoProfil}
             alt="8bit me wkwkw"
-            className="object-cover object-center w-full h-40"
+            className="object-cover object-center w-full h-40 w-40 rounded-full"
           />
-        </div>
-        <div className="text-xl lg:w-5/6 text-justify">
-          <h1 className="text-4xl mb-8">
-            {"/>"} Hello World!{" "}
-            <span role="img" aria-label="laptop_icon">
-              👋
-            </span>
-          </h1>
-          <p>
-            Hai, saya Rafi. Saya membuat blog ini untuk mendokumentasikan hasil
-            pembelajaran saya dan juga sebagai media untuk mencurahkan hal-hal
-            random saya. Selamat menikmati konten yang saya sajikan{" "}
-            <span role="img" aria-label="globe_icon">
-              😁
-            </span>
-          </p>
         </div>
       </div>
 
-      <h1 className="text-4xl px-2 my-10">Artikel terbaru</h1>
+      <div className="text-center my-20">
+        ~
+      </div>
+
+      <h1 className="text-4xl my-10">Artikel terbaru</h1>
 
       <div className="mb-6">
         <Posts data={simplifiedPosts} />
@@ -67,15 +60,13 @@ export default function Home({ data, pageContext }) {
 
       <div className="text-right">
         <Link to="/blog">
-          <span className="transition border border-2 border-transparent px-2 py-2 lg:mt-4 mt-2 transition
-            hover:bg-gray-200 hover:border-gray-400
-            dark:text-white dark:hover:border-gray-600 dark:hover:bg-gray-800">
+          <span className="transition duration-200 ease-in-out hover:text-royal px-4 lg:py-2 block font-medium m-1">
             Lihat artikel lainnya
           </span>
         </Link>
       </div>
 
-      <h1 className="text-4xl px-2 my-10">CTF Writeups</h1>
+      <h1 className="text-4xl my-10">CTF Writeups</h1>
 
       <div className="mb-6">
         <Posts data={simplifiedWriteups} />
@@ -83,9 +74,7 @@ export default function Home({ data, pageContext }) {
 
       <div className="text-right">
         <Link to="/tags/writeup">
-          <span className="transition border border-2 border-transparent px-2 py-2 lg:mt-4 mt-2 transition
-            hover:bg-gray-200 hover:border-gray-400
-            dark:text-white dark:hover:border-gray-600 dark:hover:bg-gray-800">
+          <span className="transition duration-200 ease-in-out hover:text-royal px-4 lg:py-2 block font-medium m-1">
             Lihat writeup lainnya
           </span>
         </Link>
@@ -95,9 +84,7 @@ export default function Home({ data, pageContext }) {
       <Project projects={projects.nodes} />
       <div className="text-right my-6">
         <Link to="/portofolio">
-          <span className="transition border border-2 border-transparent px-2 py-2 lg:mt-4 mt-2 transition
-            hover:bg-gray-200 hover:border-gray-400
-            dark:text-white dark:hover:border-gray-600 dark:hover:bg-gray-800">
+          <span className="transition duration-200 ease-in-out hover:text-royal px-4 lg:py-2 block font-medium m-1">
             Lihat portofolio lainnya
           </span>
         </Link>
@@ -118,6 +105,7 @@ export const indexQuery = graphql`
         frontmatter {
           title
           date(formatString: "DD MMMM YYYY", locale: "id-ID")
+          description
         }
         fields {
           slug
@@ -135,6 +123,7 @@ export const indexQuery = graphql`
         frontmatter {
           title
           date(formatString: "DD MMMM YYYY", locale: "id-ID")
+          description
         }
         fields {
           slug

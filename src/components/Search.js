@@ -25,7 +25,7 @@ export default function Search({ posts, location, navigate }) {
 
   return (
     <>
-      <div className="flex items-center mt-2 mb-6 ml-4 px-2 w-full">
+      {/* <div className="flex items-center mt-2 mb-6 ml-4 w-full">
         <svg
           className="w-4 h-4 fill-current z-10"
           xmlns="http://www.w3.org/2000/svg"
@@ -45,16 +45,43 @@ export default function Search({ posts, location, navigate }) {
             setQuery(e.target.value)
           }}
         />
+      </div> */}
+      <div className="relative max-w-lg">
+        <input
+          aria-label="Ketik di sini untuk mulai mencari..."
+          type="text"
+          value={query}
+          onChange={e => {
+            navigate(e.target.value ? `/blog/?search=${e.target.value}` : "")
+            setQuery(e.target.value)
+          }}
+          placeholder="Ketik di sini untuk mulai mencari..."
+          className="block w-full px-4 py-2 text-gray-900 dark:text-gray-200 bg-white ring-1 rounded-md ring-1 focus:outline-none focus:ring-royal ring-gray-400 dark:ring-gray-600 dark:focus:ring-royal dark:bg-transparent"
+        />
+        <svg
+          className="absolute w-5 h-5 text-gray-400 right-3 top-3 dark:text-gray-300"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+          />
+        </svg>
       </div>
       <section>
         {query ? (
           results.length > 0 ? (
             <Posts data={results} showYears query={query} />
           ) : (<p className="text-center text-2xl py-5">Kamu nyari apa? Ndak nemu nih
-              <span role="img" aria-label="sad_icon">
+            <span role="img" aria-label="sad_icon">
               😥
-              </span>
-            </p>)
+            </span>
+          </p>)
         ) : (
           <Posts data={posts} showYears />
         )}

@@ -35,7 +35,7 @@ export default class Footer extends React.Component {
 
     return (
       <>
-        <footer className="footer relative lg:my-10 my-20 mt-0 px-2 text-center">
+        <footer className="footer relative lg:mb-0 lg:py-0 py-20 mt-0 px-2 text-center">
           <div className="flex justify-center mb-5">
             <a
               href="https://www.instagram.com/rafipriatna"

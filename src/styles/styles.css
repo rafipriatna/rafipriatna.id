@@ -60,7 +60,8 @@ pre[class*="language-"] {
   overflow-wrap: break-word;
 }
 
-pre.language-shell, code.language-shell {
+pre.language-shell,
+code.language-shell {
   white-space: pre-wrap;
 }
 
@@ -122,4 +123,35 @@ h4:not(:first-child) {
 
 figcaption {
   text-align: center;
+}
+
+/* Background */
+.circle-obj {
+  background: radial-gradient(closest-side, #e55d87, rgba(233, 168, 2, 0));
+  animation: traverse-up-left 10s ease-in-out infinite alternate;
+  z-index: -1;
+}
+
+.circle-obj2 {
+  background: radial-gradient(closest-side, #5fc3e4, rgba(233, 168, 2, 0));
+  animation: traverse-up-right 12s ease-in-out infinite alternate;
+  z-index: -1;
+}
+
+@keyframes traverse-up-left {
+  0% {
+  }
+
+  100% {
+    transform: translateY(-200px) translateX(-350px) rotate(180deg);
+  }
+}
+
+@keyframes traverse-up-right {
+  0% {
+  }
+
+  100% {
+    transform: translateY(-300px) translateX(300px) rotate(360deg);
+  }
 }

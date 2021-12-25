@@ -18,7 +18,7 @@ export default function Post({ data, pageContext }) {
   return (
     <Layout>
       <Seo data={dataSeo} />
-      <article itemScope itemType="http://schema.org/Article" className="px-2">
+      <article itemScope itemType="http://schema.org/Article">
         <header className="mb-10 break-words">
           <h1 className="text-4xl mb-6">{title}</h1>
           <div className="dark:text-gray-400">

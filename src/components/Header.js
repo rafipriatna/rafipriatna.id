@@ -21,10 +21,31 @@ export default function Header() {
     }
   }
 
+  const menus = [
+    {
+      name: "Beranda",
+      href: "/",
+    },
+    {
+      name: "Blog",
+      href: "/blog",
+    },
+
+    {
+      name: "Tentang",
+      href: "/tentang",
+    },
+    {
+      name: "Portofolio",
+      href: "/portofolio",
+    },
+
+  ]
+
   return (
-    <div className="transition sticky top-0 z-50 lg:text-xl bg-white dark:bg-gray-800 shadow-sm">
-      <div className="mx-auto lg:max-w-4xl flex flex-col lg:flex-row">
-        <div className="flex items-center justify-between px-6 lg:px-2 py-4 lg:py-0 uppercase font-semibold dark:text-gray-100">
+    <div className="transition lg:text-xl z-10 lg:mt-5">
+      <div className="flex flex-col lg:flex-row">
+        <div className="flex items-center justify-between px-0 py-4 lg:py-0 uppercase font-semibold dark:text-gray-100">
           <Link to="/">
             <div className="flex justify-between space-x-2 items-center">
               <div>
@@ -46,7 +67,7 @@ export default function Header() {
               onClick={changeTheme}
             >
               {typeof window !== "undefined" &&
-              localStorage.getItem("theme") === "psikopat"
+                localStorage.getItem("theme") === "psikopat"
                 ? moonIcon
                 : sunIcon}
             </button>
@@ -55,48 +76,30 @@ export default function Header() {
 
         <div className="hidden lg:block px-2 flex flex-row w-full dark:text-gray-100">
           <div className="flex justify-end items-center">
-            <Link
-              to="/"
-              className="border-b-2 border-transparent transition duration-200 ease-in-out hover:bg-gray-300 dark:hover:bg-gray-700 px-4 block font-medium py-5 hover:border-blue-600"
-              activeClassName="bg-gray-300 dark:bg-gray-700 border-blue-600"
-            >
-              Beranda
-            </Link>
-            <Link
-              to="/blog"
-              partiallyActive={true}
-              className="border-b-2 border-transparent transition duration-200 ease-in-out hover:bg-gray-300 dark:hover:bg-gray-700 px-4 block font-medium py-5 hover:border-blue-600"
-              activeClassName="bg-gray-300 dark:bg-gray-700 border-blue-600"
-            >
-              Blog
-            </Link>
-            <Link
-              to="/tentang"
-              className="border-b-2 border-transparent transition duration-200 ease-in-out hover:bg-gray-300 dark:hover:bg-gray-700 px-4 block font-medium py-5 hover:border-blue-600"
-              activeClassName="bg-gray-300 dark:bg-gray-700 border-blue-600"
-            >
-              Tentang
-            </Link>
-            <Link
-              to="/portofolio"
-              className="border-b-2 border-transparent transition duration-200 ease-in-out hover:bg-gray-300 dark:hover:bg-gray-700 px-4 block font-medium py-5 hover:border-blue-600"
-              activeClassName="bg-gray-300 dark:bg-gray-700 border-blue-600"
-            >
-              Portofolio
-            </Link>
+            {menus.map(item => {
+              return (
+                <Link
+                  to={item.href}
+                  className="transition duration-200 ease-in-out hover:text-royal px-4 lg:py-2 block font-medium m-1"
+                  activeClassName="text-royal"
+                >
+                  {item.name}
+                </Link>
+              )
+            })}
             <button
               type="button"
               className="pl-4 py-4 focus:outline-none"
               onClick={changeTheme}
             >
               {typeof window !== "undefined" &&
-              localStorage.getItem("theme") === "psikopat"
+                localStorage.getItem("theme") === "psikopat"
                 ? moonIcon
                 : sunIcon}
             </button>
           </div>
         </div>
       </div>
-    </div>
+    </div >
   )
 }
