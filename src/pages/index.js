@@ -48,10 +48,6 @@ export default function Home({ data, pageContext }) {
         </div>
       </div>
 
-      <div className="text-center my-20">
-        ~
-      </div>
-
       <h1 className="text-4xl my-10">Artikel terbaru</h1>
 
       <div className="mb-6">

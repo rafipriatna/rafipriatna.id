@@ -88,7 +88,7 @@ export default class Footer extends React.Component {
             this.state.scrolling
               ? "translate-y-0 opacity-100"
               : "translate-y-12 opacity-0"
-          } fixed z-30 bottom-0 right-0 lg:mr-6 lg:mb-14 mr-4 mb-20 bg-gray-300 dark:bg-gray-800 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 rounded-md bg-opacity-50 dark:bg-opacity-50`}
+          } fixed z-30 bottom-0 right-0 lg:mr-6 lg:mb-14 mr-4 mb-20 bg-white dark:bg-dark transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 rounded-md bg-opacity-30 dark:bg-opacity-30 backdrop-filter backdrop-blur-lg`}
         >
           <button onClick={backToTop} className="focus:outline-none">
             <svg
@@ -110,7 +110,7 @@ export default class Footer extends React.Component {
 
         {/* New mobile menu */}
         <div>
-          <section className="block lg:hidden fixed inset-x-0 bottom-0 z-10 shadow-2xl text-gray-500 bg-gray-300 dark:bg-gray-800 dark:text-gray-400">
+          <section className="block lg:hidden fixed inset-x-0 bottom-0 z-10 shadow-lg text-gray-500 bg-white dark:bg-dark backdrop-blur-lg bg-opacity-30 dark:bg-opacity-30 dark:text-gray-400">
             <div id="tabs" className="flex justify-between">
               <Link
                 to="/"
