@@ -35,7 +35,7 @@ export default function Home({ data, pageContext }) {
 
       <div className="grid items-center grid-cols-1 text-center place-items-center md:text-left md:grid-cols-6 my-10">
         <h1 className="order-2 col-span-5 text-4xl leading-tight md:leading-normal md:order-1 sm:text-5xl">
-          Saya{' '}
+          Halo, saya{' '}
           <span className="animate-pulse text-royal">Rafi</span>.
           Seorang mahasiswa S1 Sistem Informasi yang biasa saja.
         </h1>

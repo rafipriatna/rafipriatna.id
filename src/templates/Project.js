@@ -23,8 +23,8 @@ export default function Project({ data, pageContext }) {
       <Seo data={dataSeo} />
       <article itemScope itemType="http://schema.org/Article" className="px-2">
         <header className="mb-10 break-words">
-          <div class="flex flex-wrap overflow-hidden items-center">
-            <div class="w-24 overflow-hidden lg:block hidden">
+          <div className="flex flex-wrap overflow-hidden items-center">
+            <div className="w-24 overflow-hidden lg:block hidden">
               <img
                 src={iconImage}
                 className="h-20 w-20"
@@ -32,7 +32,7 @@ export default function Project({ data, pageContext }) {
               />
             </div>
 
-            <div class="w-5/6 overflow-hidden">
+            <div className="w-5/6 overflow-hidden">
               <h1 className="text-4xl mb-2">{title}</h1>
               <div className="dark:text-gray-400">{date}</div>
             </div>

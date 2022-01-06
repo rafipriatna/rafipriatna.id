@@ -27,10 +27,10 @@ const PostCell = ({ node, query }) => {
     }
 
     return (
-        <Link to={node.slug} key={node.id} className='text-xl transition duration-200 ease-in-out hover:text-royal'>
-            <div className="space-y-2 xl:grid xl:grid-cols-4 xl:space-y-0 xl:items-baseline my-5">
+        <Link to={node.slug} key={node.id} className='text-xl transition duration-200 ease-in-out'>
+            <div className="space-y-2 xl:grid xl:grid-cols-4 xl:space-y-0 xl:items-baseline my-5 cursor-pointer overflow-hidden transform hover:scale-105 duration-500">
                 <dl>
-                    <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
+                    <dd className="text-base font-medium leading-6  dark:text-white">
                         {node.date}
                     </dd>
                 </dl>
@@ -38,8 +38,8 @@ const PostCell = ({ node, query }) => {
                     <div className="space-y-6">
                         <div>
                             {getTitle(node.title, query)}
-                            <div className="flex flex-wrap prose text-gray-500 max-w-none dark:text-gray-400 my-2">
-                                {/* {node.description} */}
+                            <div className="flex flex-wrap prose text-gray-700 max-w-none dark:text-gray-400 my-2">
+                                {node.description}
                             </div>
                         </div>
                     </div>

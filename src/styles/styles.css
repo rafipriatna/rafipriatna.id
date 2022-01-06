@@ -42,7 +42,7 @@ pre.language-shell::after {
   box-shadow: 0 0 1px rgb(0 0 0 / 10%), 0 0 1px rgb(0 0 0 / 6%),
     0 2px 2px rgb(0 0 0 / 6%), 0 4px 4px rgb(0 0 0 / 6%),
     0 8px 8px rgb(0 0 0 / 6%), 0 16px 16px rgb(0 0 0 / 6%);
-  @apply rounded bg-slate-50 dark:bg-slate-800
+  @apply rounded bg-slate-800
 }
 
 :not(pre) > code[class*="language-"],
