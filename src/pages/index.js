@@ -37,7 +37,7 @@ export default function Home({ data, pageContext }) {
         <h1 className="order-2 col-span-5 text-4xl leading-tight md:leading-normal md:order-1 sm:text-5xl">
           Halo, saya{' '}
           <span className="animate-pulse text-royal">Rafi</span>.
-          Seorang mahasiswa S1 Sistem Informasi yang biasa saja.
+          Selamat datang di kebun digital saya {' '} <span role="img" aria-label="tanaman">🌱</span>.
         </h1>
         <div className="order-1 md:order-2">
           <img
