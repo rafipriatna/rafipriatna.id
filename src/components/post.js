@@ -35,7 +35,7 @@ export default function Posts({ data, showYears }) {
 
 const PostItem = ({ node }) => {
 
-    const type = node.icon.type
+    const type = node.icon?.type || ''
     let thumbnail = ''
     if (type === 'emoji') {
         thumbnail = <span role='img'>{node.icon.emoji}</span>
