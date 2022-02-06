@@ -34,7 +34,7 @@ const IndexPage = ({ data, pageContext }) => {
 export const indexQuery = graphql`
 query IndexQuery {
   allNotion(
-    filter: {properties: {type: {value: {name: {eq: "Article"}}}}}
+    filter: {properties: {type: {value: {name: {eq: "Article"}}}, status: {value: {name: {eq: "Posted"}}}}}
     limit: 5
     sort: {fields: properties___date___value___start, order: DESC}
   ) {

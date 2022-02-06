@@ -20,9 +20,9 @@ const BlogPage = ({ data, ...props }) => {
 
     return (
         <Layout>
-                <h1 className="my-5 text-5xl leading-tight md:leading-normal ">Blog</h1>
+                <h1 className='my-5 text-5xl leading-tight md:leading-normal '>Blog</h1>
                 <p className='my-5'>Artikel, tutorial, dan tulisan lainnya ada di sini.</p>
-            <div className="mb-6">
+            <div className='mb-6'>
                 <Search posts={notionPost} {...props} />
             </div>
         </Layout>
@@ -32,7 +32,7 @@ const BlogPage = ({ data, ...props }) => {
 export const blogQuery = graphql`
 query BlogQuery {
     allNotion(
-      filter: {properties: {type: {value: {name: {eq: "Article"}}}}}
+      filter: {properties: {type: {value: {name: {eq: "Article"}}}, status: {value: {name: {eq: "Posted"}}}}}
       sort: {fields: properties___date___value___start, order: DESC}
     ) {
       edges {
