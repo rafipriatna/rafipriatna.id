@@ -35,7 +35,7 @@ export default class Footer extends React.Component {
 
         return (
             <>
-                <footer className='footer relative lg:mb-0 lg:py-0 py-10 z-40 mt-0 px-2 text-center bg-white dark:bg-dark'>
+                <footer className='footer relative lg:mb-0 lg:py-0 py-10 z-40 mt-0 text-center bg-white dark:bg-dark'>
                     <div className='flex items-center justify-between mt-12'>
                         <div className='flex items-center order-2 space-x-6'>
                             <a
