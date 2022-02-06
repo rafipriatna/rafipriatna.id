@@ -7,6 +7,7 @@ import Layout from '../layouts/default'
 // Components
 import Hero from '../components/hero'
 import Posts from '../components/post'
+import Seo from '../components/seo'
 
 // Helper
 import { notionPostFormat } from '../lib/notion-post-format'
@@ -21,6 +22,7 @@ const IndexPage = ({ data, pageContext }) => {
 
   return (
     <Layout>
+      <Seo title='Beranda' />
       <Hero />
 
       <h1 className="text-3xl my-10 pt-10 font-semibold">Artikel terbaru</h1>

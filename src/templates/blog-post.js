@@ -4,43 +4,48 @@ import { graphql, Link } from 'gatsby'
 // Layout
 import Layout from '../layouts/default'
 
-// Lib
+// Components
+import Seo from '../components/seo'
+
+// Helper
 import { Blocks } from '../lib/render'
 
 const BlogPostPage = ({ data, pageContext }) => {
-    const { notion } = data
-    const title = notion.title
-    const { date, tags } = notion.properties
-    const content = notion.raw.children
+  const { notion } = data
+  const title = notion.title
+  const { date, tags } = notion.properties
+  const content = notion.raw.children
 
-    return (
-        <Layout>
-            <article itemScope itemType='http://schema.org/Article' className='my-10'>
-                <header className='mb-10 break-words'>
-                    <h1 className='text-4xl mb-6'>{title}</h1>
-                    <div className='text-gray-400'>
-                        <p className='my-2'>
-                            Terbit pada tanggal {date.value.start}{' '}
-                        </p>
-                        {tags.value.map((tag, index) => {
-                            return (
-                                <Link to={'/tags/' + tag.name} className='font-bold pb-4 mr-2 hover:text-white' key={index}>
-                                    #{tag.name}
-                                </Link>
-                            )
-                        })}
-                    </div>
-                </header>
-                <div className='max-w-full break-words text-lg'>
-                    {content.map((block, index) => {
-                        return (
-                            <Fragment key={index}>{Blocks(block)}</Fragment>
-                        )
-                    })}
-                </div>
-            </article>
-        </Layout>
-    )
+  return (
+    <Layout>
+      <Seo title={title} />
+
+      <article itemScope itemType='http://schema.org/Article' className='my-10'>
+        <header className='mb-10 break-words'>
+          <h1 className='text-4xl mb-6'>{title}</h1>
+          <div className='text-gray-400'>
+            <p className='my-2'>
+              Terbit pada tanggal {date.value.start}{' '}
+            </p>
+            {tags.value.map((tag, index) => {
+              return (
+                <Link to={'/tags/' + tag.name} className='font-bold pb-4 mr-2 hover:text-white' key={index}>
+                  #{tag.name}
+                </Link>
+              )
+            })}
+          </div>
+        </header>
+        <div className='max-w-full break-words text-lg'>
+          {content.map((block, index) => {
+            return (
+              <Fragment key={index}>{Blocks(block)}</Fragment>
+            )
+          })}
+        </div>
+      </article>
+    </Layout>
+  )
 }
 
 export const blogPostQuery = graphql`

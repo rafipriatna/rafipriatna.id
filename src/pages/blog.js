@@ -6,27 +6,30 @@ import Layout from '../layouts/default'
 
 // Components
 import Search from '../components/search'
+import Seo from '../components/seo'
 
 // Helper
 import { notionPostFormat } from '../lib/notion-post-format'
 
 const BlogPage = ({ data, ...props }) => {
-    const { allNotion } = data
+  const { allNotion } = data
 
-    const notionPost = useMemo(
-        () => notionPostFormat(allNotion.edges),
-        [allNotion.edges]
-    )
+  const notionPost = useMemo(
+    () => notionPostFormat(allNotion.edges),
+    [allNotion.edges]
+  )
 
-    return (
-        <Layout>
-                <h1 className='my-5 text-5xl leading-tight md:leading-normal '>Blog</h1>
-                <p className='my-5'>Artikel, tutorial, dan tulisan lainnya ada di sini.</p>
-            <div className='mb-6'>
-                <Search posts={notionPost} {...props} />
-            </div>
-        </Layout>
-    )
+  return (
+    <Layout>
+      <Seo title='Blog' />
+
+      <h1 className='my-5 text-5xl leading-tight md:leading-normal '>Blog</h1>
+      <p className='my-5'>Artikel, tutorial, dan tulisan lainnya ada di sini.</p>
+      <div className='mb-6'>
+        <Search posts={notionPost} {...props} />
+      </div>
+    </Layout>
+  )
 }
 
 export const blogQuery = graphql`
