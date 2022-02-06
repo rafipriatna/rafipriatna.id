@@ -37,10 +37,10 @@ const PostItem = ({ node }) => {
 
     const type = node.icon.type
     let thumbnail = ''
-    if (type == 'emoji') {
+    if (type === 'emoji') {
         thumbnail = <span role='img'>{node.icon.emoji}</span>
-    } else if (type == 'external') {
-        thumbnail = <img src={node.icon.external.url} className='w-7 h-7 rounded' />
+    } else if (type === 'external') {
+        thumbnail = <img alt='Thumbnail' src={node.icon.external.url} className='w-7 h-7 rounded' />
     } else {
         thumbnail = <span role='img'>📝</span>
     }
