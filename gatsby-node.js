@@ -51,8 +51,10 @@ exports.createPages = async ({ graphql, actions, getCache, createNodeId }) => {
   })
 }
 
-exports.onCreateNode = async ({ node, actions: { createNode, createNodeField }, createNodeId, getCache }) => {
+exports.onCreateNode = async ({ node, actions: { createNode }, createNodeId, getCache }) => {
   if (node.internal.type === 'Notion' && node.properties.status.value.name === 'Posted') {
+
+    // Generate static image for every posts
     const item = node.raw.children
 
     for (let i = 0; i < item.length; i++) {
@@ -73,12 +75,36 @@ exports.onCreateNode = async ({ node, actions: { createNode, createNodeField }, 
             createNodeId,
             getCache,
           })
-  
+
           if (fileNode) {
             item[i].image.remoteImage___NODE = fileNode.id
           }
         }
+      }
+    }
 
+    // Generate static image for icon
+    if (node.raw.icon !== null) {
+      let img
+
+      if (node.raw.icon.type === 'file') {
+        img = node.raw.icon.file.url
+      } else if (node.raw.icon.type === 'external') {
+        img = node.raw.icon.external.url
+      }
+
+      if (img) {
+        const fileNode = await createRemoteFileNode({
+          url: img,
+          parentNodeId: node.id,
+          createNode,
+          createNodeId,
+          getCache,
+        })
+
+        if (fileNode) {
+          node.raw.icon.remoteImage___NODE = fileNode.id
+        }
       }
     }
   }

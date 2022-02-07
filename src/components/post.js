@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'gatsby'
+import { GatsbyImage } from 'gatsby-plugin-image'
 
 export default function Posts({ data, showYears }) {
 
@@ -35,12 +36,12 @@ export default function Posts({ data, showYears }) {
 
 const PostItem = ({ node }) => {
 
-    const type = node.icon?.type || ''
+    const type = node.icon?.type || null
     let thumbnail = ''
     if (type === 'emoji') {
         thumbnail = <span role='img'>{node.icon.emoji}</span>
-    } else if (type === 'external') {
-        thumbnail = <img alt='Thumbnail' src={node.icon.external.url} className='w-7 h-7 rounded' />
+    } else if (type === 'external' || type === 'file') {
+        thumbnail = <GatsbyImage className='w-7 h-7 rounded' alt='Thumbnail' image={node.icon.remoteImage.childImageSharp.gatsbyImageData} />
     } else {
         thumbnail = <span role='img'>📝</span>
     }

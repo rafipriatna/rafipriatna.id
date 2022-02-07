@@ -84,41 +84,41 @@ module.exports = {
                   allNotion(
                     filter: {properties: {type: {value: {name: {eq: "Article"}}}}}
                   ) {
-                    edges {
-                      node {
-                        id
-                        raw {
-                          icon {
-                            type
-                            external {
-                              url
+                    nodes {
+                      id
+                      raw {
+                        icon {
+                          type
+                          remoteImage {
+                            childImageSharp {
+                              gatsbyImageData
                             }
-                            emoji
                           }
-                          properties {
-                            Name {
-                              id
-                            }
+                          emoji
+                        }
+                        properties {
+                          Name {
+                            id
+                          }
+                          date {
                             date {
-                              date {
-                                start(locale: "id-ID", formatString: "DD MMMM YYYY")
-                              }
+                              start(locale: "id-ID", formatString: "DD MMMM YYYY")
                             }
-                            slug {
-                              rich_text
+                          }
+                          slug {
+                            rich_text
+                          }
+                          tags {
+                            multi_select {
+                              name
                             }
-                            tags {
-                              multi_select {
-                                name
-                              }
-                            }
-                            description {
-                              rich_text
-                            }
+                          }
+                          description {
+                            rich_text
                           }
                         }
-                        title
                       }
+                      title
                     }
                   }
                 }
@@ -127,14 +127,14 @@ module.exports = {
         index: ['title', 'tags'],
         store: ['id', 'icon', 'slug', 'title', 'tags', 'date', 'description'],
         normalizer: ({ data }) =>
-          data.allNotion.edges.map(post => ({
-            id: post.node.id,
-            icon: post.node.raw.icon,
-            title: post.node.title,
-            date: post.node.raw.properties.date.date.start,
-            slug: '/' + post.node.raw.properties.slug.rich_text,
-            tags: post.node.raw.properties.tags.multi_select,
-            description: post.node.raw.properties.description.rich_text,
+          data.allNotion.nodes.map(post => ({
+            id: post.id,
+            icon: post.raw.icon,
+            title: post.title,
+            date: post.raw.properties.date.date.start,
+            slug: '/' + post.raw.properties.slug.rich_text,
+            tags: post.raw.properties.tags.multi_select,
+            description: post.raw.properties.description.rich_text,
           })),
       },
     },

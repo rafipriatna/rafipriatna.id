@@ -16,8 +16,8 @@ const IndexPage = ({ data, pageContext }) => {
   const { allNotion } = data
 
   const notionPost = useMemo(
-    () => notionPostFormat(allNotion.edges),
-    [allNotion.edges]
+    () => notionPostFormat(allNotion.nodes),
+    [allNotion.nodes]
   )
 
   return (
@@ -40,40 +40,40 @@ query IndexQuery {
     limit: 5
     sort: {fields: properties___date___value___start, order: DESC}
   ) {
-    edges {
-      node {
-        id
-        raw {
-          icon {
-            type
-            external {
-              url
+    nodes {
+      id
+      title
+      raw {
+        icon {
+          type
+          remoteImage {
+            childImageSharp {
+              gatsbyImageData
             }
-            emoji
           }
-          properties {
-            Name {
-              id
-            }
+          emoji
+        }
+        properties {
+          Name {
+            id
+          }
+          date {
             date {
-              date {
-                start(locale: "id-ID", formatString: "DD MMMM YYYY")
-              }
+              start(locale: "id-ID", formatString: "DD MMMM YYYY")
             }
-            slug {
-              rich_text
+          }
+          slug {
+            rich_text
+          }
+          tags {
+            multi_select {
+              name
             }
-            tags {
-              multi_select {
-                name
-              }
-            }
-            description {
-              rich_text
-            }
+          }
+          description {
+            rich_text
           }
         }
-        title
       }
     }
   }
