@@ -1,10 +1,11 @@
 const path = require(`path`)
 const { createRemoteFileNode } = require(`gatsby-source-filesystem`)
 
-exports.createPages = async ({ graphql, actions, getCache, createNodeId }) => {
+exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
-  const blogPostTemplate = path.resolve(`src/templates/blog-post.js`)
-
+  const blogPostNotionTemplate = path.resolve(`src/templates/blog-post-notion.js`)
+  const blogPostMarkdownTemplate = path.resolve(`src/templates/blog-post-markdown.js`)
+  
   return graphql(`
     query LoadArticlesQuery {
         allNotion(
@@ -19,15 +20,17 @@ exports.createPages = async ({ graphql, actions, getCache, createNodeId }) => {
                 value
               }
             }
-            raw {
-              children {
-                image {
-                  file {
-                    url
-                  }
-                  type
-                }
-              }
+          }
+        }
+        allMarkdownRemark(
+          sort: { fields: [frontmatter___date], order: ASC }
+          filter: { fileAbsolutePath: { regex: "/content/posts/|/content/writeups/" } }
+          limit: 1000
+        ) {
+          nodes {
+            id
+            fields {
+              slug
             }
           }
         }
@@ -35,39 +38,58 @@ exports.createPages = async ({ graphql, actions, getCache, createNodeId }) => {
     `).then(result => {
     if (result.errors) throw result.errors
 
-    const articles = result.data.allNotion.nodes
+    const articlesNotion = result.data.allNotion.nodes
+    const articlesMarkdown = result.data.allMarkdownRemark.nodes
 
-    if (articles.length > 0) {
-      articles.forEach(article => {
+    if (articlesNotion.length > 0) {
+      articlesNotion.forEach(article => {
         createPage({
           path: article.properties.slug.value,
-          component: blogPostTemplate,
+          component: blogPostNotionTemplate,
           context: {
             id: article.id
           }
         })
       })
     }
+
+    if (articlesMarkdown.length > 0) {
+      articlesMarkdown.forEach((post, index) => {
+        createPage({
+          path: post.fields.slug,
+          component: blogPostMarkdownTemplate,
+          context: {
+            id: post.id,
+          },
+        })
+      })
+    }
+
   })
 }
 
-exports.onCreateNode = async ({ node, actions: { createNode }, createNodeId, getCache }) => {
-  if (node.internal.type === 'Notion' && node.properties.status.value.name === 'Posted') {
+exports.onCreateNode = async ({ node, actions: { createNode, createNodeField }, createNodeId, getCache }) => {
+  // Markdown
+  if (node.internal.type === `MarkdownRemark`) {
+    if (typeof node.frontmatter.slug !== 'undefined') {
+      createNodeField({
+        name: 'slug',
+        node,
+        value: node.frontmatter.slug,
+      })
+    }
+  }
+
+  // Notion
+  if (node.internal.type === 'Notion') {
 
     // Generate static image for every posts
     const item = node.raw.children
 
     for (let i = 0; i < item.length; i++) {
       if (item[i].type === 'image') {
-        let img
-
         if (item[i].image.type === 'file') {
-          img = item[i].image.file.url
-        } else if (item[i].image.type === 'external') {
-          img = item[i].image.external.url
-        }
-
-        if (img) {
+          const img = item[i].image.file.url
           const fileNode = await createRemoteFileNode({
             url: img,
             parentNodeId: node.id,
@@ -85,15 +107,9 @@ exports.onCreateNode = async ({ node, actions: { createNode }, createNodeId, get
 
     // Generate static image for icon
     if (node.raw.icon !== null) {
-      let img
 
       if (node.raw.icon.type === 'file') {
-        img = node.raw.icon.file.url
-      } else if (node.raw.icon.type === 'external') {
-        img = node.raw.icon.external.url
-      }
-
-      if (img) {
+        const img = node.raw.icon.file.url
         const fileNode = await createRemoteFileNode({
           url: img,
           parentNodeId: node.id,

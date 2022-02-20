@@ -41,6 +41,13 @@ module.exports = {
       },
       __key: 'images'
     },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `content`,
+        path: `${__dirname}/content`,
+      },
+    },
 
     // ========================================================================
     // CSS
@@ -61,83 +68,26 @@ module.exports = {
       options: {
         token: process.env.NOTION_SECRET,
         databaseId: process.env.DATABASE_ID,
-        propsToFrontmatter: true,
+        propsToFrontmatter: false,
         lowerTitleLevel: true,
       },
     },
-
-    // ========================================================================
-    // Search
-    // ========================================================================
     {
-      resolve: 'gatsby-plugin-local-search',
+      resolve: `gatsby-transformer-remark`,
       options: {
-        name: 'pages',
-        engine: 'flexsearch',
-        engineOptions: {
-          encode: 'icase',
-          tokenize: 'forward',
-          async: false,
-        },
-        query: `
-                {
-                  allNotion(
-                    filter: {properties: {type: {value: {name: {eq: "Article"}}}}}
-                  ) {
-                    nodes {
-                      id
-                      raw {
-                        icon {
-                          type
-                          remoteImage {
-                            childImageSharp {
-                              gatsbyImageData
-                            }
-                          }
-                          emoji
-                        }
-                        properties {
-                          Name {
-                            id
-                          }
-                          date {
-                            date {
-                              start(locale: "id-ID", formatString: "DD MMMM YYYY")
-                            }
-                          }
-                          slug {
-                            rich_text
-                          }
-                          tags {
-                            multi_select {
-                              name
-                            }
-                          }
-                          description {
-                            rich_text
-                          }
-                        }
-                      }
-                      title
-                    }
-                  }
-                }
-              `,
-        ref: 'id',
-        index: ['title', 'tags'],
-        store: ['id', 'icon', 'slug', 'title', 'tags', 'date', 'description'],
-        normalizer: ({ data }) =>
-          data.allNotion.nodes.map(post => ({
-            id: post.id,
-            icon: post.raw.icon,
-            title: post.title,
-            date: post.raw.properties.date.date.start,
-            slug: '/' + post.raw.properties.slug.rich_text,
-            tags: post.raw.properties.tags.multi_select,
-            description: post.raw.properties.description.rich_text,
-          })),
+        plugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 1500,
+              withWebp: true,
+              showCaptions: true,
+              quality: 100,
+              backgroundColor: `transparent`,
+            },
+          }
+        ],
       },
     },
-
   ]
 };

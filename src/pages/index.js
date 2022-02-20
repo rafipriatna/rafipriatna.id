@@ -10,14 +10,14 @@ import Posts from '../components/post'
 import Seo from '../components/seo'
 
 // Helper
-import { notionPostFormat } from '../lib/notion-post-format'
+import { postFormat } from '../lib/post-format'
 
 const IndexPage = ({ data, pageContext }) => {
-  const { allNotion } = data
+  const { NotionPosts, MarkdownPosts } = data
 
-  const notionPost = useMemo(
-    () => notionPostFormat(allNotion.nodes),
-    [allNotion.nodes]
+  const articles = useMemo(
+    () => postFormat(MarkdownPosts.nodes, NotionPosts.nodes),
+    [MarkdownPosts.nodes, NotionPosts.nodes]
   )
 
   return (
@@ -27,7 +27,7 @@ const IndexPage = ({ data, pageContext }) => {
 
       <h1 className="text-3xl my-10 pt-10 font-semibold">Artikel terbaru</h1>
       <div className="mb-6">
-        <Posts data={notionPost} />
+        <Posts data={articles.slice(0,5)} />
       </div>
     </Layout>
   )
@@ -35,7 +35,7 @@ const IndexPage = ({ data, pageContext }) => {
 
 export const indexQuery = graphql`
 query IndexQuery {
-  allNotion(
+  NotionPosts: allNotion(
     filter: {properties: {type: {value: {name: {eq: "Article"}}}, status: {value: {name: {eq: "Posted"}}}}}
     limit: 5
     sort: {fields: properties___date___value___start, order: DESC}
@@ -50,6 +50,9 @@ query IndexQuery {
             childImageSharp {
               gatsbyImageData
             }
+          }
+          external {
+            url
           }
           emoji
         }
@@ -74,6 +77,24 @@ query IndexQuery {
             rich_text
           }
         }
+      }
+    }
+  }
+
+  MarkdownPosts: allMarkdownRemark(
+    limit: 5
+    sort: { fields: [frontmatter___date], order: DESC }
+    filter: { fileAbsolutePath: { regex: "/content/posts/" } }
+  ) {
+    nodes {
+      id
+      frontmatter {
+        title
+        date(formatString: "DD MMMM YYYY", locale: "id-ID")
+        description
+      }
+      fields {
+        slug
       }
     }
   }

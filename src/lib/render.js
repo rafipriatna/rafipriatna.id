@@ -93,27 +93,22 @@ export function Blocks(block) {
                 </details>
             )
 
-        case 'child_page':
-            return <p>{value.title}</p>
-
         case 'image':
-            const src =
-                value.remoteImage.childImageSharp.gatsbyImageData;
+            let image;
+            if (value.type === 'file') {
+                image = <GatsbyImage className='rounded-xl' width={1200} height={684} alt={caption ? caption : 'Tanpa keterangan.'} image={value.remoteImage.childImageSharp.gatsbyImageData}
+                />
+            } else {
+                image = <img className='rounded-xl' width={1200} height={684} alt={caption ? caption : 'Tanpa keterangan.'} src={value.external.url}
+                />
+            }
+
             const caption =
                 value.caption?.length >= 1 ? value.caption[0].plain_text : '';
+
             return (
-                <figure className='object-none object-center' tes={src}>
-                    <GatsbyImage
-                        className='rounded-xl'
-                        width={1200}
-                        height={684}
-                        alt={
-                            caption
-                                ? caption
-                                : 'Tanpa keterangan.'
-                        }
-                        image={src}
-                    />
+                <figure className='object-none object-center'>
+                    {image}
                     {caption && (
                         <figcaption className='text-center'>{caption}</figcaption>
                     )}
@@ -122,7 +117,19 @@ export function Blocks(block) {
 
         case 'code':
             return (
-                <code class="block whitespace-pre overflow-x-scroll">{value.text[0].text.content}</code>
+                <pre>
+                    <code>{value.text[0].text.content}</code>
+                </pre>
+            )
+
+        case 'callout':
+            return (
+                <div className="flex space-x-4 bg-gray-50 dark:bg-midnight rounded-lg p-3">
+                    {value.icon && <span>{value.icon.emoji}</span>}
+                    <div>
+                        <Text text={value.text} />
+                    </div>
+                </div>
             )
 
         case 'quote':

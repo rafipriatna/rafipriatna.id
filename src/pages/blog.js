@@ -9,14 +9,14 @@ import Search from '../components/search'
 import Seo from '../components/seo'
 
 // Helper
-import { notionPostFormat } from '../lib/notion-post-format'
+import { postFormat } from '../lib/post-format'
 
 const BlogPage = ({ data, ...props }) => {
-  const { allNotion } = data
+  const { NotionPosts, MarkdownPosts } = data
 
-  const notionPost = useMemo(
-    () => notionPostFormat(allNotion.nodes),
-    [allNotion.nodes]
+  const articles = useMemo(
+    () => postFormat(MarkdownPosts.nodes, NotionPosts.nodes),
+    [MarkdownPosts.nodes, NotionPosts.nodes]
   )
 
   return (
@@ -26,7 +26,7 @@ const BlogPage = ({ data, ...props }) => {
       <h1 className='my-5 text-5xl leading-tight md:leading-normal '>Blog</h1>
       <p className='my-5'>Artikel, tutorial, dan tulisan lainnya ada di sini.</p>
       <div className='mb-6'>
-        <Search posts={notionPost} {...props} />
+        <Search posts={articles} {...props} />
       </div>
     </Layout>
   )
@@ -34,9 +34,8 @@ const BlogPage = ({ data, ...props }) => {
 
 export const blogQuery = graphql`
 query BlogQuery {
-    allNotion(
+    NotionPosts: allNotion(
       filter: {properties: {type: {value: {name: {eq: "Article"}}}, status: {value: {name: {eq: "Posted"}}}}}
-      limit: 5
       sort: {fields: properties___date___value___start, order: DESC}
     ) {
       nodes {
@@ -45,10 +44,8 @@ query BlogQuery {
         raw {
           icon {
             type
-            remoteImage {
-              childImageSharp {
-                gatsbyImageData
-              }
+            external {
+              url
             }
             emoji
           }
@@ -73,6 +70,23 @@ query BlogQuery {
               rich_text
             }
           }
+        }
+      }
+    }
+
+    MarkdownPosts: allMarkdownRemark(
+      sort: { fields: [frontmatter___date], order: DESC }
+      filter: { fileAbsolutePath: { regex: "/content/posts/|/content/writeups/" } }
+    ) {
+      nodes {
+        id
+        frontmatter {
+          title
+          date(formatString: "DD MMMM YYYY", locale: "id-ID")
+          description
+        }
+        fields {
+          slug
         }
       }
     }

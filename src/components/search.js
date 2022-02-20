@@ -1,28 +1,16 @@
 import React, { useState } from 'react'
-import { useStaticQuery, graphql } from 'gatsby'
-import { useFlexSearch } from 'react-use-flexsearch'
-import {parse} from 'querystring'
+import { parse } from 'querystring'
 
 // Components
 import Posts from './post'
 
-export default function Search({ posts, location }) {
-    const { search } = parse(location.search)
-    const [query, setQuery] = useState(search || '')
-    const { localSearchPages } = useStaticQuery(graphql`
-      query {
-        localSearchPages {
-          index
-          store
-        }
-      }
-    `)
+// Helper
+import JsSearchFunction from '../lib/js-search'
 
-    const results = useFlexSearch(
-        query,
-        localSearchPages.index,
-        localSearchPages.store
-    )
+export default function Search({ posts, location }) {
+    const { q } = parse(location.search)
+    const [query, setQuery] = useState(q || '')
+    const results = JsSearchFunction(posts, query)
 
     return (
         <>

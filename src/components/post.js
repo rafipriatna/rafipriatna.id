@@ -17,7 +17,7 @@ export default function Posts({ data, showYears }) {
     if (showYears) {
         return years.map((year) => (
             <section key={year}>
-                <h2 className='text-3xl mb-6 mt-10 px-2'>{year}</h2>
+                <h2 className='text-3xl mb-6 mt-10'>{year}</h2>
                 {postsByYear[year].map((node) => (
                     <PostItem key={node.id} node={node} />
                 ))}
@@ -40,8 +40,10 @@ const PostItem = ({ node }) => {
     let thumbnail = ''
     if (type === 'emoji') {
         thumbnail = <span role='img'>{node.icon.emoji}</span>
-    } else if (type === 'external' || type === 'file') {
+    } else if (type === 'file') {
         thumbnail = <GatsbyImage className='w-7 h-7 rounded' alt='Thumbnail' image={node.icon.remoteImage.childImageSharp.gatsbyImageData} />
+    } else if (type === 'external') {
+        thumbnail = <img className='w-7 h-7 rounded' alt='Thumbnail' src={node.icon.external.url} />
     } else {
         thumbnail = <span role='img'>📝</span>
     }
@@ -58,7 +60,7 @@ const PostItem = ({ node }) => {
                             {node.title}
                         </h2>
                     </div>
-                    <div className='text-md flex flex-col lg:flex-row lg:block hidden'>
+                    <div className='lg:block hidden'>
                         <span>{node.date}</span>
                     </div>
                 </div>
