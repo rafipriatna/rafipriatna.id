@@ -95,6 +95,9 @@ export function Blocks(block) {
 
         case 'image':
             let image;
+            const caption =
+                value.caption?.length >= 1 ? value.caption[0].plain_text : '';
+                
             if (value.type === 'file') {
                 image = <GatsbyImage className='rounded-xl' width={1200} height={684} alt={caption ? caption : 'Tanpa keterangan.'} image={value.remoteImage.childImageSharp.gatsbyImageData}
                 />
@@ -102,9 +105,6 @@ export function Blocks(block) {
                 image = <img className='rounded-xl' width={1200} height={684} alt={caption ? caption : 'Tanpa keterangan.'} src={value.external.url}
                 />
             }
-
-            const caption =
-                value.caption?.length >= 1 ? value.caption[0].plain_text : '';
 
             return (
                 <figure className='object-none object-center'>
@@ -124,7 +124,7 @@ export function Blocks(block) {
 
         case 'callout':
             return (
-                <div className="flex space-x-4 bg-gray-50 dark:bg-midnight rounded-lg p-3">
+                <div className="flex space-x-4 bg-gray-50 dark:bg-slate-800 rounded-lg p-3">
                     {value.icon && <span>{value.icon.emoji}</span>}
                     <div>
                         <Text text={value.text} />

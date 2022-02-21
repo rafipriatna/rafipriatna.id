@@ -21,25 +21,17 @@ const BlogPostMarkdownPage = ({ data, pageContext }) => {
 
             <article itemScope itemType='http://schema.org/Article' className='my-10'>
                 <header className='break-words'>
-                    <div class="w-full mx-auto text-gray-800 font-light mb-6 border-b border-gray-200 pb-6">
+                    <div className='w-full mx-auto text-gray-800 font-light mb-6 border-b border-gray-200 dark:border-gray-600 pb-6 dark:text-white'>
                         <div>
-                            <h6 class="font-semibold text-4xl mb-5">{title}</h6>
-                            <p class="text-gray-400 text-lg">Terbit pada tanggal {date}</p>
-
-                            {tags.map((tag, index) => {
-                                return (
-                                    <Link to={'/tags/' + tag} className='font-bold pb-4 mr-2 hover:text-white text-lg' key={index}>
-                                        #{tag}
-                                    </Link>
-                                )
-                            })}
+                            <h6 className='font-semibold text-4xl mb-5'>{title}</h6>
+                            <p className='text-gray-400 text-lg'>Terbit pada tanggal {date}</p>
                         </div>
                     </div>
                 </header>
                 <div className='prose dark:prose-dark max-w-full break-words text-xl text-justify'>
                     <section
                         dangerouslySetInnerHTML={{ __html: post.html }}
-                        itemProp="articleBody"
+                        itemProp='articleBody'
                     />
                 </div>
             </article>

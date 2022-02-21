@@ -77,6 +77,9 @@ function SEO({ description, lang, meta, title }) {
                     content: metaDescription,
                 },
             ].concat(meta)}
+            bodyAttributes={{
+                class: 'transition bg-white dark:bg-gray-800'
+            }}
         />
     )
 }
