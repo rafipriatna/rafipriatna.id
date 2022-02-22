@@ -113,11 +113,11 @@ export default class Footer extends React.Component {
 
                 {/* New mobile menu */}
                 <div>
-                    <section className='block lg:hidden fixed inset-x-0 bottom-0 z-50 shadow-lg text-gray-500 bg-white dark:bg-dark backdrop-blur-lg bg-opacity-30 dark:bg-opacity-30 dark:text-gray-400 border-t-2 border-royal/20'>
+                    <section className='block lg:hidden fixed inset-x-0 bottom-0 z-50 shadow-lg text-gray-500 bg-white dark:bg-gray-800 backdrop-blur-lg bg-opacity-50 dark:bg-opacity-50 dark:text-gray-400 border-t-2 border-gray-400/20'>
                         <div id='tabs' className='flex justify-between'>
                             <Link
                                 to='/'
-                                className='w-full focus:text-royal hover:text-royal justify-center inline-block text-center pt-2 pb-1'
+                                className='w-full justify-center inline-block text-center pt-2 pb-1'
                                 activeClassName='dark:text-gray-100 text-gray-800'
                             >
                                 <svg
@@ -138,7 +138,7 @@ export default class Footer extends React.Component {
                             </Link>
                             <Link
                                 to='/blog'
-                                className='w-full focus:text-royal hover:text-royal justify-center inline-block text-center pt-2 pb-1'
+                                className='w-full justify-center inline-block text-center pt-2 pb-1'
                                 activeClassName='dark:text-gray-100 text-gray-800'
                             >
                                 <svg
@@ -159,7 +159,7 @@ export default class Footer extends React.Component {
                             </Link>
                             <Link
                                 to='/proyek'
-                                className='w-full focus:text-royal hover:text-royal justify-center inline-block text-center pt-2 pb-1'
+                                className='w-full justify-center inline-block text-center pt-2 pb-1'
                                 activeClassName='dark:text-gray-100 text-gray-800'
                             >
                                 <svg

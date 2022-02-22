@@ -78,7 +78,7 @@ function SEO({ description, lang, meta, title }) {
                 },
             ].concat(meta)}
             bodyAttributes={{
-                class: 'transition bg-white dark:bg-gray-800'
+                class: 'transition bg-white dark:bg-gray-900'
             }}
         />
     )
