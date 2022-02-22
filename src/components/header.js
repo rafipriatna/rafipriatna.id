@@ -31,10 +31,6 @@ export default function Header() {
             href: '/blog',
         },
         {
-            name: 'Tentang',
-            href: '/tentang',
-        },
-        {
             name: 'Proyek',
             href: '/proyek',
         },
