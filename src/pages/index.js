@@ -67,9 +67,6 @@ query IndexQuery {
           emoji
         }
         properties {
-          Name {
-            id
-          }
           date {
             date {
               start(locale: "id-ID", formatString: "DD MMMM YYYY")
@@ -131,9 +128,6 @@ query IndexQuery {
           emoji
         }
         properties {
-          Name {
-            id
-          }
           date {
             date {
               start(locale: "id-ID", formatString: "DD MMMM YYYY")

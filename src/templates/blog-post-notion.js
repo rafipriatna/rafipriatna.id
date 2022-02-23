@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { graphql, Link } from 'gatsby'
+import { graphql } from 'gatsby'
 
 // Layout
 import Layout from '../layouts/default'
@@ -13,7 +13,7 @@ import { Blocks } from '../lib/render'
 const BlogPostNotionPage = ({ data, pageContext }) => {
   const { notion } = data
   const title = notion.title
-  const { date, tags } = notion.properties
+  const { date } = notion.properties
   const content = notion.raw.children
 
   return (
@@ -50,14 +50,6 @@ export const blogPostQuery = graphql`
           date {
             value {
               start(formatString: "DD MMMM YYYY", locale: "id-ID")
-            }
-          }
-          description {
-            value
-          }
-          tags {
-            value {
-              name
             }
           }
         }
@@ -110,17 +102,65 @@ export const blogPostQuery = graphql`
             }
             paragraph {
               text {
+                annotations {
+                  bold
+                  code
+                  color
+                  italic
+                  strikethrough
+                  underline
+                }
+                text {
+                  content
+                  link {
+                    url
+                  }
+                }
+                href
+              }
+            }
+            heading_2 {
+              text {
+                annotations {
+                  bold
+                  code
+                  color
+                  strikethrough
+                  italic
+                  underline
+                }
                 text {
                   content
                 }
-                type
+              }
+            }
+            heading_3 {
+              text {
+                annotations {
+                  underline
+                  strikethrough
+                  italic
+                  color
+                  code
+                  bold
+                }
+                text {
+                  content
+                }
+              }
+            }
+            numbered_list_item {
+              text {
                 annotations {
                   bold
                   code
                   italic
+                  color
                   strikethrough
                   underline
-                  color
+                }
+                text {
+                  content
                 }
               }
             }

@@ -43,24 +43,26 @@ export function Blocks(block) {
 
         case 'heading_1':
             return (
-                <h1>{value.text}</h1>
+                <h1><Text text={value.text} /></h1>
             )
 
         case 'heading_2':
             return (
-                <h2>{value.text}</h2>
+                <h2><Text text={value.text} /></h2>
             )
 
         case 'heading_3':
             return (
-                <h3>{value.text}</h3>
+                <h3><Text text={value.text} /></h3>
             )
 
         case 'numbered_list_item':
             return (
-                <li>
-                    <Text text={value.text} />
-                </li>
+                <ul>
+                    <li>
+                        <Text text={value.text} />
+                    </li>
+                </ul>
             )
 
         case 'to_do':
@@ -97,7 +99,7 @@ export function Blocks(block) {
             let image;
             const caption =
                 value.caption?.length >= 1 ? value.caption[0].plain_text : '';
-                
+
             if (value.type === 'file') {
                 image = <GatsbyImage className='rounded-xl' width={1200} height={684} alt={caption ? caption : 'Tanpa keterangan.'} image={value.remoteImage.childImageSharp.gatsbyImageData}
                 />
