@@ -16,8 +16,8 @@ export default function Posts({ data, showYears }) {
 
     if (showYears) {
         return years.map((year) => (
-            <section key={year}>
-                <h2 className='text-3xl mb-6 mt-10'>{year}</h2>
+            <section key={year} className='my-14'>
+                <h2 className='text-3xl mb-5'>{year}</h2>
                 {postsByYear[year].map((node) => (
                     <PostItem key={node.id} node={node} />
                 ))}
@@ -50,7 +50,7 @@ const PostItem = ({ node }) => {
 
     return (
         <Link to={node.slug} key={node.id}>
-            <div className='transition duration-200 ease-in-out hover:bg-gray-700 hover:text-white rounded-md px-2 py-2 lg:mt-4 mt-2'>
+            <div className='transition duration-200 ease-in-out hover:bg-gray-700 hover:text-white rounded-md px-2 py-1 lg:mt-4 mt-2'>
                 <div className='lg:flex inline-block lg:flex-row justify-between w-full lg:py-0'>
                     <div className='text-lg flex inline-block lg:flex-row'>
                         <div className='max-w-xs mr-2'>
