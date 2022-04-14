@@ -1,5 +1,5 @@
 import React from 'react'
-import { graphql, Link } from 'gatsby'
+import { graphql } from 'gatsby'
 
 // Layout
 import Layout from '../layouts/default'
@@ -7,13 +7,10 @@ import Layout from '../layouts/default'
 // Components
 import Seo from '../components/seo'
 
-// Helper
-import { Blocks } from '../lib/render'
-
 const BlogPostMarkdownPage = ({ data, pageContext }) => {
     const post = data.markdownRemark
     const { frontmatter } = post
-    const { title, tags, date } = frontmatter
+    const { title, date } = frontmatter
 
     return (
         <Layout>
