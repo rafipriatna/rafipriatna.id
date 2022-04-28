@@ -164,6 +164,21 @@ export const blogPostQuery = graphql`
                 }
               }
             }
+            quote {
+              text {
+                annotations {
+                  bold
+                  code
+                  color
+                  italic
+                  strikethrough
+                  underline
+                }
+                text {
+                  content
+                }
+              }
+            }
             type
           }
         }
