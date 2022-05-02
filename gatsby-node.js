@@ -5,7 +5,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
   const blogPostNotionTemplate = path.resolve(`src/templates/blog-post-notion.js`)
   const blogPostMarkdownTemplate = path.resolve(`src/templates/blog-post-markdown.js`)
-  
+
   return graphql(`
     query LoadArticlesQuery {
         allNotion(
@@ -86,20 +86,22 @@ exports.onCreateNode = async ({ node, actions: { createNode, createNodeField }, 
     // Generate static image for every posts
     const item = node.raw.children
 
-    for (let i = 0; i < item.length; i++) {
-      if (item[i].type === 'image') {
-        if (item[i].image.type === 'file') {
-          const img = item[i].image.file.url
-          const fileNode = await createRemoteFileNode({
-            url: img,
-            parentNodeId: node.id,
-            createNode,
-            createNodeId,
-            getCache,
-          })
+    if (node.raw.properties.status.select.name == 'Posted') {
+      for (let i = 0; i < item.length; i++) {
+        if (item[i].type === 'image') {
+          if (item[i].image.type === 'file') {
+            const img = item[i].image.file.url
+            const fileNode = await createRemoteFileNode({
+              url: img,
+              parentNodeId: node.id,
+              createNode,
+              createNodeId,
+              getCache,
+            })
 
-          if (fileNode) {
-            item[i].image.remoteImage___NODE = fileNode.id
+            if (fileNode) {
+                item[i].image.remoteImage___NODE = fileNode.id
+            }
           }
         }
       }
