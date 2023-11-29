@@ -13,16 +13,16 @@ import Seo from '../components/seo'
 import { postFormat } from '../lib/post-format'
 
 const IndexPage = ({ data, pageContext }) => {
-  const { NotionPosts, MarkdownPosts, NotionWriteups, MarkdownWriteups } = data
+  const { MarkdownPosts, MarkdownWriteups } = data
 
   const articles = useMemo(
-    () => postFormat(MarkdownPosts.nodes, NotionPosts.nodes),
-    [MarkdownPosts.nodes, NotionPosts.nodes]
+    () => postFormat(MarkdownPosts.nodes),
+    [MarkdownPosts.nodes]
   )
   
   const writeups = useMemo(
-    () => postFormat(MarkdownWriteups.nodes, NotionWriteups.nodes),
-    [MarkdownWriteups.nodes, NotionWriteups.nodes]
+    () => postFormat(MarkdownWriteups.nodes),
+    [MarkdownWriteups.nodes]
   )
 
   return (
@@ -45,120 +45,35 @@ const IndexPage = ({ data, pageContext }) => {
 
 export const indexQuery = graphql`
 query IndexQuery {
-  NotionPosts: allNotion(
-    filter: {properties: {type: {value: {name: {eq: "Article"}}}, status: {value: {name: {eq: "Posted"}}}}}
-    limit: 5
-    sort: {fields: properties___date___value___start, order: DESC}
-  ) {
-    nodes {
-      id
-      title
-      raw {
-        icon {
-          type
-          remoteImage {
-            childImageSharp {
-              gatsbyImageData
-            }
-          }
-          external {
-            url
-          }
-          emoji
-        }
-        properties {
-          date {
-            date {
-              start(locale: "id-ID", formatString: "DD MMMM YYYY")
-            }
-          }
-          slug {
-            rich_text
-          }
-          tags {
-            multi_select {
-              name
-            }
-          }
-          description {
-            rich_text
-          }
-        }
-      }
-    }
-  }
-
   MarkdownPosts: allMarkdownRemark(
     limit: 5
-    sort: { fields: [frontmatter___date], order: DESC }
+    sort: { frontmatter: { date: DESC } }
     filter: { fileAbsolutePath: { regex: "/content/posts/" } }
   ) {
     nodes {
       id
       frontmatter {
         title
-        date(formatString: "DD MMMM YYYY", locale: "id-ID")
+        date(formatString: "DD/MM/yyyy", locale: "id-ID")
         description
       }
       fields {
         slug
-      }
-    }
-  }
-
-  NotionWriteups: allNotion(
-    filter: {properties: {type: {value: {name: {eq: "Writeup"}}}, status: {value: {name: {eq: "Posted"}}}}}
-    limit: 5
-    sort: {fields: properties___date___value___start, order: DESC}
-  ) {
-    nodes {
-      id
-      title
-      raw {
-        icon {
-          type
-          remoteImage {
-            childImageSharp {
-              gatsbyImageData
-            }
-          }
-          external {
-            url
-          }
-          emoji
-        }
-        properties {
-          date {
-            date {
-              start(locale: "id-ID", formatString: "DD MMMM YYYY")
-            }
-          }
-          slug {
-            rich_text
-          }
-          tags {
-            multi_select {
-              name
-            }
-          }
-          description {
-            rich_text
-          }
-        }
+        icon
       }
     }
   }
   
   MarkdownWriteups: allMarkdownRemark(
     limit: 5
-    sort: { fields: [frontmatter___date], order: DESC }
+    sort: { frontmatter: { date: DESC } }
     filter: { fileAbsolutePath: { regex: "/content/writeups/" } }
   ) {
     nodes {
       id
       frontmatter {
         title
-        date(formatString: "DD MMMM YYYY", locale: "id-ID")
+        date(formatString: "DD/MM/yyyy", locale: "id-ID")
         description
       }
       fields {

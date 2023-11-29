@@ -1,6 +1,7 @@
 ---
 date: 2021-08-18T20:23:00+07:00
 title: "Tentang Async/Await pada Javascript"
+icon: "🖥️"
 slug: "async-await-javascript"
 tags: ["javascript"]
 description: "Penjelasan sederhana mengenai Async/Await pada Javascript."

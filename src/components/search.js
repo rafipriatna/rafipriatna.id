@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { parse } from 'querystring'
+import { parse } from 'querystring-es3'
 
 // Components
 import Posts from './post'
@@ -14,7 +14,7 @@ export default function Search({ posts, location }) {
 
     return (
         <>
-            <div className='relative max-w-lg'>
+            <div className='relative'>
                 <input
                     aria-label='Ketik di sini untuk mulai mencari...'
                     type='text'

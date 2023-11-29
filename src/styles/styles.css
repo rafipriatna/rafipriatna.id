@@ -1,3 +1,12 @@
+html,
+body {
+  scroll-behavior: smooth;
+}
+
+img {
+  @apply drop-shadow-2xl
+}
+
 .prose code::before {
   content: "";
 }
@@ -6,6 +15,16 @@
   content: "";
 }
 
-.prose p > code {
-  @apply bg-indigo-200 dark:bg-indigo-900 dark:bg-opacity-50 text-indigo-500 dark:text-indigo-200 py-0.5 px-2 rounded mx-1 inline-block align-middle tracking-tight text-base;
+.prose p > code.language-text {
+  @apply bg-gray-200 dark:bg-indigo-900 dark:bg-opacity-50 text-indigo-500 dark:text-indigo-200 text-gray-800 py-0.5 px-2 rounded mx-1 text-base font-normal tracking-normal;
+}
+
+.gatsby-highlight-code-line {
+  background-color: rgb(49, 49, 49);
+  display: block;
+  margin-right: -1em;
+  margin-left: -1em;
+  padding-right: 1em;
+  padding-left: 0.75em;
+  border-left: 0.25em solid #1A7CFA;
 }

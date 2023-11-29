@@ -45,7 +45,7 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `content`,
-        path: `${__dirname}/content`,
+        path: `${__dirname}/content/`,
       },
     },
 
@@ -64,28 +64,54 @@ module.exports = {
     // Data Source
     // ========================================================================
     {
-      resolve: 'gatsby-source-notion-api',
-      options: {
-        token: process.env.NOTION_SECRET,
-        databaseId: process.env.DATABASE_ID,
-        propsToFrontmatter: false,
-        lowerTitleLevel: true,
-      },
-    },
-    {
       resolve: `gatsby-transformer-remark`,
       options: {
         plugins: [
           {
+            resolve: `gatsby-remark-autolink-headers`,
+            options: {
+              isIconAfterHeader: true
+            },
+          },
+          {
             resolve: `gatsby-remark-images`,
             options: {
               maxWidth: 1500,
-              withWebp: true,
               showCaptions: true,
               quality: 100,
               backgroundColor: `transparent`,
             },
-          }
+          },
+          {
+            resolve: `gatsby-remark-prismjs`,
+            options: {
+              classPrefix: "language-",
+              inlineCodeMarker: null,
+              aliases: {},
+              showLineNumbers: false,
+              noInlineHighlight: false,
+              languageExtensions: [
+                {
+                  language: "superscript",
+                  extend: "javascript",
+                  definition: {
+                    superscript_types: /(SuperType)/,
+                  },
+                  insertBefore: {
+                    function: {
+                      superscript_keywords: /(superif|superelse)/,
+                    },
+                  },
+                },
+              ],
+              prompt: {
+                user: "root",
+                host: "localhost",
+                global: false,
+              },
+              escapeEntities: {},
+            },
+          },
         ],
       },
     },

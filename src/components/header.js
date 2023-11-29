@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'gatsby'
 
-import FotoProfil from '../images/me.jpg'
+import FotoProfil from '../images/me_transparent_big.png'
 
 export default function Header() {
     const sunIcon = '☀️'
@@ -34,21 +34,20 @@ export default function Header() {
             name: 'Proyek',
             href: '/proyek',
         },
-
     ]
 
     return (
-        <div className='transition lg:text-xl z-10 lg:mt-5'>
+        <div className='transition lg:text-xl z-10 lg:mt-10'>
             <div className='flex flex-col lg:flex-row'>
                 <div className='flex items-center justify-between px-0 py-4 lg:py-0 uppercase font-semibold dark:text-gray-100'>
                     <Link to='/'>
                         <div className='flex justify-between space-x-2 items-center'>
                             <div>
-                                <div className='group w-8 h-8 rounded-full overflow-hidden'>
+                                <div className='group w-8 h-8 rounded-full overflow-hidden bg-indigo-500'>
                                     <img
                                         src={FotoProfil}
                                         alt='8bit me wkwkw'
-                                        className='object-center w-full h-full'
+                                        className='object-center w-full h-full p-0.5'
                                     />
                                 </div>
                             </div>
