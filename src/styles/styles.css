@@ -15,7 +15,7 @@ img {
   content: "";
 }
 
-.prose p > code.language-text {
+.prose * > code.language-text {
   @apply bg-gray-200 dark:bg-indigo-900 dark:bg-opacity-50 text-indigo-500 dark:text-indigo-200 text-gray-800 py-0.5 px-2 rounded mx-1 text-base font-normal tracking-normal;
 }
 
@@ -31,4 +31,8 @@ img {
 
 .footnotes {
   @apply text-left
+}
+
+.gatsby-resp-image-figcaption {
+  @apply text-center my-10
 }
