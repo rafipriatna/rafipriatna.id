@@ -112,6 +112,18 @@ module.exports = {
               escapeEntities: {},
             },
           },
+          {
+            resolve: `gatsby-remark-footnotes`,
+            options: {
+              footnoteBackRefPreviousElementDisplay: "inline",
+              footnoteBackRefDisplay: "inline",
+              footnoteBackRefInnerText: "^",
+              footnoteBackRefAnchorStyle: `text-decoration: none;`,
+              footnoteBackRefInnerTextStartPosition: "front",
+              useFootnoteMarkerText: false,
+              useCustomDivider: "<hr/><strong>Referensi:</strong>"
+            }
+          }
         ],
       },
     },
