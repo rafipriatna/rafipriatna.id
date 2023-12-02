@@ -5,7 +5,7 @@ import FotoProfil from '../images/me_transparent_big.png'
 
 export default function Hero() {
     return (
-        <div className="my-10 lg:mt-20 mb-10">
+        <div className="my-10 lg:mt-20 mb-10 bg-indigo-500 rounded-lg p-5 text-white dark:bg-indigo-800">
             <div className="flex flex-row items-center">
                 <div className="w-full lg:w-4/6">
                     <h1 className="text-4xl font-semibold leading-tight md:leading-normal">
