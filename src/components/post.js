@@ -45,7 +45,7 @@ const PostItem = ({ node }) => {
 
     return (
         <Link to={node.slug} key={node.id}>
-            <div className='transition duration-200 ease-in-out hover:bg-gray-700 hover:text-white rounded-md px-2 py-1 lg:mt-4 mt-2'>
+            <div className='transition duration-200 ease-in-out hover:bg-indigo-500 hover:text-white rounded-md px-2 py-1 lg:mt-4 mt-2'>
                 <div className='lg:flex inline-block lg:flex-row justify-between w-full lg:py-0'>
                     <div className='text-lg flex inline-block lg:flex-row'>
                         <div className='max-w-xs mr-2'>
