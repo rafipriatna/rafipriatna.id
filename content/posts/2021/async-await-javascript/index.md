@@ -17,11 +17,11 @@ Oke, kita mulai dari analogi dulu.
 
 Sebelum kamu pergi ke sekolah jam 07:00 pagi, biasanya kamu harus siap-siap dulu. Misalnya kamu memiliki 5 hal yang harus dilakukan sebelum berangkat ke sekolah:
 
-    1. Mandi
-    2. Pakai Seragam
-    3. Sarapan
-    4. Buka Instagram
-    5. Pergi ke sekolah
+1. Mandi
+2. Pakai Seragam
+3. Sarapan
+4. Buka Instagram
+5. Pergi ke sekolah
 
 Lalu kamu diberikan dua pilihan (pilih satu): 1). Melakukan semua hal tersebut secara berurut dari nomor 1 - 5. 2). Melakukan semua hal tersebut tanpa berurut yang penting selesai.
 
