@@ -9,7 +9,7 @@ module.exports = {
     siteUrl: 'https://rafipriatna.id/',
     keywords: 'Rafi Priatna K, Blog, Indonesia, GNU',
     author: '@rafipriatna',
-    image: 'src/images/me.jpg'
+    image: 'src/images/me_transparent_big.png'
   },
   plugins: [
     // ========================================================================
@@ -26,7 +26,7 @@ module.exports = {
         background_color: 'dark',
         theme_color: '#161e2e',
         display: 'minimal-ui',
-        icon: 'src/images/me.jpg',
+        icon: 'src/images/me_transparent_big.png',
       },
     },
 
