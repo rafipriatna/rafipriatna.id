@@ -4,7 +4,7 @@ body {
 }
 
 img {
-  @apply drop-shadow-2xl
+  @apply drop-shadow-2xl;
 }
 
 .prose code::before {
@@ -15,12 +15,12 @@ img {
   content: "";
 }
 
-.prose *>code.language-text {
+.prose * > code.language-text {
   @apply bg-gray-200 dark:bg-indigo-900 dark:bg-opacity-50 text-indigo-500 dark:text-indigo-200 text-gray-800 py-0.5 px-2 rounded mx-1 text-base font-normal tracking-normal;
 }
 
-.prose *>h2 {
-  @apply mt-8
+.prose * > h2 {
+  @apply mt-8;
 }
 
 .gatsby-highlight-code-line {
@@ -30,13 +30,17 @@ img {
   margin-left: -1em;
   padding-right: 1em;
   padding-left: 0.75em;
-  border-left: 0.25em solid #1A7CFA;
+  border-left: 0.25em solid #1a7cfa;
+}
+
+.gatsby-highlight {
+  @apply text-base;
 }
 
 .footnotes {
-  @apply text-left
+  @apply text-left;
 }
 
 .gatsby-resp-image-figcaption {
-  @apply text-center my-10
+  @apply text-center my-10;
 }
