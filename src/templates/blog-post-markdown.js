@@ -25,7 +25,7 @@ const BlogPostMarkdownPage = ({ data, pageContext }) => {
                         </div>
                     </div>
                 </header>
-                <div className='prose dark:prose-dark max-w-full break-words text-xl text-justify leading-normal'>
+                <div className='prose dark:prose-dark max-w-full break-words text-lg text-justify font-normal'>
                     <section
                         dangerouslySetInnerHTML={{ __html: post.html }}
                         itemProp='articleBody'

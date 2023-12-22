@@ -23,6 +23,10 @@ img {
   @apply mt-8;
 }
 
+.prose * > p {
+  @apply mb-8
+}
+
 .gatsby-highlight-code-line {
   background-color: rgb(49, 49, 49);
   display: block;
@@ -34,7 +38,7 @@ img {
 }
 
 .gatsby-highlight {
-  @apply text-base;
+  @apply text-base mb-8;
 }
 
 .footnotes {

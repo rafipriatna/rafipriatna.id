@@ -21,6 +21,9 @@ module.exports = {
       royal: "#1A7CFA"
     },
     extend: {
+      fontFamily: {
+        inter: ['Inter', 'sans-serif'],
+      },
       typography: theme => ({
         default: {
           css: {
