@@ -1,7 +1,5 @@
 import React from 'react'
-import { Link } from 'gatsby'
-
-import FotoProfil from '../images/me_transparent_big.png'
+import { StaticImage } from "gatsby-plugin-image"
 
 export default function Hero() {
     return (
@@ -24,8 +22,8 @@ export default function Hero() {
                     </p>
                 </div>
                 <div className="w-48 h-48 relative hidden lg:block ml-auto">
-                    <img
-                        src={FotoProfil}
+                    <StaticImage
+                        src='../images/me_transparent_big.png'
                         alt='8bit me wkwkw'
                     />
                 </div>

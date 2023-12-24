@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'gatsby'
-
-import FotoProfil from '../images/me_transparent_big.png'
+import { StaticImage } from "gatsby-plugin-image"
 
 export default function Header() {
     const sunIcon = '☀️'
@@ -44,8 +43,8 @@ export default function Header() {
                         <div className='flex justify-between space-x-2 items-center'>
                             <div>
                                 <div className='group w-8 h-8 rounded-full overflow-hidden bg-indigo-500'>
-                                    <img
-                                        src={FotoProfil}
+                                    <StaticImage
+                                        src='../images/me_transparent_big.png'
                                         alt='8bit me wkwkw'
                                         className='object-center w-full h-full p-0.5'
                                     />
