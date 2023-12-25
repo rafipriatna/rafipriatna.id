@@ -42,7 +42,7 @@ export default function Header() {
                     <Link to='/'>
                         <div className='flex justify-between space-x-2 items-center'>
                             <div>
-                                <div className='group w-8 h-8 rounded-full overflow-hidden bg-indigo-500'>
+                                <div className='group w-8 h-8 rounded-full overflow-hidden bg-indigo-500 dark:bg-indigo-800'>
                                     <StaticImage
                                         src='../images/me_transparent_big.png'
                                         alt='8bit me wkwkw'
@@ -73,8 +73,8 @@ export default function Header() {
                             return (
                                 <Link
                                     to={item.href}
-                                    className='transition duration-200 ease-in-out hover:text-indigo-500 px-4 lg:py-2 block font-medium m-1'
-                                    activeClassName='text-indigo-600'
+                                    className='transition duration-200 ease-in-out px-4 dark:text-white hover:text-white lg:py-2 block font-medium m-1 hover:bg-indigo-500 hover:dark:bg-indigo-800 rounded-md'
+                                    activeClassName='text-white bg-indigo-500 dark:bg-indigo-800'
                                     key={index}
                                 >
                                     {item.name}
