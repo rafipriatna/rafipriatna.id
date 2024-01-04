@@ -21,7 +21,7 @@ export default function Hero() {
                         </span>
                     </p>
                 </div>
-                <div className="w-48 h-48 relative hidden lg:block ml-auto">
+                <div className="w-48 h-48 relative hidden lg:block ml-auto hero">
                     <StaticImage
                         src='../images/me_transparent_big.png'
                         alt='8bit me wkwkw'

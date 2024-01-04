@@ -7,6 +7,10 @@ img {
   @apply drop-shadow-2xl;
 }
 
+.hero * > img {
+  @apply drop-shadow-none;
+}
+
 .prose code::before {
   content: "";
 }
