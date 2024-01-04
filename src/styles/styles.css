@@ -7,7 +7,7 @@ img {
   @apply drop-shadow-2xl;
 }
 
-.hero * > img {
+.hero *>img {
   @apply drop-shadow-none;
 }
 
@@ -19,19 +19,19 @@ img {
   content: "";
 }
 
-.prose * > code.language-text {
+.prose *>code.language-text {
   @apply bg-gray-200 dark:bg-indigo-900 dark:bg-opacity-50 text-indigo-500 dark:text-indigo-200 text-gray-800 py-0.5 px-2 rounded mx-1 text-base font-mono tracking-normal;
 }
 
-.prose * > code.language-text {
+.prose *>code.language-text {
   text-shadow: none;
 }
 
-.prose * > h2 {
+.prose *>h2 {
   @apply mt-8;
 }
 
-.prose * > p {
+.prose *>p {
   @apply mb-8
 }
 
@@ -55,4 +55,12 @@ img {
 
 .gatsby-resp-image-figcaption {
   @apply text-center my-10;
+}
+
+a.anchor * {
+  @apply text-dark my-2 w-5 h-5 pl-2 dark:text-white;
+}
+
+h4 > a.anchor * {
+  @apply my-1
 }
