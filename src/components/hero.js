@@ -3,7 +3,7 @@ import { StaticImage } from "gatsby-plugin-image"
 
 export default function Hero() {
     return (
-        <div className="my-10 lg:mt-20 mb-10 bg-indigo-500 rounded-lg p-5 text-white dark:bg-indigo-800">
+        <div className="my-10 lg:mt-20 mb-10 bg-indigo-500 rounded-lg p-5 text-white bg-opacity-70 border-4 border-indigo-800 shadow-lg backdrop-blur">
             <div className="flex flex-row items-center">
                 <div className="w-full lg:w-4/6">
                     <h1 className="text-4xl font-semibold leading-tight md:leading-normal">
