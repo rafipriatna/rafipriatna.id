@@ -3,6 +3,9 @@ date: 2024-01-05T20:23:00+07:00
 title: "2023 ke 2024"
 icon: "✨"
 slug: "2023-ke-2024"
+categories:
+    - Personal
+    - Review Tahunan
 tags: 
     - Personal
 description: "Review tahunan saya dari awal 2023 hingga awal 2024, so much fun!"
