@@ -21,7 +21,7 @@ const BlogPostMarkdownPage = ({ data, pageContext }) => {
         <header className="break-words">
           <div className="flex animate-in flex-col gap-8">
             <div className="max-w-xl space-y-2">
-              <h1 className="text-3xl font-bold leading-tight tracking-tight text-primary">
+              <h1 className="text-3xl font-bold leading-tight tracking-tight">
                 {title}
               </h1>
               <p className="text-lg leading-tight text-gray-500 md:text-xl">
