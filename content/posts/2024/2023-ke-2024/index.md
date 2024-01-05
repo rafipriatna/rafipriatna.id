@@ -81,6 +81,8 @@ Beberapa topik yang ingin saya raih atau setidaknya saya pelajari selama 2024:
 - Lebih bisa memanajemen waktu.
 - Lebih banyak membaca.
 - Perdalam _softskills_.
+- Menulis banyak artikel di blog ini, terutama tentang _Cyber Security_.
+- Membuat jurnal harian.
 
 ## Kesimpulan
 Tahun ini saya banyak sekali belajar hal baru, terutama di dunia _Cyber Security_. Terlepas karena tuntutan pekerjaan, dari diri saya sendiri pun ada keinginan untuk mempelajari hal itu, jadi saya merasa _fun_. Saya juga mengujungi banyak tempat-tempat menarik, ya meskipun nggak jauh-jauh, tapi saya merasa senang, apalagi ditemenin sama _my lovely girlfie_. 🫰
