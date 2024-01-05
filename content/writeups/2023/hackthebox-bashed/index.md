@@ -7,8 +7,6 @@ tags:
   - HackTheBox
   - Writeup
 description: "Bashed is a fairly easy machine which focuses mainly on fuzzing and locating important files. As basic access to the crontab is restricted."
-lab: HTB
-difficulty: easy
 ---
 Bashed is a fairly easy machine which focuses mainly on fuzzing and locating important files. As basic access to the crontab is restricted.
 
