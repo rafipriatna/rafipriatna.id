@@ -59,7 +59,7 @@ Jadi jika teman-teman hanya memiliki board Arduino, teman-teman masih bisa mengi
 
 Direktori yang saya gunakan bernama `WeMosIoT`, di sana tersedia dua direktori, yaitu `backend` sebagai tempat menyimpan Node.js dan `frontend` sebagai tempat menyimpan vue.js.
 
-```
+```bash
 └── WeMosIoT
     ├── backend
     └── frontend
@@ -80,7 +80,7 @@ Silakan buat database baru dengan MySQL Client favorit, misalnya PhpMyAdmin, Adm
 ```bash
 mysql -u root -p
 ```
-```
+```bash
 mysql > create database node_arduino;
 mysql > exit;
 ```
