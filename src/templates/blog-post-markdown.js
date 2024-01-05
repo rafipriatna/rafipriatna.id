@@ -11,7 +11,7 @@ import AuthorCard from "../components/author-card";
 const BlogPostMarkdownPage = ({ data, pageContext }) => {
   const post = data.markdownRemark;
   const { frontmatter } = post;
-  const { title, date, description } = frontmatter;
+  const { title, date, description, categories } = frontmatter;
 
   return (
     <Layout>
@@ -19,7 +19,7 @@ const BlogPostMarkdownPage = ({ data, pageContext }) => {
 
       <article itemScope itemType="http://schema.org/Article" className="my-10">
         <header className="break-words">
-          <div className="flex animate-in flex-col gap-8">
+          <div className="flex animate-in flex-col gap-4">
             <div className="max-w-xl space-y-2">
               <h1 className="text-3xl font-bold leading-tight tracking-tight">
                 {title}
@@ -30,6 +30,15 @@ const BlogPostMarkdownPage = ({ data, pageContext }) => {
             </div>
             <div className="border-b border-gray-500"></div>
             <AuthorCard articleDate={date} />
+            <div className="flex justify-start">
+              {
+                categories && categories.map(category => {
+                  return (
+                    <span className="mr-1 rounded px-2 py-0.5 text-sm text-white bg-indigo-500 dark:bg-indigo-800">{category}</span>
+                  )
+                })
+              }
+          </div>
           </div>
         </header>
         <div className="prose dark:prose-dark max-w-full break-words text-lg text-justify font-normal">
@@ -52,6 +61,7 @@ export const blogPostQuery = graphql`
         date(formatString: "DD MMMM YYYY", locale: "id-ID")
         description
         tags
+        categories
       }
     }
   }
