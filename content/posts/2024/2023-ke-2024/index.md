@@ -1,6 +1,7 @@
 ---
 date: 2024-01-05T20:23:00+07:00
 title: "2023 ke 2024"
+featuredImage: "sky.jpeg"
 icon: "✨"
 slug: "2023-ke-2024"
 categories:
