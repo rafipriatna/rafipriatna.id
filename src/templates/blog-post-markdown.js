@@ -42,7 +42,7 @@ const BlogPostMarkdownPage = ({ data, pageContext }) => {
             </div>
           </div>
         </header>
-        <div className="mx-auto lg:max-w-4xl max-w-none">
+        <div className="mx-auto lg:max-w-5xl max-w-none">
           {featuredImage && (
             <GatsbyImage
               image={featuredImg}
@@ -50,7 +50,7 @@ const BlogPostMarkdownPage = ({ data, pageContext }) => {
             />
           )}
         </div>
-        <div className="prose dark:prose-dark max-w-full break-words text-lg text-justify font-normal dark:text-white mx-auto lg:max-w-3xl px-4 lg:px-0">
+        <div className="prose dark:prose-dark max-w-full break-words text-lg dark:text-white mx-auto lg:max-w-3xl px-4 lg:px-0 tracking-wide leading-loose">
           <section
             dangerouslySetInnerHTML={{ __html: post.html }}
             itemProp="articleBody"
@@ -73,7 +73,7 @@ export const blogPostQuery = graphql`
         categories
         featuredImage {
           childImageSharp {
-            gatsbyImageData(width: 800)
+            gatsbyImageData(width: 1000, height: 500)
           }
         }
       }
