@@ -20,7 +20,7 @@ img {
 }
 
 .prose *>code.language-text {
-  @apply bg-gray-200 dark:bg-indigo-900 dark:bg-opacity-50 text-indigo-500 dark:text-indigo-200 text-gray-800 py-0.5 px-2 rounded mx-1 text-base font-mono tracking-normal;
+  @apply bg-gray-200 dark:bg-indigo-900 dark:bg-opacity-50 text-indigo-500 dark:text-indigo-200 text-gray-800 py-0.5 px-2 rounded mx-1 text-base font-mono tracking-normal break-words;
 }
 
 .prose *>code.language-text {
@@ -36,7 +36,7 @@ img {
 }
 
 .prose * > table * {
-  @apply text-gray-900 dark:text-gray-100;
+  @apply text-gray-900 dark:text-gray-100 break-all;
 }
 
 .prose * > table {
