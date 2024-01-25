@@ -14,21 +14,6 @@ export default function Hero() {
               <i>vulnerability assessment</i>.
             </p>
           </div>
-          <a
-            href="https://www.credential.net/b216417a-3265-4448-8913-f6a7d9122be1"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <StaticImage
-              className="mt-5"
-              placeholder="blurred"
-              width={40}
-              height={40}
-              src="../images/OSCP.png"
-              alt="OffSec Certified Professional"
-              title="OffSec Certified Professional"
-            />
-          </a>
         </div>
         <div className="w-48 h-48 relative hidden lg:block ml-auto">
           <StaticImage
