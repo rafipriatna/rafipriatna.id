@@ -29,7 +29,7 @@ const CheatSheetarkdownPage = ({ data, pageContext }) => {
             </div>
           </div>
         </header>
-        <div className="prose dark:prose-dark max-w-full break-words text-lg dark:text-white mx-auto lg:max-w-6xl px-4 lg:px-0 tracking-wide leading-loose lg:ml-96 max-w-3xl">
+        <div className="prose dark:prose-dark max-w-full break-words text-lg dark:text-white mx-auto lg:max-w-6xl px-4 lg:px-0 tracking-wide leading-loose lg:ml-32 xl:ml-64 2xl:ml-96 max-w-3xl">
           <div className="w-full md:grid md:grid-cols-6 md:gap-12">
             <section
               dangerouslySetInnerHTML={{ __html: post.html }}
