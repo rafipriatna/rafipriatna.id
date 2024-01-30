@@ -1,7 +1,7 @@
 ---
 title: "FTP Enumeration"
 slug: "ftp-enumeration"
-section: "Port And Enumeration"
+section: "Recon And Enumeration"
 description: "Enumerasi port 21 FTP."
 ---
 

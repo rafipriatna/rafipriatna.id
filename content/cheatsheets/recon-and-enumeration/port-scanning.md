@@ -1,7 +1,7 @@
 ---
 title: "Port Scanning"
 slug: "port-scanning"
-section: "Port And Enumeration"
+section: "Recon And Enumeration"
 description: "Mencari PORT yang terbuka dari target menggunakan NMAP dan NetCat."
 ---
 
