@@ -22,9 +22,9 @@ const BlogPage = ({ data, ...props }) => {
   return (
     <Layout>
       <Seo title="Blog" />
-      <div className="mx-auto lg:max-w-3xl px-4 lg:px-0 ">
-        <h1 className="my-5 text-5xl leading-tight md:leading-normal">Blog</h1>
-        <p className="my-5">
+      <div className="mx-auto lg:max-w-3xl px-4 lg:px-0 my-10">
+        <h1 className="my-5 text-balance text-4xl font-bold sm:text-5xl/[1.1]">Blog</h1>
+        <p className="my-5 max-w-2xl text-lg tracking-wide leading-loose">
           Artikel, tutorial, dan tulisan lainnya ada di sini.
         </p>
         <div className="mb-6">
