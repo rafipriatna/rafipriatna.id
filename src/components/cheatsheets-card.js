@@ -27,8 +27,8 @@ const Item = ({ node }) => {
         <li className='text-slate-800 pl-0 my-0'>
             <Link to={`/cheatsheets/` + node.fields.slug}
                 key={node.id}
-                className='flex w-full items-center border-l-2 border-indigo-300 py-1 pl-2 text-sm dark:text-gray-200 hover:text-indigo-600 no-underline hover:border-indigo-600 dark:hover:text-indigo-400 dark:border-slate-600 dark:hover:border-indigo-400'
-                activeClassName='text-indigo-600 dark:text-indigo-400 border-l-2 border-indigo-600 dark:border-indigo-400 bg-indigo-200 bg-opacity-30 dark:bg-opacity-20'
+                className='flex w-full items-center py-1 pl-2 text-sm border-l-2 border-slate-200 dark:border-slate-600 dark:text-gray-200 hover:text-indigo-600 no-underline dark:hover:text-indigo-400'
+                activeClassName='text-indigo-600 dark:text-indigo-400 bg-indigo-200 bg-opacity-30 dark:bg-opacity-20 border-indigo-400 dark:border-indigo-400'
             >
                 <div className="flex-shrink-0">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon" className="mr-2 h-4 w-4">
