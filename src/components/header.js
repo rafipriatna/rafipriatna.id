@@ -33,10 +33,14 @@ export default function Header() {
             name: 'Proyek',
             href: '/proyek',
         },
+        {
+            name: 'Cheatsheets',
+            href: '/cheatsheets'
+        }
     ]
 
     return (
-        <div className='transition lg:text-xl z-10 lg:mt-10 mx-auto lg:max-w-3xl px-4 lg:px-0 '>
+        <div className='transition lg:text-lg z-10 lg:mt-10 mx-auto lg:max-w-3xl px-4 lg:px-0 '>
             <div className='flex flex-col lg:flex-row'>
                 <div className='flex items-center justify-between px-0 py-4 lg:py-0 uppercase font-semibold dark:text-gray-100'>
                     <Link to='/'>
