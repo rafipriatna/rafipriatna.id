@@ -67,8 +67,6 @@ const notes: CollectionEntry<"notes">[] = (await getCollection("notes"))
         <ul class="not-prose flex flex-col gap-4">
           {
             notes.map((note) => {
-              // @ts-ignore
-              note.slug = "notes/" + note.slug;
               return (
                 <li>
                   <ArrowCard entry={note} />
@@ -107,8 +105,6 @@ const notes: CollectionEntry<"notes">[] = (await getCollection("notes"))
         <ul class="not-prose flex flex-col gap-4">
           {
             writeups.map((writeup) => {
-              // @ts-ignore
-              writeup.slug = "writeups/" + writeup.slug;
               return (
                 <li>
                   <ArrowCard entry={writeup} />

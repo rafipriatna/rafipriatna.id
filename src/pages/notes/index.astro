@@ -44,8 +44,6 @@ const years = Object.keys(notes).sort((a, b) => parseInt(b) - parseInt(a));
               <div>
                 <ul class="not-prose flex flex-col gap-4">
                   {notes[year].map((note) => {
-                    // @ts-ignore
-                    note.slug = "notes/" + note.slug;
                     return (
                       <li>
                         <ArrowCard entry={note} />
