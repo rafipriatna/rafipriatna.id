@@ -24,6 +24,8 @@ const writeups = (await getCollection("writeups"))
       <ul class="animate not-prose flex flex-col gap-4">
         {
           writeups.map((writeup) => {
+            // @ts-ignore
+            writeup.slug = "/writeups/" + writeup.slug;
             return (
               <li>
                 <ArrowCard entry={writeup} />
