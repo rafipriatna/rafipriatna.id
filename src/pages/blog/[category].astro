@@ -1,0 +1,11 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  return [{ params: { category: "test" } }];
+}
+
+const { category } = Astro.params;
+---
+
+<div>Good dog, {category}!</div>

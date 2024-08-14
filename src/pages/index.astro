@@ -1,0 +1,154 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Container from "@components/Container.astro";
+import { SITE, HOME, SOCIALS } from "@consts";
+import ArrowCard from "@components/ArrowCard.astro";
+import Link from "@components/Link.astro";
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+
+const blog = (await getCollection("blog"))
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, SITE.NUM_POSTS_ON_HOMEPAGE);
+
+const writeups: CollectionEntry<"writeups">[] = (
+  await getCollection("writeups")
+)
+  .filter((writeup) => !writeup.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, SITE.NUM_WRITEUPS_ON_HOMEPAGE);
+
+const notes: CollectionEntry<"notes">[] = (await getCollection("notes"))
+  .filter((note) => !note.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, SITE.NUM_NOTES_ON_HOMEPAGE);
+---
+
+<Layout title={HOME.TITLE} description={HOME.DESCRIPTION}>
+  <Container>
+    <h1 class="animate text-2xl font-semibold text-black dark:text-white">
+      Hai, saya Rafi Priatna 👋
+    </h1>
+    <div class="space-y-16">
+      <section>
+        <article class="space-y-4">
+          <span class="animate text-lg">
+            <p>
+              Saya seorang <i>Cyber Security Consultant</i> yang suka bengong dan
+              suka menulis hal-hal aneh seperti <code>code</code>, hal teknis,
+              hobi, dan catatan pribadi.
+            </p>
+
+            <p>
+              Di sini, kalian bisa membaca <Link href="/blog"
+                >tulisan teknis</Link
+              >, <Link href="/writeups">WriteUp CTF</Link>, membaca beberapa <Link
+                href="/notes">catatan pribadi</Link
+              > atau cari tahu lebih banyak <Link href="/me">tentang saya</Link
+              >.
+            </p>
+
+            <p>
+              Kebanyakan hal yang saya tulis di sini merupakan dokumentasi
+              pribadi, dan hanya opini pribadi saya saja. ✌️
+            </p>
+          </span>
+        </article>
+      </section>
+
+      <section class="animate space-y-6">
+        <div class="flex flex-wrap items-center justify-between gap-y-2">
+          <h2 class="font-semibold text-black dark:text-white">
+            Catatan Terbaru
+          </h2>
+          <Link href="/notes"> Lihat Semuanya </Link>
+        </div>
+        <ul class="not-prose flex flex-col gap-4">
+          {
+            notes.map((note) => {
+              // @ts-ignore
+              note.slug = "notes/" + note.slug;
+              return (
+                <li>
+                  <ArrowCard entry={note} />
+                </li>
+              );
+            })
+          }
+        </ul>
+      </section>
+
+      <section class="animate space-y-6">
+        <div class="flex flex-wrap items-center justify-between gap-y-2">
+          <h2 class="font-semibold text-black dark:text-white">
+            Tulisan Terbaru
+          </h2>
+          <Link href="/blog"> Lihat Semuanya </Link>
+        </div>
+        <ul class="not-prose flex flex-col gap-4">
+          {
+            blog.map((post) => (
+              <li>
+                <ArrowCard entry={post} />
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section class="animate space-y-6">
+        <div class="flex flex-wrap items-center justify-between gap-y-2">
+          <h2 class="font-semibold text-black dark:text-white">
+            WriteUp Terbaru
+          </h2>
+          <Link href="/writeups"> Lihat Semuanya </Link>
+        </div>
+        <ul class="not-prose flex flex-col gap-4">
+          {
+            writeups.map((writeup) => {
+              // @ts-ignore
+              writeup.slug = "writeups/" + writeup.slug;
+              return (
+                <li>
+                  <ArrowCard entry={writeup} />
+                </li>
+              );
+            })
+          }
+        </ul>
+      </section>
+
+      <section class="animate space-y-4">
+        <h2 class="font-semibold text-black dark:text-white">Let's Connect</h2>
+        <article>
+          <p>
+            Jika kamu ingin menghubungi saya atau hanya sekedar <i>say hi</i>,
+            temukan saya di media sosial atau kirimkan saya email.
+          </p>
+        </article>
+        <ul class="not-prose flex flex-wrap gap-2">
+          {
+            SOCIALS.map((SOCIAL) => (
+              <li class="flex gap-x-2 text-nowrap">
+                <Link
+                  href={SOCIAL.HREF}
+                  external
+                  aria-label={`${SITE.TITLE} on ${SOCIAL.NAME}`}
+                >
+                  {SOCIAL.NAME}
+                </Link>
+                {"/"}
+              </li>
+            ))
+          }
+          <li class="line-clamp-1">
+            <span class="font-semibold underline">{SITE.USER_EMAIL}</span>
+            <span>at</span>
+            <span class="font-semibold underline">{SITE.DOMAIN}</span>
+          </li>
+        </ul>
+      </section>
+    </div>
+  </Container>
+</Layout>

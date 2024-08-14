@@ -1,0 +1,125 @@
+---
+import Layout from "@layouts/Layout.astro";
+import { Image } from "astro:assets";
+import Container from "@components/Container.astro";
+import Link from "@components/Link.astro";
+import { SITE, SOCIALS } from "@consts";
+
+import WonderfulPartner from "@assets/wonderful_partner.png";
+import Work from "@assets/work.jpeg";
+---
+
+<Layout title="About Me" description="Bejirrr">
+    <Container>
+        <h1 class="animate text-2xl font-semibold text-black dark:text-white">
+            Me
+        </h1>
+        <div class="space-y-4 pt-1">
+            <p class="animate text-md">Sedikit tentang saya.</p>
+        </div>
+        <div class="space-y-16">
+            <section>
+                <article class="space-y-4">
+                    <span class="animate text-lg">
+                        <p>
+                            Saya Rafi Priatna, seorang <i
+                                >Cyber Security Enthusiast</i
+                            > yang suka <code>ngoding</code>, dan iseng.
+                        </p>
+                        <p>
+                            Saya suka kucing, suka kopi, suka makan, suka
+                            jalan-jalan motoran dan punya seorang <i
+                                >wonderful partner</i
+                            >. Saya suka membaca bacaan di Quora — menurut saya
+                            bacaannya menarik semua —, suka bermain <i
+                                >game offline</i
+                            > seperti <i>Stardew Valley</i>, atau yang ber-<i
+                                >genre</i
+                            > simulasi, dan senang bermain di emulator PS1.
+                        </p>
+                    </span>
+                </article>
+
+                <div class="flex flex-col py-10 min-[410px]:flex-row">
+                    <Image
+                        src={Work}
+                        alt="Test"
+                        width={350}
+                        height={250}
+                        class="h-[250px] w-[350px] -rotate-12 rounded-xl object-cover shadow-2xl"
+                    />
+                    <Image
+                        src={WonderfulPartner}
+                        alt="Test 2"
+                        width={250}
+                        height={350}
+                        class="mx-auto h-[350px] w-[250px] rotate-6 rounded-xl object-cover shadow-2xl sm:ml-auto z-10"
+                    />
+                </div>
+            </section>
+
+            <section class="animate space-y-6">
+                <h2 class="text-lg text-black dark:text-white">Hubungi Saya</h2>
+                <ul class="space-y-2">
+                    <li class="line-clamp-1">
+                        Email:
+                        <span class="font-semibold underline"
+                            >{SITE.USER_EMAIL}</span
+                        >
+                        <span>at</span>
+                        <span class="font-semibold underline"
+                            >{SITE.DOMAIN}</span
+                        >
+                    </li>
+                    {
+                        SOCIALS.map((SOCIAL) => (
+                            <li class="flex gap-x-2 text-nowrap">
+                                <Link
+                                    href={SOCIAL.HREF}
+                                    external
+                                    aria-label={`${SITE.TITLE} on ${SOCIAL.NAME}`}
+                                >
+                                    {SOCIAL.NAME}
+                                </Link>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </section>
+
+            <section class="animate space-y-6">
+                <h2 class="text-xl font-semibold text-black dark:text-white">
+                    Apa yang saya lakukan sekarang?
+                </h2>
+                <ul class="ml-5 list-disc space-y-2">
+                    <li>
+                        Bekerja sebagai <i>fulltime Cyber Security Consultant</i
+                        >.
+                    </li>
+                    <li>
+                        Melakukan <i>Bug Hunting</i> jika sempat.
+                    </li>
+                    <li>
+                        Membuat lab di <a
+                            href="https://www.hacktrace-ranges.id/"
+                            target="_blank"
+                            class="text-blue-400 hover:text-blue-600"
+                            >HackTrace Ranges</a
+                        >.
+                    </li>
+                    <li><i>Tweaking</i> website ini.</li>
+                </ul>
+            </section>
+
+            <section class="animate space-y-6">
+                <span class="animate text-lg">
+                    <p>
+                        Jika kamu membutuhkan jasa <i>Penetration Testing</i>,
+                        atau butuh jasa pembuatan aplikasi berbasis website, <i
+                            >feel free to contact me.</i> ✌️
+                    </p>
+                </span>
+            </section>
+        </div>
+    </Container>
+</Layout>

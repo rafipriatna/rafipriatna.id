@@ -1,0 +1,351 @@
+<!DOCTYPE html><html lang="en"> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/png" href="/_astro/me_transparent.DiKVjXeE_1MkkEL.png"><link rel="apple-touch-icon" href="/_astro/me_transparent.DiKVjXeE_1MkkEL.png"><meta name="generator" content="Astro v4.11.5"><!-- Canonical URL --><link rel="canonical" href="https://astro-micro.vercel.app/perjalanan-menuju-oscp/"><!-- Primary Meta Tags --><title>Perjalanan Menuju OSCP | RafiPriatna.ID</title><meta name="title" content="Perjalanan Menuju OSCP | RafiPriatna.ID"><meta name="description" content="Pengalaman saya meraih sertifikasi OSCP. Sebuah perjalanan yang seru dan penuh tantangan."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://astro-micro.vercel.app/perjalanan-menuju-oscp/"><meta property="og:title" content="Perjalanan Menuju OSCP | RafiPriatna.ID"><meta property="og:description" content="Pengalaman saya meraih sertifikasi OSCP. Sebuah perjalanan yang seru dan penuh tantangan."><meta property="og:image" content="https://astro-micro.vercel.app/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://astro-micro.vercel.app/perjalanan-menuju-oscp/"><meta property="twitter:title" content="Perjalanan Menuju OSCP | RafiPriatna.ID"><meta property="twitter:description" content="Pengalaman saya meraih sertifikasi OSCP. Sebuah perjalanan yang seru dan penuh tantangan."><meta property="twitter:image" content="https://astro-micro.vercel.app/blog-placeholder-1.jpg"><!-- PageFind --><link href="/pagefind/pagefind-ui.css" rel="stylesheet"><script src="/pagefind/pagefind-ui.js"></script><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script>
+  function init() {
+    preloadTheme();
+    onScroll();
+    animate();
+    updateThemeButtons();
+    addCopyCodeButtons();
+
+    const backToTop = document.getElementById("back-to-top");
+    backToTop?.addEventListener("click", (event) => scrollToTop(event));
+
+    const backToPrev = document.getElementById("back-to-prev");
+    backToPrev?.addEventListener("click", () => window.history.back());
+
+    const lightThemeButton = document.getElementById("light-theme-button");
+    lightThemeButton?.addEventListener("click", () => {
+      localStorage.setItem("theme", "light");
+      toggleTheme(false);
+      updateThemeButtons();
+    });
+
+    const darkThemeButton = document.getElementById("dark-theme-button");
+    darkThemeButton?.addEventListener("click", () => {
+      localStorage.setItem("theme", "dark");
+      toggleTheme(true);
+      updateThemeButtons();
+    });
+
+    const systemThemeButton = document.getElementById("system-theme-button");
+    systemThemeButton?.addEventListener("click", () => {
+      localStorage.setItem("theme", "system");
+      toggleTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
+      updateThemeButtons();
+    });
+
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", (event) => {
+        if (localStorage.theme === "system") {
+          toggleTheme(event.matches);
+        }
+      });
+
+    document.addEventListener("scroll", onScroll);
+  }
+
+  function updateThemeButtons() {
+    const theme = localStorage.getItem("theme");
+    const lightThemeButton = document.getElementById("light-theme-button");
+    const darkThemeButton = document.getElementById("dark-theme-button");
+    const systemThemeButton = document.getElementById("system-theme-button");
+
+    function removeActiveButtonTheme(button) {
+      button?.classList.remove("bg-black/5");
+      button?.classList.remove("dark:bg-white/5");
+    }
+
+    function addActiveButtonTheme(button) {
+      button?.classList.add("bg-black/5");
+      button?.classList.add("dark:bg-white/5");
+    }
+
+    removeActiveButtonTheme(lightThemeButton);
+    removeActiveButtonTheme(darkThemeButton);
+    removeActiveButtonTheme(systemThemeButton);
+
+    if (theme === "light") {
+      addActiveButtonTheme(lightThemeButton);
+    } else if (theme === "dark") {
+      addActiveButtonTheme(darkThemeButton);
+    } else {
+      addActiveButtonTheme(systemThemeButton);
+    }
+  }
+
+  function animate() {
+    const animateElements = document.querySelectorAll(".animate");
+
+    animateElements.forEach((element, index) => {
+      setTimeout(() => {
+        element.classList.add("show");
+      }, index * 100);
+    });
+  }
+
+  function onScroll() {
+    if (window.scrollY > 0) {
+      document.documentElement.classList.add("scrolled");
+    } else {
+      document.documentElement.classList.remove("scrolled");
+    }
+  }
+
+  function scrollToTop(event) {
+    event.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }
+
+  function toggleTheme(dark) {
+    const css = document.createElement("style");
+
+    css.appendChild(
+      document.createTextNode(
+        `* {
+             -webkit-transition: none !important;
+             -moz-transition: none !important;
+             -o-transition: none !important;
+             -ms-transition: none !important;
+             transition: none !important;
+          }
+        `
+      )
+    );
+
+    document.head.appendChild(css);
+
+    if (dark) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+
+    window.getComputedStyle(css).opacity;
+    document.head.removeChild(css);
+
+  }
+
+  function preloadTheme() {
+    const userTheme = localStorage.theme;
+
+    if (userTheme === "light" || userTheme === "dark") {
+      toggleTheme(userTheme === "dark");
+    } else {
+      toggleTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
+    }
+  }
+
+  function addCopyCodeButtons() {
+    let copyButtonLabel = "📋";
+    let codeBlocks = Array.from(document.querySelectorAll("pre"));
+
+    async function copyCode(codeBlock, copyButton) {
+      const codeText = codeBlock.innerText;
+      const buttonText = copyButton.innerText;
+      const textToCopy = codeText.replace(buttonText, "");
+
+      await navigator.clipboard.writeText(textToCopy);
+      copyButton.innerText = "✅";
+
+      setTimeout(() => {
+        copyButton.innerText = copyButtonLabel;
+      }, 2000);
+    }
+
+    for (let codeBlock of codeBlocks) {
+      const wrapper = document.createElement("div");
+      wrapper.style.position = "relative";
+
+      const copyButton = document.createElement("button");
+      copyButton.innerText = copyButtonLabel;
+      copyButton.classList = "copy-code";
+
+      codeBlock.setAttribute("tabindex", "0");
+      codeBlock.appendChild(copyButton);
+
+      codeBlock.parentNode.insertBefore(wrapper, codeBlock);
+      wrapper.appendChild(codeBlock);
+
+      copyButton?.addEventListener("click", async () => {
+        await copyCode(codeBlock, copyButton);
+      });
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", () => init());
+  document.addEventListener("astro:after-swap", () => init());
+  preloadTheme();
+</script><link rel="stylesheet" href="/_astro/_slug_.Dz-_no8X.css">
+<link rel="stylesheet" href="/_astro/_slug_.Bg56fhso.css">
+<style>summary[data-astro-cid-xvrfupwn]{cursor:pointer;border-top-left-radius:.5rem;border-top-right-radius:.5rem;padding:.375rem .75rem;font-weight:500;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}summary[data-astro-cid-xvrfupwn]:hover{background-color:#0000000d}summary[data-astro-cid-xvrfupwn]:hover:is(.dark *){background-color:#ffffff0d}details[data-astro-cid-xvrfupwn][open] summary[data-astro-cid-xvrfupwn]{background-color:#0000000d}details[data-astro-cid-xvrfupwn][open] summary[data-astro-cid-xvrfupwn]:is(.dark *){background-color:#ffffff0d}
+</style><script type="module" src="/_astro/hoisted.Bfd9A_oI.js"></script></head> <body> <header data-astro-transition-persist="astro-l7r54iwe-1"> <div class="mx-auto max-w-screen-md px-4"> <div class="flex flex-wrap items-center justify-between"> <a href="/" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out">  <div class="flex items-center"> <img src="/_astro/me_transparent.DiKVjXeE_Z1Kx3TH.webp" alt="A bird sitting on a nest of eggs." loading="eager" width="50" height="50" decoding="async"> <div class="ml-1 grid hidden justify-items-start md:block"> <div class="font-semibold"> RafiPriatna.ID </div> <p class="text-xs">Lifelong Learner ✨</p> </div> </div>  </a> <nav class="flex items-center gap-4"> <a href="/blog" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out"> Blog </a> <a href="/writeups" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out"> Writeups </a> | <button id="magnifying-glass" aria-label="Search" class="flex items-center rounded transition-colors duration-300 ease-in-out hover:text-black focus-visible:text-black dark:border-white/20 dark:hover:text-white dark:focus-visible:text-white"> <svg height="16" stroke-linejoin="round" viewBox="0 0 16 16" width="16" style="color: currentcolor;"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.5 7C3.5 5.067 5.067 3.5 7 3.5C8.933 3.5 10.5 5.067 10.5 7C10.5 7.88461 10.1718 8.69256 9.63058 9.30876L9.30876 9.63058C8.69256 10.1718 7.88461 10.5 7 10.5C5.067 10.5 3.5 8.933 3.5 7ZM9.96544 11.0261C9.13578 11.6382 8.11014 12 7 12C4.23858 12 2 9.76142 2 7C2 4.23858 4.23858 2 7 2C9.76142 2 12 4.23858 12 7C12 8.11014 11.6382 9.13578 11.0261 9.96544L14.0303 12.9697L14.5607 13.5L13.5 14.5607L12.9697 14.0303L9.96544 11.0261Z" fill="currentColor"></path></svg>
+&nbsp;
+</button> </nav> </div> </div> </header> <main>  <div class="mx-auto max-w-screen-md px-4"> <div class="animate"> <a href="/blog" class="not-prose group relative flex w-fit flex-nowrap rounded border border-black/15 py-1.5 pl-7 pr-3 transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-neutral-800 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white dark:bg-neutral-900"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute left-2 top-1/2 size-4 -translate-y-1/2 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="text-sm"> Kembali ke blog </div> </a> </div> <div class="my-10 space-y-1"> <div class="animate"> <div class="grid grid-cols-1"> <div class="flex items-center gap-1.5"> <div class="font-base text-sm"> <time datetime="2024-01-27T02:02:00.000Z"> 27 Januari 2024 </time> </div> <div class="font-base text-sm">
+&bull; Waktu baca: 8 menit </div> </div> </div> </div> <h1 class="animate text-3xl font-semibold text-black dark:text-white"> Perjalanan Menuju OSCP </h1> </div> <details open class="animate rounded-lg border border-black/15 bg-white dark:border-white/20 dark:bg-neutral-900" data-astro-cid-xvrfupwn> <summary data-astro-cid-xvrfupwn>Daftar Isi</summary> <nav class="" data-astro-cid-xvrfupwn> <ul class="py-3" data-astro-cid-xvrfupwn> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#perkenalan" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out"> Perkenalan </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#teks" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out"> Teks </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#video" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out"> Video </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#lab-praktik" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out"> Lab Praktik </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#lab-try-harder" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out"> Lab Try Harder </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#exam-bonus-points" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out"> Exam Bonus Points </a>  </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#strategi-belajar" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out"> Strategi Belajar </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#waktu-untuk-belajar" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out"> Waktu untuk belajar </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#menulis-catatan" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out"> Menulis Catatan </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#menyelesaikan-semua-exercises" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out"> Menyelesaikan Semua Exercises </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#lab-try-harder-1" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out"> Lab Try Harder </a>  </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#strategi-oscp-exam" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out"> Strategi OSCP Exam </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#strategi-ujian-pertama" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out"> Strategi Ujian Pertama </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#strategi-ujian-kedua-retake" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out"> Strategi Ujian Kedua (Retake) </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#push-rank-lab" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out"> Push Rank Lab </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#exam" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out"> Exam </a>  </li> </ul> </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#penulisan-laporan" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out"> Penulisan Laporan </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#kesimpulan" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out"> Kesimpulan </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#footnote-label" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out"> Footnotes </a>  </li> </ul> </nav> </details> <article class="animate"> <p>Pada tanggal 18 Januari 2024 kemarin, saya sudah resmi menerima sertifikat Offensive Security Certified Professional (OSCP) yang dikeluarkan oleh Offsec. Hal ini berarti, saya sudah dinyatakan lulus OSCP Exam! So happy. 😁</p>
+<img src="https://api.accredible.com/v1/frontend/credential_website_embed_image/certificate/92313805" style="margin-left: auto; margin-right: auto" alt="OSCP Certificate">
+<p>Saya mengikuti sertifikasi ini karena diberikan kesempatan dan disponsori oleh kantor saya, dan saya akan berbagi cerita pengalaman saya mengikuti sertifikasi ini yang sangat seru dan penuh tantangan.</p>
+<h2 id="perkenalan">Perkenalan</h2>
+<p>Kembali ke bulan Agustus 2023, saya diberikan kesempatan oleh kantor saya untuk mengikuti pelatihan/trainin PWK/PEN-200 dari Offsec. Isi dari PEN-200 ini sangat lengkap. Benar-benar lengkap. Mulai dari non teknis seperti gimana cara belajar yang efisien, gimana cara mencatat hal teknis, lalu hal teknis seperti <em>Information Gathering</em> pakai <em>NMAP</em>, hingga pembuatan <em>report penetration testing</em>.</p>
+<p>Jadi menurut saya, kalo kamu punya <em>skills</em> dasar cara pakai Linux, atau Networking, langsung ambil PEN-200 ini nggak akan jadi masalah. Karena materinya diajarkan dari dasar juga.</p>
+<p>Kebetulan, kantor saya beli PEN-200 paket 3 bulan, yang berarti saya cuma bisa akses materinya hingga bulan Oktober. Menurut saya, cara penyampaian materinya juga cukup lengkap, ada versi teks, video, lab untuk praktik, hingga labs try harder.</p>
+<h3 id="teks">Teks</h3>
+<p>Seperti namanya, materi ini disajikan dalam bentuk teks, dan bisa didownload dalam bentuk PDF yang sangat banyak halamannya.</p>
+<h3 id="video">Video</h3>
+<p>Video ini isinya semacam tutorial dari teks-nya. Jadi kalimat yang disampaikan sama persis seperti di teks. Tapi saya jarang nonton videonya sih, lebih suka teks karena lebih <em>sat set sat set</em>. Video juga bisa didownload.</p>
+<h3 id="lab-praktik">Lab Praktik</h3>
+<p>Tiap-tiap modul ada labnya, semacam <em>exercises</em> gitu. Jadi abis baca materi, langsung praktik.</p>
+<h3 id="lab-try-harder">Lab Try Harder</h3>
+<p>Seperti namanya, <em>Try Harder</em>, berarti lab ini mendorong kami untuk mencoba lebih keras lagi buat dapetin <em>flag</em> <em>local.txt</em> dan <em>proof.txt</em>. Bener-bener tanpa arahan, cuma dikasih IP mesin, dan kita harus bisa enumerasi, ngumpulin informasi, dan eksploit. Secara umum, ada 6 labs di sini: 3 Labs AD (<em>Active Directory</em>) dan 3 Labs non AD (GNU/Linux or Windows OS). Meskipun total cuma 6, tapi tiap Labs bisa berisi lebih dari 1 IP. 😁</p>
+<h3 id="exam-bonus-points">Exam Bonus Points</h3>
+<p>Ada bonus point Exam sebesar 10 jika kamu berhasil meraih <sup><a href="#user-content-fn-1" id="user-content-fnref-1" data-footnote-ref="" aria-describedby="footnote-label">1</a></sup>:</p>
+<ul>
+<li>80% Lab Praktik</li>
+<li>30 <em>proof.txt</em> dari Lab Try Harder</li>
+</ul>
+<h2 id="strategi-belajar">Strategi Belajar</h2>
+<p>Karena saya memiliki kesibukan bekerja, maka saya harus bisa mengatur waktu untuk belajar dan bekerja. Jadi, begini strategi saya.</p>
+<h3 id="waktu-untuk-belajar">Waktu untuk belajar</h3>
+<blockquote>
+<p>Saya bekerja <em>9 to 6</em>, berarti saya bekerja dari jam 09 Pagi sampai jam 18 Malam. Alias, saya bekerja 8 jam sehari, dan istirahat sejam. Jarak tempuh dari rumah saya ke tempat kerja sekitar 1 jam.</p>
+</blockquote>
+<p>Jadi, saya memiliki waktu sekitar 2 jam sehari untuk belajar di hari kerja, dan 8 jam sehari di <em>weekend</em>. Ditambah curi-curi waktu sewaktu pentesting, karena ada kalanya project pentest tidak berjalan mulus, kadang ada eror, <em>on hold</em>, dan sebagainya.</p>
+<h3 id="menulis-catatan">Menulis Catatan</h3>
+<p>Saya menggunakan <a href="https://notion.so">Notion</a> sebagai media mencatat saya. Jadi, apa yang saya catat?</p>
+<ul>
+<li>Rangkuman materi/konsep</li>
+<li>Perintah-perintah dari <em>tools</em></li>
+<li>WriteUp dari lab praktik/lab try harder</li>
+</ul>
+<p><img  src="/_astro/image.CvR3_lAJ_1Dwdvs.webp" alt="Notion" width="494" height="206" loading="lazy" decoding="async"></p>
+<p>Selama saya menggunakan Notion ini, saya memiliki beberapa hal yang cukup mengganggu. Misalnya, Notion ini butuh Internet. Jadi, ketika saya membuka aplikasi Notion (di Windows), kadang lemot banget. Juga, aplikasi masih suka buggy. Mungkin kalian bisa menggunakan alternative lain seperti <strong>Anytype</strong> atau <strong>Joplin</strong>. Saya sendiri, di akhir masa belajar saya, saya ganti catatan ke Joplin. Juga sewaktu Exam, saya mencatat nya di Joplin.</p>
+<h3 id="menyelesaikan-semua-exercises">Menyelesaikan Semua <em>Exercises</em></h3>
+<p>Tiap-tiap module <em>exercises</em> nya atau lab praktik-nya saya selesaikan. Minimal 80% <em>exercises</em> yang ada di tiap modul saya selesaikan. Menurut saya, adanya <em>exercise</em> ini membantu saya untuk lebih memahami modul yang telah dipelajari. Karena kita langsung praktik. Untuk itu, sangat penting untuk mengerjakan <em>exercise</em>.</p>
+<h3 id="lab-try-harder-1">Lab Try Harder</h3>
+<p>Lab ini sangat sulit, nggak ada <em>writeup</em> nya di internet, dan juga Offsec tidak menyediakan <em>official writeup</em>-nya, jadi kita dituntut untuk <em>Try Harder</em>. Dari total sekitar 50-an lab, saya mengerjakan 28 lab. Yes, kurang sedikit lagi untuk mendapatkan bonus points exam :)</p>
+<p>Setidaknya, saya mengerjakan dua lab AD, dan satu lab non AD. Karena ini <em>Try Harder</em>, maka kita dituntut untuk bisa <em>searching</em> di internet, dan juga bertanya ke instruktur Offsec di Discord mereka. Instruktur nya sangat <em>friendly</em>, bisa bertanya apa saja.</p>
+<h2 id="strategi-oscp-exam">Strategi OSCP Exam</h2>
+<p>Setelah belajar selama 3 bulan, akhirnya tiba waktunya ujian. Di sini, saya mengambil ujian pada awal bulan November 2023. OSCP Exam ini akan diberikan 3 mesin satu set AD, dan 3 standalone. Dimana, pada satu set AD akan diberikan skor 40 jika berhasil mendapatkan DC dan mensubmit 3 <em>proof.txt</em>, sedangkan standalone akan mendapatkan 10 point untuk tiap <em>local.txt</em> dan <em>proof.txt</em>.</p>
+<h3 id="strategi-ujian-pertama">Strategi Ujian Pertama</h3>
+<p>Karena saya tidak berhasil mendapatkan bonus point, maka strategi saya adalah mengerjakan satu set AD, dan dua standalone berarti saya akan mendapatkan 80 point atau 70 point.</p>
+<p>Ujian pertama berjalan sangat <em>greedy</em>. Dan berakhir saya tidak lulus ujian. Kok, bisa?</p>
+<p>Menurut saya, pada ujian pertama ini saya terlalu berambisi untuk menyelesaikan mesin yang diberikan. Bayangkan, pada ujian ini saya jarang istirahat dan tidak tidur satu menit pun. Amazing :D</p>
+<p>Satu jam pertama, saya berhasil mendapatkan point 40 dari satu set AD. Tiga jam berikutnya, saya berhasil mendapatkan <em>local.txt</em> dan <em>proof.txt</em> dari satu standalone. Berarti, saya sudah dapet 60 points dan waktu ujian tersisa 19 jam. Seharusnya, 19 jam adalah waktu yang cukup untuk menyelesaikan dua mesin lagi. Tapi nyatanya tidak selesai.</p>
+<p>Satu jam terakhir sebelum ujian selesai, saya baru menemukan pintu masuk <em>initial access</em> dari mesinnya, yang mana waktunya tidak cukup bagi saya untuk melakukan eksploitasi. Akhirnya, waktunya habis dan saya hanya mendapatkan poin 60. Frustasi sekali menerima fakta hanya mendapatkan 60 point :(</p>
+<h3 id="strategi-ujian-kedua-retake">Strategi Ujian Kedua (Retake)</h3>
+<p>Ujian kedua dilaksanakan pada tanggal 15 Januari 2024, sebelum ujian dimulai, saya dikasih rentang waktu sekitar > 6 minggu untuk mempersiapkan diri. Jadi apa yang saya persiapkan?</p>
+<h4 id="push-rank-lab">Push Rank Lab</h4>
+<p>Saya mengerjakan mesin-mesin berikut, saya lebih berfokus ke mesin berbasis Windows, supaya saya lebih familiar dengan perintah-perintah-nya.</p>
+<p>Berikut adalah mesin HackTheBox yang saya kerjakan:</p>
+<ul>
+<li>Monteverde</li>
+<li>Cascade</li>
+<li>Optimum</li>
+<li>Devel</li>
+<li>Legacy</li>
+<li>Forest</li>
+<li>Bashed</li>
+</ul>
+<p>Berikut adalah mesin HackTrace yang saya kerjakan:</p>
+<ul>
+<li>River</li>
+<li>Exodus</li>
+<li>Cornflix</li>
+<li>TraverseMode</li>
+<li>Atulieer</li>
+<li>NebulaMQ</li>
+<li>DevilGod</li>
+</ul>
+<h4 id="exam">Exam</h4>
+<p>Sewaktu ujian, saya mengubah strategi saya dari yang tadinya <em>greedy</em>, menjadi lebih kalem. Lebih kalem berarti, dikit-dikit rebahan wkwkw</p>
+<p>Tiap satu atau dua jam, jika nggak dapet ide apa-apa, langsung <em>break</em>, rebahan. Intinya, saya membuat <em>mindset</em> saya untuk santuy, seolah-olah sedang tidak ujian dan tidak dibatasi waktu. Dengan begini, saya bisa sedikit melonggarkan pikiran saya, sehingga saya bisa mengerjakan lab ujian dengan maksimal.</p>
+<p>Alhamdulillah, 7 jam pertama saya sudah mendapatkan 70 point. Yang berarti, saya sudah mengerjakan satu set AD, satu standalone, dan mendapatkan <em>local.txt</em> pada satu mesin standalone. Saya pikir, strategi yang saya terapkan ini sudah tepat. :D</p>
+<p>Satu jam berikutnya, saya berhasil mendapatkan 80 point. Namun, sayang sekali dengan 16 jam waktu yang tersisa, saya belum berhasil mendapatkan 100 point :(</p>
+<h2 id="penulisan-laporan">Penulisan Laporan</h2>
+<p>Saya rasa, selain dengan mengerjakan lab ujian, penulisan laporan juga harus rinci dan jelas. Karena, laporan yang kurang jelas mengakibatkan berkurangnya poin. Jadi, gimana cara saya menulis laporan?</p>
+<ul>
+<li>Mencatat perintah-perintah yang saya gunakan di Joplin.</li>
+<li>Membuat <em>screenshot</em> tiap perintah yang saya jalankan.</li>
+<li>Menggunakan <a href="https://deepl.com">DeepL</a> untuk menerjemahkan ke bahasa Inggris.</li>
+<li>Menggunakan <a href="https://help.offsec.com/hc/en-us/articles/360046787731-PEN-200-Reporting-Requirements">Offsec template laporan</a>.</li>
+<li>To The Point: Maksudnya alih-alih menjelaskan “Feroxbuster adalah …” tapi lebih ke “Melakukan <em>directory search</em> menggunakan <code>feroxbuster</code>, mendapatkan ini ini dan ini”.</li>
+<li>BACA laporannya berkali-kali, pastikan jelas dan tidak ada salah ketik.</li>
+<li>Pastikan <code>md5hash</code> dari PDF yang di-<em>generate</em> itu sesuai dengan yang seharusnya sebelum di-<em>upload</em>.</li>
+</ul>
+<h2 id="kesimpulan">Kesimpulan</h2>
+<p>Beberapa kesimpulan yang mungkin bisa teman-teman terapkan supaya bisa lulus sekali <em>take exam</em>.</p>
+<ul>
+<li>Time Managemen adalah kunci. Perlu diingat, ada satu set AD dan tiga standalone yang harus diselesaikan dalam 24 jam. Jadi, siapkan mental dan time managemen nya.</li>
+<li>Merasa nyaman dengan Kali Linux. Tahu banyak soal Kali ini adalah hal wajib. Pasti akan ada waktu dimana sesuatu itu <em>break</em> saat kamu sedang menggunakan Kali. Jadi, pastikan kamu tahu harus bagaimana xixixi.</li>
+<li>Enumerasi, enumerasi, dan enumerarsi. Lakukan enumerasi dengan benar dan teliti.</li>
+<li><em>Keep it Simple</em>. Jangan <em>overthinking</em>, karena ini “hanya” ujian, bukan pentest sungguhan.</li>
+<li><em>Stay hydrated</em>, harus sedia botol minum di meja.</li>
+<li>Selalu istirahat jika sudah merasa pusing wkwkwk</li>
+<li>Bawa banyak jajanan di meja. Hindari jajanan yang ada gula-nya, nanti kamu ngantuk dan lemas.</li>
+</ul>
+<section data-footnotes="" class="footnotes"><h2 class="sr-only" id="footnote-label">Footnotes</h2>
+<ol>
+<li id="user-content-fn-1">
+<p><a href="https://help.offsec.com/hc/en-us/articles/4412170923924-OSCP-Exam-FAQ#h_01FP8BXRYRTQM6QKB9FPH2FQM7">https://help.offsec.com/hc/en-us/articles/4412170923924-OSCP-Exam-FAQ#h_01FP8BXRYRTQM6QKB9FPH2FQM7</a> <a href="#user-content-fnref-1" data-footnote-backref="" aria-label="Back to reference 1" class="data-footnote-backref">↩</a></p>
+</li>
+</ol>
+</section> <div class="mt-24"> <div class="grid grid-cols-2 gap-1.5 sm:gap-3"> <div class="invisible"></div> <a href="/2023-ke-2024" class="group relative flex flex-grow flex-row-reverse flex-nowrap rounded-lg border border-black/15 px-4 py-4 pr-10 no-underline transition-colors duration-300 ease-in-out bg-white hover:bg-neutral-100 dark:hover:bg-neutral-800 dark:bg-neutral-900 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute right-2 top-1/2 size-5 -translate-y-1/2 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-3 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 19 12 12 19" class="-translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="flex items-center text-sm">2023 ke 2024</div> </a> </div> </div> </article> </div>  </main> <footer class="animate"> <div class="mx-auto max-w-screen-md px-4"> <div class="relative"> <div class="absolute -top-12 right-0"> <button id="back-to-top" class="group relative flex w-fit flex-nowrap rounded border border-black/15 py-1.5 pl-8 pr-3 transition-colors duration-300 ease-in-out hover:text-black bg-white hover:bg-neutral-100 dark:hover:bg-neutral-800 dark:bg-neutral-900 focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute left-2 top-1/2 size-4 -translate-y-1/2 rotate-90 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="text-sm">Back to top</div> </button> </div> </div> <div class="flex items-center justify-between"> <div>&copy; 2024 • RafiPriatna.ID</div> <div class="flex flex-wrap items-center gap-1.5"> <button id="light-theme-button" aria-label="Light theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 dark:border-white/20 bg-white hover:bg-neutral-100 dark:hover:bg-neutral-800 dark:bg-neutral-900"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <circle cx="12" cy="12" r="5"></circle> <line x1="12" y1="1" x2="12" y2="3"></line> <line x1="12" y1="21" x2="12" y2="23"></line> <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line> <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line> <line x1="1" y1="12" x2="3" y2="12"></line> <line x1="21" y1="12" x2="23" y2="12"></line> <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line> <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line> </svg> </button> <button id="dark-theme-button" aria-label="Dark theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 dark:border-white/20 bg-white hover:bg-neutral-100 dark:hover:bg-neutral-800 dark:bg-neutral-900"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path> </svg> </button> <button id="system-theme-button" aria-label="System theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 dark:border-white/20 bg-white hover:bg-neutral-100 dark:hover:bg-neutral-800 dark:bg-neutral-900"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect> <line x1="8" y1="21" x2="16" y2="21"></line> <line x1="12" y1="17" x2="12" y2="21"></line> </svg> </button> </div> </div> </div> </footer> <div id="backdrop" class="bg-[rgba(0, 0, 0, 0.5] invisible fixed left-0 top-0 z-50 flex h-screen w-full justify-center p-6 backdrop-blur-sm" data-astro-transition-persist="astro-t6dxx5el-2"> <div id="pagefind-container" class="m-0 flex h-fit max-h-[80%] w-full max-w-screen-sm flex-col overflow-auto rounded border border-black/15 bg-neutral-100 p-2 px-4 py-3 shadow-lg dark:border-white/20 dark:bg-neutral-900"> <div id="search" class="pagefind-ui pagefind-init" data-pagefind-ui data-bundle-path="/pagefind/" data-ui-options="{&#34;showImages&#34;:false,&#34;excerptLength&#34;:15,&#34;resetStyles&#34;:false}"></div>  <div class="mr-2 pb-1 pt-4 text-right text-xs dark:prose-invert">
+Tekan <span class="prose text-xs dark:prose-invert"><kbd class="">Esc</kbd></span> atau klik dimana saja untuk tutup.
+</div> </div> </div> <script>
+  const magnifyingGlass = document.getElementById("magnifying-glass");
+  const backdrop = document.getElementById("backdrop");
+
+  function openPagefind() {
+    const searchDiv = document.getElementById("search");
+    const search = searchDiv.querySelector("input");
+    setTimeout(() => {
+      search.focus();
+    }, 0);
+    search.placeholder = "Cari Artikel Apapun";
+    backdrop?.classList.remove("invisible");
+    backdrop?.classList.add("visible");
+  }
+
+  function closePagefind() {
+    const search = document.getElementById("search");
+    search.value = "";
+    backdrop?.classList.remove("visible");
+    backdrop?.classList.add("invisible");
+  }
+
+  // open pagefind
+  magnifyingGlass?.addEventListener("click", () => {
+    openPagefind();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "/") {
+      e.preventDefault();
+      openPagefind();
+    } else if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+      e.preventDefault();
+      openPagefind();
+    }
+  });
+
+  // close pagefind
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" || e.keyCode === 27) {
+      closePagefind();
+    }
+  });
+
+  backdrop?.addEventListener("click", (event) => {
+    if (!event.target.closest("#pagefind-container")) {
+      closePagefind();
+    }
+  });
+
+  // prevent form submission
+  const form = document.getElementById("form");
+  form?.addEventListener("submit", (event) => {
+    event.preventDefault();
+  });
+</script>  </body></html>
