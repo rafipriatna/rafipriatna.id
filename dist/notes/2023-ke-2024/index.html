@@ -1,0 +1,362 @@
+<!DOCTYPE html><html lang="en"> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/png" href="/_astro/me_transparent.DiKVjXeE_1MkkEL.png"><link rel="apple-touch-icon" href="/_astro/me_transparent.DiKVjXeE_1MkkEL.png"><meta name="generator" content="Astro v4.13.3"><!-- Canonical URL --><link rel="canonical" href="https://astro-micro.vercel.app/notes/2023-ke-2024/"><!-- Primary Meta Tags --><title>2023 ke 2024 | RafiPriatna.ID</title><meta name="title" content="2023 ke 2024 | RafiPriatna.ID"><meta name="description" content="Review tahunan saya dari awal 2023 hingga awal 2024, so much fun!"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://astro-micro.vercel.app/notes/2023-ke-2024/"><meta property="og:title" content="2023 ke 2024 | RafiPriatna.ID"><meta property="og:description" content="Review tahunan saya dari awal 2023 hingga awal 2024, so much fun!"><meta property="og:image" content="https://astro-micro.vercel.app/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://astro-micro.vercel.app/notes/2023-ke-2024/"><meta property="twitter:title" content="2023 ke 2024 | RafiPriatna.ID"><meta property="twitter:description" content="Review tahunan saya dari awal 2023 hingga awal 2024, so much fun!"><meta property="twitter:image" content="https://astro-micro.vercel.app/blog-placeholder-1.jpg"><!-- PageFind --><link href="/pagefind/pagefind-ui.css" rel="stylesheet"><script src="/pagefind/pagefind-ui.js"></script><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script>
+  function init() {
+    preloadTheme();
+    onScroll();
+    animate();
+    updateThemeButtons();
+    addCopyCodeButtons();
+
+    const backToTop = document.getElementById("back-to-top");
+    backToTop?.addEventListener("click", (event) => scrollToTop(event));
+
+    const backToPrev = document.getElementById("back-to-prev");
+    backToPrev?.addEventListener("click", () => window.history.back());
+
+    const lightThemeButton = document.getElementById("light-theme-button");
+    lightThemeButton?.addEventListener("click", () => {
+      localStorage.setItem("theme", "light");
+      toggleTheme(false);
+      updateThemeButtons();
+    });
+
+    const darkThemeButton = document.getElementById("dark-theme-button");
+    darkThemeButton?.addEventListener("click", () => {
+      localStorage.setItem("theme", "dark");
+      toggleTheme(true);
+      updateThemeButtons();
+    });
+
+    const systemThemeButton = document.getElementById("system-theme-button");
+    systemThemeButton?.addEventListener("click", () => {
+      localStorage.setItem("theme", "system");
+      toggleTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
+      updateThemeButtons();
+    });
+
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", (event) => {
+        if (localStorage.theme === "system") {
+          toggleTheme(event.matches);
+        }
+      });
+
+    document.addEventListener("scroll", onScroll);
+  }
+
+  function updateThemeButtons() {
+    const theme = localStorage.getItem("theme");
+    const lightThemeButton = document.getElementById("light-theme-button");
+    const darkThemeButton = document.getElementById("dark-theme-button");
+    const systemThemeButton = document.getElementById("system-theme-button");
+
+    function removeActiveButtonTheme(button) {
+      button?.classList.remove("bg-black/5");
+      button?.classList.remove("dark:bg-white/5");
+    }
+
+    function addActiveButtonTheme(button) {
+      button?.classList.add("bg-black/5");
+      button?.classList.add("dark:bg-white/5");
+    }
+
+    removeActiveButtonTheme(lightThemeButton);
+    removeActiveButtonTheme(darkThemeButton);
+    removeActiveButtonTheme(systemThemeButton);
+
+    if (theme === "light") {
+      addActiveButtonTheme(lightThemeButton);
+    } else if (theme === "dark") {
+      addActiveButtonTheme(darkThemeButton);
+    } else {
+      addActiveButtonTheme(systemThemeButton);
+    }
+  }
+
+  function animate() {
+    const animateElements = document.querySelectorAll(".animate");
+
+    animateElements.forEach((element, index) => {
+      setTimeout(() => {
+        element.classList.add("show");
+      }, index * 100);
+    });
+  }
+
+  function onScroll() {
+    if (window.scrollY > 0) {
+      document.documentElement.classList.add("scrolled");
+    } else {
+      document.documentElement.classList.remove("scrolled");
+    }
+  }
+
+  function scrollToTop(event) {
+    event.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }
+
+  function toggleTheme(dark) {
+    const css = document.createElement("style");
+
+    css.appendChild(
+      document.createTextNode(
+        `* {
+             -webkit-transition: none !important;
+             -moz-transition: none !important;
+             -o-transition: none !important;
+             -ms-transition: none !important;
+             transition: none !important;
+          }
+        `
+      )
+    );
+
+    document.head.appendChild(css);
+
+    if (dark) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+
+    window.getComputedStyle(css).opacity;
+    document.head.removeChild(css);
+
+  }
+
+  function preloadTheme() {
+    const userTheme = localStorage.theme;
+
+    if (userTheme === "light" || userTheme === "dark") {
+      toggleTheme(userTheme === "dark");
+    } else {
+      toggleTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
+    }
+  }
+
+  function addCopyCodeButtons() {
+    let copyButtonLabel = "📋";
+    let codeBlocks = Array.from(document.querySelectorAll("pre"));
+
+    async function copyCode(codeBlock, copyButton) {
+      const codeText = codeBlock.innerText;
+      const buttonText = copyButton.innerText;
+      const textToCopy = codeText.replace(buttonText, "");
+
+      await navigator.clipboard.writeText(textToCopy);
+      copyButton.innerText = "✅";
+
+      setTimeout(() => {
+        copyButton.innerText = copyButtonLabel;
+      }, 2000);
+    }
+
+    for (let codeBlock of codeBlocks) {
+      const wrapper = document.createElement("div");
+      wrapper.style.position = "relative";
+
+      const copyButton = document.createElement("button");
+      copyButton.innerText = copyButtonLabel;
+      copyButton.classList = "copy-code";
+
+      codeBlock.setAttribute("tabindex", "0");
+      codeBlock.appendChild(copyButton);
+
+      codeBlock.parentNode.insertBefore(wrapper, codeBlock);
+      wrapper.appendChild(codeBlock);
+
+      copyButton?.addEventListener("click", async () => {
+        await copyCode(codeBlock, copyButton);
+      });
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", () => init());
+  document.addEventListener("astro:after-swap", () => init());
+  preloadTheme();
+</script><link rel="stylesheet" href="/_astro/_slug_.BZQGGjS8.css">
+<link rel="stylesheet" href="/_astro/_slug_.B8uyjkNC.css">
+<style>summary[data-astro-cid-xvrfupwn]{cursor:pointer;border-top-left-radius:.5rem;border-top-right-radius:.5rem;padding:.375rem .75rem;font-weight:500;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}summary[data-astro-cid-xvrfupwn]:hover{background-color:#0000000d}summary[data-astro-cid-xvrfupwn]:hover:is(.dark *){background-color:#ffffff0d}details[data-astro-cid-xvrfupwn][open] summary[data-astro-cid-xvrfupwn]{background-color:#0000000d}details[data-astro-cid-xvrfupwn][open] summary[data-astro-cid-xvrfupwn]:is(.dark *){background-color:#ffffff0d}
+</style><script type="module" src="/_astro/hoisted.Bfd9A_oI.js"></script></head> <body> <header data-astro-transition-persist="astro-l7r54iwe-1"> <div class="mx-auto max-w-screen-md px-4"> <div class="flex flex-wrap items-center justify-between"> <a href="/" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out">  <div class="flex items-center"> <img src="/_astro/me_transparent.DiKVjXeE_Z1Kx3TH.webp" alt="A bird sitting on a nest of eggs." loading="eager" width="50" height="50" decoding="async"> <div class="ml-1 grid hidden justify-items-start md:block"> <div class="font-semibold"> RafiPriatna.ID </div> <p class="text-xs">Lifelong Learner ✨</p> </div> </div>  </a> <nav class="flex items-center gap-4"> <a href="/blog" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out"> Blog </a> <a href="/notes" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out"> Notes </a> <a href="/writeups" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out"> Writeups </a> | <button id="magnifying-glass" aria-label="Search" class="flex items-center rounded transition-colors duration-300 ease-in-out hover:text-black focus-visible:text-black dark:border-white/20 dark:hover:text-white dark:focus-visible:text-white"> <svg height="16" stroke-linejoin="round" viewBox="0 0 16 16" width="16" style="color: currentcolor;"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.5 7C3.5 5.067 5.067 3.5 7 3.5C8.933 3.5 10.5 5.067 10.5 7C10.5 7.88461 10.1718 8.69256 9.63058 9.30876L9.30876 9.63058C8.69256 10.1718 7.88461 10.5 7 10.5C5.067 10.5 3.5 8.933 3.5 7ZM9.96544 11.0261C9.13578 11.6382 8.11014 12 7 12C4.23858 12 2 9.76142 2 7C2 4.23858 4.23858 2 7 2C9.76142 2 12 4.23858 12 7C12 8.11014 11.6382 9.13578 11.0261 9.96544L14.0303 12.9697L14.5607 13.5L13.5 14.5607L12.9697 14.0303L9.96544 11.0261Z" fill="currentColor"></path></svg>
+&nbsp;
+</button> </nav> </div> </div> </header> <main>  <div class="mx-auto max-w-screen-md px-4"> <div class="animate"> <a href="/notes" class="not-prose group relative flex w-fit flex-nowrap rounded border border-black/15 py-1.5 pl-7 pr-3 transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-neutral-800 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white dark:bg-neutral-900"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute left-2 top-1/2 size-4 -translate-y-1/2 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="text-sm"> Back to notes </div> </a> </div> <div class="animate my-10 space-y-1"> <div class="flex items-center gap-1.5"> <div class="font-base text-sm"> <time datetime="2024-01-05T13:23:00.000Z"> 05 Januari 2024 </time> </div>
+&bull;
+<div class="font-base text-sm"> Waktu baca: 5 menit </div> </div> <h1 class="text-3xl font-semibold text-black dark:text-white"> 2023 ke 2024 </h1> </div> <details open class="animate rounded-lg border border-black/15 bg-white dark:border-white/20 dark:bg-neutral-900" data-astro-cid-xvrfupwn> <summary data-astro-cid-xvrfupwn>Daftar Isi</summary> <nav class="" data-astro-cid-xvrfupwn> <ul class="py-3" data-astro-cid-xvrfupwn> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#pekerjaan-baru" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out"> Pekerjaan Baru </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#onsite-pertama" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out"> Onsite Pertama </a>  </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#film-yang-saya-tonton" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out"> Film yang saya tonton </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#tempat-yang-saya-kunjungi" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out"> Tempat yang saya kunjungi </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#tempat-kerja-baru-di-rumah" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out"> Tempat kerja baru (di rumah) </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#apa-yang-sudah-saya-pelajari" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out"> Apa yang sudah saya pelajari </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#apa-yang-ingin-saya-raih-resolusi-2024" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out"> Apa yang ingin saya raih (Resolusi 2024?) </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#kesimpulan" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out"> Kesimpulan </a>  </li> </ul> </nav> </details>  <article class="animate"> <p>Selamat tahun baru semuanya! Saatnya untuk menulisan <em>review</em> selama satu tahun. Ini adalah artikel pertama saya terkait <em>review</em> tahunan saya. 😁</p>
+<p>Saya memiliki harapan yang sangat tinggi buat tahun 2024! Awal tahun ini, saya ambil cuti di tempat saya bekerja. Lumayan liburan awal tahun hehe.</p>
+<h2 id="pekerjaan-baru">Pekerjaan Baru</h2>
+<p>Sebenernya, ini jatuhnya ke dua tahun lalu sih. Lebih tepatnya akhir tahun 2022. Tapi gapapa, saya tulis di sini, karena baru terasanya pas memasuki tahun 2023.</p>
+<p>Pada tanggal 01 Desember 2022, saya akhirnya mendapatkan pekerjaan baru dan pekerjaan pertama saya sebagai Junior Penetration Tester atau Cyber Security Engineer.</p>
+<p>Selama setahun ini, saya selalu mendapatkan hal baru tiap kali mengerjakan projek <em>Security Assessment</em>. Awal tahun, baru masuk sebulan, saya sudah dihajar projek-projek Mobile Pentesting. Dari sana, saya berkenalan dengan banyak <em>tools</em> baru, seperti: <em>frida</em>, <em>objection</em>, <em>JD GUI</em>, <em>JADX Gui</em>, dan sebagainya.</p>
+<p>Selain itu, saya juga belajar lebih dalam tentang Web Pentesting, karena sewaktu saya kuliah dulu saya sering ikut CTF dan main di kategori Web Exploitation. Jadi, ya kurang lebih lebih apa yang saya lakukan saat kuliah masih nyambung di pekerjaan baru saya ini.</p>
+<p>Awal-awal bekerja, ada banyak kesalahan yang saya lakukan wkwkw. Misalnya, saya izin karna wisuda (saya wisuda di bulan Desember 2022 btw), baru bilang ke Project Manager itu H-1 tanggal wisuda wkwkwk. Untung Project Manager saya ngizinin.</p>
+<h3 id="onsite-pertama">Onsite Pertama</h3>
+<p>Saya juga masih deg-degan waktu dapet projek onsite, bulan Februari (dua bulan setelah saya bekerja), saya dapat dapat onsite ke Kuningan. Untung ditemenin oleh senior, jadi agak santai sedikit. Meskipun tetep deg-degan, karena saya belum pernah melakukan pekerjaan VAPT (Vulnerability Assessment &#x26; Penetration Testing).</p>
+<p>VAPT pertama saya itu, saya belajar banyak hal lagi. Misalnya, setelah melakukan <em>scanning</em> jaringan, jika ditemukan kerentanan, maka harus diverifikasi dulu apakah kerentanan tersebut valid atau tidak, menggunakan NMAP. Lalu, coba lakukan eksploit jika bisa, itu bisa berpengaruh ke skor kerentanannya. Misalnya jika ditemukan kerentanan <em>critical</em> waktu dilakukan <em>scanning</em>, namun saat dilakukan percobaan <em>exploit</em> tidak berhasil, bisa saja skor kerentanannya bisa turun dari <em>critical</em> menjadi <em>high</em> atau <em>medium</em>.</p>
+<p><em>Client</em> pertama saya untuk onsite ini cukup <em>friendly</em>. Saya sering dikasih es kopi atau makan siang gratis. Merasa sangat bersyukur :)</p>
+<h2 id="film-yang-saya-tonton">Film yang saya tonton</h2>
+<p>Beberapa film yang saya tonton baik itu di bioskop maupun di media layanan <em>streaming</em>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Judul Film</th><th>Production House</th><th>Rating Pribadi</th><th>🎬</th></tr></thead><tbody><tr><td>Ant-Man and the Wasp: Quantumania</td><td>Marvel Studios</td><td>⭐9/10</td><td>XXI</td></tr><tr><td>Guardians of the Galaxy Vol. 3</td><td>Marvel Studios</td><td>⭐9/10</td><td>XXI</td></tr><tr><td>Transformers: Rise of the Beasts</td><td>Paramount Pictures</td><td>⭐8,5/10</td><td>XXI</td></tr><tr><td>Ketika Berhenti di Sini</td><td>Sinemaku Pictures</td><td>⭐8/10</td><td>XXI</td></tr><tr><td>172 Days</td><td>StarVision Plus</td><td>⭐8/10</td><td>XXI</td></tr><tr><td>The Marvels</td><td>Marvel Studios</td><td>⭐8/10</td><td>XXI</td></tr><tr><td>Aquaman and the Lost Kingdom</td><td>Warner Bros</td><td>⭐8/10</td><td>XXI</td></tr><tr><td>Loki Season 2</td><td>Marvel Studios</td><td>⭐8/10</td><td>Streaming Disney+</td></tr><tr><td>WandaVision</td><td>Marvel Studios</td><td>⭐7/10</td><td>Streaming Disney+</td></tr></tbody></table>
+<h2 id="tempat-yang-saya-kunjungi">Tempat yang saya kunjungi</h2>
+<p>Selama 2023 ini, saya banyak mengunjungi tempat-tempat yang dulu sangat ingin saya kunjungi. Saya ngga bisa banyak membuat kata-kata, ini saya kasih foto-fotonya saja. 😁</p>
+<p><img  src="/_astro/image.KGT9R9ce_14jvoa.webp" alt="Taman Sakura AEON Mall BSD City" width="539" height="685" loading="lazy" decoding="async"></p>
+<p><img  src="/_astro/image-1.CYMMgL4U_Z9YWI8.webp" alt="South Quarter" width="540" height="546" loading="lazy" decoding="async"></p>
+<p><img  src="/_astro/image-2.CyQwa_pz_bee4m.webp" alt="Dufan" width="538" height="805" loading="lazy" decoding="async"></p>
+<p><img  src="/_astro/image-3.n-iUmF_5_ZcD26m.webp" alt="Hutan Kota GBK" width="718" height="604" loading="lazy" decoding="async"></p>
+<p><img  src="/_astro/image-4.BF76BuHf_24eqUX.webp" alt="Taman Langsat" width="730" height="782" loading="lazy" decoding="async"></p>
+<p><img  src="/_astro/image-5.CuAxyBmT_1M687f.webp" alt="BXSea Bintaro Jaya" width="708" height="727" loading="lazy" decoding="async"></p>
+<h2 id="tempat-kerja-baru-di-rumah">Tempat kerja baru (di rumah)</h2>
+<p>Kamar saya sudah direnovasi, sekarang saya punya meja kerja sendiri. Ya, meskpun masih sangat sederhana, tapi lumayan lah daripada lesehan wkwkw.</p>
+<p><img  src="/_astro/image-6.CPg-YxEz_15QCmS.webp" alt="Meja Kerja Baru" width="713" height="743" loading="lazy" decoding="async"></p>
+<h2 id="apa-yang-sudah-saya-pelajari">Apa yang sudah saya pelajari</h2>
+<p>Beberapa topik <em>Cyber Security</em> yang saya pelajari selama setetahun:</p>
+<ul>
+<li>Linux PrivEsc</li>
+<li>Windows PrivEsc</li>
+<li>Social Engineering</li>
+<li>Information Gathering</li>
+<li>Antivirus Evasion</li>
+<li>Active Directory</li>
+</ul>
+<h2 id="apa-yang-ingin-saya-raih-resolusi-2024">Apa yang ingin saya raih (Resolusi 2024?)</h2>
+<p>Beberapa topik yang ingin saya raih atau setidaknya saya pelajari selama 2024:</p>
+<ul>
+<li>Menulis <em>report penertation</em> dengan baik dan benar. Termasuk perjelas penulisan <em>Proof of Concept</em> dan sebagainya.</li>
+<li>Perdalam topik PrivEsc.</li>
+<li>Lulus OSCP.</li>
+<li>Lebih bisa memanajemen waktu.</li>
+<li>Lebih banyak membaca.</li>
+<li>Perdalam <em>softskills</em>.</li>
+<li>Menulis banyak artikel di blog ini, terutama tentang <em>Cyber Security</em>.</li>
+<li>Membuat jurnal harian.</li>
+</ul>
+<h2 id="kesimpulan">Kesimpulan</h2>
+<p>Tahun ini saya banyak sekali belajar hal baru, terutama di dunia <em>Cyber Security</em>. Terlepas karena tuntutan pekerjaan, dari diri saya sendiri pun ada keinginan untuk mempelajari hal itu, jadi saya merasa <em>fun</em>. Saya juga mengujungi banyak tempat-tempat menarik, ya meskipun nggak jauh-jauh, tapi saya merasa senang, apalagi ditemenin sama <em>my lovely girlfie</em>. 🫰</p>
+<p>Saya juga menonton banyak film-film seru, wah, tahun 2023 banyak film seru dari Marvel. Meskipun rada pusing nontonnya karena temanya <em>Multiverse</em>, tapi tetep seru menurutku.</p>
+<p>Harapannya di tahun ini, 2024, saya dapat berkembang lebih baik daripada tahun kemarin. Saya bisa menguasai <em>softskills</em>, lebih bisa memanajemen waktu, lebih banyak membaca, dan lebih banyak topik <em>cybersec</em> yang saya pelajari.</p>
+<p>Sekian, terima gaji.</p> </article> </div>  </main> <footer class="animate"> <div class="mx-auto max-w-screen-md px-4"> <div class="relative"> <div class="absolute -top-12 right-0"> <button id="back-to-top" class="group relative flex w-fit flex-nowrap rounded border border-black/15 py-1.5 pl-8 pr-3 transition-colors duration-300 ease-in-out hover:text-black bg-white hover:bg-neutral-100 dark:hover:bg-neutral-800 dark:bg-neutral-900 focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute left-2 top-1/2 size-4 -translate-y-1/2 rotate-90 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="text-sm">Back to top</div> </button> </div> </div> <div class="flex items-center justify-between"> <div>&copy; 2024 • RafiPriatna.ID</div> <div class="flex flex-wrap items-center gap-1.5"> <button id="light-theme-button" aria-label="Light theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 dark:border-white/20 bg-white hover:bg-neutral-100 dark:hover:bg-neutral-800 dark:bg-neutral-900"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <circle cx="12" cy="12" r="5"></circle> <line x1="12" y1="1" x2="12" y2="3"></line> <line x1="12" y1="21" x2="12" y2="23"></line> <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line> <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line> <line x1="1" y1="12" x2="3" y2="12"></line> <line x1="21" y1="12" x2="23" y2="12"></line> <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line> <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line> </svg> </button> <button id="dark-theme-button" aria-label="Dark theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 dark:border-white/20 bg-white hover:bg-neutral-100 dark:hover:bg-neutral-800 dark:bg-neutral-900"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path> </svg> </button> <button id="system-theme-button" aria-label="System theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 dark:border-white/20 bg-white hover:bg-neutral-100 dark:hover:bg-neutral-800 dark:bg-neutral-900"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect> <line x1="8" y1="21" x2="16" y2="21"></line> <line x1="12" y1="17" x2="12" y2="21"></line> </svg> </button> </div> </div> </div> </footer> <div id="backdrop" class="bg-[rgba(0, 0, 0, 0.5] invisible fixed left-0 top-0 z-50 flex h-screen w-full justify-center p-6 backdrop-blur-sm" data-astro-transition-persist="astro-t6dxx5el-2"> <div id="pagefind-container" class="m-0 flex h-fit max-h-[80%] w-full max-w-screen-sm flex-col overflow-auto rounded border border-black/15 bg-neutral-100 p-2 px-4 py-3 shadow-lg dark:border-white/20 dark:bg-neutral-900"> <div id="search" class="pagefind-ui pagefind-init" data-pagefind-ui data-bundle-path="/pagefind/" data-ui-options="{&#34;showImages&#34;:false,&#34;excerptLength&#34;:15,&#34;resetStyles&#34;:false}"></div>  <div class="mr-2 pb-1 pt-4 text-right text-xs dark:prose-invert">
+Tekan <span class="prose text-xs dark:prose-invert"><kbd class="">Esc</kbd></span> atau klik dimana saja untuk tutup.
+</div> </div> </div> <script>
+  const magnifyingGlass = document.getElementById("magnifying-glass");
+  const backdrop = document.getElementById("backdrop");
+
+  function openPagefind() {
+    const searchDiv = document.getElementById("search");
+    const search = searchDiv.querySelector("input");
+    setTimeout(() => {
+      search.focus();
+    }, 0);
+    search.placeholder = "Cari Artikel Apapun";
+    backdrop?.classList.remove("invisible");
+    backdrop?.classList.add("visible");
+  }
+
+  function closePagefind() {
+    const search = document.getElementById("search");
+    search.value = "";
+    backdrop?.classList.remove("visible");
+    backdrop?.classList.add("invisible");
+  }
+
+  // open pagefind
+  magnifyingGlass?.addEventListener("click", () => {
+    openPagefind();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "/") {
+      e.preventDefault();
+      openPagefind();
+    } else if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+      e.preventDefault();
+      openPagefind();
+    }
+  });
+
+  // close pagefind
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" || e.keyCode === 27) {
+      closePagefind();
+    }
+  });
+
+  backdrop?.addEventListener("click", (event) => {
+    if (!event.target.closest("#pagefind-container")) {
+      closePagefind();
+    }
+  });
+
+  // prevent form submission
+  const form = document.getElementById("form");
+  form?.addEventListener("submit", (event) => {
+    event.preventDefault();
+  });
+</script>  </body></html>

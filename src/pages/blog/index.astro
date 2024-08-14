@@ -46,11 +46,15 @@ const years = Object.keys(posts).sort((a, b) => parseInt(b) - parseInt(a));
                 </div>
                 <div>
                   <ul class="not-prose flex flex-col gap-4">
-                    {posts[year].map((post) => (
-                      <li>
-                        <ArrowCard entry={post} />
-                      </li>
-                    ))}
+                    {posts[year].map((post) => {
+                      // @ts-ignore
+                      post.slug = `/${post.slug}`;
+                      return (
+                        <li>
+                          <ArrowCard entry={post} />
+                        </li>
+                      );
+                    })}
                   </ul>
                 </div>
               </section>
