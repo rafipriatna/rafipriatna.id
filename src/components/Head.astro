@@ -3,6 +3,7 @@ import "../styles/global.css";
 import { getImage } from 'astro:assets'
 import faviconSrc from "@assets/me_transparent.png";
 import { ViewTransitions } from "astro:transitions";
+import LoadingIndicator from "astro-loading-indicator/component"
 
 import "@fontsource/geist-sans";
 import "@fontsource/geist-mono";
@@ -59,6 +60,9 @@ const { title, description, image = "/blog-placeholder-1.jpg" } = Astro.props;
 <script is:inline src="/pagefind/pagefind-ui.js"></script>
 
 <ViewTransitions />
+<LoadingIndicator
+  color="#7e22ce"
+/>
 
 <script is:inline>
   function init() {
