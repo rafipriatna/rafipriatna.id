@@ -22,7 +22,7 @@ body {
   @apply flex flex-col;
   @apply bg-neutral-100 dark:bg-neutral-900;
   @apply text-black/75 dark:text-white/75;
-  @apply bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] bg-transparent dark:bg-[radial-gradient(#2d2d2d_1px,transparent_1px)]
+  /* @apply bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] bg-transparent dark:bg-[radial-gradient(#2d2d2d_1px,transparent_1px)] */
 }
 
 header {
