@@ -55,8 +55,8 @@ Ya, meskipun saya sendiri belum sukses. Tapi sebagai orang berusia 24 tahun, say
 Kamu terus lihat teman-temanmu sukses di medsos: punya rumah, karier cemerlang, *traveling* ke luar negeri. Sementara kamu? Masih *stuck* di situ-situ aja. Dan itu semua karena kamu gak ambil langkah sejak awal.
 
 ## Apa Solusi-nya?
-Faktor utama yang harus dibangun adalah **Pola Pikir** alias ***Mindeset***.
-JIka cara berpikir kamu "perubahan itu sudah tidak ada", maka ubah itu semua.
+Faktor utama yang harus dibangun adalah **Pola Pikir** alias ***Mindset***.
+Jika cara berpikir kamu "perubahan itu sudah tidak ada", maka ubah itu semua.
 > Sesuatu tidak akan berubah sebelum kamu berubah dulu.
 
 Setidaknya ada beberapa kebiasaan atau *habbit* yang bisa mengubah pola pikir kamu:
