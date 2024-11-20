@@ -307,6 +307,13 @@ declare module 'astro:content' {
   collection: "notes";
   data: any
 } & { render(): Render[".md"] };
+"2024/untuk-kamu-yang-berusia-20an/index.md": {
+	id: "2024/untuk-kamu-yang-berusia-20an/index.md";
+  slug: "untuk-kamu-yang-berusia-20an";
+  body: string;
+  collection: "notes";
+  data: any
+} & { render(): Render[".md"] };
 };
 "writeups": {
 "hackthebox-bashed/index.md": {
