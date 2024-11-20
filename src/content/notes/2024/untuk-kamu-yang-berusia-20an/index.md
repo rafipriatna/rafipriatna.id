@@ -1,6 +1,6 @@
 ---
 date: 2024-11-20
-title: "Untuk kamu yang berusia 20an"
+title: "Untuk kamu yang berusia 20an..."
 slug: "untuk-kamu-yang-berusia-20an"
 description: "Jika kamu masih memanfaatkan waktumu untuk hal-hal yang kurang produktif, artikel ini mungkin bisa membantumu untuk lebih sadar dan termotivasi."
 draft: false
