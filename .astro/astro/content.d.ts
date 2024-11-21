@@ -4,6 +4,7 @@ declare module 'astro:content' {
 			Content: import('astro').MarkdownInstance<{}>['Content'];
 			headings: import('astro').MarkdownHeading[];
 			remarkPluginFrontmatter: Record<string, any>;
+			components: import('astro').MDXInstance<{}>['components'];
 		}>;
 	}
 }
@@ -263,6 +264,13 @@ declare module 'astro:content' {
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".md"] };
+"2024/halo-fedora-41/index.mdx": {
+	id: "2024/halo-fedora-41/index.mdx";
+  slug: "halo-fedora-41";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".mdx"] };
 };
 "notes": {
 "2019/halo-dunia/index.md": {
@@ -293,13 +301,6 @@ declare module 'astro:content' {
   collection: "notes";
   data: any
 } & { render(): Render[".md"] };
-"2024/halo-fedora-41/index.mdx": {
-	id: "2024/halo-fedora-41/index.mdx";
-  slug: "halo-fedora-41";
-  body: string;
-  collection: "notes";
-  data: any
-} & { render(): Render[".mdx"] };
 "2024/perjalanan-menuju-oscp/index.md": {
 	id: "2024/perjalanan-menuju-oscp/index.md";
   slug: "perjalanan-menuju-oscp";
