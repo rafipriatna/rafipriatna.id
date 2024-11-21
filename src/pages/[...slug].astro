@@ -71,6 +71,9 @@ const { Content, headings } = await post.render();
       <h1 class="animate text-3xl font-semibold text-black dark:text-white">
         {post.data.title}
       </h1>
+      <div class="gap-4 text-gray-500 text-xl leading-relaxed">
+        {post.data.description}
+      </div>
     </div>
     {headings.length > 0 && <TableOfContents headings={headings} />}
     <article class="animate">
