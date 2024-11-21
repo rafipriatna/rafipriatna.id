@@ -28,7 +28,7 @@ const { Content, headings } = await note.render();
     <div class="animate">
       <BackToPrevious href="/notes">Kembali ke notes</BackToPrevious>
     </div>
-    <div class="animate my-10 space-y-1">
+    <div class="animate my-10 space-y-3">
       <div class="flex items-center gap-1.5">
         <div class="font-base text-sm">
           <FormattedDate date={note.data.date} />
@@ -41,6 +41,7 @@ const { Content, headings } = await note.render();
       <h1 class="text-3xl font-semibold text-black dark:text-white">
         {note.data.title}
       </h1>
+      <div class="gap-4 text-gray-500 text-xl leading-relaxed">{note.data.description}</div>
     </div>
     <TableOfContents headings={headings} />
     <article class="animate">
