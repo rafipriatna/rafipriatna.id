@@ -45,6 +45,10 @@ article {
   @apply prose-headings:text-black prose-headings:dark:text-white;
 }
 
+article h2,h3,h4,h5 {
+  @apply font-patrick-hand;
+}
+
 @layer utilities {
   article a {
     @apply font-sans text-current underline underline-offset-[3px];

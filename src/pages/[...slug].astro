@@ -68,15 +68,15 @@ const { Content, headings } = await post.render();
           </div>
         </div>
       </div>
-      <h1 class="animate text-3xl font-semibold text-black dark:text-white">
+      <h1 class="animate text-4xl text-black dark:text-white font-chewy tracking-wider">
         {post.data.title}
       </h1>
-      <div class="gap-4 text-gray-500 text-xl leading-relaxed">
+      <div class="gap-4 text-gray-500 text-xl leading-relaxed font-patrick-hand">
         {post.data.description}
       </div>
     </div>
     {headings.length > 0 && <TableOfContents headings={headings} />}
-    <article class="animate">
+    <article class="animate text-lg leading-relaxed">
       <Content />
       <div class="mt-24">
         <PostNavigation prevPost={prevPost} nextPost={nextPost} />

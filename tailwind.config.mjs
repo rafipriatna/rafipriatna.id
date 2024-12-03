@@ -8,6 +8,8 @@ export default {
       fontFamily: {
         sans: ["Geist Sans", ...defaultTheme.fontFamily.sans],
         mono: ["Geist Mono", ...defaultTheme.fontFamily.mono],
+        chewy: ['chewy', 'cursive'],
+        'patrick-hand': ['patrick-hand', 'cursive'],
       },
     },
   },

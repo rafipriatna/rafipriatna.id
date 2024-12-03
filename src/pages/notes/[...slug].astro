@@ -5,7 +5,6 @@ import Container from "@components/Container.astro";
 import FormattedDate from "@components/FormattedDate.astro";
 import { readingTime } from "@lib/utils";
 import BackToPrevious from "@components/BackToPrevious.astro";
-import Link from "@components/Link.astro";
 import TableOfContents from "@components/TableOfContents.astro";
 
 export async function getStaticPaths() {
@@ -38,13 +37,13 @@ const { Content, headings } = await note.render();
           {readingTime(note.body)}
         </div>
       </div>
-      <h1 class="text-3xl font-semibold text-black dark:text-white">
+      <h1 class="text-4xl text-black dark:text-white font-chewy tracking-wider">
         {note.data.title}
       </h1>
-      <div class="gap-4 text-gray-500 text-xl leading-relaxed">{note.data.description}</div>
+      <div class="gap-4 text-gray-500 text-xl leading-relaxed font-patrick-hand">{note.data.description}</div>
     </div>
     <TableOfContents headings={headings} />
-    <article class="animate">
+    <article class="animate text-lg leading-relaxed">
       <Content />
     </article>
   </Container>
