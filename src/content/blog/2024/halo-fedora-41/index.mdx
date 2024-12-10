@@ -101,5 +101,65 @@ Ini terminal saya yang sudah pakai `zsh`, `oh-my-zsh` dan `tmux` xixixi.
 
 ![Terminal](terminal.png)
 
+Berikut adalah konfigurasi `.tmux.conf` yang saya gunakan:
+```
+# remap prefix from 'C-b' to 'C-a'
+unbind C-b
+set-option -g prefix C-a
+bind-key C-a send-prefix
+
+# split panes using | and -
+bind | split-window -h
+bind - split-window -v
+unbind '"'
+unbind %
+
+# reload config file (change file location to your the tmux.conf you want to use)
+bind r source-file ~/.tmux.conf
+
+# switch panes using Alt-arrow without prefix
+bind -n M-Left select-pane -L
+bind -n M-Right select-pane -R
+bind -n M-Up select-pane -U
+bind -n M-Down select-pane -D
+
+# Enable mouse mode (tmux 2.1 and above)
+set -g mouse on
+
+# don't rename windows automatically
+set-option -g allow-rename off
+
+set -g default-terminal "screen-256color"
+
+set-window-option -g mode-keys vi
+
+bind -T copy-mode-vi v send -X begin-selection
+bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "pbcopy"
+bind P paste-buffer
+bind -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "pbcopy"
+
+setw -g mode-keys vi
+
+# Transparent panel
+# set-option -g status-style bg=default
+
+# TMUX Plugins
+set -g @plugin 'tmux-plugins/tpm'
+
+set -g @plugin 'tmux-plugins/tmux-pain-control'
+set -g @plugin 'tmux-plugins/tmux-sensible'
+set -g @plugin 'tmux-plugins/tmux-logging'
+
+set -g @plugin 'fabioluciano/tmux-tokyo-night'
+
+### Tokyo Night Theme configuration
+# set -g @theme_variation 'moon'
+set -g @theme_left_separator ''
+set -g @theme_right_separator ''
+set -g @theme_plugins 'datetime,weather,playerctl,yay'
+
+run '~/.tmux/plugins/tpm/tpm'
+```
+
 ## Penutup
 Sekian _curcol_ saya soal awal mula pakai Fedora 41. Sejauh ini, sistem ini sangat mulus dan ngebut. Sangat suka sangat suka. 🫰🏻
