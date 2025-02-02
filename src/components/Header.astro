@@ -8,7 +8,7 @@ import ProfileImage from "@assets/me_transparent.png";
 
 <header transition:persist>
   <Container>
-    <div class="flex flex-wrap items-center justify-between border-2 rounded-lg py-1 px-6 backdrop-blur-sm saturate-200 border-neutral-200 dark:border-neutral-600 bg-neutral-100/75 dark:bg-neutral-900/75">
+    <div class="flex flex-wrap items-center justify-between border rounded-lg py-1 px-6 backdrop-blur-sm saturate-200 border-neutral-200 dark:border-neutral-600 bg-neutral-100/75 dark:bg-neutral-900/75 shadow">
       <Link href="/" underline={false}>
         <div class="flex items-center">
           <Image
@@ -27,7 +27,7 @@ import ProfileImage from "@assets/me_transparent.png";
           </div>
         </div>
       </Link>
-      <nav class="flex items-center gap-4 text-lg font-semibold md:flex md:items-center md:gap-4">
+      <nav class="flex items-center gap-4 font-semibold md:flex md:items-center md:gap-4">
         <div class="hidden md:flex items-center gap-4">
           <Link href="/blog" underline={false}>Blog</Link>
           <Link href="/notes" underline={false}>Notes</Link>
