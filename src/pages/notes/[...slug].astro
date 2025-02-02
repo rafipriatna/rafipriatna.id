@@ -37,10 +37,10 @@ const { Content, headings } = await note.render();
           {readingTime(note.body)}
         </div>
       </div>
-      <h1 class="text-4xl text-black dark:text-white font-chewy tracking-wider">
+      <h1 class="text-4xl text-black dark:text-white">
         {note.data.title}
       </h1>
-      <div class="gap-4 text-gray-500 text-xl leading-relaxed font-patrickHand">{note.data.description}</div>
+      <div class="gap-4 text-gray-500 text-xl leading-relaxed">{note.data.description}</div>
     </div>
     <TableOfContents headings={headings} />
     <article class="animate text-lg leading-relaxed">
