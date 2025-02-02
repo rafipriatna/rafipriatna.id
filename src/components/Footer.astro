@@ -2,7 +2,33 @@
 import Container from "@components/Container.astro";
 import { SITE } from "@consts";
 import BackToTop from "@components/BackToTop.astro";
+import Link from "./Link.astro";
 ---
+
+<div
+  class="fixed z-50 bottom-0 left-0 right-0 z-50 bg-neutral-100 dark:bg-neutral-900 border-t border-neutral-200 dark:border-neutral-600 shadow-lg md:hidden py-2"
+>
+  <div class="flex justify-around p-2">
+    <Link
+      href="/blog"
+      underline={false}
+      class="text-lg font-semibold text-center hover:text-teal-500 transition duration-200"
+      >Blog</Link
+    >
+    <Link
+      href="/notes"
+      underline={false}
+      class="text-lg font-semibold text-center hover:text-teal-500 transition duration-200"
+      >Notes</Link
+    >
+    <Link
+      href="/writeups"
+      underline={false}
+      class="text-lg font-semibold text-center hover:text-teal-500 transition duration-200"
+      >Writeups</Link
+    >
+  </div>
+</div>
 
 <footer class="animate">
   <Container>
@@ -11,7 +37,7 @@ import BackToTop from "@components/BackToTop.astro";
         <BackToTop />
       </div>
     </div>
-    <div class="flex items-center justify-between">
+    <div class="flex items-center justify-between my-12">
       <div>&copy; {new Date().getFullYear()} • {SITE.TITLE}</div>
       <div class="flex flex-wrap items-center gap-1.5">
         <button
