@@ -159,6 +159,9 @@ html:not(.dark) article {
   @apply prose-th:bg-neutral-100 prose-th:border-neutral-200 prose-th:text-neutral-900;
   @apply prose-td:border-neutral-200 prose-td:text-neutral-700;
   @apply prose-hr:border-neutral-200;
+  /* Link di konten: hijau gelap agar terbaca di tema light */
+  @apply prose-a:text-accent-700 prose-a:border-accent-300;
+  @apply hover:prose-a:text-accent-600 hover:prose-a:border-accent-500;
 }
 
 /* ─── Utility classes ─── */

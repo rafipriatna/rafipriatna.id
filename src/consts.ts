@@ -99,10 +99,10 @@ export const WORK_EXPERIENCE: WorkExperience = [
 
 export const EDUCATION: Education = [
   {
-    degree: "S1 Teknik Informatika",
-    institution: "Universitas",
-    period: "2016–2020",
-    description: "Fokus pada keamanan informasi dan pengembangan perangkat lunak.",
+    degree: "S1 Sistem Informasi",
+    institution: "Universitas Gunadarma",
+    period: "2018-2022",
+    description: "Fokus pada pengembangan perangkat lunak dan keamanan informasi. Mengikuti berbagai kegiatan dan organisasi di bidang IT dan keamanan.",
   },
 ];
 
