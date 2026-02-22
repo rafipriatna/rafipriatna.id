@@ -1,9 +1,9 @@
 ---
-interface Component {
-  type: "default" | "info" | "warning" | "error";
+interface Props {
+  type?: "default" | "info" | "warning" | "error";
 }
 
-const { type = "default" } = Astro.props;
+const { type = "default" } = Astro.props as Props;
 
 const styles = {
   default: "border-accent/30 bg-accent/5 text-accent",
