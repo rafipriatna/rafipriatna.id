@@ -7,8 +7,6 @@ import LoadingIndicator from "astro-loading-indicator/component"
 
 import "@fontsource/geist-sans";
 import "@fontsource/geist-mono";
-import "@fontsource/chewy";
-import "@fontsource/patrick-hand";
 
 const appleTouchIcon = await getImage({
   src: faviconSrc,
@@ -63,7 +61,7 @@ const { title, description, image = "/blog-placeholder-1.jpg" } = Astro.props;
 
 <ViewTransitions />
 <LoadingIndicator
-  color="#00a8ff",
+  color="#22c55e",
   height="2px"
 />
 
@@ -119,26 +117,24 @@ const { title, description, image = "/blog-placeholder-1.jpg" } = Astro.props;
     const darkThemeButton = document.getElementById("dark-theme-button");
     const systemThemeButton = document.getElementById("system-theme-button");
 
-    function removeActiveButtonTheme(button) {
-      button?.classList.remove("bg-black/5");
-      button?.classList.remove("dark:bg-white/5");
+    function removeActive(button) {
+      button?.classList.remove("!text-accent");
     }
 
-    function addActiveButtonTheme(button) {
-      button?.classList.add("bg-black/5");
-      button?.classList.add("dark:bg-white/5");
+    function addActive(button) {
+      button?.classList.add("!text-accent");
     }
 
-    removeActiveButtonTheme(lightThemeButton);
-    removeActiveButtonTheme(darkThemeButton);
-    removeActiveButtonTheme(systemThemeButton);
+    removeActive(lightThemeButton);
+    removeActive(darkThemeButton);
+    removeActive(systemThemeButton);
 
     if (theme === "light") {
-      addActiveButtonTheme(lightThemeButton);
+      addActive(lightThemeButton);
     } else if (theme === "dark") {
-      addActiveButtonTheme(darkThemeButton);
+      addActive(darkThemeButton);
     } else {
-      addActiveButtonTheme(systemThemeButton);
+      addActive(systemThemeButton);
     }
   }
 
@@ -208,7 +204,7 @@ const { title, description, image = "/blog-placeholder-1.jpg" } = Astro.props;
   }
 
   function addCopyCodeButtons() {
-    let copyButtonLabel = "📋";
+    let copyButtonLabel = "copy";
     let codeBlocks = Array.from(document.querySelectorAll("pre"));
 
     async function copyCode(codeBlock, copyButton) {
@@ -217,7 +213,7 @@ const { title, description, image = "/blog-placeholder-1.jpg" } = Astro.props;
       const textToCopy = codeText.replace(buttonText, "");
 
       await navigator.clipboard.writeText(textToCopy);
-      copyButton.innerText = "✅";
+      copyButton.innerText = "done";
 
       setTimeout(() => {
         copyButton.innerText = copyButtonLabel;

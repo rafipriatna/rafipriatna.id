@@ -2,14 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ─── Base ─── */
 html {
   overflow-y: auto;
-  color-scheme: light;
-  scroll-padding-top: 100px;
+  color-scheme: dark;
+  scroll-padding-top: 8rem;
 }
 
-html.dark {
-  color-scheme: dark;
+html:not(.dark) {
+  color-scheme: light;
 }
 
 html,
@@ -20,118 +21,228 @@ body {
 body {
   @apply font-sans antialiased;
   @apply flex flex-col;
-  @apply bg-neutral-100 dark:bg-neutral-900;
-  @apply text-black/75 dark:text-white/75;
-  /* @apply bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] bg-transparent dark:bg-[radial-gradient(#2d2d2d_1px,transparent_1px)] */
+  @apply bg-base text-text-primary;
+  @apply selection:bg-accent/15 selection:text-accent;
 }
 
+html:not(.dark) body {
+  @apply bg-neutral-50 text-neutral-900;
+  @apply selection:bg-accent/15 selection:text-accent-700;
+}
+
+/* ─── Header ─── */
 header {
-  @apply fixed left-0 right-0 top-0 z-50 py-4;
+  @apply fixed left-0 right-0 top-0 z-50;
+  @apply bg-base/90 backdrop-blur-sm;
+  @apply border-b border-surface-border/50;
 }
 
+html:not(.dark) header {
+  @apply bg-neutral-50/90 border-neutral-200;
+}
+
+/* ─── Main ─── */
 main {
-  @apply flex-1 py-32;
+  @apply flex-1 pt-[7.5rem] pb-16;
 }
 
+/* ─── Footer ─── */
 footer {
-  @apply py-6 text-sm;
+  @apply py-6 text-xs;
+  @apply border-t border-surface-border/50;
 }
 
+html:not(.dark) footer {
+  @apply border-neutral-200;
+}
+
+/* ─── Light mode: override semantic text/surface colors ─── */
+html:not(.dark) .text-text-primary {
+  @apply text-neutral-900;
+}
+
+html:not(.dark) .text-text-secondary {
+  @apply text-neutral-600;
+}
+
+html:not(.dark) .text-text-muted {
+  @apply text-neutral-500;
+}
+
+html:not(.dark) .text-text-primary\/85 {
+  @apply text-neutral-800;
+}
+
+html:not(.dark) .text-surface-border {
+  @apply text-neutral-400;
+}
+
+html:not(.dark) .border-surface-border,
+html:not(.dark) .border-surface-border\/50,
+html:not(.dark) .border-surface-border\/30 {
+  @apply border-neutral-200;
+}
+
+html:not(.dark) .bg-surface-light {
+  @apply bg-neutral-100;
+}
+
+html:not(.dark) .bg-surface-border\/50 {
+  @apply bg-neutral-200;
+}
+
+html:not(.dark) .bg-base {
+  @apply bg-neutral-50;
+}
+
+html:not(.dark) .bg-base\/90 {
+  @apply bg-neutral-50/90;
+}
+
+html:not(.dark) .bg-base\/95 {
+  @apply bg-neutral-50/95;
+}
+
+/* ─── Typography (article/prose) ─── */
 article {
-  @apply prose prose-neutral max-w-full dark:prose-invert prose-img:mx-auto prose-img:my-auto;
-  @apply prose-headings:font-semibold;
-  @apply prose-headings:text-black prose-headings:dark:text-white;
+  @apply prose dark:prose-invert max-w-full;
+  @apply prose-headings:font-mono prose-headings:font-semibold;
+  @apply prose-headings:text-text-primary;
+  @apply prose-headings:mt-10 prose-headings:mb-4;
+  @apply prose-h1:text-xl prose-h1:font-bold prose-h1:leading-tight;
+  @apply prose-h2:text-lg prose-h2:mt-10 prose-h2:mb-4;
+  @apply prose-h3:text-base prose-h3:mt-8 prose-h3:mb-3;
+  @apply prose-h4:text-sm prose-h4:mt-6 prose-h4:mb-3;
+  @apply prose-p:text-text-primary/85 prose-p:leading-relaxed prose-p:mb-5;
+  @apply prose-p:text-[15px];
+  @apply prose-a:text-accent prose-a:no-underline;
+  @apply prose-a:border-b prose-a:border-accent/20;
+  @apply prose-a:transition-colors prose-a:duration-200;
+  @apply hover:prose-a:text-accent-400 hover:prose-a:border-accent/60;
+  @apply prose-img:mx-auto prose-img:my-8 prose-img:rounded-md;
+  @apply prose-img:border prose-img:border-surface-border;
+  @apply prose-code:text-accent prose-code:font-mono prose-code:text-xs prose-code:font-normal;
+  @apply prose-code:bg-surface-light prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded;
+  @apply prose-pre:bg-surface-light prose-pre:border prose-pre:border-surface-border;
+  @apply prose-pre:rounded-md prose-pre:text-sm;
+  @apply prose-strong:text-text-primary prose-strong:font-semibold;
+  @apply prose-ul:my-4 prose-ul:space-y-1;
+  @apply prose-ol:my-4 prose-ol:space-y-1;
+  @apply prose-li:text-text-primary/85 prose-li:leading-relaxed prose-li:text-[15px];
+  @apply prose-blockquote:border-l-2 prose-blockquote:border-accent/40;
+  @apply prose-blockquote:pl-4 prose-blockquote:py-1 prose-blockquote:my-6;
+  @apply prose-blockquote:text-text-secondary prose-blockquote:italic prose-blockquote:text-sm;
+  @apply prose-hr:border-surface-border prose-hr:my-10;
+  @apply prose-table:my-6 prose-table:w-full prose-table:text-sm;
+  @apply prose-th:border prose-th:border-surface-border prose-th:bg-surface-light prose-th:px-3 prose-th:py-2;
+  @apply prose-th:text-text-primary prose-th:font-semibold prose-th:text-xs prose-th:font-mono;
+  @apply prose-td:border prose-td:border-surface-border prose-td:px-3 prose-td:py-2;
+  @apply prose-td:text-text-primary/85 prose-td:text-sm;
 }
 
-article h2,h3,h4,h5 {
-  @apply font-semibold;
+html:not(.dark) article {
+  @apply prose-headings:text-neutral-900;
+  @apply prose-p:text-neutral-700;
+  @apply prose-li:text-neutral-700;
+  @apply prose-strong:text-neutral-900;
+  @apply prose-blockquote:text-neutral-500;
+  @apply prose-code:text-accent-700 prose-code:bg-neutral-100;
+  @apply prose-pre:bg-neutral-100 prose-pre:border-neutral-200;
+  @apply prose-img:border-neutral-200;
+  @apply prose-th:bg-neutral-100 prose-th:border-neutral-200 prose-th:text-neutral-900;
+  @apply prose-td:border-neutral-200 prose-td:text-neutral-700;
+  @apply prose-hr:border-neutral-200;
 }
 
+/* ─── Utility classes ─── */
 @layer utilities {
-  article a {
-    @apply font-sans text-current underline underline-offset-[3px];
-    @apply decoration-black/30 dark:decoration-white/30;
-    @apply transition-colors duration-300 ease-in-out;
+  .section-heading {
+    @apply text-xs font-mono uppercase tracking-widest text-text-muted mb-8;
   }
-  article a:hover {
-    @apply text-black dark:text-white;
-    @apply decoration-black/50 dark:decoration-white/50;
+
+  .section-heading::before {
+    content: "// ";
+    @apply text-accent/50;
   }
 }
 
+/* ─── Animations ─── */
 .animate {
-  @apply -translate-y-3 opacity-0;
-  @apply transition-all duration-300 ease-out;
+  @apply opacity-0;
+  @apply transition-all duration-500 ease-out;
 }
 
 .animate.show {
-  @apply translate-y-0 opacity-100;
+  @apply opacity-100;
 }
 
 html #back-to-top {
-  @apply pointer-events-none opacity-0;
+  @apply pointer-events-none opacity-0 transition-opacity duration-300;
 }
 
 html.scrolled #back-to-top {
   @apply pointer-events-auto opacity-100;
 }
 
-/* shiki config */
+/* ─── Code blocks ─── */
 pre {
-  @apply border border-black/15 py-5 dark:border-white/20;
+  @apply border border-surface-border py-5 bg-surface-light;
+}
+
+html:not(.dark) pre {
+  @apply bg-neutral-100 border-neutral-200;
 }
 
 :root {
-  --astro-code-color-text: #09090b;
-  --astro-code-color-background: #fafafa;
-  --astro-code-token-comment: #a19595;
-  --astro-code-token-keyword: #f47067;
-  --astro-code-token-string: #00a99a;
-  --astro-code-token-function: #429996;
-  --astro-code-token-constant: #2b70c5;
-  --astro-code-token-parameter: #4e8fdf;
-  --astro-code-token-string-expression: #ae42a0;
-  --astro-code-token-punctuation: #8996a3;
-  --astro-code-token-link: #8d85ff;
+  --astro-code-color-text: #ededed;
+  --astro-code-color-background: #141414;
+  --astro-code-token-comment: #555555;
+  --astro-code-token-keyword: #22c55e;
+  --astro-code-token-string: #4ade80;
+  --astro-code-token-function: #86efac;
+  --astro-code-token-constant: #bbf7d0;
+  --astro-code-token-parameter: #22c55e;
+  --astro-code-token-string-expression: #4ade80;
+  --astro-code-token-punctuation: #888888;
+  --astro-code-token-link: #86efac;
 }
 
-.dark {
-  --astro-code-color-text: #fafafa;
-  --astro-code-color-background: #09090b;
-  --astro-code-token-comment: #a19595;
-  --astro-code-token-keyword: #f47067;
-  --astro-code-token-string: #00a99a;
-  --astro-code-token-function: #6eafad;
-  --astro-code-token-constant: #b3cceb;
-  --astro-code-token-parameter: #4e8fdf;
-  --astro-code-token-string-expression: #bf7db6;
-  --astro-code-token-punctuation: #8996a3;
-  --astro-code-token-link: #8d85ff;
-}
-
-/* copy code button on codeblocks */
+/* ─── Copy code button ─── */
 .copy-code {
-  @apply absolute right-3 top-3 grid size-9 place-content-center rounded border border-black/15 bg-neutral-100 text-center duration-300 ease-in-out dark:border-white/20 dark:bg-neutral-900;
-}
-
-.copy-code:hover {
-  @apply bg-[#E9E9E9] transition-colors dark:bg-[#232323];
+  @apply absolute right-3 top-3 grid size-8 place-content-center rounded;
+  @apply border border-surface-border bg-surface-light text-text-muted;
+  @apply transition-all duration-200 ease-in-out;
+  @apply hover:text-accent hover:border-accent/40;
 }
 
 .copy-code:active {
   @apply scale-90 transition-transform;
 }
 
-html.dark .astro-code,
-html.dark .astro-code span {
-  color: var(--shiki-dark) !important;
+/* ─── Shiki code highlighting ─── */
+/* Dark mode: defaultColor: 'dark' → warna inline sudah tema dark, jangan override color agar syntax highlighting tetap */
+.astro-code {
   background-color: var(--shiki-dark-bg) !important;
   font-style: var(--shiki-dark-font-style) !important;
   font-weight: var(--shiki-dark-font-weight) !important;
   text-decoration: var(--shiki-dark-text-decoration) !important;
 }
 
-html.dark .astro-code span {
+.astro-code span {
+  background-color: transparent !important;
+}
+
+/* Light mode: pakai variabel tema light di setiap token */
+html:not(.dark) .astro-code,
+html:not(.dark) .astro-code span {
+  color: var(--shiki-light) !important;
+  background-color: #f5f5f5 !important;
+  font-style: var(--shiki-light-font-style) !important;
+  font-weight: var(--shiki-light-font-weight) !important;
+  text-decoration: var(--shiki-light-text-decoration) !important;
+}
+
+html:not(.dark) .astro-code span {
   background-color: transparent !important;
 }
 
@@ -142,7 +253,7 @@ html.dark .astro-code span {
       @apply -ml-4 -mr-5 inline-block w-[calc(100%+(theme(spacing.4)+theme(spacing.4)))] pl-4 pr-5;
     }
     &.highlighted {
-      @apply border-blue-400 !bg-neutral-200 dark:border-blue-800 dark:!bg-neutral-700/30;
+      @apply border-accent/40 !bg-accent/10;
     }
     &.diff {
       &.add,
@@ -152,15 +263,15 @@ html.dark .astro-code span {
         }
       }
       &.add {
-        @apply border-blue-500 bg-blue-500/30 opacity-70 !bg-blue-200 dark:!bg-blue-700/30;
+        @apply border-accent/40 bg-accent/15;
         span:first-child::before {
-          @apply text-blue-500 content-["+"];
+          @apply text-accent content-["+"];
         }
       }
       &.remove {
-        @apply border-red-500 bg-red-500/30 opacity-70 !bg-red-200 dark:!bg-red-700/30;
+        @apply border-red-500/40 bg-red-500/15;
         span:first-child::before {
-          @apply text-red-500 content-["-"];
+          @apply text-red-400 content-["-"];
         }
       }
     }

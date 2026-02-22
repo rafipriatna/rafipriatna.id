@@ -12,18 +12,15 @@ const writeups = (await getCollection("writeups"))
 
 <Layout title={WRITEUPS.TITLE} description={WRITEUPS.DESCRIPTION}>
   <Container>
-    <div class="pb-10">
-      <h1 class="animate text-4xl font-semibold text-black dark:text-white">
-        {WRITEUPS.TITLE}
-      </h1>
-      <div class="space-y-4 pt-1">
-        <p class="animate text-md">{WRITEUPS.DESCRIPTION}</p>
-      </div>
-    </div>
-    <div class="space-y-10">
-      <ul class="animate not-prose flex flex-col gap-4">
+    <div class="pt-8 md:pt-12">
+      <h1 class="section-heading">writeups</h1>
+      <p class="text-sm text-text-muted mb-10">{WRITEUPS.DESCRIPTION}</p>
+
+      <ul class="space-y-0">
         {
           writeups.map((writeup) => {
+            // @ts-ignore
+            writeup.slug = "writeups/" + writeup.slug;
             return (
               <li>
                 <ArrowCard entry={writeup} />

@@ -5,40 +5,24 @@ interface Component {
 
 const { type = "default" } = Astro.props;
 
-let emoji = "💡";
+const styles = {
+  default: "border-accent/30 bg-accent/5 text-accent",
+  info: "border-blue-500/30 bg-blue-500/5 text-blue-400",
+  warning: "border-yellow-500/30 bg-yellow-500/5 text-yellow-400",
+  error: "border-red-500/30 bg-red-500/5 text-red-400",
+};
 
-if (type === "info") {
-  emoji = "ℹ️";
-} else if (type === "warning") {
-  emoji = "⚠️";
-} else if (type === "error") {
-  emoji = "🚨";
-}
+const icons = {
+  default: ">",
+  info: "i",
+  warning: "!",
+  error: "x",
+};
 ---
 
-<div class={`not-prose callout callout-${type}`}>
-  <span class="emoji pointer-events-none select-none">{emoji}</span>
-  <slot />
+<div class={`not-prose flex items-start gap-3 rounded-md border p-4 my-6 text-sm ${styles[type]}`}>
+  <span class="font-mono text-xs mt-0.5 shrink-0 opacity-70">[{icons[type]}]</span>
+  <div class="text-text-secondary text-[15px] leading-relaxed">
+    <slot />
+  </div>
 </div>
-
-<style>
-  .callout {
-    @apply relative my-4 flex rounded border border-orange-800 bg-orange-100 p-3 text-orange-950 dark:border-orange-200 dark:bg-orange-950 dark:text-orange-200;
-  }
-
-  .emoji {
-    @apply pr-3 text-xl;
-  }
-
-  .callout-info {
-    @apply border-blue-800 bg-blue-100 text-blue-950 dark:border-blue-200 dark:bg-blue-950 dark:text-blue-200;
-  }
-
-  .callout-warning {
-    @apply border-yellow-800 bg-yellow-100 text-yellow-950 dark:border-yellow-200 dark:bg-yellow-950 dark:text-yellow-200;
-  }
-
-  .callout-error {
-    @apply border-red-800 bg-red-100 text-red-950 dark:border-red-200 dark:bg-red-950 dark:text-red-200;
-  }
-</style>

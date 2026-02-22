@@ -24,27 +24,38 @@ const { Content, headings } = await note.render();
 
 <Layout title={note.data.title} description={note.data.description}>
   <Container>
-    <div class="animate">
-      <BackToPrevious href="/notes">Kembali ke notes</BackToPrevious>
-    </div>
-    <div class="animate my-10 space-y-3">
-      <div class="flex items-center gap-1.5">
-        <div class="font-base text-sm">
-          <FormattedDate date={note.data.date} />
-        </div>
-        &bull;
-        <div class="font-base text-sm">
-          {readingTime(note.body)}
-        </div>
+    <article class="min-w-0 pt-6 md:pt-10">
+      <div class="mb-5">
+        <BackToPrevious href="/notes">notes</BackToPrevious>
       </div>
-      <h1 class="text-4xl text-black dark:text-white">
-        {note.data.title}
-      </h1>
-      <div class="gap-4 text-gray-500 text-xl leading-relaxed">{note.data.description}</div>
-    </div>
-    <TableOfContents headings={headings} />
-    <article class="animate text-lg leading-relaxed">
-      <Content />
+
+      <div class="mb-10 pb-8 border-b border-surface-border/50">
+        <div class="flex items-center gap-2 text-xs text-text-muted font-mono mb-4">
+          <FormattedDate date={note.data.date} />
+          <span class="text-surface-border">·</span>
+          <span>{readingTime(note.body)}</span>
+        </div>
+        
+        <h1 class="text-lg md:text-xl font-bold text-text-primary leading-snug font-mono break-words min-w-0 max-w-full">
+          {note.data.title}
+        </h1>
+        
+        {note.data.description && (
+          <p class="text-sm text-text-secondary mt-3 leading-relaxed">
+            {note.data.description}
+          </p>
+        )}
+      </div>
+
+      {headings.length > 0 && (
+        <div class="mb-10">
+          <TableOfContents headings={headings} />
+        </div>
+      )}
+
+      <div class="prose prose-invert max-w-none">
+        <Content />
+      </div>
     </article>
   </Container>
 </Layout>

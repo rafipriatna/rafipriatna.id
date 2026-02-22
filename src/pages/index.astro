@@ -1,11 +1,16 @@
 ---
 import Layout from "@layouts/Layout.astro";
 import Container from "@components/Container.astro";
-import { SITE, HOME, SOCIALS } from "@consts";
+import CertificationBadge from "@components/CertificationBadge.astro";
+import { SITE, HOME, SOCIALS, WORK_EXPERIENCE } from "@consts";
 import ArrowCard from "@components/ArrowCard.astro";
 import Link from "@components/Link.astro";
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
+
+import OSCPLogo from "@assets/certifications/oscp.png";
+import CPSALogo from "@assets/certifications/cpsa.png";
+import CRTLogo from "@assets/certifications/crt.png";
 
 const blog = (await getCollection("blog"))
   .filter((post) => !post.data.draft)
@@ -27,84 +32,90 @@ const notes: CollectionEntry<"notes">[] = (await getCollection("notes"))
 
 <Layout title={HOME.TITLE} description={HOME.DESCRIPTION}>
   <Container>
-    <h1 class="animate text-4xl font-semibold text-black dark:text-white">
-      Hai, saya Rafi Priatna 👋
-    </h1>
-    <div class="space-y-16">
-      <section>
-        <article class="space-y-4">
-          <span class="animate text-lg">
-            <p>
-              Saya seorang <i>Cyber Security Consultant</i> yang suka bengong dan
-              suka menulis hal-hal aneh seperti <code>code</code>, hal teknis,
-              hobi, dan catatan pribadi.
-            </p>
-
-            <p>
-              Di sini, kalian bisa membaca <Link href="/blog"
-                >tulisan teknis</Link
-              >, <Link href="/writeups">WriteUp CTF</Link>, membaca beberapa <Link
-                href="/notes">catatan pribadi</Link
-              > atau cari tahu lebih banyak <Link href="/me">tentang saya</Link
-              >.
-            </p>
-
-            <p>
-              Kebanyakan hal yang saya tulis di sini merupakan dokumentasi
-              pribadi, dan hanya opini pribadi saya saja. ✌️
-            </p>
-          </span>
-        </article>
-      </section>
-
-      <section class="animate space-y-6">
-        <div class="flex flex-wrap items-center justify-between gap-y-2">
-          <h2 class="font-semibold text-black dark:text-white text-2xl font-semibold">
-            Catatan Terbaru
-          </h2>
-          <Link href="/notes"> Lihat Semuanya </Link>
+    <!-- Hero -->
+    <section class="pt-12 pb-16 md:pt-20 md:pb-24">
+      <div class="space-y-6">
+        <div>
+          <h1 class="text-2xl md:text-3xl font-bold text-text-primary font-mono tracking-tight">
+            Rafi Priatna Kasbiantoro<span class="animate-cursor-blink text-accent">_</span>
+          </h1>
+          <p class="text-sm font-mono text-accent mt-2">
+            Cyber Security Consultant
+          </p>
+          <div class="flex flex-wrap items-center gap-3 mt-4">
+            <CertificationBadge name="OSCP" logo={OSCPLogo} />
+            <CertificationBadge name="CPSA" logo={CPSALogo} />
+            <CertificationBadge name="CRT" logo={CRTLogo} />
+          </div>
         </div>
-        <ul class="not-prose flex flex-col gap-4">
-          {
-            notes.map((note) => {
-              // @ts-ignore
-              note.slug = "notes/" + note.slug;
-              return (
-                <li>
-                  <ArrowCard entry={note} />
-                </li>
-              );
-            })
-          }
-        </ul>
-      </section>
 
-      <section class="animate space-y-6">
-        <div class="flex flex-wrap items-center justify-between gap-y-2">
-          <h2 class="font-semibold text-black dark:text-white text-2xl">
-            Tulisan Terbaru
-          </h2>
-          <Link href="/blog"> Lihat Semuanya </Link>
-        </div>
-        <ul class="not-prose flex flex-col gap-4">
+        <p class="text-[15px] text-text-secondary leading-relaxed max-w-lg">
+          Saya seorang Cyber Security Consultant yang kadang suka bengong, lalu berakhir nulis — tentang code, hal teknis, hobi, sampai catatan pribadi.
+        </p>
+
+        <p class="text-[15px] text-text-secondary leading-relaxed max-w-lg">
+          Di sini kamu bisa nemuin tulisan teknis, write-up CTF, dan sedikit cerita di balik layar.
+        </p>
+
+        <p class="text-[15px] text-text-secondary leading-relaxed max-w-lg">
+          Sebagian besar adalah dokumentasi perjalanan dan opini pribadi saya. Anggap saja ini ruang berpikir yang saya bagikan. ✌️
+        </p>
+
+        <div class="flex items-center gap-4 text-xs font-mono">
           {
-            blog.map((post) => (
-              <li>
-                <ArrowCard entry={post} />
-              </li>
+            SOCIALS.map((SOCIAL, index) => (
+              <>
+                <Link
+                  href={SOCIAL.HREF}
+                  external
+                  underline={false}
+                  class="text-text-muted hover:text-accent transition-colors duration-200"
+                  aria-label={`${SITE.TITLE} on ${SOCIAL.NAME}`}
+                >
+                  {SOCIAL.NAME.toLowerCase()}
+                </Link>
+                {index < SOCIALS.length - 1 && <span class="text-surface-border">·</span>}
+              </>
             ))
           }
-        </ul>
+        </div>
+      </div>
+    </section>
+    
+    {WORK_EXPERIENCE.length > 0 && (
+      <section class="mb-16">
+        <h2 class="section-heading">Work Experience</h2>
+        <div class="space-y-0">
+          {
+            WORK_EXPERIENCE.map((job) => (
+              <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 sm:gap-4 py-3 border-b border-surface-border/30 last:border-0">
+                <div>
+                  <p class="text-[15px] text-text-primary font-medium">{job.role}</p>
+                  <p class="text-xs text-text-muted font-mono mt-0.5">{job.company}</p>
+                  {job.description && (
+                    <p class="text-sm text-text-secondary mt-2 leading-relaxed">{job.description}</p>
+                  )}
+                </div>
+                <span class="text-xs text-text-muted font-mono shrink-0 sm:mt-0 mt-1">{job.period}</span>
+              </div>
+            ))
+          }
+        </div>
       </section>
 
-      <section class="animate space-y-6">
-        <div class="flex flex-wrap items-center justify-between gap-y-2">
-          <h2 class="font-semibold text-black dark:text-white text-2xl">
-            WriteUp Terbaru
-          </h2>
-          <Link href="/writeups"> Lihat Semuanya </Link>
+    <div class="h-px bg-surface-border/50 mb-16"></div>
+    )}
+
+    <!-- Recent Writeups -->
+    {writeups.length > 0 && (
+      <section class="mb-16">
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="section-heading !mb-0">writeups</h2>
+          <Link href="/writeups" underline={false} class="text-xs font-mono text-text-muted hover:text-accent transition-colors duration-200">
+            semua &rarr;
+          </Link>
         </div>
-        <ul class="not-prose flex flex-col gap-4">
+        <ul class="space-y-1">
           {
             writeups.map((writeup) => {
               // @ts-ignore
@@ -118,37 +129,74 @@ const notes: CollectionEntry<"notes">[] = (await getCollection("notes"))
           }
         </ul>
       </section>
+    )}
 
-      <section class="animate space-y-4">
-        <h2 class="font-semibold text-black dark:text-white text-2xl">Let's Connect</h2>
-        <article>
-          <p>
-            Jika kamu ingin menghubungi saya atau hanya sekedar <i>say hi</i>,
-            temukan saya di media sosial atau kirimkan saya email.
-          </p>
-        </article>
-        <ul class="not-prose flex flex-wrap gap-2">
+    <!-- Recent Blog -->
+    {blog.length > 0 && (
+      <section class="mb-16">
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="section-heading !mb-0">blog</h2>
+          <Link href="/blog" underline={false} class="text-xs font-mono text-text-muted hover:text-accent transition-colors duration-200">
+            semua &rarr;
+          </Link>
+        </div>
+        <ul class="space-y-1">
           {
-            SOCIALS.map((SOCIAL) => (
-              <li class="flex gap-x-2 text-nowrap">
-                <Link
-                  href={SOCIAL.HREF}
-                  external
-                  aria-label={`${SITE.TITLE} on ${SOCIAL.NAME}`}
-                >
-                  {SOCIAL.NAME}
-                </Link>
-                {"/"}
+            blog.map((post) => (
+              <li>
+                <ArrowCard entry={post} />
               </li>
             ))
           }
-          <li class="line-clamp-1">
-            <span class="font-semibold underline">{SITE.USER_EMAIL}</span>
-            <span>at</span>
-            <span class="font-semibold underline">{SITE.DOMAIN}</span>
-          </li>
         </ul>
       </section>
-    </div>
+    )}
+
+    <!-- Recent Notes -->
+    {notes.length > 0 && (
+      <section class="mb-16">
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="section-heading !mb-0">notes</h2>
+          <Link href="/notes" underline={false} class="text-xs font-mono text-text-muted hover:text-accent transition-colors duration-200">
+            semua &rarr;
+          </Link>
+        </div>
+        <ul class="space-y-1">
+          {
+            notes.map((note) => {
+              // @ts-ignore
+              note.slug = "notes/" + note.slug;
+              return (
+                <li>
+                  <ArrowCard entry={note} />
+                </li>
+              );
+            })
+          }
+        </ul>
+      </section>
+    )}
+
+    <!-- Contact -->
+    <section class="mb-8">
+      <div class="h-px bg-surface-border/50 mb-16"></div>
+      <h2 class="section-heading">contact</h2>
+      <div class="space-y-3 text-sm">
+        <div class="flex items-center gap-3 font-mono">
+          <span class="text-text-muted text-xs w-12">email</span>
+          <Link 
+            href={`mailto:${SITE.USER_EMAIL}@${SITE.DOMAIN}`}
+            underline={false}
+            class="text-text-secondary hover:text-accent transition-colors duration-200"
+          >
+            {SITE.USER_EMAIL}@{SITE.DOMAIN}
+          </Link>
+        </div>
+        <div class="flex items-center gap-3 font-mono">
+          <span class="text-text-muted text-xs w-12">pgp</span>
+          <span class="text-text-muted text-xs">on request</span>
+        </div>
+      </div>
+    </section>
   </Container>
 </Layout>

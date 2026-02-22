@@ -17,6 +17,7 @@ export default defineConfig({
         light: 'vitesse-light',
         dark: 'vitesse-dark',
       },
+      defaultColor: 'dark', // inline = dark; setiap token dapat --shiki-light untuk light mode
       transformers: [transformerNotationHighlight(), transformerNotationFocus(), transformerNotationDiff()],
       wrap: true
     },

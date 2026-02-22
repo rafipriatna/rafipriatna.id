@@ -1,19 +1,23 @@
 ---
 import Layout from "@layouts/Layout.astro";
 import Container from "@components/Container.astro";
-import BackToPrevious from "@components/BackToPrevious.astro";
+import Link from "@components/Link.astro";
 import { SITE } from "@consts";
 ---
 
 <Layout title="404" description={SITE.DESCRIPTION}>
   <Container>
-    <div class="mt-16 grid place-items-center gap-3">
-      <h4 class="animate text-2xl font-semibold text-black dark:text-white">
-        404: Page not found
-      </h4>
-      <span class="animate">
-        <BackToPrevious href="/">Go to home page</BackToPrevious>
-      </span>
+    <div class="pt-20 md:pt-32 text-center">
+      <p class="text-xs font-mono text-accent mb-4">404</p>
+      <h1 class="text-lg font-mono text-text-primary mb-3">Page not found</h1>
+      <p class="text-sm text-text-muted mb-8">The page you're looking for doesn't exist.</p>
+      <Link 
+        href="/" 
+        underline={false}
+        class="text-sm font-mono text-text-muted hover:text-accent transition-colors duration-200"
+      >
+        &larr; back to home
+      </Link>
     </div>
   </Container>
 </Layout>

@@ -3,147 +3,153 @@ import Layout from "@layouts/Layout.astro";
 import { Image } from "astro:assets";
 import Container from "@components/Container.astro";
 import Link from "@components/Link.astro";
+import CertificationBadge from "@components/CertificationBadge.astro";
 import { SITE, SOCIALS } from "@consts";
 
 import WonderfulPartner from "@assets/wonderful_partner.png";
 import Work from "@assets/work.jpeg";
+import OSCPLogo from "@assets/certifications/oscp.png";
+import CPSALogo from "@assets/certifications/cpsa.png";
+import CRTLogo from "@assets/certifications/crt.png";
 ---
 
-<Layout title="About Me" description="Bejirrr">
-    <Container>
-        <h1 class="animate text-2xl font-semibold text-black dark:text-white">
-            Me
-        </h1>
-        <div class="space-y-4 pt-1">
-            <p class="animate text-md">Sedikit tentang saya.</p>
+<Layout title="About Me" description="Tentang Rafi Priatna - Cyber Security Consultant">
+  <Container>
+    <div class="pt-8 md:pt-12 space-y-16">
+      <!-- Intro -->
+      <section>
+        <h1 class="section-heading">about</h1>
+        <div class="space-y-5 text-[15px] text-text-secondary leading-relaxed">
+          <p>
+            Saya <span class="text-text-primary font-medium">Rafi Priatna</span>, seorang 
+            <span class="text-accent">Cyber Security Consultant</span> yang memiliki passion 
+            dalam memahami bagaimana sistem bekerja dan bagaimana mereka bisa di-compromise.
+          </p>
+          <p>
+            Security engineering bukan hanya tentang menemukan vulnerability — ini tentang 
+            memahami root cause dan memberikan solusi yang tepat.
+          </p>
+          <p>
+            Di luar pekerjaan, saya suka melakukan bug hunting, menulis dokumentasi teknis, 
+            dan membangun lab security. Saya juga menikmati bermain game offline 
+            seperti Stardew Valley, dan menghabiskan waktu dengan partner saya.
+          </p>
         </div>
-        <div class="space-y-16">
-            <section>
-                <article class="space-y-4">
-                    <span class="animate text-lg">
-                        <p>
-                            Saya Rafi Priatna, seorang <i
-                                >Cyber Security Enthusiast</i
-                            > yang suka <code>ngoding</code>, dan iseng.
-                        </p>
-                        <p>
-                            Saya suka kucing, suka kopi, suka makan, suka
-                            jalan-jalan motoran dan punya seorang <i
-                                >wonderful partner</i
-                            >. Saya suka membaca bacaan di Quora — menurut saya
-                            bacaannya menarik semua —, suka bermain <i
-                                >game offline</i
-                            > seperti <i>Stardew Valley</i>, atau yang ber-<i
-                                >genre</i
-                            > simulasi, dan senang bermain di emulator PS1.
-                        </p>
-                    </span>
-                </article>
+      </section>
 
-                <div class="flex flex-col py-10 min-[410px]:flex-row">
-                    <Image
-                        src={Work}
-                        alt="Test"
-                        width={350}
-                        height={250}
-                        class="h-[250px] w-[350px] -rotate-12 rounded-xl object-cover shadow-2xl"
-                    />
-                    <Image
-                        src={WonderfulPartner}
-                        alt="Test 2"
-                        width={250}
-                        height={350}
-                        class="mx-auto h-[350px] w-[250px] rotate-6 rounded-xl object-cover shadow-2xl sm:ml-auto z-10"
-                    />
-                </div>
-            </section>
-
-            <section class="aniamte space-y-6">
-                <h2 class="text-2xl text-black dark:text-white">Speaking</h2>
-                <div class="flex">
-                    <div class="flex-auto">
-                        <div class="flex items-center gap-x-1.5">
-                            <div
-                                class="flex-none rounded-full bg-purple-500/20 p-1"
-                            >
-                                <div
-                                    class="h-1.5 w-1.5 rounded-full bg-purple-500"
-                                >
-                                </div>
-                            </div>
-                            <p class="text-lg text-gray-500">
-                                How to Start a Career in Cyber Security
-                            </p>
-                        </div>
-                        <p class="pl-4 ml-1.5 text-xs mt-1 text-gray-600">CCUG X LinuxHacking.ID</p>
-                    </div>
-                    <p class="text-lg text-gray-500">2024</p>
-                </div>
-            </section>
-
-            <section class="animate space-y-6">
-                <h2 class="text-2xl text-black dark:text-white">Hubungi Saya</h2>
-                <ul class="space-y-2">
-                    <li class="line-clamp-1">
-                        Email:
-                        <span class="font-semibold underline"
-                            >{SITE.USER_EMAIL}</span
-                        >
-                        <span>at</span>
-                        <span class="font-semibold underline"
-                            >{SITE.DOMAIN}</span
-                        >
-                    </li>
-                    {
-                        SOCIALS.map((SOCIAL) => (
-                            <li class="flex gap-x-2 text-nowrap">
-                                <Link
-                                    href={SOCIAL.HREF}
-                                    external
-                                    aria-label={`${SITE.TITLE} on ${SOCIAL.NAME}`}
-                                >
-                                    {SOCIAL.NAME}
-                                </Link>
-                            </li>
-                        ))
-                    }
-                </ul>
-            </section>
-
-            <section class="animate space-y-6">
-                <h2 class="text-2xl font-semibold text-black dark:text-white">
-                    Apa yang saya lakukan sekarang?
-                </h2>
-                <ul class="ml-5 list-disc space-y-2">
-                    <li>
-                        Bekerja sebagai <i>fulltime Cyber Security Consultant</i
-                        >.
-                    </li>
-                    <li>
-                        Melakukan <i>Bug Hunting</i> jika sempat.
-                    </li>
-                    <li>
-                        Membuat lab di <a
-                            href="https://www.hacktrace-ranges.id/"
-                            target="_blank"
-                            class="text-blue-400 hover:text-blue-600"
-                            >HackTrace Ranges</a
-                        >.
-                    </li>
-                    <li><i>Tweaking</i> website ini.</li>
-                </ul>
-            </section>
-
-            <section class="animate space-y-6">
-                <span class="animate text-lg">
-                    <p>
-                        Jika kamu membutuhkan jasa <i>Penetration Testing</i>,
-                        atau butuh jasa pembuatan aplikasi berbasis website, <i
-                            >feel free to contact me.</i
-                        > ✌️
-                    </p>
-                </span>
-            </section>
+      <!-- Certifications -->
+      <section>
+        <h2 class="section-heading">certifications</h2>
+        <div class="flex flex-wrap items-center gap-3">
+          <CertificationBadge name="OSCP" logo={OSCPLogo} />
+          <CertificationBadge name="CPSA" logo={CPSALogo} />
+          <CertificationBadge name="CRT" logo={CRTLogo} />
         </div>
-    </Container>
+      </section>
+
+      <!-- Photos -->
+      <section>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <Image
+            src={Work}
+            alt="Work setup"
+            width={350}
+            height={250}
+            class="h-[220px] w-full sm:w-auto sm:flex-1 rounded-md object-cover border border-surface-border"
+          />
+          <Image
+            src={WonderfulPartner}
+            alt="Wonderful partner"
+            width={250}
+            height={350}
+            class="h-[280px] w-full sm:w-[200px] rounded-md object-cover border border-surface-border"
+          />
+        </div>
+      </section>
+
+      <!-- Now -->
+      <section>
+        <h2 class="section-heading">now</h2>
+        <ul class="space-y-2.5 text-[15px] text-text-secondary">
+          <li class="flex items-start gap-2.5">
+            <span class="text-accent text-xs mt-1.5 font-mono">&gt;</span>
+            <span>Fulltime <span class="text-text-primary">Cyber Security Consultant</span></span>
+          </li>
+          <li class="flex items-start gap-2.5">
+            <span class="text-accent text-xs mt-1.5 font-mono">&gt;</span>
+            <span><span class="text-text-primary">Bug Hunting</span> jika sempat</span>
+          </li>
+          <li class="flex items-start gap-2.5">
+            <span class="text-accent text-xs mt-1.5 font-mono">&gt;</span>
+            <span>Membuat lab di <Link href="https://www.hacktrace-ranges.id/" external class="text-accent">HackTrace Ranges</Link></span>
+          </li>
+          <li class="flex items-start gap-2.5">
+            <span class="text-accent text-xs mt-1.5 font-mono">&gt;</span>
+            <span>Tweaking website ini</span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Speaking -->
+      <section>
+        <h2 class="section-heading">speaking</h2>
+        <div class="space-y-3">
+          <div class="flex items-baseline justify-between gap-4 py-2 border-b border-surface-border/30">
+            <div>
+              <p class="text-[15px] text-text-primary font-medium">How to Start a Career in Cyber Security</p>
+              <p class="text-xs text-text-muted font-mono mt-1">CCUG x LinuxHacking.ID</p>
+            </div>
+            <span class="text-xs text-text-muted font-mono shrink-0">2024</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Services -->
+      <section>
+        <h2 class="section-heading">services</h2>
+        <p class="text-[15px] text-text-secondary leading-relaxed">
+          Jika kamu membutuhkan jasa <span class="text-accent">Penetration Testing</span>, 
+          atau butuh jasa pembuatan aplikasi berbasis website, feel free to contact me.
+        </p>
+      </section>
+
+      <!-- Contact -->
+      <section class="pb-8">
+        <h2 class="section-heading">contact</h2>
+        <div class="space-y-2.5 text-sm font-mono">
+          <div class="flex items-center gap-3">
+            <span class="text-text-muted text-xs w-12">email</span>
+            <Link 
+              href={`mailto:${SITE.USER_EMAIL}@${SITE.DOMAIN}`}
+              underline={false}
+              class="text-text-secondary hover:text-accent transition-colors duration-200"
+            >
+              {SITE.USER_EMAIL}@{SITE.DOMAIN}
+            </Link>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-text-muted text-xs w-12">social</span>
+            <div class="flex items-center gap-2">
+              {
+                SOCIALS.map((SOCIAL, index) => (
+                  <>
+                    <Link
+                      href={SOCIAL.HREF}
+                      external
+                      underline={false}
+                      class="text-text-secondary hover:text-accent transition-colors duration-200 text-sm"
+                      aria-label={`${SITE.TITLE} on ${SOCIAL.NAME}`}
+                    >
+                      {SOCIAL.NAME.toLowerCase()}
+                    </Link>
+                    {index < SOCIALS.length - 1 && <span class="text-surface-border">·</span>}
+                  </>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </Container>
 </Layout>

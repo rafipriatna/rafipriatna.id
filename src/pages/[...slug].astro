@@ -52,35 +52,44 @@ const { Content, headings } = await post.render();
 
 <Layout title={post.data.title} description={post.data.description}>
   <Container>
-    <div class="animate">
-      <BackToPrevious href="/blog">Kembali ke blog</BackToPrevious>
-    </div>
-    <div class="my-10 space-y-1">
-      <div class="animate">
-        <div class="grid grid-cols-1">
-          <div class="flex items-center gap-1.5">
-            <div class="font-base text-sm">
-              <FormattedDate date={post.data.date} />
-            </div>
-            <div class="font-base text-sm">
-              &bull; {readingTime(post.body)}
-            </div>
-          </div>
+    <article class="min-w-0 pt-6 md:pt-10">
+      <div class="mb-5">
+        <BackToPrevious href="/blog">blog</BackToPrevious>
+      </div>
+
+      <div class="mb-10 pb-8 border-b border-surface-border/50">
+        <div class="flex items-center gap-2 text-xs text-text-muted font-mono mb-4">
+          <FormattedDate date={post.data.date} />
+          <span class="text-surface-border">·</span>
+          <span>{readingTime(post.body)}</span>
         </div>
+        
+        <h1 class="text-lg md:text-xl font-bold text-text-primary leading-snug font-mono break-words min-w-0 max-w-full">
+          {post.data.title}
+        </h1>
+        
+        {post.data.description && (
+          <p class="text-sm text-text-secondary mt-3 leading-relaxed">
+            {post.data.description}
+          </p>
+        )}
       </div>
-      <h1 class="animate text-4xl text-black dark:text-white">
-        {post.data.title}
-      </h1>
-      <div class="gap-4 text-gray-500 text-xl leading-relaxed">
-        {post.data.description}
+
+      {headings.length > 0 && (
+        <div class="mb-10">
+          <TableOfContents headings={headings} />
+        </div>
+      )}
+
+      <div class="prose prose-invert max-w-none">
+        <Content />
       </div>
-    </div>
-    {headings.length > 0 && <TableOfContents headings={headings} />}
-    <article class="animate text-lg leading-relaxed">
-      <Content />
-      <div class="mt-24">
-        <PostNavigation prevPost={prevPost} nextPost={nextPost} />
-      </div>
+
+      {(nextPost || prevPost) && (
+        <div class="mt-16 pt-8 border-t border-surface-border/50">
+          <PostNavigation prevPost={prevPost} nextPost={nextPost} />
+        </div>
+      )}
     </article>
   </Container>
 </Layout>

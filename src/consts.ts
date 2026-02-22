@@ -1,4 +1,4 @@
-import type { Metadata, Site, Socials } from "@types";
+import type { Metadata, Site, Socials, WorkExperience } from "@types";
 
 export const SITE: Site = {
   TITLE: "RafiPriatna.ID",
@@ -46,4 +46,19 @@ export const SOCIALS: Socials = [
     NAME: "LinkedIn",
     HREF: "https://www.linkedin.com/in/rafipriatna",
   },
+];
+
+export const WORK_EXPERIENCE: WorkExperience = [
+  {
+    role: "Cyber Security Consultant I",
+    company: "PT. Spentera",
+    period: "2024-2026",
+  },
+  {
+    role: "Junior Penetration Tester",
+    company: "PT. Spentera",
+    period: "2022-2024",
+  },
+  // Tambah entri lain sesuai pengalaman kamu, contoh:
+  // { role: "Penetration Tester", company: "Nama Perusahaan", period: "2022–2024", description: "..." },
 ];

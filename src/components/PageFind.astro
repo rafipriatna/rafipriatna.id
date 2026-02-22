@@ -5,11 +5,11 @@ import Search from "astro-pagefind/components/Search";
 <div
   transition:persist
   id="backdrop"
-  class="bg-[rgba(0, 0, 0, 0.5] invisible fixed left-0 top-0 z-50 flex h-screen w-full justify-center p-6 backdrop-blur-sm"
+  class="bg-base/85 invisible fixed left-0 top-0 z-50 flex h-screen w-full justify-center p-6 backdrop-blur-sm"
 >
   <div
     id="pagefind-container"
-    class="m-0 flex h-fit max-h-[80%] w-full max-w-screen-sm flex-col overflow-auto rounded border border-black/15 bg-neutral-100 p-2 px-4 py-3 shadow-lg dark:border-white/20 dark:bg-neutral-900"
+    class="m-0 flex h-fit max-h-[80%] w-full max-w-md flex-col overflow-auto rounded-md border border-surface-border bg-base p-4 shadow-2xl"
   >
     <Search
       id="search"
@@ -20,10 +20,8 @@ import Search from "astro-pagefind/components/Search";
         resetStyles: false,
       }}
     />
-    <div class="mr-2 pb-1 pt-4 text-right text-xs dark:prose-invert">
-      Tekan <span class="prose text-xs dark:prose-invert"
-        ><kbd class="">Esc</kbd></span
-      > atau klik dimana saja untuk tutup.
+    <div class="pb-1 pt-3 text-right text-xs text-text-muted font-mono">
+      <kbd class="px-1 py-0.5 rounded border border-surface-border text-text-muted text-[10px]">esc</kbd> untuk tutup
     </div>
   </div>
 </div>
@@ -38,7 +36,7 @@ import Search from "astro-pagefind/components/Search";
     setTimeout(() => {
       search.focus();
     }, 0);
-    search.placeholder = "Cari Artikel Apapun";
+    search.placeholder = "Cari...";
     backdrop?.classList.remove("invisible");
     backdrop?.classList.add("visible");
   }
@@ -50,7 +48,6 @@ import Search from "astro-pagefind/components/Search";
     backdrop?.classList.add("invisible");
   }
 
-  // open pagefind
   magnifyingGlass?.addEventListener("click", () => {
     openPagefind();
   });
@@ -65,7 +62,6 @@ import Search from "astro-pagefind/components/Search";
     }
   });
 
-  // close pagefind
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" || e.keyCode === 27) {
       closePagefind();
@@ -78,7 +74,6 @@ import Search from "astro-pagefind/components/Search";
     }
   });
 
-  // prevent form submission
   const form = document.getElementById("form");
   form?.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -89,36 +84,70 @@ import Search from "astro-pagefind/components/Search";
   :root {
     --pagefind-ui-scale: 0.75;
     --pagefind-ui-border-width: 1px;
-    --pagefind-ui-border-radius: 3px;
-    --pagefind-ui-font: "Geist", sans-serif;
-    --pagefind-ui-primary: #3d3d3d;
-    --pagefind-ui-text: #3d3d3d;
-    --pagefind-ui-background: #ffffff;
-    --pagefind-ui-border: #d0d0d0;
-    --pagefind-ui-tag: #f5f5f5;
+    --pagefind-ui-border-radius: 6px;
+    --pagefind-ui-font: "Geist Mono", monospace;
+    --pagefind-ui-primary: #22c55e;
+    --pagefind-ui-text: #ededed;
+    --pagefind-ui-background: #0a0a0a;
+    --pagefind-ui-border: #262626;
+    --pagefind-ui-tag: #1e1e1e;
   }
 
   .dark {
-    --pagefind-ui-primary: #d4d4d4;
-    --pagefind-ui-text: #d4d4d4;
-    --pagefind-ui-background: #171717;
-    --pagefind-ui-border: #404040;
+    --pagefind-ui-primary: #22c55e;
+    --pagefind-ui-text: #ededed;
+    --pagefind-ui-background: #0a0a0a;
+    --pagefind-ui-border: #262626;
+    --pagefind-ui-tag: #1e1e1e;
+  }
+
+  html:not(.dark) {
+    --pagefind-ui-primary: #16a34a;
+    --pagefind-ui-text: #171717;
+    --pagefind-ui-background: #fafafa;
+    --pagefind-ui-border: #e5e5e5;
+    --pagefind-ui-tag: #f5f5f5;
   }
 
   #search input {
     font-weight: normal;
+    background-color: var(--pagefind-ui-background);
+    color: var(--pagefind-ui-text);
+    border-color: var(--pagefind-ui-border);
+  }
+
+  #search input::placeholder {
+    color: var(--pagefind-ui-text);
+    opacity: 0.35;
   }
 
   #search p {
     font-weight: normal;
+    color: var(--pagefind-ui-text);
   }
 
   #search .pagefind-ui__result-title {
     font-weight: 600;
+    color: var(--pagefind-ui-text);
+  }
+
+  #search .pagefind-ui__result-excerpt {
+    color: var(--pagefind-ui-text);
+    opacity: 0.7;
   }
 
   #search .pagefind-ui__message {
     padding: 0;
     padding-bottom: 0.75rem;
+    color: var(--pagefind-ui-text);
+    opacity: 0.5;
+  }
+
+  #search .pagefind-ui__result {
+    border-color: var(--pagefind-ui-border);
+  }
+
+  #search .pagefind-ui__result:hover {
+    background-color: var(--pagefind-ui-tag);
   }
 </style>

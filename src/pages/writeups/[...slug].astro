@@ -5,46 +5,57 @@ import Container from "@components/Container.astro";
 import FormattedDate from "@components/FormattedDate.astro";
 import { readingTime } from "@lib/utils";
 import BackToPrevious from "@components/BackToPrevious.astro";
-import Link from "@components/Link.astro";
 import TableOfContents from "@components/TableOfContents.astro";
 
 export async function getStaticPaths() {
   const writeups = (await getCollection("writeups"))
     .filter((post) => !post.data.draft)
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-  return writeups.map((note) => ({
-    params: { slug: note.slug },
-    props: note,
+  return writeups.map((writeup) => ({
+    params: { slug: writeup.slug },
+    props: writeup,
   }));
 }
 type Props = CollectionEntry<"writeups">;
 
-const note = Astro.props;
-const { Content, headings } = await note.render();
+const writeup = Astro.props;
+const { Content, headings } = await writeup.render();
 ---
 
-<Layout title={note.data.title} description={note.data.description}>
+<Layout title={writeup.data.title} description={writeup.data.description}>
   <Container>
-    <div class="animate">
-      <BackToPrevious href="/writeups">Kembali ke writeups</BackToPrevious>
-    </div>
-    <div class="animate my-10 space-y-1">
-      <div class="flex items-center gap-1.5">
-        <div class="font-base text-sm">
-          <FormattedDate date={note.data.date} />
-        </div>
-        &bull;
-        <div class="font-base text-sm">
-          {readingTime(note.body)}
-        </div>
+    <article class="min-w-0 pt-6 md:pt-10">
+      <div class="mb-5">
+        <BackToPrevious href="/writeups">writeups</BackToPrevious>
       </div>
-      <h1 class="text-4xl font-semibold text-black dark:text-white">
-        {note.data.title}
-      </h1>
-    </div>
-    <TableOfContents headings={headings} />
-    <article class="animate text-lg leading-relaxed">
-      <Content />
+
+      <div class="mb-10 pb-8 border-b border-surface-border/50">
+        <div class="flex items-center gap-2 text-xs text-text-muted font-mono mb-4">
+          <FormattedDate date={writeup.data.date} />
+          <span class="text-surface-border">·</span>
+          <span>{readingTime(writeup.body)}</span>
+        </div>
+        
+        <h1 class="text-lg md:text-xl font-bold text-text-primary leading-snug font-mono break-words min-w-0 max-w-full">
+          {writeup.data.title}
+        </h1>
+        
+        {writeup.data.description && (
+          <p class="text-sm text-text-secondary mt-3 leading-relaxed">
+            {writeup.data.description}
+          </p>
+        )}
+      </header>
+
+      {headings.length > 0 && (
+        <div class="mb-10">
+          <TableOfContents headings={headings} />
+        </div>
+      )}
+
+      <div class="prose prose-invert max-w-none">
+        <Content />
+      </div>
     </article>
   </Container>
 </Layout>

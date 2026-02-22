@@ -1,59 +1,68 @@
 ---
-import { Image } from "astro:assets";
 import Container from "@components/Container.astro";
 import Link from "@components/Link.astro";
 import { SITE } from "@consts";
-import ProfileImage from "@assets/me_transparent.png";
 ---
 
 <header transition:persist>
   <Container>
-    <div class="flex flex-wrap items-center justify-between border rounded-lg py-1 px-6 backdrop-blur-sm saturate-200 border-neutral-200 dark:border-neutral-600 bg-neutral-100/75 dark:bg-neutral-900/75 shadow">
-      <Link href="/" underline={false}>
-        <div class="flex items-center">
-          <Image
-            src={ProfileImage}
-            alt="A bird sitting on a nest of eggs."
-            width={50}
-            height={50}
-            loading="eager"
-            class="rounded-full"
-          />
-          <div class="ml-1 grid hidden justify-items-start md:block">
-            <div class="tracking-wider">
-              {SITE.TITLE}
-            </div>
-            <p class="text-xs">{SITE.TAGLINE}</p>
-          </div>
-        </div>
+    <div class="flex items-center justify-between h-14">
+      <Link href="/" underline={false} class="font-mono text-sm text-text-primary hover:text-accent transition-colors duration-200">
+        <span class="text-accent">~</span>/{SITE.TITLE.toLowerCase()}
       </Link>
-      <nav class="flex items-center gap-4 font-semibold md:flex md:items-center md:gap-4">
-        <div class="hidden md:flex items-center gap-4">
-          <Link href="/blog" underline={false}>Blog</Link>
-          <Link href="/notes" underline={false}>Notes</Link>
-          <Link href="/writeups" underline={false}>Writeups</Link>
-          <span class="hidden md:block">|</span>
+      
+      <nav class="flex items-center gap-5">
+        <div class="hidden md:flex items-center gap-5">
+          <Link 
+            href="/blog" 
+            underline={false}
+            class="text-xs font-mono text-text-muted hover:text-accent transition-colors duration-200 uppercase tracking-wider"
+          >
+            blog
+          </Link>
+          <Link 
+            href="/notes" 
+            underline={false}
+            class="text-xs font-mono text-text-muted hover:text-accent transition-colors duration-200 uppercase tracking-wider"
+          >
+            notes
+          </Link>
+          <Link 
+            href="/writeups" 
+            underline={false}
+            class="text-xs font-mono text-text-muted hover:text-accent transition-colors duration-200 uppercase tracking-wider"
+          >
+            writeups
+          </Link>
+          <Link 
+            href="/me" 
+            underline={false}
+            class="text-xs font-mono text-text-muted hover:text-accent transition-colors duration-200 uppercase tracking-wider"
+          >
+            about
+          </Link>
         </div>
+        <div class="h-4 w-px bg-surface-border hidden md:block"></div>
         <button
           id="magnifying-glass"
           aria-label="Search"
-          class="flex items-center rounded transition-colors duration-300 ease-in-out hover:text-black focus-visible:text-black dark:border-white/20 dark:hover:text-white dark:focus-visible:text-white"
+          class="flex items-center justify-center w-8 h-8 rounded text-text-muted hover:text-accent transition-colors duration-200"
         >
           <svg
-            height="16"
+            height="14"
             stroke-linejoin="round"
             viewBox="0 0 16 16"
-            width="16"
-            style="color: currentcolor;"
+            width="14"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
           >
             <path
               fill-rule="evenodd"
               clip-rule="evenodd"
               d="M3.5 7C3.5 5.067 5.067 3.5 7 3.5C8.933 3.5 10.5 5.067 10.5 7C10.5 7.88461 10.1718 8.69256 9.63058 9.30876L9.30876 9.63058C8.69256 10.1718 7.88461 10.5 7 10.5C5.067 10.5 3.5 8.933 3.5 7ZM9.96544 11.0261C9.13578 11.6382 8.11014 12 7 12C4.23858 12 2 9.76142 2 7C2 4.23858 4.23858 2 7 2C9.76142 2 12 4.23858 12 7C12 8.11014 11.6382 9.13578 11.0261 9.96544L14.0303 12.9697L14.5607 13.5L13.5 14.5607L12.9697 14.0303L9.96544 11.0261Z"
-              fill="currentColor"
             ></path>
           </svg>
-          &nbsp;
         </button>
       </nav>
     </div>
