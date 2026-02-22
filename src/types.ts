@@ -19,9 +19,38 @@ export type Socials = {
   HREF: string;
 }[];
 
-export type WorkExperience = {
+export type WorkExperienceEntry = {
   role: string;
   company: string;
   period: string;
   description?: string;
-}[];
+  highlights?: string[];
+};
+
+export type WorkExperience = WorkExperienceEntry[];
+
+export type EducationEntry = {
+  degree: string;
+  institution: string;
+  period: string;
+  description?: string;
+};
+
+export type Education = EducationEntry[];
+
+export type SkillsGroup = {
+  title: string;
+  items: string[];
+};
+
+export type Skills = SkillsGroup[];
+
+export type CertificationEntry = {
+  name: string;
+  fullName: string;
+  issuer: string;
+  year: string;
+  url?: string;
+};
+
+export type Certifications = CertificationEntry[];

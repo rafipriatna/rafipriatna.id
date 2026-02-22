@@ -1,4 +1,4 @@
-import type { Metadata, Site, Socials, WorkExperience } from "@types";
+import type { Metadata, Site, Socials, WorkExperience, Education, Skills, Certifications } from "@types";
 
 export const SITE: Site = {
   TITLE: "RafiPriatna.ID",
@@ -48,17 +48,71 @@ export const SOCIALS: Socials = [
   },
 ];
 
+export const CERTIFICATIONS: Certifications = [
+  {
+    name: "OSCP",
+    fullName: "Offensive Security Certified Professional",
+    issuer: "Offensive Security",
+    year: "2024",
+    url: "https://www.credly.com/badges/offensive-security-certified-professional-oscp",
+  },
+  {
+    name: "CPSA",
+    fullName: "CREST Practitioner Security Analyst",
+    issuer: "CREST",
+    year: "2024-2029",
+  },
+  {
+    name: "CRT",
+    fullName: "CREST Registered Tester",
+    issuer: "CREST",
+    year: "2024-2029",
+  },
+];
+
 export const WORK_EXPERIENCE: WorkExperience = [
   {
     role: "Cyber Security Consultant I",
     company: "PT. Spentera",
     period: "2024-2026",
+    description: "Fokus pada penetration testing, security assessment, dan konsultasi keamanan untuk klien enterprise.",
+    highlights: [
+      "Melakukan penetration testing aplikasi web, mobile, API, dan infrastruktur.",
+      "Membantu tim internal dan klien dalam remediation temuan keamanan.",
+      "Berpartisipasi dalam proyek red team dan security review.",
+      "Mendapat sertifikasi CPSA & CRT selama periode ini.",
+      "Mengembangkan skill penetration testing, security assessment, dan konsultasi keamanan.",
+    ],
   },
   {
     role: "Junior Penetration Tester",
     company: "PT. Spentera",
-    period: "2022-2024",
+    period: "2022–2024",
+    description: "Memulai karier di bidang offensive security dengan fokus web, infrastruktur & mobile.",
+    highlights: [
+      "Web application, API, infrastruktur & mobile penetration testing.",
+      "Dokumentasi temuan dan rekomendasi remediasi.",
+      "Mendapat sertifikasi OSCP selama periode ini.",
+    ],
   },
-  // Tambah entri lain sesuai pengalaman kamu, contoh:
-  // { role: "Penetration Tester", company: "Nama Perusahaan", period: "2022–2024", description: "..." },
+];
+
+export const EDUCATION: Education = [
+  {
+    degree: "S1 Teknik Informatika",
+    institution: "Universitas",
+    period: "2016–2020",
+    description: "Fokus pada keamanan informasi dan pengembangan perangkat lunak.",
+  },
+];
+
+export const SKILLS: Skills = [
+  {
+    title: "Security",
+    items: ["Penetration Testing", "Web/Mobile/API Security", "OWASP", "Red Team"],
+  },
+  {
+    title: "Tools & Tech",
+    items: ["Linux", "Docker", "Python", "Bash", "Git", "NMAP", "Wireshark", "Metasploit", "Burp Suite", "Kali Linux"],
+  },
 ];

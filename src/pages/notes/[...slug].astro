@@ -7,6 +7,7 @@ import { readingTime } from "@lib/utils";
 import BackToPrevious from "@components/BackToPrevious.astro";
 import TableOfContents from "@components/TableOfContents.astro";
 
+// URL aturan: /notes/{slug}
 export async function getStaticPaths() {
   const notes = (await getCollection("notes"))
     .filter((post) => !post.data.draft)

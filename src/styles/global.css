@@ -46,6 +46,13 @@ main {
   @apply flex-1 pt-[7.5rem] pb-16;
 }
 
+/* Ruang untuk mobile nav + footer agar tema tidak tertutup */
+@media (max-width: 767px) {
+  main {
+    @apply pb-32;
+  }
+}
+
 /* ─── Footer ─── */
 footer {
   @apply py-6 text-xs;

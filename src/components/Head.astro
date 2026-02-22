@@ -79,25 +79,26 @@ const { title, description, image = "/blog-placeholder-1.jpg" } = Astro.props;
     const backToPrev = document.getElementById("back-to-prev");
     backToPrev?.addEventListener("click", () => window.history.back());
 
-    const lightThemeButton = document.getElementById("light-theme-button");
-    lightThemeButton?.addEventListener("click", () => {
-      localStorage.setItem("theme", "light");
-      toggleTheme(false);
-      updateThemeButtons();
+    document.querySelectorAll('.theme-toggle[data-theme="light"]').forEach((btn) => {
+      btn.addEventListener("click", () => {
+        localStorage.setItem("theme", "light");
+        toggleTheme(false);
+        updateThemeButtons();
+      });
     });
-
-    const darkThemeButton = document.getElementById("dark-theme-button");
-    darkThemeButton?.addEventListener("click", () => {
-      localStorage.setItem("theme", "dark");
-      toggleTheme(true);
-      updateThemeButtons();
+    document.querySelectorAll('.theme-toggle[data-theme="dark"]').forEach((btn) => {
+      btn.addEventListener("click", () => {
+        localStorage.setItem("theme", "dark");
+        toggleTheme(true);
+        updateThemeButtons();
+      });
     });
-
-    const systemThemeButton = document.getElementById("system-theme-button");
-    systemThemeButton?.addEventListener("click", () => {
-      localStorage.setItem("theme", "system");
-      toggleTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
-      updateThemeButtons();
+    document.querySelectorAll('.theme-toggle[data-theme="system"]').forEach((btn) => {
+      btn.addEventListener("click", () => {
+        localStorage.setItem("theme", "system");
+        toggleTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
+        updateThemeButtons();
+      });
     });
 
     window
@@ -113,29 +114,9 @@ const { title, description, image = "/blog-placeholder-1.jpg" } = Astro.props;
 
   function updateThemeButtons() {
     const theme = localStorage.getItem("theme");
-    const lightThemeButton = document.getElementById("light-theme-button");
-    const darkThemeButton = document.getElementById("dark-theme-button");
-    const systemThemeButton = document.getElementById("system-theme-button");
-
-    function removeActive(button) {
-      button?.classList.remove("!text-accent");
-    }
-
-    function addActive(button) {
-      button?.classList.add("!text-accent");
-    }
-
-    removeActive(lightThemeButton);
-    removeActive(darkThemeButton);
-    removeActive(systemThemeButton);
-
-    if (theme === "light") {
-      addActive(lightThemeButton);
-    } else if (theme === "dark") {
-      addActive(darkThemeButton);
-    } else {
-      addActive(systemThemeButton);
-    }
+    document.querySelectorAll(".theme-toggle").forEach((btn) => btn.classList.remove("!text-accent"));
+    const selector = theme === "light" ? '[data-theme="light"]' : theme === "dark" ? '[data-theme="dark"]' : '[data-theme="system"]';
+    document.querySelectorAll(".theme-toggle" + selector).forEach((btn) => btn.classList.add("!text-accent"));
   }
 
   function animate() {
