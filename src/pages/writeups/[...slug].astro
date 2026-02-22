@@ -7,13 +7,18 @@ import { readingTime } from "@lib/utils";
 import BackToPrevious from "@components/BackToPrevious.astro";
 import TableOfContents from "@components/TableOfContents.astro";
 
-// URL aturan: /writeups/{slug}
+// URL aturan: /writeups/{slug} (bukan /writeups/writeups/slug)
+function normalizeSlug(slug: string): string {
+  const prefix = "writeups/";
+  return slug.startsWith(prefix) ? slug.slice(prefix.length) : slug;
+}
+
 export async function getStaticPaths() {
   const writeups = (await getCollection("writeups"))
     .filter((post) => !post.data.draft)
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
   return writeups.map((writeup) => ({
-    params: { slug: writeup.slug },
+    params: { slug: normalizeSlug(writeup.slug) },
     props: writeup,
   }));
 }

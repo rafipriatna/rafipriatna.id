@@ -7,13 +7,18 @@ import { readingTime } from "@lib/utils";
 import BackToPrevious from "@components/BackToPrevious.astro";
 import TableOfContents from "@components/TableOfContents.astro";
 
-// URL aturan: /notes/{slug}
+// URL aturan: /notes/{slug} (bukan /notes/notes/slug)
+function normalizeSlug(slug: string): string {
+  const prefix = "notes/";
+  return slug.startsWith(prefix) ? slug.slice(prefix.length) : slug;
+}
+
 export async function getStaticPaths() {
   const notes = (await getCollection("notes"))
     .filter((post) => !post.data.draft)
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
   return notes.map((note) => ({
-    params: { slug: note.slug },
+    params: { slug: normalizeSlug(note.slug) },
     props: note,
   }));
 }
