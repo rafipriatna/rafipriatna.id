@@ -157,119 +157,119 @@ declare module 'astro:content' {
   slug: "pengaturan-windows-10-untuk-pengembangan-web";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".md"] };
 "2020/berkenalan-dengan-arduino/index.md": {
 	id: "2020/berkenalan-dengan-arduino/index.md";
   slug: "berkenalan-dengan-arduino";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".md"] };
 "2020/cara-install-dnscrypt-proxy-di-mx-linux/index.md": {
 	id: "2020/cara-install-dnscrypt-proxy-di-mx-linux/index.md";
   slug: "cara-install-dnscrypt-proxy-di-mx-linux";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".md"] };
 "2020/cara-install-lemp-stack-centos-8/index.md": {
 	id: "2020/cara-install-lemp-stack-centos-8/index.md";
   slug: "cara-install-lemp-stack-centos-8";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".md"] };
 "2020/cara-install-ssl-cloudflare-gratis-di-nginx/index.md": {
 	id: "2020/cara-install-ssl-cloudflare-gratis-di-nginx/index.md";
   slug: "cara-install-ssl-cloudflare-gratis-di-nginx";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".md"] };
 "2020/ctf/index.md": {
 	id: "2020/ctf/index.md";
   slug: "ctf";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".md"] };
 "2020/dual-boot-windows-dan-ubuntu-dengan-intel-optane/index.md": {
 	id: "2020/dual-boot-windows-dan-ubuntu-dengan-intel-optane/index.md";
   slug: "dual-boot-windows-dan-ubuntu-dengan-intel-optane";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".md"] };
 "2020/membuat-iot-dengan-wemos-d1-r2-esp8266-serta-menggunakan-api-nodejs-dan-vuejs/index.md": {
 	id: "2020/membuat-iot-dengan-wemos-d1-r2-esp8266-serta-menggunakan-api-nodejs-dan-vuejs/index.md";
   slug: "membuat-iot-dengan-wemos-d1-r2-esp8266-serta-menggunakan-api-nodejs-dan-vuejs";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".md"] };
 "2020/migrasi-blog-ke-hugo/index.md": {
 	id: "2020/migrasi-blog-ke-hugo/index.md";
   slug: "migrasi-blog-ke-hugo";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".md"] };
 "2020/migrasi-ke-mx-linux/index.md": {
 	id: "2020/migrasi-ke-mx-linux/index.md";
   slug: "migrasi-ke-mx-linux";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".md"] };
 "2020/restorasi-mysql-dari-data-directory/index.md": {
 	id: "2020/restorasi-mysql-dari-data-directory/index.md";
   slug: "restorasi-mysql-dari-data-directory";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".md"] };
 "2020/selamat-tinggal-mx-linux/index.md": {
 	id: "2020/selamat-tinggal-mx-linux/index.md";
   slug: "selamat-tinggal-mx-linux";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".md"] };
 "2020/tips-menghemat-baterai-laptop-linux/index.md": {
 	id: "2020/tips-menghemat-baterai-laptop-linux/index.md";
   slug: "tips-menghemat-baterai-laptop-linux";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".md"] };
 "2021/async-await-javascript/index.md": {
 	id: "2021/async-await-javascript/index.md";
   slug: "async-await-javascript";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".md"] };
 "2023/pengantar-android-pentesting/index.md": {
 	id: "2023/pengantar-android-pentesting/index.md";
   slug: "pengantar-android-pentesting";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".md"] };
 "2024/bypassing-jailmonkey-root-detection-di-ios/index.md": {
 	id: "2024/bypassing-jailmonkey-root-detection-di-ios/index.md";
   slug: "bypassing-jailmonkey-root-detection";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".md"] };
 "2024/halo-fedora-41/index.mdx": {
 	id: "2024/halo-fedora-41/index.mdx";
   slug: "halo-fedora-41";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
 };
 "notes": {
@@ -317,7 +317,7 @@ declare module 'astro:content' {
 } & { render(): Render[".md"] };
 "2026/kendali-yang-terlalu-rapat/index.md": {
 	id: "2026/kendali-yang-terlalu-rapat/index.md";
-  slug: "kendali-yang-terlalu-rapat";
+  slug: "ctrl-z-trust-not-found";
   body: string;
   collection: "notes";
   data: any
@@ -329,28 +329,28 @@ declare module 'astro:content' {
   slug: "de-masking-the-stars";
   body: string;
   collection: "writeups";
-  data: any
+  data: InferEntrySchema<"writeups">
 } & { render(): Render[".mdx"] };
 "hackthebox-bashed/index.md": {
 	id: "hackthebox-bashed/index.md";
   slug: "htb-bashed";
   body: string;
   collection: "writeups";
-  data: any
+  data: InferEntrySchema<"writeups">
 } & { render(): Render[".md"] };
 "writeup-dctf-2021/index.md": {
 	id: "writeup-dctf-2021/index.md";
   slug: "writeup-dctf-2021";
   body: string;
   collection: "writeups";
-  data: any
+  data: InferEntrySchema<"writeups">
 } & { render(): Render[".md"] };
 "writeup-kualifikasi-ctf-hackfest-0x04-web-hacking/index.md": {
 	id: "writeup-kualifikasi-ctf-hackfest-0x04-web-hacking/index.md";
   slug: "writeup-kualifikasi-ctf-hackfest-0x04-web-hacking";
   body: string;
   collection: "writeups";
-  data: any
+  data: InferEntrySchema<"writeups">
 } & { render(): Render[".md"] };
 };
 
@@ -362,5 +362,5 @@ declare module 'astro:content' {
 
 	type AnyEntryMap = ContentEntryMap & DataEntryMap;
 
-	export type ContentConfig = never;
+	export type ContentConfig = typeof import("../../src/content/config.js");
 }

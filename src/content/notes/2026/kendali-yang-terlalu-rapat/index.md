@@ -1,7 +1,7 @@
 ---
 date: 2026-02-10
-title: "Kendali yang Terlalu Rapat"
-slug: "kendali-yang-terlalu-rapat"
+title: "CTRL+Z | EP1: 404_tRu5T_n0T_f0uNd"
+slug: "ctrl-z-trust-not-found"
 description: "Kamu tidak butuh orang yang hebat kalau akhirnya hanya ingin memelihara rasa tidak amanmu sendiri."
 draft: false
 ---
