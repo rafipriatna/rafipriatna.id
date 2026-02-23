@@ -317,6 +317,13 @@ declare module 'astro:content' {
 } & { render(): Render[".md"] };
 };
 "writeups": {
+"2026/de-masking-the-stars/index.mdx": {
+	id: "2026/de-masking-the-stars/index.mdx";
+  slug: "de-masking-the-stars";
+  body: string;
+  collection: "writeups";
+  data: InferEntrySchema<"writeups">
+} & { render(): Render[".mdx"] };
 "hackthebox-bashed/index.md": {
 	id: "hackthebox-bashed/index.md";
   slug: "htb-bashed";
