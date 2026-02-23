@@ -118,8 +118,6 @@ const notes: CollectionEntry<"notes">[] = (await getCollection("notes"))
         <ul class="space-y-1">
           {
             writeups.map((writeup) => {
-              // @ts-ignore
-              writeup.slug = "writeups/" + writeup.slug;
               return (
                 <li>
                   <ArrowCard entry={writeup} />
@@ -164,8 +162,6 @@ const notes: CollectionEntry<"notes">[] = (await getCollection("notes"))
         <ul class="space-y-1">
           {
             notes.map((note) => {
-              // @ts-ignore
-              note.slug = "notes/" + note.slug;
               return (
                 <li>
                   <ArrowCard entry={note} />
