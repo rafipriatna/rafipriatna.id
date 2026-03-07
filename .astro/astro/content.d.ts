@@ -315,6 +315,13 @@ declare module 'astro:content' {
   collection: "notes";
   data: any
 } & { render(): Render[".md"] };
+"2026/ctrl-z-resource-exhausted/index.md": {
+	id: "2026/ctrl-z-resource-exhausted/index.md";
+  slug: "ctrl-z-resource-exhausted";
+  body: string;
+  collection: "notes";
+  data: any
+} & { render(): Render[".md"] };
 "2026/ctrl-z-silent-mode/index.md": {
 	id: "2026/ctrl-z-silent-mode/index.md";
   slug: "ctrl-z-silent-mode";
