@@ -1,7 +1,6 @@
 ---
 // Bookshelf interface for blog articles
 import { type CollectionEntry, getCollection } from "astro:content";
-import { SITE } from "@consts";
 
 const data = (await getCollection("blog"))
   .filter((post) => !post.data.draft)

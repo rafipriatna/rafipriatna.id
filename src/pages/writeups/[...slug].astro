@@ -15,10 +15,6 @@ export async function getStaticPaths() {
 
 type Props = CollectionEntry<"writeups">;
 
-const allWriteups = (await getCollection("writeups"))
-  .filter((w) => !w.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-
 const writeup = Astro.props;
 const { Content, headings } = await writeup.render();
 ---
