@@ -1,61 +1,39 @@
 ---
 import { type CollectionEntry, getCollection } from "astro:content";
-import Layout from "@layouts/Layout.astro";
-import Container from "@components/Container.astro";
-import FormattedDate from "@components/FormattedDate.astro";
-import { readingTime } from "@lib/utils";
-import BackToPrevious from "@components/BackToPrevious.astro";
-import TableOfContents from "@components/TableOfContents.astro";
+import GameLayout from "@layouts/GameLayout.astro";
+import QuestJournal from "@components/QuestJournal.astro";
 
 export async function getStaticPaths() {
-  const notes = (await getCollection("notes"))
-    .filter((post) => !post.data.draft)
+  const allNotes = (await getCollection("notes"))
+    .filter((n) => !n.data.draft)
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-  return notes.map((note) => {
-    const slug = note.slug.startsWith("notes/") ? note.slug.slice(6) : note.slug;
-    return { params: { slug }, props: note };
-  });
+  return allNotes.map((note) => ({
+    params: { slug: note.slug },
+    props: note,
+  }));
 }
+
 type Props = CollectionEntry<"notes">;
+
+const allNotes = (await getCollection("notes"))
+  .filter((n) => !n.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
 const note = Astro.props;
 const { Content, headings } = await note.render();
 ---
 
-<Layout title={note.data.title} description={note.data.description}>
-  <Container>
-    <article class="min-w-0 pt-6 md:pt-10">
-      <div class="mb-5">
-        <BackToPrevious href="/notes">notes</BackToPrevious>
-      </div>
-
-      <div class="mb-10 pb-8 border-b border-surface-border/50">
-        <div class="flex items-center gap-2 text-xs text-text-muted font-mono mb-4">
-          <FormattedDate date={note.data.date} />
-          <span class="text-surface-border">·</span>
-          <span>{readingTime(note.body)}</span>
-        </div>
-        
-        <h1 class="text-lg md:text-xl font-bold text-text-primary leading-snug font-mono break-words min-w-0 max-w-full">
-          {note.data.title}
-        </h1>
-        
-        {note.data.description && (
-          <p class="text-sm text-text-secondary mt-3 leading-relaxed">
-            {note.data.description}
-          </p>
-        )}
-      </div>
-
-      {headings.length > 0 && (
-        <div class="mb-10">
-          <TableOfContents headings={headings} />
-        </div>
-      )}
-
-      <div class="prose prose-invert max-w-none">
-        <Content />
-      </div>
-    </article>
-  </Container>
-</Layout>
+<GameLayout title={note.data.title} description={note.data.description}>
+  <QuestJournal
+    title={note.data.title}
+    description={note.data.description}
+    date={note.data.date}
+    body={note.body}
+    headings={headings}
+    contentType="notes"
+    backHref="/notes"
+    backLabel="Cozy Cabin"
+  >
+    <Content />
+  </QuestJournal>
+</GameLayout>

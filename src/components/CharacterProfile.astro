@@ -1,0 +1,204 @@
+---
+// Character Profile - RPG-style about/me page
+import { Image } from "astro:assets";
+import { SITE, SOCIALS, WORK_EXPERIENCE, EDUCATION, SKILLS, CERTIFICATIONS } from "@consts";
+
+import WonderfulPartner from "@assets/wonderful_partner.png";
+import Work from "@assets/work.jpeg";
+import Avatar from "@assets/Avatar.png";
+import OSCPLogo from "@assets/certifications/oscp.png";
+import CPSALogo from "@assets/certifications/cpsa.png";
+import CRTLogo from "@assets/certifications/crt.png";
+
+const certLogos: Record<string, typeof OSCPLogo> = {
+  OSCP: OSCPLogo,
+  CPSA: CPSALogo,
+  CRT: CRTLogo,
+};
+
+// Map original skills to RPG stats
+const rpgStats = [
+  { name: "Application Security", value: 80, icon: "🛡️" },
+  { name: "Mobile Security", value: 75, icon: "📱" },
+  { name: "Web Security", value: 92, icon: "🌐" },
+  { name: "Cloud Security", value: 40, icon: "☁️" },
+  { name: "Bug Bounty", value: 35, icon: "💰" },
+  { name: "Penetration Testing", value: 85, icon: "🔨" },
+  { name: "Reverse Engineering", value: 40, icon: "⚙️" },
+];
+---
+
+<div class="profile-page min-h-screen pb-24">
+  <div class="max-w-4xl mx-auto px-4 pt-8 sm:pt-12">
+    <!-- Back link -->
+    <a href="/" class="inline-flex items-center gap-1 mb-6 font-mono text-sm text-[var(--ink-light)] hover:text-[var(--gold)] transition-colors">
+      ← Return to village
+    </a>
+
+    <!-- Main Character Profile Screen -->
+    <div class="rpg-box p-4 sm:p-6">
+      <!-- Screen header -->
+      <div class="text-center pb-4 mb-6 border-b border-[var(--border)]">
+        <span class="font-pixel text-[8px] sm:text-[10px] text-[var(--ink-muted)]">✦ CHARACTER PROFILE ✦</span>
+      </div>
+
+      <!-- Profile content -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+        <!-- Left: Avatar & Basic Info -->
+        <div class="space-y-4">
+          <!-- Avatar frame -->
+          <div class="mx-auto w-32 h-32 flex items-center justify-center overflow-hidden">
+            <Image src={Avatar} alt="Rafi Priatna" class="w-full h-full object-contain p-1" />
+          </div>
+          
+          <!-- Name & title -->
+          <div class="text-center">
+            <h1 class="font-pixel text-sm sm:text-base text-[var(--ink)]">RAFI PRIATNA</h1>
+            <p class="font-mono text-sm text-[var(--gold)] mt-1">Application Security Engineer</p>
+          </div>
+          
+          <!-- Level / XP bar -->
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="font-pixel text-[8px] text-[var(--ink)]">LV. 23</span>
+              <span class="font-mono text-[10px] text-[var(--ink-dim)]">XP: 13,337</span>
+            </div>
+            <div class="h-3 pixel-border-light relative overflow-hidden" style="background: var(--bg-accent);">
+              <div class="h-full" style="width: 78%; background: linear-gradient(90deg, var(--gold), var(--green-glow)); transition: width 1s ease;"></div>
+            </div>
+            <p class="font-mono text-[10px] text-[var(--ink-dim)] text-center">Security Researcher</p>
+          </div>
+
+          <!-- Certifications as badges -->
+          <div class="pt-3 border-t border-[var(--border)]">
+            <p class="font-pixel text-[8px] text-[var(--ink)] mb-3">CERTIFICATIONS</p>
+            <div class="space-y-2">
+              {CERTIFICATIONS.map((cert) => {
+                const logo = certLogos[cert.name];
+                return (
+                  <div class="pixel-border-light p-2 flex items-center gap-2" style="background: var(--bg-card-hover);">
+                    <div class="w-11 h-11 flex items-center justify-center overflow-hidden">
+                      {logo ? (
+                        <Image src={logo} alt={cert.name} class="w-full h-full object-contain p-1" />
+                      ) : (
+                        <span class="text-lg font-bold" style="background: linear-gradient(135deg, var(--gold), var(--green-glow)); color: #1A1614;">
+                          {cert.name.slice(0, 2)}
+                        </span>
+                      )}
+                    </div>
+                    <div class="flex-1 min-w-0">
+                      <p class="font-mono text-xs text-[var(--ink)] truncate">{cert.fullName}</p>
+                      <p class="font-mono text-[10px] text-[var(--ink-dim)]">{cert.issuer} · {cert.year}</p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        <!-- Middle: RPG Stats -->
+        <div class="space-y-4">
+          <p class="font-pixel text-[8px] text-[var(--ink)]">STATS</p>
+          <div class="space-y-3">
+            {rpgStats.map((stat) => (
+              <div>
+                <div class="flex items-center justify-between mb-1">
+                  <span class="font-mono text-xs text-[var(--ink)] flex items-center gap-1">
+                    <span>{stat.icon}</span>
+                    {stat.name}
+                  </span>
+                  <span class="font-mono text-xs text-[var(--ink-light)]">{stat.value}</span>
+                </div>
+                <div class="h-2 pixel-border-light overflow-hidden" style="background: var(--bg-accent);">
+                  <div class="h-full transition-all duration-700 ease-out" 
+                       style={{ width: `${stat.value}%`, background: 'linear-gradient(90deg, var(--gold), var(--green-glow))' }}></div>
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          <!-- Bio -->
+          <div class="pt-4 mt-4 border-t border-[var(--border)]">
+            <p class="font-pixel text-[8px] text-[var(--ink)] mb-2">BIO</p>
+            <p class="font-mono text-sm text-[var(--ink-light)] leading-relaxed">
+              Security engineering bukan hanya tentang menemukan vulnerability — ini tentang memahami root cause dan memberikan solusi yang tepat. Di luar pekerjaan, saya suka bug hunting, menulis dokumentasi teknis, dan membangun lab security. Juga menikmati Stardew Valley dan menghabiskan waktu dengan partner saya.
+            </p>
+          </div>
+        </div>
+
+        <!-- Right: Equipment / Inventory -->
+        <div class="space-y-4">
+          <p class="font-pixel text-[8px] text-[var(--ink)]">INVENTORY</p>
+          
+          <!-- Skills as items -->
+          <div class="pixel-border-light p-3" style="background: var(--bg-card-hover);">
+            <p class="font-pixel text-[7px] text-[var(--ink)] mb-2">TOOLS & SKILLS</p>
+            <div class="flex flex-wrap gap-1.5">
+              {SKILLS.flatMap(s => s.items).map((item) => (
+                <span class="font-mono text-[11px] px-1.5 py-0.5 pixel-border-light"
+                      style="background: var(--bg-accent); color: var(--ink-light);">
+                  {item}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <!-- Work Experience -->
+          <div class="pixel-border-light p-3" style="background: var(--bg-card-hover);">
+            <p class="font-pixel text-[7px] text-[var(--ink)] mb-2">QUEST LOG</p>
+            {WORK_EXPERIENCE.map((job) => (
+              <div class="mb-2 last:mb-0 pb-2 last:pb-0 border-b last:border-0 border-dotted border-[var(--border)]">
+                <p class="font-mono text-xs text-[var(--ink)] font-bold">{job.role}</p>
+                <p class="font-mono text-[11px] text-[var(--ink-dim)]">{job.company} · {job.period}</p>
+              </div>
+            ))}
+          </div>
+
+          <!-- Education -->
+          <div class="pixel-border-light p-3" style="background: var(--bg-card-hover);">
+            <p class="font-pixel text-[7px] text-[var(--ink)] mb-2">EDUCATION</p>
+            {EDUCATION.map((edu) => (
+              <div>
+                <p class="font-mono text-xs text-[var(--ink)] font-bold">{edu.degree}</p>
+                <p class="font-mono text-[11px] text-[var(--ink-dim)]">{edu.institution} · {edu.period}</p>
+              </div>
+            ))}
+          </div>
+
+          <!-- Contact -->
+          <div class="pixel-border-light p-3" style="background: var(--bg-card-hover);">
+            <p class="font-pixel text-[7px] text-[var(--ink)] mb-2">CONTACT</p>
+            <div class="font-mono text-xs text-[var(--ink-light)]">
+              <p>Email: me@rafipriatna.id</p>
+              <div class="flex gap-3 mt-1">
+                {SOCIALS.map((s) => (
+                  <a href={s.HREF} target="_blank" rel="noopener noreferrer"
+                     class="text-[var(--ink-muted)] hover:text-[var(--gold)] transition-colors no-underline">
+                    {s.NAME.toLowerCase()}
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Photos section -->
+      <div class="mt-8 pt-6 border-t border-[var(--border)]">
+        <div class="flex flex-col sm:flex-row gap-4">
+          <div class="pixel-border p-1 flex-1" style="background: var(--bg-card-hover);">
+            <Image src={Work} alt="Work setup" width={350} height={220}
+                   class="w-full h-40 object-cover" />
+            <p class="font-mono text-[11px] text-[var(--ink-dim)] mt-1">Battle Station</p>
+          </div>
+          <div class="pixel-border p-1 shrink-0" style="background: var(--bg-card-hover);">
+            <Image src={WonderfulPartner} alt="Wonderful partner" width={200} height={280}
+                   class="w-full sm:w-32 h-40 object-cover" />
+            <p class="font-mono text-[11px] text-[var(--ink-dim)] mt-1">+1 Party Member</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

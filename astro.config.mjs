@@ -4,12 +4,11 @@ import { transformerNotationHighlight, transformerNotationFocus, transformerNota
 
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
-import pagefind from "astro-pagefind";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://astro-micro.vercel.app",
-  integrations: [tailwind(), sitemap(), mdx(), pagefind()],
+  site: "https://rafipriatna.id",
+  integrations: [tailwind(), sitemap(), mdx()],
   markdown: {
     syntaxHighlight: 'shiki',
     shikiConfig: {
@@ -17,7 +16,7 @@ export default defineConfig({
         light: 'vitesse-light',
         dark: 'vitesse-dark',
       },
-      defaultColor: 'dark', // inline = dark; setiap token dapat --shiki-light untuk light mode
+      defaultColor: 'dark',
       transformers: [transformerNotationHighlight(), transformerNotationFocus(), transformerNotationDiff()],
       wrap: true
     },

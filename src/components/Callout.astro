@@ -1,28 +1,24 @@
 ---
-interface Props {
-  type?: "default" | "info" | "warning" | "error";
-}
-
-const { type = "default" } = Astro.props as Props;
-
-const styles = {
-  default: "border-accent/30 bg-accent/5 text-accent",
-  info: "border-blue-500/30 bg-blue-500/5 text-blue-400",
-  warning: "border-yellow-500/30 bg-yellow-500/5 text-yellow-400",
-  error: "border-red-500/30 bg-red-500/5 text-red-400",
+type Props = {
+  type?: "info" | "warning" | "tip";
 };
 
-const icons = {
-  default: ">",
-  info: "i",
-  warning: "!",
-  error: "x",
+const { type = "info" } = Astro.props;
+
+const styles: Record<string, { border: string; bg: string; icon: string; label: string }> = {
+  info: { border: "var(--lab-glow)", bg: "rgba(74, 222, 128, 0.1)", icon: "ℹ️", label: "INFO" },
+  warning: { border: "var(--gold)", bg: "rgba(232, 168, 56, 0.1)", icon: "⚠️", label: "WARNING" },
+  tip: { border: "var(--detective-string)", bg: "rgba(245, 158, 11, 0.08)", icon: "💡", label: "TIP" },
 };
+
+const s = styles[type];
 ---
 
-<div class={`not-prose flex items-start gap-3 rounded-md border p-4 my-6 text-sm ${styles[type]}`}>
-  <span class="font-mono text-xs mt-0.5 shrink-0 opacity-70">[{icons[type]}]</span>
-  <div class="text-text-secondary text-[15px] leading-relaxed">
-    <slot />
+<div class="pixel-border-light px-4 py-3 my-6" style="border-left: 4px solid var(--gold); border-color: s.border; background: s.bg;">
+  <div class="flex items-start gap-2">
+    <span class="font-mono text-xs text-[var(--ink-light)]/60 shrink-0 mt-0.5">{s.icon}</span>
+    <div>
+      <slot />
+    </div>
   </div>
 </div>

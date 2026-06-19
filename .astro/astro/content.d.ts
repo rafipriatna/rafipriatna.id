@@ -278,63 +278,63 @@ declare module 'astro:content' {
   slug: "halo-dunia";
   body: string;
   collection: "notes";
-  data: any
+  data: InferEntrySchema<"notes">
 } & { render(): Render[".md"] };
 "2021/pengalaman-mengikuti-kompetisi-gemastik-xiv/index.md": {
 	id: "2021/pengalaman-mengikuti-kompetisi-gemastik-xiv/index.md";
   slug: "pengalaman-mengikuti-kompetisi-gemastik-xiv";
   body: string;
   collection: "notes";
-  data: any
+  data: InferEntrySchema<"notes">
 } & { render(): Render[".md"] };
 "2021/renovasi-blog/index.md": {
 	id: "2021/renovasi-blog/index.md";
   slug: "renovasi-blog";
   body: string;
   collection: "notes";
-  data: any
+  data: InferEntrySchema<"notes">
 } & { render(): Render[".md"] };
 "2024/2023-ke-2024/index.md": {
 	id: "2024/2023-ke-2024/index.md";
   slug: "2023-ke-2024";
   body: string;
   collection: "notes";
-  data: any
+  data: InferEntrySchema<"notes">
 } & { render(): Render[".md"] };
 "2024/perjalanan-menuju-oscp/index.md": {
 	id: "2024/perjalanan-menuju-oscp/index.md";
   slug: "perjalanan-menuju-oscp";
   body: string;
   collection: "notes";
-  data: any
+  data: InferEntrySchema<"notes">
 } & { render(): Render[".md"] };
 "2024/untuk-kamu-yang-berusia-20an/index.md": {
 	id: "2024/untuk-kamu-yang-berusia-20an/index.md";
   slug: "untuk-kamu-yang-berusia-20an";
   body: string;
   collection: "notes";
-  data: any
+  data: InferEntrySchema<"notes">
 } & { render(): Render[".md"] };
 "2026/ctrl-z-resource-exhausted/index.md": {
 	id: "2026/ctrl-z-resource-exhausted/index.md";
   slug: "ctrl-z-resource-exhausted";
   body: string;
   collection: "notes";
-  data: any
+  data: InferEntrySchema<"notes">
 } & { render(): Render[".md"] };
 "2026/ctrl-z-silent-mode/index.md": {
 	id: "2026/ctrl-z-silent-mode/index.md";
   slug: "ctrl-z-silent-mode";
   body: string;
   collection: "notes";
-  data: any
+  data: InferEntrySchema<"notes">
 } & { render(): Render[".md"] };
 "2026/ctrl-z-trust-not-found/index.md": {
 	id: "2026/ctrl-z-trust-not-found/index.md";
   slug: "ctrl-z-trust-not-found";
   body: string;
   collection: "notes";
-  data: any
+  data: InferEntrySchema<"notes">
 } & { render(): Render[".md"] };
 };
 "writeups": {

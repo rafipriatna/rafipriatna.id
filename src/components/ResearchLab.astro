@@ -1,0 +1,161 @@
+---
+// Bookshelf interface for blog articles
+import { type CollectionEntry, getCollection } from "astro:content";
+import { SITE } from "@consts";
+
+const data = (await getCollection("blog"))
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+type Acc = { [year: string]: CollectionEntry<"blog">[] };
+const posts = data.reduce((acc: Acc, post) => {
+  const year = post.data.date.getFullYear().toString();
+  if (!acc[year]) acc[year] = [];
+  acc[year].push(post);
+  return acc;
+}, {});
+const years = Object.keys(posts).sort((a, b) => parseInt(b) - parseInt(a));
+
+const readingTime = (body: string) => {
+  const wpm = 200;
+  const words = body?.split(/\s+/g).length || 0;
+  const time = Math.ceil(words / wpm);
+  return `${time} min read`;
+};
+---
+
+<div class="lab-page min-h-screen pb-24">
+  <!-- Header -->
+  <div class="max-w-4xl mx-auto px-4 pt-8 sm:pt-12">
+    <div class="flex items-center gap-3 mb-2">
+      <span class="font-pixel text-sm text-[var(--ink)] animate-fade-in">🔬</span>
+      <h1 class="font-pixel text-lg sm:text-xl text-[var(--ink)] animate-slide-in-up">
+        RESEARCH LAB
+      </h1>
+    </div>
+    <p class="font-mono text-sm sm:text-base text-[var(--ink-light)] ml-9 animate-slide-in-up" style="animation-delay: 0.1s;">
+      Vulnerability archives · Security research · Technical documentation
+    </p>
+    
+    <!-- Stats bar -->
+    <div class="flex flex-wrap gap-3 mt-6 animate-slide-in-up" style="animation-delay: 0.2s;">
+      <div class="pixel-border-light px-3 py-1.5" style="background: var(--bg-card);">
+        <span class="font-pixel text-[8px] text-[var(--ink)]">RECORDS</span>
+        <span class="font-mono text-sm text-[var(--green-glow)] ml-2">{data.length}</span>
+      </div>
+      <div class="pixel-border-light px-3 py-1.5" style="background: var(--bg-card);">
+        <span class="font-pixel text-[8px] text-[var(--ink)]">YEARS</span>
+        <span class="font-mono text-sm text-[var(--green-glow)] ml-2">{years.length}</span>
+      </div>
+    </div>
+
+    <!-- Back link -->
+    <a href="/" class="inline-flex items-center gap-1 mt-4 font-mono text-sm text-[var(--ink-muted)] hover:text-[var(--gold)] transition-colors">
+      ← Return to village
+    </a>
+  </div>
+
+  <!-- Bookshelf -->
+  <div class="max-w-4xl mx-auto px-4 mt-8">
+    <div class="rpg-box p-4 sm:p-6">
+      <!-- Shelf header -->
+      <div class="flex items-center gap-2 mb-6 pb-3 border-b border-[var(--border)]">
+        <span class="font-pixel text-[10px] text-[var(--ink)]">📚</span>
+        <span class="font-pixel text-[10px] text-[var(--ink)]">ARCHIVE SHELF</span>
+        <span class="font-mono text-xs text-[var(--green-glow)] animate-cursor-blink">_</span>
+      </div>
+
+      {years.map((year) => (
+        <div class="mb-8 last:mb-0">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="font-mono text-base font-bold text-[var(--green-glow)]">{year}</span>
+            <div class="flex-1 h-px" style="background: var(--border);"></div>
+            <span class="font-mono text-xs text-[var(--ink-dim)]">{posts[year].length} documents</span>
+          </div>
+
+          <div class="grid gap-3">
+            {posts[year].map((post) => {
+              const categories = post.data.categories || [];
+              return (
+                <a 
+                  href={`/${post.slug}`}
+                  class="book-entry group block pixel-border-light p-4 transition-all duration-200"
+                  style="background: var(--bg-card);"
+                >
+                  <div class="flex items-start gap-4">
+                    <!-- Book icon -->
+                    <div class="shrink-0 w-10 h-14 flex items-center justify-center pixel-border"
+                         style="background: linear-gradient(135deg, var(--lab-dark) 0%, var(--lab-metal) 100%);">
+                      <span class="font-pixel text-[6px] text-[var(--green-glow)] text-center leading-tight px-1">
+                        DOC
+                      </span>
+                    </div>
+                    
+                    <!-- Content -->
+                    <div class="flex-1 min-w-0">
+                      <h3 class="font-mono text-sm sm:text-base text-[var(--ink)] font-bold group-hover:text-[var(--gold)] transition-colors">
+                        {post.data.title}
+                      </h3>
+                      <p class="font-sans text-xs sm:text-sm text-[var(--ink-light)]/80 mt-1 line-clamp-2">
+                        {post.data.description}
+                      </p>
+                      
+                      <!-- Metadata -->
+                      <div class="flex flex-wrap items-center gap-2 mt-2">
+                        <span class="font-mono text-[11px] text-[var(--ink-dim)]">
+                          📅 {post.data.date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                        </span>
+                        <span class="text-[var(--ink-dim)]">·</span>
+                        <span class="font-mono text-[11px] text-[var(--ink-dim)]">
+                          ⏱ {readingTime(post.body)}
+                        </span>
+                        {categories.length > 0 && (
+                          <>
+                            <span class="text-[var(--ink-dim)]">·</span>
+                            <div class="flex gap-1">
+                              {categories.slice(0, 2).map((cat) => (
+                                <span class="font-mono text-[10px] px-1.5 py-0.5 pixel-border-light"
+                                      style="background: var(--bg-accent); color: var(--green-glow);">
+                                  {cat}
+                                </span>
+                              ))}
+                            </div>
+                          </>
+                        )}
+                      </div>
+                    </div>
+                    
+                    <!-- Arrow indicator -->
+                    <span class="shrink-0 font-mono text-sm text-[var(--ink-dim)] group-hover:text-[var(--gold)] transition-all opacity-0 group-hover:opacity-100">
+                      →
+                    </span>
+                  </div>
+                </a>
+              );
+            })}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Bottom nav -->
+  <div class="max-w-4xl mx-auto px-4 mt-8 text-center">
+    <a href="/" class="font-mono text-sm text-[var(--ink-muted)] hover:text-[var(--gold)] transition-colors">
+      ← Back to village center
+    </a>
+  </div>
+</div>
+
+<style is:global>
+  @keyframes cursorBlink {
+    50% { opacity: 0; }
+  }
+  .animate-cursor-blink {
+    animation: cursorBlink 1.2s step-end infinite;
+  }
+  .book-entry:hover {
+    transform: translateX(4px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+</style>

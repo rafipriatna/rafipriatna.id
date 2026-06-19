@@ -5,9 +5,6 @@ import faviconSrc from "@assets/me_transparent.png";
 import { ViewTransitions } from "astro:transitions";
 import LoadingIndicator from "astro-loading-indicator/component"
 
-import "@fontsource/geist-sans";
-import "@fontsource/geist-mono";
-
 const appleTouchIcon = await getImage({
   src: faviconSrc,
   width: 180,
@@ -55,173 +52,89 @@ const { title, description, image = "/blog-placeholder-1.jpg" } = Astro.props;
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
 
-<!-- PageFind -->
-<link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
-<script is:inline src="/pagefind/pagefind-ui.js"></script>
-
 <ViewTransitions />
 <LoadingIndicator
-  color="#22c55e",
+  color="#E8A838",
   height="2px"
 />
 
 <script is:inline>
   function init() {
-    preloadTheme();
-    onScroll();
-    animate();
-    updateThemeButtons();
     addCopyCodeButtons();
-
-    const backToTop = document.getElementById("back-to-top");
-    backToTop?.addEventListener("click", (event) => scrollToTop(event));
-
-    const backToPrev = document.getElementById("back-to-prev");
-    backToPrev?.addEventListener("click", () => window.history.back());
-
-    document.querySelectorAll('.theme-toggle[data-theme="light"]').forEach((btn) => {
-      btn.addEventListener("click", () => {
-        localStorage.setItem("theme", "light");
-        toggleTheme(false);
-        updateThemeButtons();
-      });
-    });
-    document.querySelectorAll('.theme-toggle[data-theme="dark"]').forEach((btn) => {
-      btn.addEventListener("click", () => {
-        localStorage.setItem("theme", "dark");
-        toggleTheme(true);
-        updateThemeButtons();
-      });
-    });
-    document.querySelectorAll('.theme-toggle[data-theme="system"]').forEach((btn) => {
-      btn.addEventListener("click", () => {
-        localStorage.setItem("theme", "system");
-        toggleTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
-        updateThemeButtons();
-      });
-    });
-
-    window
-      .matchMedia("(prefers-color-scheme: dark)")
-      .addEventListener("change", (event) => {
-        if (localStorage.theme === "system") {
-          toggleTheme(event.matches);
-        }
-      });
-
-    document.addEventListener("scroll", onScroll);
-  }
-
-  function updateThemeButtons() {
-    const theme = localStorage.getItem("theme");
-    document.querySelectorAll(".theme-toggle").forEach((btn) => btn.classList.remove("!text-accent"));
-    const selector = theme === "light" ? '[data-theme="light"]' : theme === "dark" ? '[data-theme="dark"]' : '[data-theme="system"]';
-    document.querySelectorAll(".theme-toggle" + selector).forEach((btn) => btn.classList.add("!text-accent"));
-  }
-
-  function animate() {
-    const animateElements = document.querySelectorAll(".animate");
-
-    animateElements.forEach((element, index) => {
-      setTimeout(() => {
-        element.classList.add("show");
-      }, index * 100);
-    });
-  }
-
-  function onScroll() {
-    if (window.scrollY > 0) {
-      document.documentElement.classList.add("scrolled");
-    } else {
-      document.documentElement.classList.remove("scrolled");
-    }
-  }
-
-  function scrollToTop(event) {
-    event.preventDefault();
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  }
-
-  function toggleTheme(dark) {
-    const css = document.createElement("style");
-
-    css.appendChild(
-      document.createTextNode(
-        `* {
-             -webkit-transition: none !important;
-             -moz-transition: none !important;
-             -o-transition: none !important;
-             -ms-transition: none !important;
-             transition: none !important;
-          }
-        `
-      )
-    );
-
-    document.head.appendChild(css);
-
-    if (dark) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-
-    window.getComputedStyle(css).opacity;
-    document.head.removeChild(css);
-
-  }
-
-  function preloadTheme() {
-    const userTheme = localStorage.theme;
-
-    if (userTheme === "light" || userTheme === "dark") {
-      toggleTheme(userTheme === "dark");
-    } else {
-      toggleTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
-    }
+    pixelateEmojis();
   }
 
   function addCopyCodeButtons() {
-    let copyButtonLabel = "copy";
-    let codeBlocks = Array.from(document.querySelectorAll("pre"));
+    let codeBlocks = Array.from(document.querySelectorAll("article pre, .quest-content pre"));
 
-    async function copyCode(codeBlock, copyButton) {
-      const codeText = codeBlock.innerText;
-      const buttonText = copyButton.innerText;
-      const textToCopy = codeText.replace(buttonText, "");
+    codeBlocks.forEach((pre) => {
+      // Create header bar as real element
+      const header = document.createElement("div");
+      header.className = "code-header";
+      header.innerHTML = '<span class="code-header-label">⏹ terminal</span>';
 
-      await navigator.clipboard.writeText(textToCopy);
-      copyButton.innerText = "done";
+      const btn = document.createElement("button");
+      btn.className = "code-copy-btn";
+      btn.innerHTML = "⎘ copy";
+      btn.setAttribute("aria-label", "Copy code");
 
-      setTimeout(() => {
-        copyButton.innerText = copyButtonLabel;
-      }, 2000);
-    }
-
-    for (let codeBlock of codeBlocks) {
-      const wrapper = document.createElement("div");
-      wrapper.style.position = "relative";
-
-      const copyButton = document.createElement("button");
-      copyButton.innerText = copyButtonLabel;
-      copyButton.classList = "copy-code";
-
-      codeBlock.setAttribute("tabindex", "0");
-      codeBlock.appendChild(copyButton);
-
-      codeBlock.parentNode.insertBefore(wrapper, codeBlock);
-      wrapper.appendChild(codeBlock);
-
-      copyButton?.addEventListener("click", async () => {
-        await copyCode(codeBlock, copyButton);
+      btn.addEventListener("click", async () => {
+        const text = pre.textContent || "";
+        try {
+          await navigator.clipboard.writeText(text);
+          btn.innerHTML = "✓ done";
+          btn.classList.add("copied");
+          setTimeout(() => {
+            btn.innerHTML = "⎘ copy";
+            btn.classList.remove("copied");
+          }, 2000);
+        } catch {
+          btn.innerHTML = "✗ failed";
+          setTimeout(() => {
+            btn.innerHTML = "⎘ copy";
+          }, 2000);
+        }
       });
+
+      header.appendChild(btn);
+
+      // Wrap pre in container, insert header before pre
+      const wrapper = document.createElement("div");
+      wrapper.className = "code-wrapper";
+      pre.parentNode.insertBefore(wrapper, pre);
+      wrapper.appendChild(header);
+      wrapper.appendChild(pre);
+    });
+  }
+
+  function pixelateEmojis() {
+    // Walk text nodes, wrap emoji characters in a pixel span
+    const walker = document.createTreeWalker(
+      document.body,
+      NodeFilter.SHOW_TEXT,
+      null,
+      false
+    );
+
+    const emojiRegex = /[\u{1F000}-\u{1FFFF}]|[\u2600-\u27BF]|[\u{2700}-\u{27BF}]|[\u{FE00}-\u{FE0F}]|[\u{200D}]|[\u{2934}-\u{2935}]|[\u{25AA}-\u{25AB}]|[\u{25B6}]|[\u{25C0}]|[\u{25FB}-\u{25FE}]|[\u{2B05}-\u{2B07}]|[\u{2B1B}-\u{2B1C}]|[\u{2B50}]|[\u{2B55}]|[\u{3030}]|[\u{303D}]|[\u{3297}]|[\u{3299}]/gu;
+
+    const nodesToReplace = [];
+    while (walker.nextNode()) {
+      const node = walker.currentNode;
+      if (node.textContent && emojiRegex.test(node.textContent)) {
+        nodesToReplace.push(node);
+      }
     }
+
+    nodesToReplace.forEach((node) => {
+      const span = document.createElement("span");
+      span.innerHTML = node.textContent.replace(emojiRegex, (match) => {
+        return `<span class="pixel-emoji">${match}</span>`;
+      });
+      node.parentNode.replaceChild(span, node);
+    });
   }
 
   document.addEventListener("DOMContentLoaded", () => init());
   document.addEventListener("astro:after-swap", () => init());
-  preloadTheme();
 </script>

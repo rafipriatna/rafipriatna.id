@@ -1,52 +1,9 @@
 ---
-import { type CollectionEntry, getCollection } from "astro:content";
-import Layout from "@layouts/Layout.astro";
-import Container from "@components/Container.astro";
-import ArrowCard from "@components/ArrowCard.astro";
+import GameLayout from "@layouts/GameLayout.astro";
+import ResearchLab from "@components/ResearchLab.astro";
 import { BLOG } from "@consts";
-
-const data = (await getCollection("blog"))
-  .filter((post) => !post.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-
-type Acc = {
-  [year: string]: CollectionEntry<"blog">[];
-};
-
-const posts = data.reduce((acc: Acc, post) => {
-  const year = post.data.date.getFullYear().toString();
-  if (!acc[year]) {
-    acc[year] = [];
-  }
-  acc[year].push(post);
-  return acc;
-}, {});
-
-const years = Object.keys(posts).sort((a, b) => parseInt(b) - parseInt(a));
 ---
 
-<Layout title={BLOG.TITLE} description={BLOG.DESCRIPTION}>
-  <Container>
-    <div class="pt-8 md:pt-12">
-      <h1 class="section-heading">blog</h1>
-      <p class="text-sm text-text-muted mb-10">{BLOG.DESCRIPTION}</p>
-
-      <div class="space-y-10">
-        {
-          years.map((year) => (
-            <section>
-              <h2 class="text-xs font-mono text-text-muted mb-4 tabular-nums">{year}</h2>
-              <ul class="space-y-0">
-                {posts[year].map((post) => (
-                  <li>
-                    <ArrowCard entry={post} />
-                  </li>
-                ))}
-              </ul>
-            </section>
-          ))
-        }
-      </div>
-    </div>
-  </Container>
-</Layout>
+<GameLayout title={BLOG.TITLE} description={BLOG.DESCRIPTION}>
+  <ResearchLab />
+</GameLayout>

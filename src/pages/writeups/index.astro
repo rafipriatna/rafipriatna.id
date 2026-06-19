@@ -1,34 +1,9 @@
 ---
-import { getCollection } from "astro:content";
-import Layout from "@layouts/Layout.astro";
-import Container from "@components/Container.astro";
-import ArrowCard from "@components/ArrowCard.astro";
+import GameLayout from "@layouts/GameLayout.astro";
+import DetectiveOffice from "@components/DetectiveOffice.astro";
 import { WRITEUPS } from "@consts";
-
-const writeups = (await getCollection("writeups"))
-  .filter((writeup) => !writeup.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
-<Layout title={WRITEUPS.TITLE} description={WRITEUPS.DESCRIPTION}>
-  <Container>
-    <div class="pt-8 md:pt-12">
-      <h1 class="section-heading">writeups</h1>
-      <p class="text-sm text-text-muted mb-10">{WRITEUPS.DESCRIPTION}</p>
-
-      <ul class="space-y-0">
-        {
-          writeups.map((writeup) => {
-            // @ts-ignore
-            writeup.slug = "writeups/" + writeup.slug;
-            return (
-              <li>
-                <ArrowCard entry={writeup} />
-              </li>
-            );
-          })
-        }
-      </ul>
-    </div>
-  </Container>
-</Layout>
+<GameLayout title={WRITEUPS.TITLE} description={WRITEUPS.DESCRIPTION}>
+  <DetectiveOffice />
+</GameLayout>

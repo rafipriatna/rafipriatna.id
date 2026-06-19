@@ -1,0 +1,36 @@
+---
+import Head from "@components/Head.astro";
+import { SITE } from "@consts";
+import SignPost from "@components/SignPost.astro";
+import AmbientEffects from "@components/AmbientEffects.astro";
+import GameFooter from "@components/GameFooter.astro";
+
+type Props = {
+  title: string;
+  description: string;
+};
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="id">
+  <head>
+    <Head title={`${title} | ${SITE.TITLE}`} description={description} />
+  </head>
+  <body>
+    <div class="scanlines"></div>
+    
+    <AmbientEffects />
+    
+    <!-- Top navigation bar -->
+    <SignPost currentPage={title} />
+    
+    <!-- Main content with top padding for fixed nav -->
+    <main class="pt-16 sm:pt-20">
+      <slot />
+    </main>
+    
+    <GameFooter />
+  </body>
+</html>

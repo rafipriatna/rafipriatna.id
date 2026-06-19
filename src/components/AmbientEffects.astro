@@ -1,0 +1,161 @@
+---
+// Ambient effects - premium pixel art clouds, moon, and particles
+---
+
+<div class="ambient-container fixed inset-0 pointer-events-none overflow-hidden z-0" aria-hidden="true">
+  
+  <!-- Pixel Moon - top right -->
+  <div class="moon-container absolute top-10 right-[12%] sm:top-14 sm:right-[18%]">
+    <div class="pixel-moon">
+      <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" style="image-rendering:pixelated">
+        <!-- Background glow -->
+        <circle cx="32" cy="32" r="28" fill="rgba(232,168,56,0.04)"/>
+        <circle cx="32" cy="32" r="22" fill="rgba(232,168,56,0.06)"/>
+        <!-- Crescent moon pixels -->
+      </svg>
+    </div>
+  </div>
+
+  <!-- Pixel Clouds -->
+  <div class="cloud-layer absolute top-[6%] left-0 w-full">
+    <!-- Cloud 1 - large -->
+    <svg class="cloud cloud-1" width="180" height="48" viewBox="0 0 180 48" fill="var(--ink-muted)" opacity="0.12" style="image-rendering:pixelated">
+      <rect x="12" y="20" width="12" height="8"/>
+      <rect x="24" y="16" width="8" height="12"/>
+      <rect x="32" y="12" width="12" height="20"/>
+      <rect x="44" y="8" width="12" height="28"/>
+      <rect x="56" y="12" width="8" height="24"/>
+      <rect x="64" y="8" width="12" height="28"/>
+      <rect x="76" y="4" width="8" height="32"/>
+      <rect x="84" y="8" width="12" height="28"/>
+      <rect x="96" y="12" width="8" height="24"/>
+      <rect x="104" y="8" width="12" height="28"/>
+      <rect x="116" y="12" width="8" height="24"/>
+      <rect x="124" y="8" width="12" height="28"/>
+      <rect x="136" y="12" width="8" height="20"/>
+      <rect x="144" y="16" width="8" height="16"/>
+      <rect x="152" y="20" width="12" height="8"/>
+      <!-- Bottom fill -->
+      <rect x="24" y="28" width="8" height="8"/>
+      <rect x="84" y="36" width="12" height="4"/>
+      <rect x="96" y="36" width="8" height="4"/>
+      <rect x="116" y="36" width="8" height="4"/>
+      <rect x="124" y="36" width="12" height="4"/>
+      <!-- Highlight pixels -->
+      <rect x="44" y="8" width="4" height="4" fill="var(--ink)" opacity="0.05"/>
+      <rect x="76" y="4" width="4" height="4" fill="var(--ink)" opacity="0.05"/>
+      <rect x="84" y="8" width="4" height="4" fill="var(--ink)" opacity="0.04"/>
+      <rect x="124" y="8" width="4" height="4" fill="var(--ink)" opacity="0.04"/>
+    </svg>
+
+    <!-- Cloud 2 - medium -->
+    <svg class="cloud cloud-2" width="130" height="36" viewBox="0 0 130 36" fill="var(--ink-muted)" opacity="0.1" style="image-rendering:pixelated">
+      <rect x="8" y="14" width="8" height="8"/>
+      <rect x="16" y="10" width="8" height="12"/>
+      <rect x="24" y="6" width="10" height="20"/>
+      <rect x="34" y="10" width="8" height="16"/>
+      <rect x="42" y="6" width="10" height="20"/>
+      <rect x="52" y="4" width="8" height="24"/>
+      <rect x="60" y="6" width="10" height="22"/>
+      <rect x="70" y="10" width="8" height="18"/>
+      <rect x="78" y="6" width="10" height="22"/>
+      <rect x="88" y="10" width="8" height="16"/>
+      <rect x="96" y="6" width="10" height="20"/>
+      <rect x="106" y="10" width="8" height="12"/>
+      <rect x="114" y="14" width="8" height="8"/>
+      <!-- Highlight -->
+      <rect x="52" y="4" width="4" height="4" fill="var(--ink)" opacity="0.04"/>
+      <rect x="60" y="6" width="4" height="4" fill="var(--ink)" opacity="0.03"/>
+    </svg>
+
+    <!-- Cloud 3 - small -->
+    <svg class="cloud cloud-3" width="100" height="28" viewBox="0 0 100 28" fill="var(--ink-muted)" opacity="0.08" style="image-rendering:pixelated">
+      <rect x="6" y="10" width="8" height="8"/>
+      <rect x="14" y="6" width="8" height="14"/>
+      <rect x="22" y="4" width="10" height="18"/>
+      <rect x="32" y="6" width="8" height="16"/>
+      <rect x="40" y="4" width="10" height="18"/>
+      <rect x="50" y="8" width="8" height="14"/>
+      <rect x="58" y="4" width="10" height="18"/>
+      <rect x="68" y="6" width="8" height="14"/>
+      <rect x="76" y="4" width="10" height="16"/>
+      <rect x="86" y="10" width="8" height="8"/>
+      <!-- Highlight -->
+      <rect x="40" y="4" width="4" height="4" fill="var(--ink)" opacity="0.03"/>
+      <rect x="58" y="4" width="4" height="4" fill="var(--ink)" opacity="0.03"/>
+    </svg>
+  </div>
+
+  <!-- Floating dust particles -->
+  <div class="dust-particles absolute inset-0 hidden sm:block">
+    <div class="dust" style="left: 8%; top: 22%; animation-delay: 0s; width: 3px; height: 3px;"></div>
+    <div class="dust" style="left: 28%; top: 38%; animation-delay: 2.3s; width: 2px; height: 2px;"></div>
+    <div class="dust" style="left: 52%; top: 18%; animation-delay: 4.1s; width: 4px; height: 4px;"></div>
+    <div class="dust" style="left: 72%; top: 45%; animation-delay: 1.2s; width: 2px; height: 2px;"></div>
+    <div class="dust" style="left: 88%; top: 28%; animation-delay: 3.5s; width: 3px; height: 3px;"></div>
+    <div class="dust" style="left: 18%; top: 55%; animation-delay: 5s; width: 2px; height: 2px;"></div>
+    <div class="dust" style="left: 45%; top: 48%; animation-delay: 0.8s; width: 3px; height: 3px;"></div>
+  </div>
+</div>
+
+<style is:global>
+  /* ─── Pixel Moon ─── */
+  .moon-container {
+    z-index: 0;
+    filter: drop-shadow(0 0 12px rgba(232, 168, 56, 0.12));
+  }
+
+  .pixel-moon svg {
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+  }
+
+  /* ─── Pixel Clouds ─── */
+  .cloud {
+    position: absolute;
+    animation: cloudDrift linear infinite;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+  }
+  .cloud-1 { animation-duration: 55s; top: 0; left: -180px; }
+  .cloud-2 { animation-duration: 70s; top: 22px; left: -130px; animation-delay: -18s; }
+  .cloud-3 { animation-duration: 60s; top: 8px; left: -100px; animation-delay: -35s; }
+
+  @keyframes cloudDrift {
+    0% { transform: translateX(-150px); }
+    100% { transform: translateX(calc(100vw + 150px)); }
+  }
+
+  /* ─── Dust Particles ─── */
+  .dust {
+    position: absolute;
+    background: rgba(232, 168, 56, 0.12);
+    animation: dustFloat 6s ease-in-out infinite;
+  }
+
+  @keyframes dustFloat {
+    0%, 100% {
+      transform: translateY(0) translateX(0);
+      opacity: 0;
+    }
+    25% {
+      opacity: 0.5;
+    }
+    50% {
+      transform: translateY(-18px) translateX(12px);
+      opacity: 0.25;
+    }
+    75% {
+      opacity: 0.4;
+    }
+  }
+
+  /* Responsive: smaller moon on mobile */
+  @media (max-width: 480px) {
+    .moon-container {
+      transform: scale(0.55);
+      top: 6px;
+      right: 8%;
+    }
+  }
+</style>

@@ -1,61 +1,39 @@
 ---
 import { type CollectionEntry, getCollection } from "astro:content";
-import Layout from "@layouts/Layout.astro";
-import Container from "@components/Container.astro";
-import FormattedDate from "@components/FormattedDate.astro";
-import { readingTime } from "@lib/utils";
-import BackToPrevious from "@components/BackToPrevious.astro";
-import TableOfContents from "@components/TableOfContents.astro";
+import GameLayout from "@layouts/GameLayout.astro";
+import QuestJournal from "@components/QuestJournal.astro";
 
 export async function getStaticPaths() {
-  const writeups = (await getCollection("writeups"))
-    .filter((post) => !post.data.draft)
+  const allWriteups = (await getCollection("writeups"))
+    .filter((w) => !w.data.draft)
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-  return writeups.map((writeup) => {
-    const slug = writeup.slug.startsWith("writeups/") ? writeup.slug.slice(9) : writeup.slug;
-    return { params: { slug }, props: writeup };
-  });
+  return allWriteups.map((writeup) => ({
+    params: { slug: writeup.slug },
+    props: writeup,
+  }));
 }
+
 type Props = CollectionEntry<"writeups">;
+
+const allWriteups = (await getCollection("writeups"))
+  .filter((w) => !w.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
 const writeup = Astro.props;
 const { Content, headings } = await writeup.render();
 ---
 
-<Layout title={writeup.data.title} description={writeup.data.description}>
-  <Container>
-    <article class="min-w-0 pt-6 md:pt-10">
-      <div class="mb-5">
-        <BackToPrevious href="/writeups">writeups</BackToPrevious>
-      </div>
-
-      <div class="mb-10 pb-8 border-b border-surface-border/50">
-        <div class="flex items-center gap-2 text-xs text-text-muted font-mono mb-4">
-          <FormattedDate date={writeup.data.date} />
-          <span class="text-surface-border">·</span>
-          <span>{readingTime(writeup.body)}</span>
-        </div>
-        
-        <h1 class="text-lg md:text-xl font-bold text-text-primary leading-snug font-mono break-words min-w-0 max-w-full">
-          {writeup.data.title}
-        </h1>
-        
-        {writeup.data.description && (
-          <p class="text-sm text-text-secondary mt-3 leading-relaxed">
-            {writeup.data.description}
-          </p>
-        )}
-      </header>
-
-      {headings.length > 0 && (
-        <div class="mb-10">
-          <TableOfContents headings={headings} />
-        </div>
-      )}
-
-      <div class="prose prose-invert max-w-none">
-        <Content />
-      </div>
-    </article>
-  </Container>
-</Layout>
+<GameLayout title={writeup.data.title} description={writeup.data.description}>
+  <QuestJournal
+    title={writeup.data.title}
+    description={writeup.data.description}
+    date={writeup.data.date}
+    body={writeup.body}
+    headings={headings}
+    contentType="writeups"
+    backHref="/writeups"
+    backLabel="Detective Office"
+  >
+    <Content />
+  </QuestJournal>
+</GameLayout>

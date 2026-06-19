@@ -72,6 +72,15 @@ export const CERTIFICATIONS: Certifications = [
 
 export const WORK_EXPERIENCE: WorkExperience = [
   {
+    role: "Application Security Engineer",
+    company: "Private",
+    period: "2026–Present",
+    description: "Bertanggung jawab untuk memastikan keamanan aplikasi dan infrastruktur perusahaan melalui penerapan best practices, code review, dan security assessment. ",
+    highlights: [
+      
+    ],
+  },
+  {
     role: "Cyber Security Consultant I",
     company: "PT. Spentera",
     period: "2024-2026",

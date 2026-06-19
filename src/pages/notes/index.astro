@@ -1,56 +1,9 @@
 ---
-import { type CollectionEntry, getCollection } from "astro:content";
-import Layout from "@layouts/Layout.astro";
-import Container from "@components/Container.astro";
-import ArrowCard from "@components/ArrowCard.astro";
+import GameLayout from "@layouts/GameLayout.astro";
+import CozyCabin from "@components/CozyCabin.astro";
 import { NOTES } from "@consts";
-
-const data = (await getCollection("notes"))
-  .filter((note) => !note.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-
-type Acc = {
-  [year: string]: CollectionEntry<"notes">[];
-};
-
-const notes = data.reduce((acc: Acc, note) => {
-  const year = note.data.date.getFullYear().toString();
-  if (!acc[year]) {
-    acc[year] = [];
-  }
-  acc[year].push(note);
-  return acc;
-}, {});
-
-const years = Object.keys(notes).sort((a, b) => parseInt(b) - parseInt(a));
 ---
 
-<Layout title={NOTES.TITLE} description={NOTES.DESCRIPTION}>
-  <Container>
-    <div class="pt-8 md:pt-12">
-      <h1 class="section-heading">notes</h1>
-      <p class="text-sm text-text-muted mb-10">{NOTES.DESCRIPTION}</p>
-
-      <div class="space-y-10">
-        {
-          years.map((year) => (
-            <section>
-              <h2 class="text-xs font-mono text-text-muted mb-4 tabular-nums">{year}</h2>
-              <ul class="space-y-0">
-                {notes[year].map((note) => {
-                  // @ts-ignore
-                  note.slug = "notes/" + note.slug;
-                  return (
-                    <li>
-                      <ArrowCard entry={note} />
-                    </li>
-                  );
-                })}
-              </ul>
-            </section>
-          ))
-        }
-      </div>
-    </div>
-  </Container>
-</Layout>
+<GameLayout title={NOTES.TITLE} description={NOTES.DESCRIPTION}>
+  <CozyCabin />
+</GameLayout>

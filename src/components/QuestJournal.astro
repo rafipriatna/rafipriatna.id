@@ -1,0 +1,270 @@
+---
+// Quest Journal - RPG-style reading experience for content pages
+import type { CollectionEntry } from "astro:content";
+
+type ContentType = "blog" | "notes" | "writeups";
+
+type Props = {
+  title: string;
+  description: string;
+  date: Date;
+  body: string;
+  headings?: { depth: number; text: string; slug: string }[];
+  contentType: ContentType;
+  backHref: string;
+  backLabel: string;
+  categories?: string[];
+  nextPost?: CollectionEntry<"blog"> | null;
+  prevPost?: CollectionEntry<"blog"> | null;
+};
+
+const { title, description, date, body, headings, contentType, backHref, backLabel, categories, nextPost, prevPost } = Astro.props;
+
+const readingTime = (bodyStr: string) => {
+  const wpm = 200;
+  const words = bodyStr?.split(/\s+/g).length || 0;
+  const time = Math.ceil(words / wpm);
+  return time;
+};
+
+const readTime = readingTime(body);
+const xpGain = Math.min(readTime * 10, 200);
+
+const typeConfig: Record<ContentType, { icon: string; color: string; tag: string }> = {
+  blog: { icon: "🔬", color: "var(--green-glow)", tag: "RESEARCH DOC" },
+  notes: { icon: "🏡", color: "var(--gold)", tag: "JOURNAL ENTRY" },
+  writeups: { icon: "🔍", color: "var(--detective-string)", tag: "CASE FILE" },
+};
+
+const config = typeConfig[contentType];
+---
+
+<div class="quest-journal-page min-h-screen pb-24">
+
+  <!-- Reading progress bar -->
+  <div class="reading-progress" id="reading-progress"></div>
+
+  <!-- Header -->
+  <div class="max-w-4xl mx-auto px-4 pt-6 sm:pt-10">
+    <!-- Back link -->
+    <a href={backHref} 
+       class="inline-flex items-center gap-1 font-mono text-sm text-[var(--ink-muted)] hover:text-[var(--gold)] transition-colors mb-4 no-underline">
+      ← Back to {backLabel}
+    </a>
+
+    <!-- Quest Journal Box -->
+    <div class="rpg-box p-4 sm:p-6 sm:p-8">
+      
+      <!-- Journal header -->
+      <div class="flex items-start gap-3 mb-6 pb-4 border-b border-[var(--border)]">
+        <div class="w-10 h-10 sm:w-12 sm:h-12 pixel-border flex items-center justify-center shrink-0 text-xl"
+             style="background: linear-gradient(135deg, var(--lab-dark) 0%, var(--roof-dark) 100%);">
+          {config.icon}
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="font-pixel text-[7px] text-[#fff] px-1.5 py-0.5" 
+                  style={{ background: config.color }}>
+              {config.tag}
+            </span>
+            {categories && categories.length > 0 && categories.slice(0, 2).map((cat) => (
+              <span class="font-mono text-[10px] text-[var(--ink-dim)] pixel-border-light px-1">
+                #{cat.toLowerCase().replace(/\s+/g, '-')}
+              </span>
+            ))}
+          </div>
+          <h1 class="font-mono text-base sm:text-lg text-[var(--ink)] font-bold mt-2 leading-snug">
+            {title}
+          </h1>
+        </div>
+      </div>
+
+      <!-- Quest metadata -->
+      <div class="flex flex-wrap items-center gap-4 mb-6 pb-4 border-b border-[var(--border)]">
+        <div class="flex items-center gap-1.5">
+          <span class="font-mono text-xs text-[var(--ink-dim)]">📅</span>
+          <span class="font-mono text-xs text-[var(--ink-light)]">
+            {date.toLocaleDateString('en-US', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' })}
+          </span>
+        </div>
+        <div class="flex items-center gap-1.5">
+          <span class="font-mono text-xs text-[var(--ink-dim)]">⏱</span>
+          <span class="font-mono text-xs text-[var(--ink-light)]">{readTime} min read</span>
+        </div>
+        <div class="flex items-center gap-1.5">
+          <span class="font-mono text-xs text-[var(--ink-dim)]">⭐</span>
+          <span class="font-mono text-xs text-[var(--green-glow)]">+{xpGain} XP</span>
+        </div>
+      </div>
+
+      <!-- Quest description -->
+      {description && (
+        <div class="mb-6 p-3 pixel-border-light" style="background: var(--bg-card-hover);">
+          <p class="font-pixel text-[7px] text-[var(--ink)] mb-1">📋 QUEST INFO</p>
+          <p class="font-mono text-sm text-[var(--ink-light)] leading-relaxed">{description}</p>
+        </div>
+      )}
+
+      <!-- Table of Contents (if headings) -->
+      {headings && headings.length > 0 && (
+        <div class="mb-6 p-3 pixel-border-light" style="background: var(--bg-card); border-color: var(--gold);">
+          <p class="font-pixel text-[7px] text-[var(--ink)] mb-2">🗺️ CHAPTERS</p>
+          <ul class="space-y-1">
+            {headings.filter(h => h.depth <= 3).map((h, i) => (
+              <li>
+                <a href={`#${h.slug}`}
+                   class="font-mono text-xs text-[var(--ink-light)]/80 hover:text-[var(--gold)] transition-colors flex items-center gap-2 no-underline">
+                  <span class="text-[var(--ink-dim)]">{String(i + 1).padStart(2, '0')}</span>
+                  <span>{h.text}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      <!-- Article content -->
+      <div class="quest-content">
+        <slot />
+      </div>
+
+      <!-- Previous / Next navigation -->
+      {(prevPost || nextPost) && (
+        <div class="mt-8 pt-4 border-t border-[var(--border)]">
+          <div class="flex justify-between gap-4">
+            {prevPost ? (
+              <a href={`/${prevPost.slug}`} class="flex-1 pixel-border-light p-3 hover:bg-[var(--bg-card-hover)] transition-colors group no-underline"
+                 style="background: var(--bg-card);">
+                <span class="font-pixel text-[7px] text-[var(--ink-dim)]">← PREVIOUS</span>
+                <p class="font-mono text-xs text-[var(--ink)] mt-1 group-hover:text-[var(--gold)] truncate">
+                  {prevPost.data.title}
+                </p>
+              </a>
+            ) : <div class="flex-1"></div>}
+            {nextPost ? (
+              <a href={`/${nextPost.slug}`} class="flex-1 pixel-border-light p-3 text-right hover:bg-[var(--bg-card-hover)] transition-colors group no-underline"
+                 style="background: var(--bg-card);">
+                <span class="font-pixel text-[7px] text-[var(--ink-dim)]">NEXT →</span>
+                <p class="font-mono text-xs text-[var(--ink)] mt-1 group-hover:text-[var(--gold)] truncate">
+                  {nextPost.data.title}
+                </p>
+              </a>
+            ) : <div class="flex-1"></div>}
+          </div>
+        </div>
+      )}
+    </div>
+
+    <!-- Back link bottom -->
+    <div class="mt-6 text-center">
+      <a href={backHref} class="font-mono text-sm text-[var(--ink-muted)] hover:text-[var(--gold)] transition-colors">
+        ← Back to {backLabel}
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  const progressBar = document.getElementById('reading-progress');
+  if (progressBar) {
+    const updateProgress = () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      progressBar.style.width = `${Math.min(progress, 100)}%`;
+    };
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+  }
+</script>
+
+<style is:global>
+  .quest-content {
+    color: var(--ink-light);
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    line-height: 1.75;
+  }
+  
+  .quest-content h2 {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 12px;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: var(--ink);
+    letter-spacing: 0.02em;
+  }
+  
+  .quest-content h3 {
+    font-family: 'VT323', monospace;
+    font-size: 18px;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    color: var(--ink);
+  }
+  
+  .quest-content p {
+    margin-bottom: 1.25rem;
+    color: var(--ink-light);
+  }
+  
+  .quest-content a {
+    color: var(--gold);
+    border-bottom: 2px dotted rgba(232, 168, 56, 0.35);
+    text-decoration: none;
+    transition: border-color 0.2s;
+  }
+  
+  .quest-content a:hover {
+    border-bottom-color: var(--gold);
+  }
+  
+  .quest-content pre {
+    background: #131210 !important;
+    border: 1px solid var(--border) !important;
+    border-top: none !important;
+    border-radius: 0 !important;
+    padding: 1.25rem !important;
+    margin: 0 !important;
+    overflow-x: auto !important;
+    font-family: 'Courier New', 'Consolas', 'Liberation Mono', monospace !important;
+    font-size: 13px !important;
+    line-height: 1.6 !important;
+  }
+  
+  .quest-content code {
+    font-family: 'Courier New', 'Consolas', 'Liberation Mono', monospace !important;
+    font-size: 13px !important;
+    color: var(--green-glow) !important;
+  }
+  
+  .quest-content blockquote {
+    border-left: 4px solid var(--gold);
+    padding: 0.75rem 1rem;
+    margin: 1.5rem 0;
+    background: var(--bg-accent);
+    border-radius: 0;
+  }
+  
+  .quest-content img {
+    border: 2px solid var(--border);
+    margin: 2rem auto;
+    max-width: 100%;
+  }
+  
+  .quest-content ul, .quest-content ol {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+  }
+  
+  .quest-content li {
+    margin-bottom: 0.5rem;
+  }
+  
+  .quest-content hr {
+    border: none;
+    border-top: 2px dotted var(--border);
+    opacity: 0.5;
+    margin: 2rem 0;
+  }
+</style>

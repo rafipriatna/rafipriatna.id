@@ -1,289 +1,367 @@
+/* ─── Font imports must precede all other statements ─── */
+@import '@fontsource/press-start-2p/400.css';
+@import '@fontsource/vt323/400.css';
+@import '@fontsource/inter/300.css';
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/inter/600.css';
+@import '@fontsource/inter/700.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ─── Design Tokens ─── */
+/* Single dark theme — no gradient, no light mode confusion */
+:root {
+  --bg-page: #0F0E0D;
+  --bg-card: #1C1815;
+  --bg-card-hover: #25211E;
+  --bg-accent: #2A241F;
+  --border: #3A322A;
+  --border-light: #4A4137;
+
+  /* Text */
+  --ink: #FFE4C4;
+  --ink-light: #D4A76A;
+  --ink-muted: #8B7D6B;
+  --ink-dim: #6B5F52;
+
+  /* Accent */
+  --gold: #E8A838;
+  --gold-hover: #FFC55C;
+  --green-glow: #4ADE80;
+
+  /* Village elements */
+  --wood: #5C3A21;
+  --wood-dark: #3E2723;
+  --roof: #A0522D;
+  --roof-dark: #6B3A2E;
+  --path: #6B5F52;
+  --grass: #1E2D14;
+  --parchment: #1C1815;
+
+  /* Lab */
+  --lab-metal: #4A4A4A;
+  --lab-glow: #4ADE80;
+  --lab-accent: #38BDF8;
+  --lab-dark: #1A1A24;
+
+  /* Cabin */
+  --cabin-wall: #3E2723;
+  --cabin-warm: #FFE4A0;
+
+  /* Detective */
+  --detective-wall: #2A241F;
+  --detective-board: #25211E;
+  --detective-pin: #DC2626;
+  --detective-string: #F59E0B;
+  --evidence: #1E1A16;
+
+  /* Village */
+  --sky-top: #0F0E0D;
+  --sky-bottom: #0F0E0D;
+  --dirt: #3A3025;
+}
+
 /* ─── Base ─── */
 html {
   overflow-y: auto;
-  color-scheme: dark;
-  scroll-padding-top: 8rem;
+  scroll-padding-top: 4rem;
+  scroll-behavior: smooth;
 }
 
-html:not(.dark) {
-  color-scheme: light;
-}
-
-html,
-body {
-  @apply size-full scroll-smooth;
+html, body {
+  @apply size-full;
 }
 
 body {
   @apply font-sans antialiased;
   @apply flex flex-col;
-  @apply bg-base text-text-primary;
-  @apply selection:bg-accent/15 selection:text-accent;
-}
-
-html:not(.dark) body {
-  @apply bg-neutral-50 text-neutral-900;
-  @apply selection:bg-accent/15 selection:text-accent-700;
-}
-
-/* ─── Header ─── */
-header {
-  @apply fixed left-0 right-0 top-0 z-50;
-  @apply bg-base/90 backdrop-blur-sm;
-  @apply border-b border-surface-border/50;
-}
-
-html:not(.dark) header {
-  @apply bg-neutral-50/90 border-neutral-200;
+  background: var(--bg-page);
+  color: var(--ink);
+  min-height: 100vh;
 }
 
 /* ─── Main ─── */
 main {
-  @apply flex-1 pt-[7.5rem] pb-16;
+  @apply flex-1;
+  position: relative;
+  z-index: 1;
 }
 
-/* Ruang untuk mobile nav + footer agar tema tidak tertutup */
-@media (max-width: 767px) {
-  main {
-    @apply pb-32;
-  }
+/* ─── Pixel border utility ─── */
+.pixel-border {
+  border: 3px solid var(--border);
+  box-shadow: 
+    inset -2px -2px 0 0 rgba(0,0,0,0.3),
+    inset 2px 2px 0 0 rgba(255,255,255,0.05);
 }
 
-/* ─── Footer ─── */
-footer {
-  @apply py-6 text-xs;
-  @apply border-t border-surface-border/50;
+.pixel-border-light {
+  border: 2px solid var(--border-light);
+  box-shadow: inset -1px -1px 0 0 rgba(0,0,0,0.2);
 }
 
-html:not(.dark) footer {
-  @apply border-neutral-200;
+/* ─── Pixel button ─── */
+.pixel-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background: var(--gold);
+  color: #1A1614;
+  border: 3px solid var(--border);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 3px 3px 0 0 rgba(0,0,0,0.4);
+  image-rendering: pixelated;
 }
 
-/* ─── Light mode: override semantic text/surface colors ─── */
-html:not(.dark) .text-text-primary {
-  @apply text-neutral-900;
+.pixel-btn:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 0 rgba(0,0,0,0.4);
+  background: var(--gold-hover);
 }
 
-html:not(.dark) .text-text-secondary {
-  @apply text-neutral-600;
+.pixel-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 0 rgba(0,0,0,0.4);
 }
 
-html:not(.dark) .text-text-muted {
-  @apply text-neutral-500;
+/* ─── Scanline overlay ─── */
+.scanlines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 1px,
+    rgba(0,0,0,0.06) 1px,
+    rgba(0,0,0,0.06) 2px
+  );
 }
 
-html:not(.dark) .text-text-primary\/85 {
-  @apply text-neutral-800;
-}
-
-html:not(.dark) .text-surface-border {
-  @apply text-neutral-400;
-}
-
-html:not(.dark) .border-surface-border,
-html:not(.dark) .border-surface-border\/50,
-html:not(.dark) .border-surface-border\/30 {
-  @apply border-neutral-200;
-}
-
-html:not(.dark) .bg-surface-light {
-  @apply bg-neutral-100;
-}
-
-html:not(.dark) .bg-surface-border\/50 {
-  @apply bg-neutral-200;
-}
-
-html:not(.dark) .bg-base {
-  @apply bg-neutral-50;
-}
-
-html:not(.dark) .bg-base\/90 {
-  @apply bg-neutral-50/90;
-}
-
-html:not(.dark) .bg-base\/95 {
-  @apply bg-neutral-50/95;
-}
-
-/* ─── Typography (article/prose) ─── */
+/* ─── Prose/article pixel styling ─── */
 article {
-  @apply prose dark:prose-invert max-w-full;
-  @apply prose-headings:font-mono prose-headings:font-semibold;
-  @apply prose-headings:text-text-primary;
-  @apply prose-headings:mt-10 prose-headings:mb-4;
-  @apply prose-h1:text-xl prose-h1:font-bold prose-h1:leading-tight;
-  @apply prose-h2:text-lg prose-h2:mt-10 prose-h2:mb-4;
-  @apply prose-h3:text-base prose-h3:mt-8 prose-h3:mb-3;
-  @apply prose-h4:text-sm prose-h4:mt-6 prose-h4:mb-3;
-  @apply prose-p:text-text-primary/85 prose-p:leading-relaxed prose-p:mb-5;
-  @apply prose-p:text-[15px];
-  @apply prose-a:text-accent prose-a:no-underline;
-  @apply prose-a:border-b prose-a:border-accent/20;
-  @apply prose-a:transition-colors prose-a:duration-200;
-  @apply hover:prose-a:text-accent-400 hover:prose-a:border-accent/60;
-  @apply prose-img:mx-auto prose-img:my-8 prose-img:rounded-md;
-  @apply prose-img:border prose-img:border-surface-border;
-  @apply prose-code:text-accent prose-code:font-mono prose-code:text-xs prose-code:font-normal;
-  @apply prose-code:bg-surface-light prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded;
-  @apply prose-pre:bg-surface-light prose-pre:border prose-pre:border-surface-border;
-  @apply prose-pre:rounded-md prose-pre:text-sm;
-  @apply prose-strong:text-text-primary prose-strong:font-semibold;
-  @apply prose-ul:my-4 prose-ul:space-y-1;
-  @apply prose-ol:my-4 prose-ol:space-y-1;
-  @apply prose-li:text-text-primary/85 prose-li:leading-relaxed prose-li:text-[15px];
-  @apply prose-blockquote:border-l-2 prose-blockquote:border-accent/40;
-  @apply prose-blockquote:pl-4 prose-blockquote:py-1 prose-blockquote:my-6;
-  @apply prose-blockquote:text-text-secondary prose-blockquote:italic prose-blockquote:text-sm;
-  @apply prose-hr:border-surface-border prose-hr:my-10;
+  @apply prose prose-invert max-w-full;
+  @apply prose-headings:font-pixel prose-headings:font-normal;
+  @apply prose-headings:text-[var(--ink)] prose-headings:tracking-normal;
+  @apply prose-headings:mt-10 prose-headings:mb-6;
+  @apply prose-h1:text-lg prose-h1:leading-relaxed;
+  @apply prose-h2:text-base prose-h2:leading-relaxed;
+  @apply prose-h3:text-sm prose-h3:leading-relaxed;
+  @apply prose-p:text-[var(--ink-light)] prose-p:leading-relaxed prose-p:mb-5;
+  @apply prose-p:text-[15px] prose-p:font-sans;
+  @apply prose-a:text-[var(--gold)] prose-a:no-underline;
+  @apply prose-a:border-b-2 prose-a:border-dotted;
+  @apply prose-img:mx-auto prose-img:my-8 prose-img:border-2;
+  @apply prose-code:text-[var(--green-glow)] prose-code:font-mono prose-code:text-sm prose-code:font-normal;
+  @apply prose-pre:border-2;
+  @apply prose-pre:rounded-none;
+  @apply prose-strong:text-[var(--ink)] prose-strong:font-bold;
+  @apply prose-ul:my-4;
+  @apply prose-ol:my-4;
+  @apply prose-li:text-[var(--ink-light)];
+  @apply prose-blockquote:border-l-4 prose-blockquote:pl-4 prose-blockquote:py-2 prose-blockquote:my-6;
+  @apply prose-blockquote:text-[var(--ink-light)] prose-blockquote:not-italic;
+  @apply prose-blockquote:rounded-r;
+  @apply prose-hr:border-[var(--border)] prose-hr:my-10 prose-hr:opacity-50;
   @apply prose-table:my-6 prose-table:w-full prose-table:text-sm;
-  @apply prose-th:border prose-th:border-surface-border prose-th:bg-surface-light prose-th:px-3 prose-th:py-2;
-  @apply prose-th:text-text-primary prose-th:font-semibold prose-th:text-xs prose-th:font-mono;
-  @apply prose-td:border prose-td:border-surface-border prose-td:px-3 prose-td:py-2;
-  @apply prose-td:text-text-primary/85 prose-td:text-sm;
+  @apply prose-th:border-2 prose-th:bg-[var(--bg-card)];
+  @apply prose-th:text-[var(--ink)] prose-th:font-pixel prose-th:text-[10px];
+  @apply prose-td:border-2;
+  @apply prose-td:text-[var(--ink-light)];
 }
 
-html:not(.dark) article {
-  @apply prose-headings:text-neutral-900;
-  @apply prose-p:text-neutral-700;
-  @apply prose-li:text-neutral-700;
-  @apply prose-strong:text-neutral-900;
-  @apply prose-blockquote:text-neutral-500;
-  @apply prose-code:text-accent-700 prose-code:bg-neutral-100;
-  @apply prose-pre:bg-neutral-100 prose-pre:border-neutral-200;
-  @apply prose-img:border-neutral-200;
-  @apply prose-th:bg-neutral-100 prose-th:border-neutral-200 prose-th:text-neutral-900;
-  @apply prose-td:border-neutral-200 prose-td:text-neutral-700;
-  @apply prose-hr:border-neutral-200;
-  /* Link di konten: hijau gelap agar terbaca di tema light */
-  @apply prose-a:text-accent-700 prose-a:border-accent-300;
-  @apply hover:prose-a:text-accent-600 hover:prose-a:border-accent-500;
+article a {
+  border-color: rgba(232, 168, 56, 0.35) !important;
+}
+article a:hover {
+  border-color: rgba(232, 168, 56, 0.8) !important;
+}
+article img {
+  border-color: var(--border) !important;
+}
+/* ─── Code blocks with terminal style ─── */
+.code-wrapper {
+  margin: 1.5rem 0;
 }
 
-/* ─── Utility classes ─── */
-@layer utilities {
-  .section-heading {
-    @apply text-xs font-mono uppercase tracking-widest text-text-muted mb-8;
-  }
-
-  .section-heading::before {
-    content: "// ";
-    @apply text-accent/50;
-  }
+.code-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: 'VT323', monospace;
+  font-size: 12px;
+  color: var(--ink-muted);
+  background: var(--bg-card);
+  padding: 5px 12px;
+  border: 1px solid var(--border);
+  border-bottom: none;
+  letter-spacing: 0.5px;
 }
 
-/* ─── Animations ─── */
-.animate {
-  @apply opacity-0;
-  @apply transition-all duration-500 ease-out;
+.code-copy-btn {
+  font-family: 'VT323', monospace;
+  font-size: 11px;
+  color: var(--ink-muted);
+  background: transparent;
+  border: 1px solid var(--border-light);
+  padding: 2px 10px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  letter-spacing: 0.3px;
 }
 
-.animate.show {
-  @apply opacity-100;
+.code-copy-btn:hover {
+  color: var(--ink);
+  border-color: var(--gold);
+  background: rgba(232, 168, 56, 0.1);
 }
 
-html #back-to-top {
-  @apply pointer-events-none opacity-0 transition-opacity duration-300;
+.code-copy-btn.copied {
+  color: var(--green-glow);
+  border-color: var(--green-glow);
 }
 
-html.scrolled #back-to-top {
-  @apply pointer-events-auto opacity-100;
+/* Terminal code blocks - transparent background */
+article .astro-code, .astro-code {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 1px solid var(--border) !important;
+  border-top: none !important;
+  border-radius: 0 !important;
+  padding: 1.25rem 1.25rem 1rem !important;
+  margin: 0 !important;
+  overflow-x: auto !important;
+  font-family: 'Courier New', 'Consolas', 'Liberation Mono', monospace !important;
+  font-size: 13px !important;
+  line-height: 1.6 !important;
 }
 
-/* ─── Code blocks ─── */
-pre {
-  @apply border border-surface-border py-5 bg-surface-light;
+/* All code tokens inside terminal - transparent */
+pre code, .astro-code code,
+pre .line, pre .line span,
+.astro-code .line, .astro-code .line span {
+  background: transparent !important;
+  background-color: transparent !important;
 }
 
-html:not(.dark) pre {
-  @apply bg-neutral-100 border-neutral-200;
-}
-
-:root {
-  --astro-code-color-text: #ededed;
-  --astro-code-color-background: #141414;
-  --astro-code-token-comment: #555555;
-  --astro-code-token-keyword: #22c55e;
-  --astro-code-token-string: #4ade80;
-  --astro-code-token-function: #86efac;
-  --astro-code-token-constant: #bbf7d0;
-  --astro-code-token-parameter: #22c55e;
-  --astro-code-token-string-expression: #4ade80;
-  --astro-code-token-punctuation: #888888;
-  --astro-code-token-link: #86efac;
-}
-
-/* ─── Copy code button ─── */
-.copy-code {
-  @apply absolute right-3 top-3 grid size-8 place-content-center rounded;
-  @apply border border-surface-border bg-surface-light text-text-muted;
-  @apply transition-all duration-200 ease-in-out;
-  @apply hover:text-accent hover:border-accent/40;
-}
-
-.copy-code:active {
-  @apply scale-90 transition-transform;
-}
-
-/* ─── Shiki code highlighting ─── */
-/* Dark mode: defaultColor: 'dark' → warna inline sudah tema dark, jangan override color agar syntax highlighting tetap */
-.astro-code {
-  background-color: var(--shiki-dark-bg) !important;
-  font-style: var(--shiki-dark-font-style) !important;
-  font-weight: var(--shiki-dark-font-weight) !important;
-  text-decoration: var(--shiki-dark-text-decoration) !important;
-}
-
+/* Remove Shiki inline token backgrounds */
 .astro-code span {
   background-color: transparent !important;
+  background: transparent !important;
 }
 
-/* Light mode: pakai variabel tema light di setiap token */
-html:not(.dark) .astro-code,
-html:not(.dark) .astro-code span {
-  color: var(--shiki-light) !important;
-  background-color: #f5f5f5 !important;
-  font-style: var(--shiki-light-font-style) !important;
-  font-weight: var(--shiki-light-font-weight) !important;
-  text-decoration: var(--shiki-light-text-decoration) !important;
+/* Remove trailing empty line added by Shiki */
+.astro-code .line:last-child:has(span:empty),
+.astro-code .line:last-child:empty {
+  display: none !important;
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
-html:not(.dark) .astro-code span {
-  background-color: transparent !important;
+/* Inline code ONLY - not inside pre/terminal */
+:not(pre) > code {
+  font-family: 'Courier New', 'Consolas', 'Liberation Mono', monospace !important;
+  font-size: 13px !important;
+  color: var(--green-glow) !important;
+  background: var(--bg-accent) !important;
+  padding: 0.1rem 0.35rem !important;
 }
 
-.astro-code {
-  .line {
-    &.highlighted,
-    &.diff {
-      @apply -ml-4 -mr-5 inline-block w-[calc(100%+(theme(spacing.4)+theme(spacing.4)))] pl-4 pr-5;
-    }
-    &.highlighted {
-      @apply border-accent/40 !bg-accent/10;
-    }
-    &.diff {
-      &.add,
-      &.remove {
-        span:first-child::before {
-          @apply -ml-4 inline-flex w-4;
-        }
-      }
-      &.add {
-        @apply border-accent/40 bg-accent/15;
-        span:first-child::before {
-          @apply text-accent content-["+"];
-        }
-      }
-      &.remove {
-        @apply border-red-500/40 bg-red-500/15;
-        span:first-child::before {
-          @apply text-red-400 content-["-"];
-        }
-      }
-    }
+/* Pixel emoji effect */
+.pixel-emoji {
+  display: inline-block;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  transform: scale(0.85);
+  font-size: 1.18em;
+}
+article th, article td {
+  border-color: var(--border) !important;
+}
+article blockquote {
+  border-color: rgba(232, 168, 56, 0.5) !important;
+  background: var(--bg-accent);
+}
+article hr {
+  border-color: var(--border) !important;
+}
+
+/* ─── Reading progress bar ─── */
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--gold), var(--green-glow));
+  z-index: 100;
+  transition: width 0.1s linear;
+}
+
+/* ─── Selection ─── */
+::selection {
+  background: var(--gold);
+  color: #1A1614;
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--wood);
+  border: 1px solid var(--border);
+}
+
+/* ─── Retro RPG menu border ─── */
+.rpg-box {
+  border: 4px solid var(--border);
+  background: var(--bg-card);
+  box-shadow: 
+    4px 4px 0 0 rgba(0,0,0,0.4),
+    inset 2px 2px 0 0 rgba(255,255,255,0.03),
+    inset -2px -2px 0 0 rgba(0,0,0,0.15);
+}
+
+/* ─── Village ground texture ─── */
+.ground-texture {
+  background-image: 
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 8px,
+      rgba(255,255,255,0.02) 8px,
+      rgba(255,255,255,0.02) 9px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 8px,
+      rgba(0,0,0,0.04) 8px,
+      rgba(0,0,0,0.04) 9px
+    );
+}
+
+/* ─── Responsive helper for pixel fonts ─── */
+@media (max-width: 640px) {
+  .pixel-btn {
+    font-size: 8px;
+    padding: 8px 14px;
   }
 }

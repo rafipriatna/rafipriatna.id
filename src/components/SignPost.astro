@@ -1,0 +1,80 @@
+---
+type Props = {
+  currentPage: string;
+};
+
+const { currentPage } = Astro.props;
+
+const locations = [
+  { name: "Home", href: "/", icon: "🏠" },
+  { name: "Articles", href: "/blog", icon: "🔬" },
+  { name: "Notes", href: "/notes", icon: "🏡" },
+  { name: "Writeups", href: "/writeups", icon: "🔍" },
+  { name: "About", href: "/me", icon: "👤" },
+];
+---
+
+<nav class="top-nav fixed top-0 left-0 right-0 z-50" aria-label="Navigation">
+  <div class="max-w-5xl mx-auto px-3 sm:px-6">
+    <div class="flex items-center justify-between h-14 sm:h-16">
+      <!-- Site logo -->
+      <a href="/" class="font-pixel text-[11px] sm:text-sm text-[var(--gold)] hover:text-[var(--gold-hover)] transition-colors shrink-0 no-underline">
+        RAFIPRIATNA.ID
+      </a>
+      
+      <!-- Nav links -->
+      <div class="flex items-center gap-0.5 sm:gap-1">
+        {locations.map((loc) => {
+          const isActive = currentPage.toLowerCase() === loc.name.toLowerCase() || 
+                          (currentPage === "Home" && loc.name === "Home") ||
+                          (currentPage === "About Me" && loc.name === "About");
+          return (
+            <a
+              href={loc.href}
+              class={`
+                nav-link relative flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-2 rounded-sm
+                text-[11px] sm:text-xs font-mono font-semibold
+                transition-all duration-150 no-underline
+                ${isActive 
+                  ? 'text-[var(--gold)] bg-[var(--bg-accent)] border-b-2 border-[var(--gold)]' 
+                  : 'text-[var(--ink-muted)] hover:text-[var(--ink)] hover:bg-[var(--bg-accent)]/50'
+                }
+              `}
+            >
+              <span class="text-sm sm:text-base leading-none" aria-hidden="true">{loc.icon}</span>
+              <span class="hidden sm:inline">{loc.name}</span>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </div>
+  <!-- Bottom border line -->
+  <div class="h-px w-full" style="background: linear-gradient(90deg, transparent, var(--border), var(--gold), var(--border), transparent);"></div>
+</nav>
+
+<style is:global>
+  .top-nav {
+    background: rgba(15, 14, 13, 0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+  
+  .nav-link {
+    position: relative;
+    white-space: nowrap;
+  }
+  
+  .nav-link:hover {
+    border-bottom-color: transparent;
+  }
+  
+  /* Mobile: compact layout */
+  @media (max-width: 400px) {
+    .nav-link {
+      padding-left: 6px;
+      padding-right: 6px;
+      font-size: 10px;
+    }
+  }
+</style>

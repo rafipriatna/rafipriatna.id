@@ -1,0 +1,157 @@
+---
+// Detective Office - investigation board for writeups
+import { getCollection } from "astro:content";
+
+const writeups = (await getCollection("writeups"))
+  .filter((w) => !w.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const readingTime = (body: string) => {
+  const wpm = 200;
+  const words = body?.split(/\s+/g).length || 0;
+  const time = Math.ceil(words / wpm);
+  return `${time} min read`;
+};
+
+// Simple severity-based classification based on title/content keywords
+function getSeverity(writeup: typeof writeups[0]): { label: string; color: string } {
+  const t = writeup.data.title.toLowerCase();
+  if (t.includes('critical') || t.includes('rce') || t.includes('sql')) 
+    return { label: 'CRITICAL', color: '#DC2626' };
+  if (t.includes('high') || t.includes('bypass') || t.includes('injection'))
+    return { label: 'HIGH', color: '#F59E0B' };
+  if (t.includes('medium') || t.includes('xss') || t.includes('csrf'))
+    return { label: 'MEDIUM', color: '#E8A838' };
+  return { label: 'INFO', color: '#6B8E4E' };
+}
+---
+
+<div class="office-page min-h-screen pb-24">
+  <!-- Header -->
+  <div class="max-w-4xl mx-auto px-4 pt-8 sm:pt-12">
+    <div class="flex items-center gap-3 mb-2">
+      <span class="font-pixel text-sm text-[var(--ink)] animate-fade-in">🔍</span>
+      <h1 class="font-pixel text-lg sm:text-xl text-[var(--ink)] animate-slide-in-up">
+        DETECTIVE OFFICE
+      </h1>
+    </div>
+    <p class="font-mono text-sm sm:text-base text-[var(--ink-light)] ml-9 animate-slide-in-up" style="animation-delay: 0.1s;">
+      Investigation reports · Bug bounty findings · Threat intelligence · Case files
+    </p>
+    
+    <!-- Stats -->
+    <div class="flex flex-wrap gap-3 mt-6 animate-slide-in-up" style="animation-delay: 0.2s;">
+      <div class="pixel-border-light px-3 py-1.5" style="background: var(--bg-card);">
+        <span class="font-pixel text-[8px] text-[var(--ink)]">OPEN CASES</span>
+        <span class="font-mono text-sm text-[var(--detective-string)] ml-2">{writeups.length}</span>
+      </div>
+    </div>
+
+    <!-- Back link -->
+    <a href="/" class="inline-flex items-center gap-1 mt-4 font-mono text-sm text-[var(--ink-muted)] hover:text-[var(--gold)] transition-colors">
+      ← Return to village
+    </a>
+  </div>
+
+  <!-- Investigation Board -->
+  <div class="max-w-4xl mx-auto px-4 mt-6">
+    <!-- Evidence board background -->
+    <div class="pixel-border p-4 sm:p-6 relative overflow-hidden"
+         style="background: var(--bg-card); border-color: var(--border);">
+      <!-- Board grid pattern -->
+      <div class="absolute inset-0 opacity-5"
+           style="background-image: 
+             repeating-linear-gradient(0deg, transparent, transparent 24px, rgba(255,255,255,0.05) 24px, rgba(255,255,255,0.05) 25px),
+             repeating-linear-gradient(90deg, transparent, transparent 24px, rgba(255,255,255,0.05) 24px, rgba(255,255,255,0.05) 25px);
+           "></div>
+      
+      <!-- Board header -->
+      <div class="relative z-10 mb-6">
+        <div class="flex items-center gap-2 pb-2 border-b-2 border-dashed border-[var(--border)]">
+          <span class="font-pixel text-[8px] sm:text-[10px] text-[var(--ink)]">📋 EVIDENCE BOARD</span>
+          <span class="font-mono text-xs text-[var(--ink-dim)] ml-auto">{writeups.length} case files</span>
+        </div>
+      </div>
+
+      <!-- Case files grid with string connections -->
+      <div class="relative z-10">
+        {writeups.length > 0 ? (
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {writeups.map((writeup, idx) => {
+              const severity = getSeverity(writeup);
+              return (
+                <a href={`/writeups/${writeup.slug}`}
+                   class="case-file group block pixel-border p-3 sm:p-4 transition-all duration-200 relative"
+                   style="background: var(--bg-card-hover); border-color: var(--border);">
+                  <!-- Pin -->
+                  <div class="absolute -top-2 -left-2 w-4 h-4 rounded-none" 
+                       style="background: var(--detective-pin); border: 2px solid var(--border);"></div>
+                  
+                  <div class="ml-2">
+                    <!-- Severity badge -->
+                    <div class="flex items-center gap-2 mb-2 flex-wrap">
+                      <span class="pixel-border-light px-1.5 py-0.5 font-mono text-[10px] font-bold" 
+                            style={{ background: severity.color, color: '#fff', borderColor: severity.color }}>
+                        {severity.label}
+                      </span>
+                      <span class="font-mono text-[10px] text-[var(--ink-dim)]">
+                        CASE #{writeups.length - idx}
+                      </span>
+                    </div>
+                    
+                    <h3 class="font-mono text-sm sm:text-base text-[var(--ink)] font-bold group-hover:text-[var(--gold)] transition-colors">
+                      {writeup.data.title}
+                    </h3>
+                    
+                    {writeup.data.description && (
+                      <p class="font-sans text-xs sm:text-sm text-[var(--ink-light)]/80 mt-1 line-clamp-2">
+                        {writeup.data.description}
+                      </p>
+                    )}
+                    
+                    <!-- Evidence metadata -->
+                    <div class="flex flex-wrap items-center gap-3 mt-3 pt-2 border-t border-dashed border-[var(--border)]">
+                      <span class="font-mono text-[10px] text-[var(--ink-dim)]">
+                        📅 {writeup.data.date.toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })}
+                      </span>
+                      <span class="font-mono text-[10px] text-[var(--ink-dim)]">
+                        ⏱ {readingTime(writeup.body)}
+                      </span>
+                    </div>
+                    
+                    <!-- Investigation arrow -->
+                    <div class="mt-2 font-mono text-xs text-[var(--detective-string)] opacity-0 group-hover:opacity-100 transition-opacity">
+                      &gt; view case file →
+                    </div>
+                  </div>
+                </a>
+              );
+            })}
+          </div>
+        ) : (
+          <div class="text-center py-12">
+            <span class="font-mono text-sm text-[var(--ink-dim)] italic">
+              The evidence board is empty... awaiting new investigations.
+            </span>
+          </div>
+        )}
+      </div>
+      
+      <!-- Red string decoration lines -->
+      <div class="absolute top-0 left-0 right-0 bottom-0 pointer-events-none z-0 opacity-10">
+        <svg class="w-full h-full" viewBox="0 0 800 400" preserveAspectRatio="none">
+          <path d="M0,0 Q200,100 400,50 T800,100" stroke="#DC2626" fill="none" stroke-width="2" stroke-dasharray="4,3"/>
+          <path d="M0,100 Q300,200 500,50 T800,200" stroke="#F59E0B" fill="none" stroke-width="1.5" stroke-dasharray="3,4"/>
+          <path d="M0,200 Q200,300 600,100 T800,300" stroke="#DC2626" fill="none" stroke-width="1" stroke-dasharray="5,5"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom nav -->
+  <div class="max-w-4xl mx-auto px-4 mt-8 text-center">
+    <a href="/" class="font-mono text-sm text-[var(--ink-light)] hover:text-[var(--gold)] transition-colors">
+      ← Back to village center
+    </a>
+  </div>
+</div>
