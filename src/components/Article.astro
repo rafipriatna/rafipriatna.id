@@ -1,0 +1,116 @@
+---
+import { getImage } from "astro:assets";
+import avatarSrc from "@assets/me_transparent.png";
+
+const avatar = await getImage({ src: avatarSrc, width: 80, height: 80, format: "png" });
+
+type Link = { title: string; href: string } | null;
+
+type Props = {
+  title: string;
+  description: string;
+  date: Date;
+  tags?: string[];
+  readTime?: string;
+  backHref: string;
+  backLabel: string;
+  prev?: Link;
+  next?: Link;
+};
+
+const {
+  title,
+  description,
+  date,
+  tags,
+  readTime,
+  backHref,
+  backLabel,
+  prev = null,
+  next = null,
+} = Astro.props;
+
+const formatted = new Intl.DateTimeFormat("id-ID", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+}).format(date);
+---
+
+<div id="reading-progress"></div>
+
+<a
+  href={backHref}
+  class="text-[13px] text-[var(--ink-faint)] no-underline transition-colors hover:text-[var(--accent)]"
+>
+  &larr; {backLabel}
+</a>
+
+<header class="mb-10 mt-5">
+  <h1
+    class="m-0 font-display text-[34px] font-bold leading-[1.15] tracking-tight sm:text-[44px]"
+  >
+    {title}
+  </h1>
+  <p class="mb-0 mt-4 font-serif text-xl italic leading-relaxed text-[var(--ink-muted)]">
+    {description}
+  </p>
+
+  <div class="mt-7 flex items-center gap-3 border-y border-[var(--border)] py-4">
+    <img src={avatar.src} alt="Rafi Priatna" class="size-10 rounded-full object-cover" />
+    <div class="text-[13.5px] leading-snug">
+      <div class="font-semibold text-[var(--ink)]">Rafi Priatna</div>
+      <div class="text-[var(--ink-faint)]">
+        {formatted}{readTime && ` · ${readTime}`}
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <slot />
+</article>
+
+{
+  tags && tags.length > 0 && (
+    <div class="mt-12 flex flex-wrap gap-2">
+      {tags.map((tag) => (
+        <a
+          href={`/blog/${encodeURIComponent(tag)}`}
+          class="rounded-full bg-[var(--accent-soft)] px-3.5 py-1.5 text-[13px] text-[var(--accent)] no-underline transition-colors hover:bg-[var(--accent)] hover:text-white"
+        >
+          {tag}
+        </a>
+      ))}
+    </div>
+  )
+}
+
+{
+  (prev || next) && (
+    <nav class="mt-12 grid gap-6 border-t border-[var(--border)] pt-8 sm:grid-cols-2">
+      {prev ? (
+        <a href={prev.href} class="reveal group no-underline">
+          <span class="text-[12px] uppercase tracking-wider text-[var(--ink-faint)]">
+            &larr; Sebelumnya
+          </span>
+          <span class="mt-1 block font-display text-[17px] font-semibold leading-snug text-[var(--ink)] transition-colors group-hover:text-[var(--accent-hover)]">
+            {prev.title}
+          </span>
+        </a>
+      ) : (
+        <span />
+      )}
+      {next && (
+        <a href={next.href} class="reveal group text-right no-underline sm:col-start-2">
+          <span class="text-[12px] uppercase tracking-wider text-[var(--ink-faint)]">
+            Berikutnya &rarr;
+          </span>
+          <span class="mt-1 block font-display text-[17px] font-semibold leading-snug text-[var(--ink)] transition-colors group-hover:text-[var(--accent-hover)]">
+            {next.title}
+          </span>
+        </a>
+      )}
+    </nav>
+  )
+}

@@ -1,8 +1,141 @@
 ---
-import GameLayout from "@layouts/GameLayout.astro";
-import CharacterProfile from "@components/CharacterProfile.astro";
+import Base from "@layouts/Base.astro";
+import { CERTIFICATIONS, EDUCATION, SITE, SKILLS, SOCIALS, WORK_EXPERIENCE } from "@consts";
+import { getImage } from "astro:assets";
+import avatarSrc from "@assets/me_transparent.png";
+
+const avatar = await getImage({ src: avatarSrc, width: 112, height: 112, format: "png" });
 ---
 
-<GameLayout title="About Me" description="Tentang Rafi Priatna - Cyber Security Consultant">
-  <CharacterProfile />
-</GameLayout>
+<Base title="About Me" description="Tentang Rafi Priatna — Application Security Engineer">
+  <header class="mb-10 flex items-center gap-5">
+    <img
+      src={avatar.src}
+      alt="Rafi Priatna"
+      width="112"
+      height="112"
+      class="size-20 rounded-full object-cover sm:size-28"
+    />
+    <div>
+      <h1 class="m-0 font-display text-4xl font-bold tracking-tight">Rafi Priatna</h1>
+      <p class="m-0 mt-1 text-[var(--ink-muted)]">{SITE.TAGLINE}</p>
+      <div class="mt-2 flex flex-wrap gap-3 text-sm">
+        {
+          SOCIALS.map((s) => (
+            <a
+              href={s.HREF}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-[var(--accent)] no-underline hover:underline"
+            >
+              {s.NAME}
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </header>
+
+  <div class="space-y-12">
+    <section>
+      <h2 class="ornament mb-5"><span>
+        Pengalaman</span></h2>
+      <div class="space-y-8">
+        {
+          WORK_EXPERIENCE.map((job) => (
+            <div>
+              <div class="flex flex-wrap items-baseline justify-between gap-2">
+                <h3 class="m-0 font-display text-lg font-semibold tracking-tight">
+                  {job.role} · <span class="font-medium">{job.company}</span>
+                </h3>
+                <span class="text-[13px] text-[var(--ink-faint)]">{job.period}</span>
+              </div>
+              {job.description && (
+                <p class="mb-0 mt-1.5 text-[15px] text-[var(--ink-muted)]">{job.description}</p>
+              )}
+              {job.highlights && job.highlights.length > 0 && (
+                <ul class="mb-0 mt-2 list-disc space-y-1 pl-5 text-[15px] text-[var(--ink-muted)]">
+                  {job.highlights.map((h) => (
+                    <li>{h}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <section>
+      <h2 class="ornament mb-5"><span>
+        Sertifikasi</span></h2>
+      <div class="divide-y divide-[var(--border)]">
+        {
+          CERTIFICATIONS.map((cert) => (
+            <div class="flex flex-wrap items-baseline justify-between gap-2 py-3">
+              <div>
+                <span class="font-semibold">
+                  {cert.url ? (
+                    <a
+                      href={cert.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="text-[var(--ink)] no-underline hover:text-[var(--accent-hover)]"
+                    >
+                      {cert.name}
+                    </a>
+                  ) : (
+                    cert.name
+                  )}
+                </span>
+                <span class="ml-2 text-[14px] text-[var(--ink-muted)]">{cert.fullName}</span>
+                <span class="ml-2 text-[13px] text-[var(--ink-faint)]">— {cert.issuer}</span>
+              </div>
+              <span class="text-[13px] text-[var(--ink-faint)]">{cert.year}</span>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <section>
+      <h2 class="ornament mb-5"><span>
+        Skill</span></h2>
+      <div class="space-y-4">
+        {
+          SKILLS.map((group) => (
+            <div>
+              <h3 class="m-0 mb-2 text-[15px] font-semibold">{group.title}</h3>
+              <div class="flex flex-wrap gap-2">
+                {group.items.map((item) => (
+                  <span class="rounded-full bg-[var(--bg-soft)] border border-[var(--border)] px-3 py-1 text-[13px] text-[var(--ink-muted)]">
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <section>
+      <h2 class="ornament mb-5"><span>
+        Pendidikan</span></h2>
+      {
+        EDUCATION.map((edu) => (
+          <div>
+            <div class="flex flex-wrap items-baseline justify-between gap-2">
+              <h3 class="m-0 font-display text-lg font-semibold tracking-tight">{edu.degree}</h3>
+              <span class="text-[13px] text-[var(--ink-faint)]">{edu.period}</span>
+            </div>
+            <p class="mb-0 mt-1 text-[15px] text-[var(--ink-muted)]">
+              {edu.institution}
+              {edu.description && ` — ${edu.description}`}
+            </p>
+          </div>
+        ))
+      }
+    </section>
+  </div>
+</Base>

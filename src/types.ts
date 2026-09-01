@@ -4,9 +4,6 @@ export type Site = {
   TAGLINE: string;
   USER_EMAIL: string;
   DOMAIN: string;
-  NUM_POSTS_ON_HOMEPAGE: number;
-  NUM_WRITEUPS_ON_HOMEPAGE: number;
-  NUM_NOTES_ON_HOMEPAGE: number;
 };
 
 export type Metadata = {

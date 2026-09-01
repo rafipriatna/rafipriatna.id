@@ -1,0 +1,154 @@
+---
+import Head from "@components/Head.astro";
+import { SITE, SOCIALS } from "@consts";
+
+type Props = {
+  title: string;
+  description: string;
+};
+
+const { title, description } = Astro.props;
+
+const nav = [
+  { href: "/", label: "Home" },
+  { href: "/blog", label: "Blog" },
+  { href: "/notes", label: "Notes" },
+  { href: "/writeups", label: "Writeups" },
+  { href: "/me", label: "Me" },
+];
+
+const path = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === "/" ? path === "/" : path.startsWith(href);
+---
+
+<!doctype html>
+<html lang="id">
+  <head>
+    <Head title={`${title} | ${SITE.TITLE}`} description={description} />
+  </head>
+  <body class="flex min-h-screen flex-col font-sans antialiased">
+    <header class="sticky top-0 z-40 border-b border-[var(--border)] bg-[var(--bg)]">
+      <div
+        class="mx-auto flex w-full max-w-[800px] items-center justify-between gap-4 px-5 py-3.5"
+      >
+        <a
+          href="/"
+          class="shrink-0 font-display text-[17px] font-bold tracking-tight no-underline"
+        >
+          {SITE.TITLE}
+        </a>
+        <nav class="flex gap-5 overflow-x-auto text-[13.5px]">
+          {
+            nav.map((item) => (
+              <a
+                href={item.href}
+                class:list={[
+                  "nav-link whitespace-nowrap pb-0.5 no-underline transition-colors",
+                  isActive(item.href)
+                    ? "active font-semibold text-[var(--ink)]"
+                    : "text-[var(--ink-soft)] hover:text-[var(--ink)]",
+                ]}
+              >
+                {item.label}
+              </a>
+            ))
+          }
+        </nav>
+      </div>
+    </header>
+
+    <main class="mx-auto w-full max-w-[800px] flex-1 px-5 pb-16 pt-12 sm:pt-16">
+      <slot />
+    </main>
+
+    <footer class="border-t border-[var(--border)] bg-[var(--bg-soft)]">
+      <div class="mx-auto w-full max-w-[800px] px-5 py-10">
+        <p class="m-0 font-display text-xl font-semibold tracking-tight">
+          Rafi Priatna <span class="text-[var(--accent)]">✳</span>
+        </p>
+        <p class="mb-5 mt-1.5 max-w-md text-[14px] leading-relaxed text-[var(--ink-muted)]">
+          {SITE.TAGLINE} — catatan tentang security, programming, dan hal-hal
+          yang saya pelajari along the way.
+        </p>
+        <div
+          class="flex flex-wrap items-center justify-between gap-3 text-[13px] text-[var(--ink-faint)]"
+        >
+          <div class="flex gap-4">
+            {
+              SOCIALS.map((s) => (
+                <a
+                  href={s.HREF}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="no-underline transition-colors hover:text-[var(--accent)]"
+                >
+                  {s.NAME}
+                </a>
+              ))
+            }
+            <a href="/rss.xml" class="no-underline transition-colors hover:text-[var(--accent)]">
+              RSS
+            </a>
+          </div>
+          <span>&copy; {new Date().getFullYear()}</span>
+        </div>
+      </div>
+    </footer>
+
+    <script is:inline>
+      // ponytail: one vanilla-JS enhance pass — no framework; split into modules only if this grows
+      function enhance() {
+        document.querySelectorAll("article pre").forEach((pre) => {
+          if (pre.querySelector(".copy-btn")) return;
+          const btn = document.createElement("button");
+          btn.className = "copy-btn";
+          btn.textContent = "copy";
+          btn.setAttribute("aria-label", "Copy code");
+          btn.addEventListener("click", async () => {
+            try {
+              await navigator.clipboard.writeText(pre.textContent || "");
+              btn.textContent = "copied";
+            } catch {
+              btn.textContent = "failed";
+            }
+            btn.classList.add("copied");
+            setTimeout(() => {
+              btn.textContent = "copy";
+              btn.classList.remove("copied");
+            }, 2000);
+          });
+          pre.appendChild(btn);
+        });
+
+        if (!window.__progressBound) {
+          window.__progressBound = true;
+          const update = () => {
+            const bar = document.getElementById("reading-progress");
+            if (!bar) return;
+            const el = document.documentElement;
+            const max = el.scrollHeight - el.clientHeight;
+            bar.style.width = (max > 0 ? (el.scrollTop / max) * 100 : 0) + "%";
+          };
+          addEventListener("scroll", update, { passive: true });
+          update();
+        }
+
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) {
+                e.target.classList.add("in");
+                io.unobserve(e.target);
+              }
+            });
+          },
+          { threshold: 0.08 },
+        );
+        document.querySelectorAll(".reveal:not(.in)").forEach((el) => io.observe(el));
+      }
+      document.addEventListener("DOMContentLoaded", enhance);
+      document.addEventListener("astro:after-swap", enhance);
+    </script>
+  </body>
+</html>

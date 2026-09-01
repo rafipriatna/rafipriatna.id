@@ -1,9 +1,161 @@
 ---
-import GameLayout from "@layouts/GameLayout.astro";
-import VillageScene from "@components/VillageScene.astro";
-import { HOME } from "@consts";
+import { getImage } from "astro:assets";
+import Base from "@layouts/Base.astro";
+import PostCard from "@components/PostCard.astro";
+import { HOME, SITE, SOCIALS } from "@consts";
+import { coverImage, feedItems, readingTime } from "@/lib/post";
+import avatarSrc from "@assets/me_transparent.png";
+
+const avatar = await getImage({ src: avatarSrc, width: 96, height: 96, format: "png" });
+
+const all = [
+  ...(await feedItems("blog")),
+  ...(await feedItems("notes")),
+  ...(await feedItems("writeups")),
+].sort((a, b) => b.date.valueOf() - a.date.valueOf());
+
+const items = all.slice(0, 5);
+
+const covers = new Map<string, string>();
+await Promise.all(
+  items.map(async (item) => {
+    const cover = coverImage(item.collection, item.id, item.body);
+    if (cover) covers.set(item.id, (await getImage({ src: cover, width: 960 })).src);
+  }),
+);
+
+const explore = [
+  {
+    href: "/blog",
+    label: "Blog",
+    description: "Panduan, tutorial, dan referensi programming & security.",
+    count: all.filter((i) => i.collection === "blog").length,
+  },
+  {
+    href: "/notes",
+    label: "Notes",
+    description: "Catatan pribadi — refleksi, pengalaman, dan hal di luar teknik.",
+    count: all.filter((i) => i.collection === "notes").length,
+  },
+  {
+    href: "/writeups",
+    label: "Writeups",
+    description: "Bedah kasus security — dari lab sampai dunia nyata.",
+    count: all.filter((i) => i.collection === "writeups").length,
+  },
+];
 ---
 
-<GameLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
-  <VillageScene />
-</GameLayout>
+<Base title={HOME.TITLE} description={HOME.DESCRIPTION}>
+  <section class="mb-14 border-b border-[var(--border)] pb-12">
+    <p class="m-0 text-[12px] font-semibold uppercase tracking-[0.22em] text-[var(--accent)]">
+      ✳ Personal blog
+    </p>
+    <h1
+      class="m-0 mt-4 font-display text-5xl font-bold leading-[1.02] tracking-tight sm:text-6xl"
+    >
+      Rafi Priatna
+    </h1>
+    <p
+      class="m-0 mt-5 max-w-xl font-serif text-xl italic leading-relaxed text-[var(--ink-muted)] sm:text-[22px]"
+    >
+      “{SITE.TAGLINE}” — menulis tentang security, programming, dan hal-hal
+      yang saya pelajari along the way.
+    </p>
+    <div class="mt-8 flex items-center gap-4">
+      <img
+        src={avatar.src}
+        alt="Rafi Priatna"
+        width="48"
+        height="48"
+        class="size-12 rounded-full object-cover ring-2 ring-[var(--accent)] ring-offset-2"
+      />
+      <div class="flex gap-4 text-[14px]">
+        {
+          SOCIALS.map((s) => (
+            <a
+              href={s.HREF}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="font-medium text-[var(--ink-muted)] no-underline transition-colors hover:text-[var(--accent)]"
+            >
+              {s.NAME}
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="ornament"><span>Tulisan terbaru</span></div>
+
+    {
+      items[0] && (
+        <PostCard
+          href={items[0].href}
+          title={items[0].title}
+          description={items[0].description}
+          date={items[0].date}
+          tags={items[0].tags}
+          source={items[0].source}
+          cover={covers.get(items[0].id)}
+          readTime={readingTime(items[0].body)}
+          featured
+        />
+      )
+    }
+
+    <div class="mt-4 divide-y divide-[var(--border)]">
+      {
+        items.slice(1).map((item) => (
+          <div class="py-7">
+            <PostCard
+              href={item.href}
+              title={item.title}
+              description={item.description}
+              date={item.date}
+              tags={item.tags}
+              source={item.source}
+              cover={covers.get(item.id)}
+              readTime={readingTime(item.body)}
+            />
+          </div>
+        ))
+      }
+    </div>
+
+    <a
+      href="/blog"
+      class="mt-6 inline-block font-medium text-[var(--accent)] no-underline hover:underline"
+    >
+      Lihat semua tulisan &rarr;
+    </a>
+  </section>
+
+  <section class="mt-16">
+    <div class="ornament"><span>Jelajahi</span></div>
+    <div class="grid gap-4 sm:grid-cols-3">
+      {
+        explore.map((item) => (
+          <a
+            href={item.href}
+            class="reveal group rounded-xl border border-[var(--border)] bg-[var(--bg-soft)] p-6 no-underline transition-colors hover:border-[var(--accent)]"
+          >
+            <div class="flex items-baseline justify-between">
+              <h3 class="m-0 font-display text-lg font-semibold text-[var(--ink)] group-hover:text-[var(--accent-hover)]">
+                {item.label}
+              </h3>
+              <span class="font-sans text-[12px] font-medium text-[var(--ink-faint)]">
+                {item.count} tulisan
+              </span>
+            </div>
+            <p class="m-0 mt-1.5 text-[13.5px] leading-relaxed text-[var(--ink-muted)]">
+              {item.description}
+            </p>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+</Base>

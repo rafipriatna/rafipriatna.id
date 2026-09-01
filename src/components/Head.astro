@@ -1,140 +1,45 @@
 ---
 import "../styles/global.css";
-import { getImage } from 'astro:assets'
+import { getImage } from "astro:assets";
 import faviconSrc from "@assets/me_transparent.png";
 import { ViewTransitions } from "astro:transitions";
-import LoadingIndicator from "astro-loading-indicator/component"
 
-const appleTouchIcon = await getImage({
+const icon = await getImage({
   src: faviconSrc,
   width: 180,
   height: 180,
-  format: 'png'
-})
+  format: "png",
+});
 
 interface Props {
   title: string;
   description: string;
-  image?: string;
 }
 
+const { title, description } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-
-const { title, description, image = "/blog-placeholder-1.jpg" } = Astro.props;
 ---
 
-<!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<link rel="icon" type="image/png" href={appleTouchIcon.src} />
-<link rel="apple-touch-icon" href={appleTouchIcon.src} />
+<link rel="icon" type="image/png" href={icon.src} />
+<link rel="apple-touch-icon" href={icon.src} />
 <meta name="generator" content={Astro.generator} />
-
-<!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
+<link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" />
 
-<!-- Primary Meta Tags -->
 <title>{title}</title>
-<meta name="title" content={title} />
 <meta name="description" content={description} />
 
-<!-- Open Graph / Facebook -->
 <meta property="og:type" content="website" />
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<meta property="og:image" content={new URL(image, Astro.url)} />
+<meta property="og:image" content={new URL(icon.src, Astro.site)} />
 
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content={Astro.url} />
-<meta property="twitter:title" content={title} />
-<meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={new URL(image, Astro.url)} />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={new URL(icon.src, Astro.site)} />
 
 <ViewTransitions />
-<LoadingIndicator
-  color="#E8A838",
-  height="2px"
-/>
-
-<script is:inline>
-  function init() {
-    addCopyCodeButtons();
-    pixelateEmojis();
-  }
-
-  function addCopyCodeButtons() {
-    let codeBlocks = Array.from(document.querySelectorAll("article pre, .quest-content pre"));
-
-    codeBlocks.forEach((pre) => {
-      // Create header bar as real element
-      const header = document.createElement("div");
-      header.className = "code-header";
-      header.innerHTML = '<span class="code-header-label">⏹ terminal</span>';
-
-      const btn = document.createElement("button");
-      btn.className = "code-copy-btn";
-      btn.innerHTML = "⎘ copy";
-      btn.setAttribute("aria-label", "Copy code");
-
-      btn.addEventListener("click", async () => {
-        const text = pre.textContent || "";
-        try {
-          await navigator.clipboard.writeText(text);
-          btn.innerHTML = "✓ done";
-          btn.classList.add("copied");
-          setTimeout(() => {
-            btn.innerHTML = "⎘ copy";
-            btn.classList.remove("copied");
-          }, 2000);
-        } catch {
-          btn.innerHTML = "✗ failed";
-          setTimeout(() => {
-            btn.innerHTML = "⎘ copy";
-          }, 2000);
-        }
-      });
-
-      header.appendChild(btn);
-
-      // Wrap pre in container, insert header before pre
-      const wrapper = document.createElement("div");
-      wrapper.className = "code-wrapper";
-      pre.parentNode.insertBefore(wrapper, pre);
-      wrapper.appendChild(header);
-      wrapper.appendChild(pre);
-    });
-  }
-
-  function pixelateEmojis() {
-    // Walk text nodes, wrap emoji characters in a pixel span
-    const walker = document.createTreeWalker(
-      document.body,
-      NodeFilter.SHOW_TEXT,
-      null,
-      false
-    );
-
-    const emojiRegex = /[\u{1F000}-\u{1FFFF}]|[\u2600-\u27BF]|[\u{2700}-\u{27BF}]|[\u{FE00}-\u{FE0F}]|[\u{200D}]|[\u{2934}-\u{2935}]|[\u{25AA}-\u{25AB}]|[\u{25B6}]|[\u{25C0}]|[\u{25FB}-\u{25FE}]|[\u{2B05}-\u{2B07}]|[\u{2B1B}-\u{2B1C}]|[\u{2B50}]|[\u{2B55}]|[\u{3030}]|[\u{303D}]|[\u{3297}]|[\u{3299}]/gu;
-
-    const nodesToReplace = [];
-    while (walker.nextNode()) {
-      const node = walker.currentNode;
-      if (node.textContent && emojiRegex.test(node.textContent)) {
-        nodesToReplace.push(node);
-      }
-    }
-
-    nodesToReplace.forEach((node) => {
-      const span = document.createElement("span");
-      span.innerHTML = node.textContent.replace(emojiRegex, (match) => {
-        return `<span class="pixel-emoji">${match}</span>`;
-      });
-      node.parentNode.replaceChild(span, node);
-    });
-  }
-
-  document.addEventListener("DOMContentLoaded", () => init());
-  document.addEventListener("astro:after-swap", () => init());
-</script>

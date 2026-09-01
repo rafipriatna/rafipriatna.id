@@ -1,7 +1,8 @@
 ---
 import { type CollectionEntry, getCollection } from "astro:content";
-import GameLayout from "@layouts/GameLayout.astro";
-import QuestJournal from "@components/QuestJournal.astro";
+import Base from "@layouts/Base.astro";
+import Article from "@components/Article.astro";
+import { readingTime } from "@/lib/post";
 
 export async function getStaticPaths() {
   const allNotes = (await getCollection("notes"))
@@ -16,20 +17,18 @@ export async function getStaticPaths() {
 type Props = CollectionEntry<"notes">;
 
 const note = Astro.props;
-const { Content, headings } = await note.render();
+const { Content } = await note.render();
 ---
 
-<GameLayout title={note.data.title} description={note.data.description}>
-  <QuestJournal
+<Base title={note.data.title} description={note.data.description}>
+  <Article
     title={note.data.title}
     description={note.data.description}
     date={note.data.date}
-    body={note.body}
-    headings={headings}
-    contentType="notes"
+    readTime={readingTime(note.body)}
     backHref="/notes"
-    backLabel="Cozy Cabin"
+    backLabel="Notes"
   >
     <Content />
-  </QuestJournal>
-</GameLayout>
+  </Article>
+</Base>

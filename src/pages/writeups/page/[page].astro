@@ -1,0 +1,29 @@
+---
+import Base from "@layouts/Base.astro";
+import ArchivePage from "@components/ArchivePage.astro";
+import { WRITEUPS } from "@consts";
+import { feedItems, PAGE_SIZE } from "@/lib/post";
+
+export async function getStaticPaths() {
+  const items = await feedItems("writeups");
+  const totalPages = Math.ceil(items.length / PAGE_SIZE);
+  return Array.from({ length: Math.max(0, totalPages - 1) }, (_, i) => ({
+    params: { page: String(i + 2) },
+    props: { items },
+  }));
+}
+
+const { items } = Astro.props;
+const currentPage = Number(Astro.params.page);
+---
+
+<Base title={`${WRITEUPS.TITLE} — Halaman ${currentPage}`} description={WRITEUPS.DESCRIPTION}>
+  <ArchivePage
+    collection="writeups"
+    eyebrow="Kasus"
+    title={WRITEUPS.TITLE}
+    description={WRITEUPS.DESCRIPTION}
+    items={items}
+    currentPage={currentPage}
+  />
+</Base>

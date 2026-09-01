@@ -5,19 +5,22 @@ type Props = {
 
 const { type = "info" } = Astro.props;
 
-const styles: Record<string, { border: string; bg: string; icon: string; label: string }> = {
-  info: { border: "var(--lab-glow)", bg: "rgba(74, 222, 128, 0.1)", icon: "ℹ️", label: "INFO" },
-  warning: { border: "var(--gold)", bg: "rgba(232, 168, 56, 0.1)", icon: "⚠️", label: "WARNING" },
-  tip: { border: "var(--detective-string)", bg: "rgba(245, 158, 11, 0.08)", icon: "💡", label: "TIP" },
+const styles: Record<string, { border: string; bg: string; icon: string }> = {
+  info: { border: "#2563eb", bg: "#eff6ff", icon: "ℹ️" },
+  warning: { border: "#d97706", bg: "#fffbeb", icon: "⚠️" },
+  tip: { border: "#15803d", bg: "#f0fdf4", icon: "💡" },
 };
 
 const s = styles[type];
 ---
 
-<div class="pixel-border-light px-4 py-3 my-6" style="border-left: 4px solid var(--gold); border-color: s.border; background: s.bg;">
+<div
+  class="my-6 rounded-r-lg border-l-4 px-4 py-3 font-sans text-base not-italic"
+  style={`border-color: ${s.border}; background: ${s.bg};`}
+>
   <div class="flex items-start gap-2">
-    <span class="font-mono text-xs text-[var(--ink-light)]/60 shrink-0 mt-0.5">{s.icon}</span>
-    <div>
+    <span class="mt-0.5 shrink-0 text-sm">{s.icon}</span>
+    <div class="min-w-0 [&_p]:my-1.5 [&_strong]:font-semibold">
       <slot />
     </div>
   </div>

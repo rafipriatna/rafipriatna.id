@@ -1,7 +1,8 @@
 ---
 import { type CollectionEntry, getCollection } from "astro:content";
-import GameLayout from "@layouts/GameLayout.astro";
-import QuestJournal from "@components/QuestJournal.astro";
+import Base from "@layouts/Base.astro";
+import Article from "@components/Article.astro";
+import { readingTime } from "@/lib/post";
 
 export async function getStaticPaths() {
   const posts = (await getCollection("blog"))
@@ -19,48 +20,27 @@ const posts = (await getCollection("blog"))
   .filter((post) => !post.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
-function getNextPost() {
-  let postIndex;
-  for (const post of posts) {
-    if (post.slug === Astro.params.slug) {
-      postIndex = posts.indexOf(post);
-      return posts[postIndex + 1] || null;
-    }
-  }
-  return null;
-}
-
-function getPrevPost() {
-  let postIndex;
-  for (const post of posts) {
-    if (post.slug === Astro.params.slug) {
-      postIndex = posts.indexOf(post);
-      return posts[postIndex - 1] || null;
-    }
-  }
-  return null;
-}
-
-const nextPost = getNextPost();
-const prevPost = getPrevPost();
 const post = Astro.props;
-const { Content, headings } = await post.render();
+const { Content } = await post.render();
+
+const i = posts.findIndex((p) => p.slug === post.slug);
+// posts sorted newest-first: older = higher index
+const prev = posts[i + 1];
+const next = posts[i - 1];
 ---
 
-<GameLayout title={post.data.title} description={post.data.description}>
-  <QuestJournal
+<Base title={post.data.title} description={post.data.description}>
+  <Article
     title={post.data.title}
     description={post.data.description}
     date={post.data.date}
-    body={post.body}
-    headings={headings}
-    contentType="blog"
+    tags={post.data.tags}
+    readTime={readingTime(post.body)}
     backHref="/blog"
-    backLabel="Research Lab"
-    categories={post.data.categories}
-    nextPost={nextPost}
-    prevPost={prevPost}
+    backLabel="Blog"
+    prev={prev ? { title: prev.data.title, href: `/${prev.slug}` } : null}
+    next={next ? { title: next.data.title, href: `/${next.slug}` } : null}
   >
     <Content />
-  </QuestJournal>
-</GameLayout>
+  </Article>
+</Base>

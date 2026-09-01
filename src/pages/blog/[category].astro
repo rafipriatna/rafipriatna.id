@@ -1,9 +1,66 @@
 ---
+import { getCollection } from "astro:content";
+import { getImage } from "astro:assets";
+import Base from "@layouts/Base.astro";
+import PostCard from "@components/PostCard.astro";
+import { coverImage, readingTime } from "@/lib/post";
+
 export async function getStaticPaths() {
-  return [{ params: { category: "test" } }];
+  const posts = (await getCollection("blog")).filter((post) => !post.data.draft);
+  const tags = [...new Set(posts.flatMap((p) => p.data.tags ?? []))];
+  return tags.map((tag) => ({
+    params: { category: tag },
+    props: {
+      posts: posts
+        .filter((p) => p.data.tags?.includes(tag))
+        .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()),
+    },
+  }));
 }
 
 const { category } = Astro.params;
+const { posts } = Astro.props;
+
+const covers = new Map<string, string>();
+await Promise.all(
+  posts.map(async (post) => {
+    const cover = coverImage("blog", post.id, post.body);
+    if (cover) covers.set(post.id, (await getImage({ src: cover, width: 640 })).src);
+  }),
+);
 ---
 
-<div>Good dog, {category}!</div>
+<Base title={`#${category}`} description={`Artikel dengan tag ${category}`}>
+  <header class="mb-8">
+    <a
+      href="/blog"
+      class="text-[13px] text-[var(--ink-faint)] no-underline transition-colors hover:text-[var(--accent)]"
+    >
+      &larr; Blog
+    </a>
+    <h1 class="m-0 mt-3 font-display text-4xl font-bold tracking-tight">
+      <span class="text-[var(--accent)]">#</span>{category}
+    </h1>
+    <p class="mb-0 mt-2 text-[15px] text-[var(--ink-muted)]">
+      {posts.length} artikel dengan tag ini.
+    </p>
+  </header>
+
+  <div class="divide-y divide-[var(--border)]">
+    {
+      posts.map((post) => (
+        <div class="py-7">
+          <PostCard
+            href={`/${post.slug}`}
+            title={post.data.title}
+            description={post.data.description}
+            date={post.data.date}
+            tags={post.data.tags}
+            cover={covers.get(post.id)}
+            readTime={readingTime(post.body)}
+          />
+        </div>
+      ))
+    }
+  </div>
+</Base>

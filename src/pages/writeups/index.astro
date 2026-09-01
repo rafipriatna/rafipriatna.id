@@ -1,9 +1,19 @@
 ---
-import GameLayout from "@layouts/GameLayout.astro";
-import DetectiveOffice from "@components/DetectiveOffice.astro";
+import Base from "@layouts/Base.astro";
+import ArchivePage from "@components/ArchivePage.astro";
 import { WRITEUPS } from "@consts";
+import { feedItems } from "@/lib/post";
+
+const items = await feedItems("writeups");
 ---
 
-<GameLayout title={WRITEUPS.TITLE} description={WRITEUPS.DESCRIPTION}>
-  <DetectiveOffice />
-</GameLayout>
+<Base title={WRITEUPS.TITLE} description={WRITEUPS.DESCRIPTION}>
+  <ArchivePage
+    collection="writeups"
+    eyebrow="Kasus"
+    title={WRITEUPS.TITLE}
+    description={WRITEUPS.DESCRIPTION}
+    items={items}
+    currentPage={1}
+  />
+</Base>

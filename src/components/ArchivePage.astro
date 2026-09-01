@@ -1,0 +1,128 @@
+---
+import { getImage } from "astro:assets";
+import PostCard from "@components/PostCard.astro";
+import { coverImage, readingTime, PAGE_SIZE, type FeedItem } from "@/lib/post";
+
+type Props = {
+  collection: "blog" | "notes" | "writeups";
+  eyebrow: string;
+  title: string;
+  description: string;
+  items: FeedItem[];
+  currentPage: number;
+  showTagPills?: boolean;
+};
+
+const {
+  collection,
+  eyebrow,
+  title,
+  description,
+  items,
+  currentPage,
+  showTagPills = false,
+} = Astro.props;
+
+const totalPages = Math.ceil(items.length / PAGE_SIZE);
+const pageItems = items.slice(
+  (currentPage - 1) * PAGE_SIZE,
+  currentPage * PAGE_SIZE,
+);
+
+const base = `/${collection}`;
+const pageHref = (n: number) => (n === 1 ? base : `${base}/page/${n}`);
+
+const covers = new Map<string, string>();
+await Promise.all(
+  pageItems.map(async (item) => {
+    const cover = coverImage(item.collection, item.id, item.body);
+    if (cover) covers.set(item.id, (await getImage({ src: cover, width: 640 })).src);
+  }),
+);
+
+const tags = [...new Set(items.flatMap((i) => i.tags ?? []))].sort();
+const years = [...new Set(pageItems.map((i) => i.date.getFullYear()))];
+---
+
+<header class="mb-10">
+  <p class="m-0 text-[12px] font-semibold uppercase tracking-[0.22em] text-[var(--accent)]">
+    ✳ {eyebrow}
+  </p>
+  <h1 class="m-0 mt-3 font-display text-4xl font-bold tracking-tight sm:text-5xl">
+    {title}
+  </h1>
+  <p class="mb-0 mt-3 max-w-lg text-[15.5px] leading-relaxed text-[var(--ink-muted)]">
+    {description}
+  </p>
+</header>
+
+{
+  showTagPills && tags.length > 0 && (
+    <div class="mb-10 flex flex-wrap gap-2">
+      {tags.map((tag) => (
+        <a
+          href={`/blog/${encodeURIComponent(tag)}`}
+          class="rounded-full border border-[var(--border)] px-3.5 py-1.5 text-[13px] text-[var(--ink-muted)] no-underline transition-colors hover:border-[var(--accent)] hover:bg-[var(--accent-soft)] hover:text-[var(--accent)]"
+        >
+          {tag}
+        </a>
+      ))}
+    </div>
+  )
+}
+
+{
+  years.map((year) => {
+    const yearItems = pageItems.filter((i) => i.date.getFullYear() === year);
+    return (
+      <section class="mb-12">
+        <h2 class="mb-2 flex items-center gap-4 font-display text-2xl font-bold text-[var(--ink)]">
+          {year}
+          <span class="h-px flex-1 bg-[var(--border)]" />
+          <span class="font-sans text-[12px] font-medium uppercase tracking-wider text-[var(--ink-faint)]">
+            {yearItems.length} tulisan
+          </span>
+        </h2>
+        <div class="divide-y divide-[var(--border)]">
+          {yearItems.map((item) => (
+            <div class="py-7">
+              <PostCard
+                href={item.href}
+                title={item.title}
+                description={item.description}
+                date={item.date}
+                tags={item.tags}
+                cover={covers.get(item.id)}
+                readTime={readingTime(item.body)}
+              />
+            </div>
+          ))}
+        </div>
+      </section>
+    );
+  })
+}
+
+{
+  totalPages > 1 && (
+    <nav class="flex items-center justify-between gap-4 border-t border-[var(--border)] pt-6 text-[14px]">
+      {currentPage > 1 ? (
+        <a href={pageHref(currentPage - 1)} class="font-medium text-[var(--accent)] no-underline hover:underline">
+          &larr; Sebelumnya
+        </a>
+      ) : (
+        <span />
+      )}
+      <span class="text-[13px] text-[var(--ink-faint)]">
+        Halaman {currentPage} dari {totalPages}
+      </span>
+      {currentPage < totalPages ? (
+        <a href={pageHref(currentPage + 1)} class="font-medium text-[var(--accent)] no-underline hover:underline">
+          Berikutnya &rarr;
+        </a>
+      ) : (
+        <span />
+      )}
+    </nav>
+  )
+}

@@ -1,9 +1,19 @@
 ---
-import GameLayout from "@layouts/GameLayout.astro";
-import CozyCabin from "@components/CozyCabin.astro";
+import Base from "@layouts/Base.astro";
+import ArchivePage from "@components/ArchivePage.astro";
 import { NOTES } from "@consts";
+import { feedItems } from "@/lib/post";
+
+const items = await feedItems("notes");
 ---
 
-<GameLayout title={NOTES.TITLE} description={NOTES.DESCRIPTION}>
-  <CozyCabin />
-</GameLayout>
+<Base title={NOTES.TITLE} description={NOTES.DESCRIPTION}>
+  <ArchivePage
+    collection="notes"
+    eyebrow="Jurnal"
+    title={NOTES.TITLE}
+    description={NOTES.DESCRIPTION}
+    items={items}
+    currentPage={1}
+  />
+</Base>

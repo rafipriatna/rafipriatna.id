@@ -21,7 +21,8 @@ export async function GET(context) {
       title: item.data.title,
       description: item.data.description,
       pubDate: item.data.date,
-      link: `/${item.collection}/${item.slug}/`,
+      // blog posts live at the root (legacy URLs), others under their collection
+      link: item.collection === "blog" ? `/${item.slug}` : `/${item.collection}/${item.slug}`,
     })),
   });
 }

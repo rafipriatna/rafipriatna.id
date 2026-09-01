@@ -1,367 +1,242 @@
-/* ─── Font imports must precede all other statements ─── */
-@import '@fontsource/press-start-2p/400.css';
-@import '@fontsource/vt323/400.css';
-@import '@fontsource/inter/300.css';
-@import '@fontsource/inter/400.css';
-@import '@fontsource/inter/500.css';
-@import '@fontsource/inter/600.css';
-@import '@fontsource/inter/700.css';
+@import "@fontsource-variable/fraunces/wght.css";
+@import "@fontsource-variable/fraunces/wght-italic.css";
+@import "@fontsource/source-serif-4/400.css";
+@import "@fontsource/source-serif-4/400-italic.css";
+@import "@fontsource/source-serif-4/600.css";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+@import "@fontsource/inter/700.css";
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* ─── Design Tokens ─── */
-/* Single dark theme — no gradient, no light mode confusion */
 :root {
-  --bg-page: #0F0E0D;
-  --bg-card: #1C1815;
-  --bg-card-hover: #25211E;
-  --bg-accent: #2A241F;
-  --border: #3A322A;
-  --border-light: #4A4137;
-
-  /* Text */
-  --ink: #FFE4C4;
-  --ink-light: #D4A76A;
-  --ink-muted: #8B7D6B;
-  --ink-dim: #6B5F52;
-
-  /* Accent */
-  --gold: #E8A838;
-  --gold-hover: #FFC55C;
-  --green-glow: #4ADE80;
-
-  /* Village elements */
-  --wood: #5C3A21;
-  --wood-dark: #3E2723;
-  --roof: #A0522D;
-  --roof-dark: #6B3A2E;
-  --path: #6B5F52;
-  --grass: #1E2D14;
-  --parchment: #1C1815;
-
-  /* Lab */
-  --lab-metal: #4A4A4A;
-  --lab-glow: #4ADE80;
-  --lab-accent: #38BDF8;
-  --lab-dark: #1A1A24;
-
-  /* Cabin */
-  --cabin-wall: #3E2723;
-  --cabin-warm: #FFE4A0;
-
-  /* Detective */
-  --detective-wall: #2A241F;
-  --detective-board: #25211E;
-  --detective-pin: #DC2626;
-  --detective-string: #F59E0B;
-  --evidence: #1E1A16;
-
-  /* Village */
-  --sky-top: #0F0E0D;
-  --sky-bottom: #0F0E0D;
-  --dirt: #3A3025;
+  --bg: #ffffff;
+  --bg-soft: #faf9f7;
+  --ink: #1c1917;
+  --ink-soft: #57534e;
+  --ink-muted: #6b6560;
+  --ink-faint: #a39d96;
+  --border: #ece8e3;
+  --accent: #0284c7;
+  --accent-hover: #0369a1;
+  --accent-soft: #f0f9ff;
+  --code-bg: #f7f5f2;
 }
 
-/* ─── Base ─── */
 html {
-  overflow-y: auto;
-  scroll-padding-top: 4rem;
   scroll-behavior: smooth;
-}
-
-html, body {
-  @apply size-full;
+  scroll-padding-top: 2rem;
 }
 
 body {
-  @apply font-sans antialiased;
-  @apply flex flex-col;
-  background: var(--bg-page);
+  background: var(--bg);
   color: var(--ink);
-  min-height: 100vh;
 }
 
-/* ─── Main ─── */
-main {
-  @apply flex-1;
-  position: relative;
-  z-index: 1;
-}
-
-/* ─── Pixel border utility ─── */
-.pixel-border {
-  border: 3px solid var(--border);
-  box-shadow: 
-    inset -2px -2px 0 0 rgba(0,0,0,0.3),
-    inset 2px 2px 0 0 rgba(255,255,255,0.05);
-}
-
-.pixel-border-light {
-  border: 2px solid var(--border-light);
-  box-shadow: inset -1px -1px 0 0 rgba(0,0,0,0.2);
-}
-
-/* ─── Pixel button ─── */
-.pixel-btn {
-  display: inline-block;
-  padding: 10px 20px;
-  background: var(--gold);
-  color: #1A1614;
-  border: 3px solid var(--border);
-  font-family: 'Press Start 2P', monospace;
-  font-size: 10px;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.15s ease;
-  box-shadow: 3px 3px 0 0 rgba(0,0,0,0.4);
-  image-rendering: pixelated;
-}
-
-.pixel-btn:hover {
-  transform: translate(-1px, -1px);
-  box-shadow: 4px 4px 0 0 rgba(0,0,0,0.4);
-  background: var(--gold-hover);
-}
-
-.pixel-btn:active {
-  transform: translate(2px, 2px);
-  box-shadow: 1px 1px 0 0 rgba(0,0,0,0.4);
-}
-
-/* ─── Scanline overlay ─── */
-.scanlines {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 9999;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 1px,
-    rgba(0,0,0,0.06) 1px,
-    rgba(0,0,0,0.06) 2px
-  );
-}
-
-/* ─── Prose/article pixel styling ─── */
-article {
-  @apply prose prose-invert max-w-full;
-  @apply prose-headings:font-pixel prose-headings:font-normal;
-  @apply prose-headings:text-[var(--ink)] prose-headings:tracking-normal;
-  @apply prose-headings:mt-10 prose-headings:mb-6;
-  @apply prose-h1:text-lg prose-h1:leading-relaxed;
-  @apply prose-h2:text-base prose-h2:leading-relaxed;
-  @apply prose-h3:text-sm prose-h3:leading-relaxed;
-  @apply prose-p:text-[var(--ink-light)] prose-p:leading-relaxed prose-p:mb-5;
-  @apply prose-p:text-[15px] prose-p:font-sans;
-  @apply prose-a:text-[var(--gold)] prose-a:no-underline;
-  @apply prose-a:border-b-2 prose-a:border-dotted;
-  @apply prose-img:mx-auto prose-img:my-8 prose-img:border-2;
-  @apply prose-code:text-[var(--green-glow)] prose-code:font-mono prose-code:text-sm prose-code:font-normal;
-  @apply prose-pre:border-2;
-  @apply prose-pre:rounded-none;
-  @apply prose-strong:text-[var(--ink)] prose-strong:font-bold;
-  @apply prose-ul:my-4;
-  @apply prose-ol:my-4;
-  @apply prose-li:text-[var(--ink-light)];
-  @apply prose-blockquote:border-l-4 prose-blockquote:pl-4 prose-blockquote:py-2 prose-blockquote:my-6;
-  @apply prose-blockquote:text-[var(--ink-light)] prose-blockquote:not-italic;
-  @apply prose-blockquote:rounded-r;
-  @apply prose-hr:border-[var(--border)] prose-hr:my-10 prose-hr:opacity-50;
-  @apply prose-table:my-6 prose-table:w-full prose-table:text-sm;
-  @apply prose-th:border-2 prose-th:bg-[var(--bg-card)];
-  @apply prose-th:text-[var(--ink)] prose-th:font-pixel prose-th:text-[10px];
-  @apply prose-td:border-2;
-  @apply prose-td:text-[var(--ink-light)];
-}
-
-article a {
-  border-color: rgba(232, 168, 56, 0.35) !important;
-}
-article a:hover {
-  border-color: rgba(232, 168, 56, 0.8) !important;
-}
-article img {
-  border-color: var(--border) !important;
-}
-/* ─── Code blocks with terminal style ─── */
-.code-wrapper {
-  margin: 1.5rem 0;
-}
-
-.code-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-family: 'VT323', monospace;
-  font-size: 12px;
-  color: var(--ink-muted);
-  background: var(--bg-card);
-  padding: 5px 12px;
-  border: 1px solid var(--border);
-  border-bottom: none;
-  letter-spacing: 0.5px;
-}
-
-.code-copy-btn {
-  font-family: 'VT323', monospace;
-  font-size: 11px;
-  color: var(--ink-muted);
-  background: transparent;
-  border: 1px solid var(--border-light);
-  padding: 2px 10px;
-  cursor: pointer;
-  transition: all 0.15s ease;
-  letter-spacing: 0.3px;
-}
-
-.code-copy-btn:hover {
-  color: var(--ink);
-  border-color: var(--gold);
-  background: rgba(232, 168, 56, 0.1);
-}
-
-.code-copy-btn.copied {
-  color: var(--green-glow);
-  border-color: var(--green-glow);
-}
-
-/* Terminal code blocks - transparent background */
-article .astro-code, .astro-code {
-  background: transparent !important;
-  background-color: transparent !important;
-  border: 1px solid var(--border) !important;
-  border-top: none !important;
-  border-radius: 0 !important;
-  padding: 1.25rem 1.25rem 1rem !important;
-  margin: 0 !important;
-  overflow-x: auto !important;
-  font-family: 'Courier New', 'Consolas', 'Liberation Mono', monospace !important;
-  font-size: 13px !important;
-  line-height: 1.6 !important;
-}
-
-/* All code tokens inside terminal - transparent */
-pre code, .astro-code code,
-pre .line, pre .line span,
-.astro-code .line, .astro-code .line span {
-  background: transparent !important;
-  background-color: transparent !important;
-}
-
-/* Remove Shiki inline token backgrounds */
-.astro-code span {
-  background-color: transparent !important;
-  background: transparent !important;
-}
-
-/* Remove trailing empty line added by Shiki */
-.astro-code .line:last-child:has(span:empty),
-.astro-code .line:last-child:empty {
-  display: none !important;
-  height: 0 !important;
-  padding: 0 !important;
-  margin: 0 !important;
-}
-
-/* Inline code ONLY - not inside pre/terminal */
-:not(pre) > code {
-  font-family: 'Courier New', 'Consolas', 'Liberation Mono', monospace !important;
-  font-size: 13px !important;
-  color: var(--green-glow) !important;
-  background: var(--bg-accent) !important;
-  padding: 0.1rem 0.35rem !important;
-}
-
-/* Pixel emoji effect */
-.pixel-emoji {
-  display: inline-block;
-  image-rendering: pixelated;
-  image-rendering: crisp-edges;
-  transform: scale(0.85);
-  font-size: 1.18em;
-}
-article th, article td {
-  border-color: var(--border) !important;
-}
-article blockquote {
-  border-color: rgba(232, 168, 56, 0.5) !important;
-  background: var(--bg-accent);
-}
-article hr {
-  border-color: var(--border) !important;
-}
-
-/* ─── Reading progress bar ─── */
-.reading-progress {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 4px;
-  background: linear-gradient(90deg, var(--gold), var(--green-glow));
-  z-index: 100;
-  transition: width 0.1s linear;
-}
-
-/* ─── Selection ─── */
 ::selection {
-  background: var(--gold);
-  color: #1A1614;
+  background: var(--accent-soft);
+  color: var(--accent-hover);
 }
 
-/* ─── Scrollbar ─── */
-::-webkit-scrollbar {
-  width: 8px;
+/* ─── Reading progress bar (article pages) ─── */
+#reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 0;
+  background: var(--accent);
+  z-index: 60;
 }
 
-::-webkit-scrollbar-track {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
+/* ─── Reveal on scroll ─── */
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 0.55s ease,
+    transform 0.55s ease;
 }
 
-::-webkit-scrollbar-thumb {
-  background: var(--wood);
-  border: 1px solid var(--border);
+.reveal.in {
+  opacity: 1;
+  transform: none;
 }
 
-/* ─── Retro RPG menu border ─── */
-.rpg-box {
-  border: 4px solid var(--border);
-  background: var(--bg-card);
-  box-shadow: 
-    4px 4px 0 0 rgba(0,0,0,0.4),
-    inset 2px 2px 0 0 rgba(255,255,255,0.03),
-    inset -2px -2px 0 0 rgba(0,0,0,0.15);
-}
-
-/* ─── Village ground texture ─── */
-.ground-texture {
-  background-image: 
-    repeating-linear-gradient(
-      90deg,
-      transparent,
-      transparent 8px,
-      rgba(255,255,255,0.02) 8px,
-      rgba(255,255,255,0.02) 9px
-    ),
-    repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 8px,
-      rgba(0,0,0,0.04) 8px,
-      rgba(0,0,0,0.04) 9px
-    );
-}
-
-/* ─── Responsive helper for pixel fonts ─── */
-@media (max-width: 640px) {
-  .pixel-btn {
-    font-size: 8px;
-    padding: 8px 14px;
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
+}
+
+/* ─── Nav underline indicator ─── */
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 100%;
+  bottom: -4px;
+  height: 2px;
+  background: var(--accent);
+  transition: right 0.25s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  right: 0;
+}
+
+/* ─── Prose: editorial serif reading column ─── */
+article {
+  @apply prose prose-neutral max-w-none;
+  @apply font-serif text-lg leading-[1.85] text-[var(--ink)];
+  @apply prose-headings:font-display prose-headings:font-semibold prose-headings:tracking-tight prose-headings:text-[var(--ink)];
+  @apply prose-h1:text-[1.9em] prose-h1:mt-14 prose-h1:mb-4;
+  @apply prose-h2:text-[1.55em] prose-h2:mt-12 prose-h2:mb-3;
+  @apply prose-h3:text-[1.25em] prose-h3:mt-9 prose-h3:mb-2;
+  @apply prose-p:my-6;
+  @apply prose-a:text-[var(--ink)] prose-a:decoration-[var(--accent)] prose-a:decoration-1 prose-a:underline-offset-[3px];
+  @apply prose-a:hover:text-[var(--accent-hover)];
+  @apply prose-strong:font-semibold prose-strong:text-[var(--ink)];
+  @apply prose-figcaption:font-sans prose-figcaption:text-sm prose-figcaption:text-[var(--ink-faint)] prose-figcaption:text-center prose-figcaption:mt-3;
+  @apply prose-hr:border-[var(--border)] prose-hr:my-12;
+  @apply prose-ul:my-6 prose-ol:my-6;
+  @apply prose-li:my-2;
+  @apply prose-table:font-sans prose-table:text-base;
+  @apply prose-th:border prose-th:border-[var(--border)] prose-th:px-3 prose-th:py-2;
+  @apply prose-td:border prose-td:border-[var(--border)] prose-td:px-3 prose-td:py-2;
+}
+
+/* drop cap on the first paragraph — the Medium move */
+article > p:first-of-type::first-letter {
+  float: left;
+  font-family: "Fraunces Variable", Georgia, serif;
+  font-size: 3.6em;
+  font-weight: 600;
+  line-height: 0.82;
+  padding-right: 0.12em;
+  padding-top: 0.06em;
+  color: var(--accent);
+}
+
+/* images break out of the reading column toward full-bleed */
+article img {
+  @apply my-9 block rounded-lg;
+  max-width: min(920px, calc(100vw - 2.5rem));
+  width: 100%;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+
+article figure {
+  max-width: min(920px, calc(100vw - 2.5rem));
+  width: 100%;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+
+article figure img {
+  margin-left: 0;
+  transform: none;
+  width: auto;
+  max-width: 100%;
+}
+
+/* blockquote: big pull-quote with decorative mark */
+article blockquote {
+  @apply relative my-10 border-l-0 py-1 pl-10 pr-2 not-italic;
+}
+
+article blockquote::before {
+  content: "“";
+  position: absolute;
+  left: 0;
+  top: -0.28em;
+  font-family: "Fraunces Variable", Georgia, serif;
+  font-size: 4.2rem;
+  line-height: 1;
+  color: var(--accent);
+}
+
+article blockquote p {
+  @apply font-serif text-[1.3em] italic leading-[1.5] text-[var(--ink)];
+}
+
+article code {
+  @apply font-sans text-[0.78em] font-medium;
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 0.12em 0.4em;
+}
+
+article pre {
+  @apply relative my-8 overflow-x-auto rounded-xl;
+  background: var(--code-bg) !important;
+  border: 1px solid var(--border);
+  padding: 1.15rem 1.3rem;
+}
+
+article pre code {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  font-size: 13.5px;
+  line-height: 1.7;
+}
+
+article .astro-code,
+article .astro-code span {
+  background: transparent !important;
+}
+
+/* copy button injected by Base.astro */
+.copy-btn {
+  @apply absolute right-2.5 top-2.5 rounded-md border px-2.5 py-1 font-sans text-[11px] font-medium transition-colors;
+  background: var(--bg);
+  border-color: var(--border);
+  color: var(--ink-faint);
+}
+
+.copy-btn:hover {
+  color: var(--ink);
+  border-color: var(--ink-faint);
+}
+
+.copy-btn.copied {
+  color: #15803d;
+  border-color: #86efac;
+  background: #f0fdf4;
+}
+
+/* ─── Section ornament ─── */
+.ornament {
+  @apply mb-3 flex items-center gap-3;
+}
+
+.ornament::before {
+  content: "✳";
+  color: var(--accent);
+  font-size: 14px;
+}
+
+.ornament::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  background: var(--border);
+}
+
+.ornament span {
+  @apply font-sans text-[12px] font-semibold uppercase tracking-[0.18em] text-[var(--ink-faint)];
 }

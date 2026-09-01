@@ -1,22 +1,19 @@
 ---
-import GameLayout from "@layouts/GameLayout.astro";
+import Base from "@layouts/Base.astro";
 ---
 
-<GameLayout title="404 - Lost" description="This page doesn't exist">
-  <div class="min-h-screen pb-24 flex items-center justify-center">
-    <div class="max-w-md mx-auto px-4 text-center">
-      <div class="rpg-box p-8">
-        <div class="text-6xl mb-4">🗺️</div>
-        <h1 class="font-pixel text-base sm:text-lg text-[var(--ink)] mb-4">
-          YOU ARE LOST
-        </h1>
-        <p class="font-mono text-sm text-[var(--ink-light)] mb-6">
-          This area hasn't been discovered yet. The path fades into mist...
-        </p>
-        <a href="/" class="pixel-btn inline-block no-underline">
-          ← Return to Village
-        </a>
-      </div>
-    </div>
+<Base title="404" description="Halaman tidak ditemukan">
+  <div class="py-24 text-center">
+    <p class="m-0 text-4xl text-[var(--accent)]">✳</p>
+    <h1 class="m-0 mt-4 font-display text-6xl font-bold tracking-tight">404</h1>
+    <p class="mx-auto mt-3 max-w-sm font-serif text-lg italic text-[var(--ink-muted)]">
+      Halaman ini tidak pernah ditulis — atau sudah saya hapus dari jurnal.
+    </p>
+    <a
+      href="/"
+      class="mt-8 inline-block rounded-full bg-[var(--ink)] px-6 py-2.5 text-sm font-medium text-white no-underline transition-colors hover:bg-[var(--accent)]"
+    >
+      &larr; Kembali ke beranda
+    </a>
   </div>
-</GameLayout>
+</Base>

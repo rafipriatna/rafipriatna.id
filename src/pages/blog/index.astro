@@ -1,9 +1,20 @@
 ---
-import GameLayout from "@layouts/GameLayout.astro";
-import ResearchLab from "@components/ResearchLab.astro";
+import Base from "@layouts/Base.astro";
+import ArchivePage from "@components/ArchivePage.astro";
 import { BLOG } from "@consts";
+import { feedItems } from "@/lib/post";
+
+const items = await feedItems("blog");
 ---
 
-<GameLayout title={BLOG.TITLE} description={BLOG.DESCRIPTION}>
-  <ResearchLab />
-</GameLayout>
+<Base title={BLOG.TITLE} description={BLOG.DESCRIPTION}>
+  <ArchivePage
+    collection="blog"
+    eyebrow="Arsip"
+    title={BLOG.TITLE}
+    description={BLOG.DESCRIPTION}
+    items={items}
+    currentPage={1}
+    showTagPills
+  />
+</Base>

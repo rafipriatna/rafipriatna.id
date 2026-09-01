@@ -2,13 +2,11 @@ import type { Metadata, Site, Socials, WorkExperience, Education, Skills, Certif
 
 export const SITE: Site = {
   TITLE: "RafiPriatna.ID",
-  DESCRIPTION: "Rafi Priatna's Personal Website!",
+  DESCRIPTION:
+    "Blog pribadi Rafi Priatna — tulisan tentang security, programming, dan hal-hal yang saya pelajari.",
   TAGLINE: "Lifelong Learner ✨",
   USER_EMAIL: "me",
   DOMAIN: "rafipriatna.id",
-  NUM_NOTES_ON_HOMEPAGE: 5,
-  NUM_POSTS_ON_HOMEPAGE: 5,
-  NUM_WRITEUPS_ON_HOMEPAGE: 3,
 };
 
 export const HOME: Metadata = {

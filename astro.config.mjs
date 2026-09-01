@@ -13,10 +13,10 @@ export default defineConfig({
     syntaxHighlight: 'shiki',
     shikiConfig: {
       themes: {
-        light: 'vitesse-light',
+        light: 'github-light',
         dark: 'vitesse-dark',
       },
-      defaultColor: 'dark',
+      defaultColor: 'light',
       transformers: [transformerNotationHighlight(), transformerNotationFocus(), transformerNotationDiff()],
       wrap: true
     },

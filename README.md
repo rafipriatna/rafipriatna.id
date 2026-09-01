@@ -1,11 +1,22 @@
-# Introducing [Astro Micro 🔬](https://astro-micro.vercel.app/)
+# rafipriatna.id
 
-Astro Micro is an accessible theme for Astro. It's a fork of [Mark Horn's](https://github.com/markhorn-dev) popular theme [Astro Nano](https://astro-nano-demo.vercel.app/). Like Nano, Micro comes with zero frameworks installed.
+Blog pribadi Rafi Priatna — dibangun dengan [Astro](https://astro.build) + Tailwind CSS.
 
-Micro adds features like [Pagefind](https://pagefind.app) for search, [Giscus](https://giscus.app) for comments, and more. For a full list of changes, see this [blog post](https://astro-micro.vercel.app/blog/00-micro-changelog).
+## Struktur
 
-Micro still comes with everything great about Nano — full type safety, a sitemap, an RSS feed, and Markdown + MDX support. Styled with TailwindCSS and preconfigured with system, light, and dark themes.
+- `src/content/blog/` — artikel (dirender di root: `/<slug>`)
+- `src/content/notes/` — catatan pribadi (`/notes/<slug>`)
+- `src/content/writeups/` — writeup security (`/writeups/<slug>`)
+- `src/layouts/Base.astro` — layout utama
+- `src/consts.ts` — metadata situs & data halaman `/me`
 
----
+## Pengembangan
 
-![astro-micro-image](https://github.com/trevortylerlee/astro-micro/assets/49603972/ec5bc96a-3e96-4af1-a182-7711b54c5ef6)
+```sh
+npm install
+npm run dev      # dev server di port 1337
+npm run build    # astro check + build
+npm run preview
+```
+
+Menulis artikel baru: buat folder `src/content/blog/<tahun>/<slug>/index.md` dengan frontmatter `title`, `description`, `date`, dan opsional `tags` + `draft`.
