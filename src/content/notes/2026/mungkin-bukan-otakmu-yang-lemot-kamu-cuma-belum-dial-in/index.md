@@ -80,14 +80,13 @@ Padahal masalahnya belum tentu di kamu.
 
 Nah, belajar sesuatu menurut saya kurang lebih kayak gitu.
 
-- Kita sering langsung mengejar hasil akhir tanpa memahami variabel kecil yang bikin hasil tersebut bisa terjadi.
+Kita sering langsung mengejar hasil akhir tanpa memahami variabel kecil yang bikin hasil tersebut bisa terjadi.
+
 - Kita lihat orang bisa coding.
 - Kita langsung belajar framework.
 - Kita lihat orang jago cybersecurity.
 - Kita langsung buka materi exploit development.
-- Kita lihat orang ngerti investasi.
-
-Langsung buka chart, pasang indikator tujuh biji, gambar garis sana-sini.
+- Kita lihat orang ngerti investasi. Langsung buka chart, pasang indikator tujuh biji, gambar garis sana-sini.
 
 Padahal fondasinya belum tentu ada.
 
